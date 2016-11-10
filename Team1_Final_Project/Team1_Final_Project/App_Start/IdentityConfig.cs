@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
-//TODO: Change the using statement here to match your project's name
+
 using Team1_Final_Project.Models;
 
 namespace Team1_Final_Project

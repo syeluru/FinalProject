@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
+using System;
 
 namespace Team1_Final_Project.Models
 {
@@ -39,6 +40,13 @@ namespace Team1_Final_Project.Models
         public string ConfirmPassword { get; set; }
 
         //TODO: Add additional fields to register users here.
+
+        public String FName { get; set; }
+        public String LName { get; set; }
+        public String StreetAddress { get; set; }
+        public String City { get; set; }
+        public String State { get; set; }
+        public String ZipCode { get; set; }
     }
 
     public class ChangePasswordViewModel

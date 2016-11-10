@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-//TODO: Change the using statement here to match your project's name
+
 using Team1_Final_Project.Models;
 
 namespace Team1_Final_Project

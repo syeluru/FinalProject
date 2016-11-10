@@ -1,4 +1,4 @@
-﻿//TODO: Change the using statement here to match your project's name
+﻿
 using Team1_Final_Project.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-//TODO: Change the namespace here to match your project's name
+
 namespace Team1_Final_Project.Controllers
 {
     [Authorize]
