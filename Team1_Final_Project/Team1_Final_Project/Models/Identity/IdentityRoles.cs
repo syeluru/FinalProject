@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 
 //TODO: Change the namespace here to match your project's name
-namespace Team1_Final_Project.Models
+namespace Team1_Final_Project.Models.Identity
 {
     public class AppRole: IdentityRole
     {

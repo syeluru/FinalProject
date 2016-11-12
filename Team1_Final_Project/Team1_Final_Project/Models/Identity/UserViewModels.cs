@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using System;
 
-namespace Team1_Final_Project.Models
+namespace Team1_Final_Project.Models.Identity
 {
     public class LoginViewModel
     {
@@ -43,6 +43,7 @@ namespace Team1_Final_Project.Models
 
         public String FName { get; set; }
         public String LName { get; set; }
+        //TODO: Figure out the deal with this
         public String StreetAddress { get; set; }
         public String City { get; set; }
         public String State { get; set; }

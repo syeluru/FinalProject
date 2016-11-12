@@ -1,5 +1,5 @@
 ﻿
-using Team1_Final_Project.Models;
+using Team1_Final_Project.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;

@@ -5,22 +5,59 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+using Team1_Final_Project.Models.Purchases;
 
 //TODO: Change the namespace here to match your project's name
-namespace Team1_Final_Project.Models
+namespace Team1_Final_Project.Models.Identity
 {
+
+    public enum UserType
+    {
+        Customer,
+        Employee,
+        Manager
+    }
     // You can add profile data for the user by adding more properties to your AppUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class AppUser : IdentityUser
     {
         //TODO: Put any additional fields that you need for your users here
+        //testing
+        //testing dans
         
         //Scalar Properties
+        [Required(ErrorMessage = "First Name is required.")]
+        [Display(Name = "First Name")]
         public String FName { get; set; }
+
+        [Required(ErrorMessage = "Last Name is required.")]
+        [Display(Name = "Last Name")]
         public String LName { get; set; }
+
+        [Required(ErrorMessage = "Street Address is required.")]
+        [Display(Name = "Street Address ")]
         public String StreetAddress { get; set; }
+
+        [Required(ErrorMessage = "City is required.")]
+        [Display(Name = "City")]
         public String City { get; set; }
+
+        [Required(ErrorMessage = "State is required.")]
+        [Display(Name = "State")]
         public String State { get; set; }
+
+        [Required(ErrorMessage = "Zip Code is required.")]
+        [Display(Name = "Zip Code")]
+        //regular expression zip code to let it be a string - dunno if this is the optimal way to do this
+        [RegularExpression(@"^\d{5}$", ErrorMessage = "Invalid Zip Code")]
         public String ZipCode { get; set; }
+
+        [Required(ErrorMessage = "Need a user type")]
+        public UserType UserType { get; set; }
+
+        [Required(ErrorMessage = "Need to know if account is enabled or not")]
+        public Boolean IsAccountEnabled { get; set; }
         
         //Navigational Properties
         //TODO: need to add validation in terms of how many credit cards a person can or can't have
