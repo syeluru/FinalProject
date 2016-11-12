@@ -194,6 +194,8 @@
     <Compile Include="Models\Identity\IdentityRoles.cs" />
     <Compile Include="Models\Identity\RoleViewModels.cs" />
     <Compile Include="Models\Identity\UserViewModels.cs" />
+    <Compile Include="Models\Purchases\Order.cs" />
+    <Compile Include="Models\Purchases\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
