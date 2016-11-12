@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Team1_Final_Project.Models;
+using Team1_Final_Project.Models.Identity;
 
-namespace Team1_Final_Project.Models
+namespace Team1_Final_Project.Models.Purchases
 {
     public enum CreditCardType
     {

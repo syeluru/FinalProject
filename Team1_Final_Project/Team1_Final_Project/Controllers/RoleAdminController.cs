@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 //TODO: Change the using statement here to match your project's name
 using Team1_Final_Project.Models;
 using Team1_Final_Project;
+using Team1_Final_Project.Models.Identity;
 
 //TODO: Change the namespace here to match your project's name
 namespace Team1_Final_Project.Controllers

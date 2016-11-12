@@ -180,15 +180,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CreditCard.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\IdentityRoles.cs" />
-    <Compile Include="Models\RoleViewModels.cs" />
-    <Compile Include="Models\UserViewModels.cs" />
+    <Compile Include="Models\Music\Album.cs" />
+    <Compile Include="Models\Music\Artist.cs" />
+    <Compile Include="Models\Music\Genre.cs" />
+    <Compile Include="Models\Music\Song.cs" />
+    <Compile Include="Models\Purchases\CreditCard.cs" />
+    <Compile Include="Models\Identity\IdentityModels.cs" />
+    <Compile Include="Models\Identity\IdentityRoles.cs" />
+    <Compile Include="Models\Identity\RoleViewModels.cs" />
+    <Compile Include="Models\Identity\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Music\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

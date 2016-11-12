@@ -12,7 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
 
-using Team1_Final_Project.Models;
+using Team1_Final_Project.Models.Identity;
 
 namespace Team1_Final_Project
 {

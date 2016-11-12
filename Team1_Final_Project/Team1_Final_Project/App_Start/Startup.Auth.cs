@@ -6,7 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 
-using Team1_Final_Project.Models;
+
+using Team1_Final_Project.Models.Identity;
 
 namespace Team1_Final_Project
 {
