@@ -22,6 +22,10 @@ namespace Team1_Final_Project.Models.Purchases
         // navigational properties
         public virtual AppUser Customer { get; set; }
 
+        public virtual List<Song> Songs { get; set; }
+
+        public virtual List<Album> Albums { get; set; }
+
 
     }
 }
