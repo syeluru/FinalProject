@@ -20,11 +20,11 @@ namespace Team1_Final_Project.Models.Music
 
         [Required(ErrorMessage = "Album Price is required.")]
         [Display(Name = "Album Price")]
-        public short AlbumPrice { get; set; }
+        public Decimal AlbumPrice { get; set; }
 
         [Required(ErrorMessage = "Album Discount is required.")]
         [Display(Name = "Album Discount")]
-        public short AlbumDiscount { get; set; }
+        public Decimal AlbumDiscount { get; set; }
 
         // navigational properties
         public virtual List<Genre> Genres { get; set; }

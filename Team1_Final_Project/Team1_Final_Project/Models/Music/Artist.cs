@@ -20,7 +20,7 @@ namespace Team1_Final_Project.Models.Music
 
         [Required(ErrorMessage = "Artist Price is required.")]
         [Display(Name = "Artist Price")]
-        public short ArtistPrice { get; set; }
+        public Decimal ArtistPrice { get; set; }
 
         // navigational properties
         public virtual List<Genre> Genres { get; set; }
