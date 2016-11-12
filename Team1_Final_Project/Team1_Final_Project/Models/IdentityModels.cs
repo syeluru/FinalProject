@@ -13,7 +13,6 @@ namespace Team1_Final_Project.Models
     public class AppUser : IdentityUser
     {
         //TODO: Put any additional fields that you need for your users here
-        //testing
         
         //Scalar Properties
         public String FName { get; set; }
