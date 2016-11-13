@@ -23,8 +23,6 @@ namespace Team1_Final_Project.Models.Identity
     public class AppUser : IdentityUser
     {
         //TODO: Put any additional fields that you need for your users here
-        //testing
-        //testing dans
         
         //Scalar Properties
         [Required(ErrorMessage = "First Name is required.")]
