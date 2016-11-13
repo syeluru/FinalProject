@@ -31,11 +31,11 @@ namespace Team1_Final_Project.Models.Music
 
         [Required(ErrorMessage = "Song Price is required.")]
         [Display(Name = "Song Price")]
-        public short SongPrice { get; set; }
+        public Decimal SongPrice { get; set; }
 
         [Required(ErrorMessage = "Song Discount is required.")]
         [Display(Name = "Song Discount")]
-        public short SongDiscount { get; set; }
+        public Decimal SongDiscount { get; set; }
 
         // navigational properties
         public virtual List<Genre> Genres { get; set; }

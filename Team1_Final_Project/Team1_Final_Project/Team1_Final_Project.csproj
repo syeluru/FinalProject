@@ -181,6 +181,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +192,7 @@
     <Compile Include="Models\Music\Artist.cs" />
     <Compile Include="Models\Music\Genre.cs" />
     <Compile Include="Models\Music\Song.cs" />
+    <Compile Include="Models\Purchases\AlbumOrderBridge.cs" />
     <Compile Include="Models\Purchases\CreditCard.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Identity\IdentityRoles.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="Models\Identity\UserViewModels.cs" />
     <Compile Include="Models\Purchases\Order.cs" />
     <Compile Include="Models\Purchases\ShoppingCart.cs" />
+    <Compile Include="Models\Purchases\SongOrderBridge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +229,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Rating\" />
     <Folder Include="Views\Music\" />
+    <Folder Include="Views\Rating\" />
+    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
