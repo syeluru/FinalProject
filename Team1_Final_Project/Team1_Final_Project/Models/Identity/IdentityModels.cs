@@ -27,11 +27,11 @@ namespace Team1_Final_Project.Models.Identity
         
         //Scalar Properties
         [Required(ErrorMessage = "First Name is required.")]
-        [DisplayName("First Name")]
+        [Display(Name = "First Name")]
         public String FName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required.")]
-        [DisplayName("Last Name")]
+        [Display(Name = "Last Name")]
         public String LName { get; set; }
 
         [Required(ErrorMessage = "Street Address is required.")]
