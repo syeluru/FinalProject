@@ -191,6 +191,14 @@
     <Compile Include="Migrations\201611151721489_InitialMigration.Designer.cs">
       <DependentUpon>201611151721489_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611151726454_secondsetup.cs" />
+    <Compile Include="Migrations\201611151726454_secondsetup.Designer.cs">
+      <DependentUpon>201611151726454_secondsetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151737364_fourth.cs" />
+    <Compile Include="Migrations\201611151737364_fourth.Designer.cs">
+      <DependentUpon>201611151737364_fourth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
@@ -242,6 +250,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611151721489_InitialMigration.resx">
       <DependentUpon>201611151721489_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151726454_secondsetup.resx">
+      <DependentUpon>201611151726454_secondsetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151737364_fourth.resx">
+      <DependentUpon>201611151737364_fourth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
