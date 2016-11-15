@@ -187,9 +187,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611151721489_InitialMigration.cs" />
+    <Compile Include="Migrations\201611151721489_InitialMigration.Designer.cs">
+      <DependentUpon>201611151721489_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
     <Compile Include="Models\Music\Genre.cs" />
+    <Compile Include="Models\Music\MusicViewModel.cs" />
     <Compile Include="Models\Music\Song.cs" />
     <Compile Include="Models\Purchases\AlbumOrderBridge.cs" />
     <Compile Include="Models\Purchases\CreditCard.cs" />
@@ -219,6 +225,7 @@
     <Content Include="Views\RoleAdmin\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Music\SearchIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -229,9 +236,13 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Rating\" />
-    <Folder Include="Views\Music\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611151721489_InitialMigration.resx">
+      <DependentUpon>201611151721489_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

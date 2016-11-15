@@ -7,5 +7,6 @@ namespace Team1_Final_Project.Models.Purchases
 {
     public class AlbumOrderBridge
     {
+        public Int32 AlbumOrderBridgeID { get; set; }
     }
 }

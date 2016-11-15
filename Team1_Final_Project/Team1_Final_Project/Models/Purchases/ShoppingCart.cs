@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using Team1_Final_Project.Models.Identity;
@@ -13,7 +14,8 @@ namespace Team1_Final_Project.Models.Purchases
         // scalar properties
         [Required(ErrorMessage = "Shopping Cart ID is required")]
         [Display(Name = "Shopping Cart ID")]
-        public Int16 ShoppingCartID { get; set; }
+        [ForeignKey("Customer")]
+        public String ShoppingCartID { get; set; }
 
         [Required(ErrorMessage = "Total Price is required")]
         [Display(Name = "Total Price")]

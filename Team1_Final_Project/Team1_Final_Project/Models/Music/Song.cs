@@ -38,7 +38,7 @@ namespace Team1_Final_Project.Models.Music
         public Decimal SongDiscount { get; set; }
 
         // navigational properties
-        public virtual List<Genre> Genres { get; set; }
+        public virtual List<Genre> SongGenres { get; set; }
 
         [Required]
         public virtual List<Artist> SongArtists { get; set; }

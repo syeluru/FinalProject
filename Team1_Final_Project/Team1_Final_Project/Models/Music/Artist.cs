@@ -18,12 +18,8 @@ namespace Team1_Final_Project.Models.Music
         [Display(Name = "Artist Name")]
         public String ArtistName { get; set; }
 
-        [Required(ErrorMessage = "Artist Price is required.")]
-        [Display(Name = "Artist Price")]
-        public Decimal ArtistPrice { get; set; }
-
         // navigational properties
-        public virtual List<Genre> Genres { get; set; }
+        public virtual List<Genre> ArtistGenres { get; set; }
 
         public virtual List<Song> ArtistSongs { get; set; }
 
