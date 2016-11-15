@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using Team1_Final_Project.Models.Purchases;
+using System.ComponentModel;
 
 //TODO: Change the namespace here to match your project's name
 namespace Team1_Final_Project.Models.Identity
@@ -26,11 +27,11 @@ namespace Team1_Final_Project.Models.Identity
         
         //Scalar Properties
         [Required(ErrorMessage = "First Name is required.")]
-        [Display(Name = "First Name")]
+        [DisplayName("First Name")]
         public String FName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required.")]
-        [Display(Name = "Last Name")]
+        [DisplayName("Last Name")]
         public String LName { get; set; }
 
         [Required(ErrorMessage = "Street Address is required.")]

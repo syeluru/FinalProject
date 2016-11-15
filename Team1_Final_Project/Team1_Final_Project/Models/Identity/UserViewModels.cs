@@ -41,14 +41,39 @@ namespace Team1_Final_Project.Models.Identity
 
         //TODO: Add additional fields to register users here.
 
+
+        //Scalar Properties
+        [Required(ErrorMessage = "First Name is required.")]
+        [Display(Name = "First Name")]
         public String FName { get; set; }
+
+        [Required(ErrorMessage = "Last Name is required.")]
+        [Display(Name = "Last Name")]
         public String LName { get; set; }
-        //TODO: Figure out the deal with this
+
+        [Required(ErrorMessage = "Street Address is required.")]
+        [Display(Name = "Street Address ")]
         public String StreetAddress { get; set; }
+
+        [Required(ErrorMessage = "City is required.")]
+        [Display(Name = "City")]
         public String City { get; set; }
+
+        [Required(ErrorMessage = "State is required.")]
+        [Display(Name = "State")]
         public String State { get; set; }
+
+        [Required(ErrorMessage = "Zip Code is required.")]
+        [Display(Name = "Zip Code")]
+        //regular expression zip code to let it be a string - dunno if this is the optimal way to do this
+        [RegularExpression(@"^\d{5}$", ErrorMessage = "Invalid Zip Code")]
         public String ZipCode { get; set; }
+
+        [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
+
+
+
     }
 
     public class ChangePasswordViewModel
