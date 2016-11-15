@@ -29,7 +29,7 @@ namespace Team1_Final_Project.Models.Music
         // navigational properties
         public virtual List<Genre> Genres { get; set; }
 
-        [Required]
+        //[Required]
         public virtual List<Artist> AlbumArtists { get; set; }
 
         public virtual List<Song> AlbumSongs { get; set; }

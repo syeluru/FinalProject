@@ -40,7 +40,7 @@ namespace Team1_Final_Project.Models.Music
         // navigational properties
         public virtual List<Genre> Genres { get; set; }
 
-        [Required]
+        //[Required]
         public virtual List<Artist> SongArtists { get; set; }
 
         public virtual Album SongAlbum { get; set; }

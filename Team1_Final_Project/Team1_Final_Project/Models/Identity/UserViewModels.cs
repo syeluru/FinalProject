@@ -48,6 +48,7 @@ namespace Team1_Final_Project.Models.Identity
         public String City { get; set; }
         public String State { get; set; }
         public String ZipCode { get; set; }
+        public Boolean IsAccountEnabled { get; set; }
     }
 
     public class ChangePasswordViewModel

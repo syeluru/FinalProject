@@ -187,9 +187,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611151727519_third.cs" />
+    <Compile Include="Migrations\201611151727519_third.Designer.cs">
+      <DependentUpon>201611151727519_third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151736417_fourth.cs" />
+    <Compile Include="Migrations\201611151736417_fourth.Designer.cs">
+      <DependentUpon>201611151736417_fourth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151748344_fifth.cs" />
+    <Compile Include="Migrations\201611151748344_fifth.Designer.cs">
+      <DependentUpon>201611151748344_fifth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151806173_sixth.cs" />
+    <Compile Include="Migrations\201611151806173_sixth.Designer.cs">
+      <DependentUpon>201611151806173_sixth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
     <Compile Include="Models\Music\Genre.cs" />
+    <Compile Include="Models\Music\MusicViewModel.cs" />
     <Compile Include="Models\Music\Song.cs" />
     <Compile Include="Models\Purchases\AlbumOrderBridge.cs" />
     <Compile Include="Models\Purchases\CreditCard.cs" />
@@ -232,6 +250,20 @@
     <Folder Include="Views\Music\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611151727519_third.resx">
+      <DependentUpon>201611151727519_third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151736417_fourth.resx">
+      <DependentUpon>201611151736417_fourth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151748344_fifth.resx">
+      <DependentUpon>201611151748344_fifth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151806173_sixth.resx">
+      <DependentUpon>201611151806173_sixth.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
