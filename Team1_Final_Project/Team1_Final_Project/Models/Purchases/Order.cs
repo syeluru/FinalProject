@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Team1_Final_Project.Models.Identity;
 
 namespace Team1_Final_Project.Models.Purchases
 {
@@ -18,6 +19,7 @@ namespace Team1_Final_Project.Models.Purchases
         public Decimal TotalPrice { get; set; }
 
         // navigational properties
+        public virtual AppUser Customer { get; set; }
         public virtual List<SongOrderBridge> SongsInOrder { get; set; }
         public virtual List<AlbumOrderBridge> AlbumsInOrder { get; set; }
         

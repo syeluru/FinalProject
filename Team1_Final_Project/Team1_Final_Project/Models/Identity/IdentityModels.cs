@@ -51,9 +51,6 @@ namespace Team1_Final_Project.Models.Identity
         [RegularExpression(@"^\d{5}$", ErrorMessage = "Invalid Zip Code")]
         public String ZipCode { get; set; }
 
-        [Required(ErrorMessage = "Need a user type")]
-        public UserType UserType { get; set; }
-
         [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
         
@@ -74,6 +71,12 @@ namespace Team1_Final_Project.Models.Identity
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             return userIdentity;
         }
+
+        public AppUser()
+        {
+            IsAccountEnabled = true;
+        }
+
     }
 
     //NOTE: Here is your dbContext for the entire project.  There should only be ONE DbContext per project
