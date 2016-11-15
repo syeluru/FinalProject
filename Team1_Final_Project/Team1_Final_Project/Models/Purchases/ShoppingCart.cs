@@ -22,6 +22,7 @@ namespace Team1_Final_Project.Models.Purchases
         public Decimal TotalPrice { get; set; }
 
         // navigational properties
+        
         public virtual AppUser Customer { get; set; }
 
         public virtual List<Song> Songs { get; set; }

@@ -7,7 +7,7 @@ using Team1_Final_Project.Models.Identity;
 
 namespace Team1_Final_Project.Models.Music
 {
-    //hello in artist
+    
     public class Artist
     {
         // scalar properties

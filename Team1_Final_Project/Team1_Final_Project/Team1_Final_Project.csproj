@@ -187,17 +187,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611151721489_InitialMigration.cs" />
-    <Compile Include="Migrations\201611151721489_InitialMigration.Designer.cs">
-      <DependentUpon>201611151721489_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201611151727519_third.cs" />
+    <Compile Include="Migrations\201611151727519_third.Designer.cs">
+      <DependentUpon>201611151727519_third.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611151726454_secondsetup.cs" />
-    <Compile Include="Migrations\201611151726454_secondsetup.Designer.cs">
-      <DependentUpon>201611151726454_secondsetup.cs</DependentUpon>
+    <Compile Include="Migrations\201611151736417_fourth.cs" />
+    <Compile Include="Migrations\201611151736417_fourth.Designer.cs">
+      <DependentUpon>201611151736417_fourth.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611151737364_fourth.cs" />
-    <Compile Include="Migrations\201611151737364_fourth.Designer.cs">
-      <DependentUpon>201611151737364_fourth.cs</DependentUpon>
+    <Compile Include="Migrations\201611151748344_fifth.cs" />
+    <Compile Include="Migrations\201611151748344_fifth.Designer.cs">
+      <DependentUpon>201611151748344_fifth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611151806173_sixth.cs" />
+    <Compile Include="Migrations\201611151806173_sixth.Designer.cs">
+      <DependentUpon>201611151806173_sixth.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -233,7 +237,6 @@
     <Content Include="Views\RoleAdmin\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Music\SearchIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -244,18 +247,22 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Rating\" />
+    <Folder Include="Views\Music\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611151721489_InitialMigration.resx">
-      <DependentUpon>201611151721489_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611151727519_third.resx">
+      <DependentUpon>201611151727519_third.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611151726454_secondsetup.resx">
-      <DependentUpon>201611151726454_secondsetup.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611151736417_fourth.resx">
+      <DependentUpon>201611151736417_fourth.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611151737364_fourth.resx">
-      <DependentUpon>201611151737364_fourth.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611151748344_fifth.resx">
+      <DependentUpon>201611151748344_fifth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611151806173_sixth.resx">
+      <DependentUpon>201611151806173_sixth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
