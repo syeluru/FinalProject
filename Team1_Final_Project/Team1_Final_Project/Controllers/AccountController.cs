@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-
 namespace Team1_Final_Project.Controllers
 {
     [Authorize]
