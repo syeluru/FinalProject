@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201611151806173_sixth.Designer.cs">
       <DependentUpon>201611151806173_sixth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611152032019_sixth1.cs" />
+    <Compile Include="Migrations\201611152032019_sixth1.Designer.cs">
+      <DependentUpon>201611152032019_sixth1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
@@ -263,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611151806173_sixth.resx">
       <DependentUpon>201611151806173_sixth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611152032019_sixth1.resx">
+      <DependentUpon>201611152032019_sixth1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
