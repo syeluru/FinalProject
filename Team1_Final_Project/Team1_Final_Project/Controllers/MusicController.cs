@@ -8,6 +8,12 @@ using Team1_Final_Project.Models.Music;
 
 namespace Team1_Final_Project.Controllers
 {
+    public enum Operation
+    {
+        GreaterThan,
+        LessThan,
+        EqualTo
+    }
     public class MusicController : Controller
     {
         // appdbcontext

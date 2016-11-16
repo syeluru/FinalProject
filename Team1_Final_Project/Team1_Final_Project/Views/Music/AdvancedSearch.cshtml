@@ -1,0 +1,73 @@
+﻿@using Team1_Final_Project.Controllers
+
+@{
+    ViewBag.Title = "Advanced Search";
+}
+
+<h2>Advanced Music Search</h2>
+@*TODO: MAKE THE CONTROLLER FOR SEARCH WITH THE ACTION NAME AdvancedSearch*@
+@using (Html.BeginForm("AdvancedSearch", "Music", FormMethod.Get))
+{
+    <p class="form-group">
+        Song Name: <br />@Html.TextBox("MusicSearchString", null, new { @class = "form-control" }) <br />
+
+        Artist: <br />@Html.TextBox("ArtistSearchString", null, new { @class = "form-control" })<br />
+
+        Album: <br/>@Html.TextBox("AlbumSearchString", null, new { @class = "form-control" })<br />
+
+        Genre: <br />@Html.DropDownList("SelectedGender", (MultiSelectList)ViewBag.AllFrequencies, new { @class = "form-control" }) <br />
+
+@*
+        <div class="form-group">
+            <div class="form-check">
+    <p>Gender</p>
+    <label class="form-check-label">
+        @Html.RadioButton("SelectedGender", Gender.All, true, new { @class = "form-check-input" }) All <br />
+    </label>
+    <br />
+    <label class="form-check-label">
+        @Html.RadioButton("SelectedGender", Gender.Male, new { @class = "form-check-input" }) Male
+    </label>
+    <br />
+    <label class="form-check-label">
+        @Html.RadioButton("SelectedGender", Gender.Female, new { @class = "form-check-input" }) Female
+    </label>
+    </div>
+    </div>
+*@
+    @*TODO: add this to search string too*@
+    Song Price: <br />@Html.TextBox("SongPriceString", null, new { @class = "form-control" }) <br />
+
+    <div class="form-group">
+        <div class="form-check">
+            <p>Operation</p>
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
+            </label>
+            <br />
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedOperation", Operation.LessThan, new { @class = "form-check-input" }) Lesser Than
+            </label>
+            <br />
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedOperation", Operation.EqualTo, new { @class = "form-check-input" }) Equal To
+            </label>
+        </div>
+    </div>
+    @*
+    <div class="form-group">
+        <div class="form-check">
+            <p>Sort Order</p>
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSortOrder", SortOrder.Ascending, true, new { @class = "form-check-input" }) Ascending <br />
+            </label>
+            <br />
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSortOrder", SortOrder.Descending, new { @class = "form-check-input" }) Descending
+            </label>
+        </div>
+    </div>*@
+    <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+
+}

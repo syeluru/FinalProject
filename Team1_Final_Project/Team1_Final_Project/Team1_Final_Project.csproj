@@ -241,6 +241,7 @@
     <Content Include="Views\RoleAdmin\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Music\AdvancedSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -251,7 +252,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\Rating\" />
-    <Folder Include="Views\Music\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
