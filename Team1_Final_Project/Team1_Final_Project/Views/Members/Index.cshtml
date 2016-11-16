@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Team1_Final_Project.Models.Identity.AppUser>
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My Account</h2>
+
+<p>
+    @Html.ActionLink("Modify My Account", "Edit", new { id = User.Identity.GetUserId() } ) |
+</p>
+<p>
+    @Html.ActionLink("My Account Details", "Details", new { id = User.Identity.GetUserId() } ) |
+</p>
+
+
+
+
