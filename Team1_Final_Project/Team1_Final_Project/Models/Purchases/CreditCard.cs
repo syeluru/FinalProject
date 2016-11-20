@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,8 @@ namespace Team1_Final_Project.Models.Purchases
         Visa,
         AmericanExpress,
         Discover,
-        MasterCard
+        MasterCard,
+        None
     }
     //testing
     public class CreditCard
@@ -25,6 +27,7 @@ namespace Team1_Final_Project.Models.Purchases
 
         [Required]
         [Display(Name = "Credit Card Type")]
+        [DefaultValue(CreditCardType.None)]
         public CreditCardType CreditCardType { get; set; }
 
         //navigational properties

@@ -1,136 +1,134 @@
-﻿@using Team1_Final_Project.Models.Music;
-@model MusicViewModel
+﻿@model Team1_Final_Project.Models.Music.MusicViewModel
+@using Team1_Final_Project.Controllers;
 
 @{
-    ViewBag.Title = "Search Index";
+    ViewBag.Title = "SearchIndex";
 }
 
-<h2>Music Search</h2>
+<h2>SearchIndex</h2>
+
 
 @using (Html.BeginForm())
 {
-    <p class="form-group">
+    @*<p class="form-group">
         Search: @Html.TextBox("SearchString", null, new { @class = "form-control" }) <br />
         <input type="submit" value="Search" class="btn btn-default" />
         @Html.ActionLink("Advanced Search", "DetailedSearch", null, new { @class = "btn btn-default" })
         @Html.ActionLink("Show All", "Index", null, new { @class = "btn btn-default" })
-    </p>
-    <p>
-        @*still need to add the numberselectedsongs and the controller search functionality*@
-        Displaying @ViewBag.NumberSelectedSongs of @ViewBag.NumberAllSongs songs.
-    </p>
+    </p>*@
+    @*<p>
+        Displaying @ViewBag.NumberSelectedCustomers of @ViewBag.NumberAllCustomers Customers.
+    </p>*@
+
+    <h2>Songs</h2>
+    <table class="table">
+        <tr>
+            <th>
+               Title
+            </th>
+            <th>
+                Artist
+            </th>
+            <th>
+                Rating
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>       
+    @foreach (var item in Model.Songs)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.SongName, "SongDetail", "Music", new { item.SongID }, null)
+            </td>
+            <td>
+                @foreach (var artist in item.SongArtists)
+                {
+                    @Html.ActionLink(artist.ArtistName, "ArtistDetail", "Music", new { artist.ArtistID }, null)
+                    <br />
+                }
+            </td>
+            <td>
+                @*NEED TO ADD RATINGS TO THIS
+                @item.SongRating
+                *@
+            </td>
+            <td>
+                @item.SongPrice
+            </td>
+        </tr>   
+    }
+
+    </table>
+
+    <h2>Albums</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Artist
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+            @foreach (var item in Model.Albums)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.AlbumName, "AlbumDetail", "Music", new { item.AlbumID }, null)
+                    </td>
+                    <td>
+                        @foreach (var artist in item.AlbumArtists)
+                        {
+                            @Html.ActionLink(artist.ArtistName, "ArtistDetail", "Music", new { artist.ArtistID }, null)
+                            <br />
+                        }
+                    </td>
+                    <td>
+                        @*NEED TO ADD RATINGS TO THIS
+                            @item.AlbumRating
+                        *@
+                    </td>
+                    <td>
+                        @item.AlbumPrice
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <h2>Artists</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Rating
+                </th>
+            </tr>
+            @foreach (var item in Model.Artists)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.ArtistName, "ArtistDetail", "Music", new { item.ArtistID }, null)
+                    </td>
+                    <td>
+                        @*NEED TO ADD RATINGS TO THIS
+                            @item.AlbumRating
+                        *@
+                    </td>
+                </tr>
+            }
+
+        </table>
+
 }
-
-
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Artists
-        </th>
-        <th>
-            Album
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-            Genre(s)
-        </th>
-    </tr>
-
-    @foreach (Song song in Model.Songs)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => song.SongName)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => song.SongArtists)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => song.SongAlbum)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => song.SongPrice)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => song.SongGenres)
-            </td>
-        </tr>
-    }
-
-</table>
-
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Artists
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-            Genre(s)
-        </th>
-    </tr>
-
-    @foreach (Album album in Model.Albums)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => album.AlbumName)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => album.AlbumArtists)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => album.AlbumPrice)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => album.AlbumGenres)
-            </td>
-        </tr>
-    }
-
-</table>
-
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Genre(s)
-        </th>
-    </tr>
-
-    @foreach (Artist artist in Model.Artists)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => artist.ArtistName)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => artist.ArtistGenres)
-            </td>
-        </tr>
-    }
-
-</table>
-
-
 

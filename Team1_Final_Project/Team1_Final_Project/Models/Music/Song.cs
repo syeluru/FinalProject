@@ -42,7 +42,7 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<Artist> SongArtists { get; set; }
 
-        public virtual Album SongAlbum { get; set; }
+        public virtual List<Album> SongAlbums { get; set; }
 
         public virtual List<AppUser> SongOwners { get; set; }
 

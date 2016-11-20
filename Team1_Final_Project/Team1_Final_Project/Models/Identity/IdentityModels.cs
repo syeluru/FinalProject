@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 using Team1_Final_Project.Models.Purchases;
+using Team1_Final_Project.Models.Music;
 using System.ComponentModel;
+
 
 //TODO: Change the namespace here to match your project's name
 namespace Team1_Final_Project.Models.Identity
@@ -65,6 +67,10 @@ namespace Team1_Final_Project.Models.Identity
         //TODO: add an Order model (or whatever we ended up doing to handle purchases) 
         public virtual List<Order> Orders { get; set; }
 
+        public virtual List<Song> Songs { get; set; }
+
+        public virtual List<Album> Albums { get; set; }
+
          
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> manager)
@@ -76,6 +82,7 @@ namespace Team1_Final_Project.Models.Identity
         public AppUser()
         {
             IsAccountEnabled = true;
+            this.CreditCards = new List<CreditCard>();
         }
     }
 
@@ -87,7 +94,17 @@ namespace Team1_Final_Project.Models.Identity
     {
         //TODO: Add your dbSets here.  As an example, I've included one for products
         //Remember - the IdentityDbContext already contains a db set for Users.  If you add another one, your code will break
-        //public DbSet<Product> Products { get; set; }
+        public DbSet<Song> Songs { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Artist> Artists { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<AlbumOrderBridge> AlbumOrderBridge { get; set; }
+        public DbSet<SongOrderBridge> SongOrderBridge { get; set; } 
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        //TODO: add ratings dbSets
+
                 
         public AppDbContext()
             : base("MyDbConnection", throwIfV1Schema: false)
