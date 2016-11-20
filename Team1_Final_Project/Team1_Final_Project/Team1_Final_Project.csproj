@@ -207,6 +207,22 @@
     <Compile Include="Migrations\201611152032019_sixth1.Designer.cs">
       <DependentUpon>201611152032019_sixth1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611201928238_testingwithmeghan.cs" />
+    <Compile Include="Migrations\201611201928238_testingwithmeghan.Designer.cs">
+      <DependentUpon>201611201928238_testingwithmeghan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611201936349_testing round 2.cs" />
+    <Compile Include="Migrations\201611201936349_testing round 2.Designer.cs">
+      <DependentUpon>201611201936349_testing round 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611201939464_testing round 3.cs" />
+    <Compile Include="Migrations\201611201939464_testing round 3.Designer.cs">
+      <DependentUpon>201611201939464_testing round 3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611202135198_testing round 4 on 11-20.cs" />
+    <Compile Include="Migrations\201611202135198_testing round 4 on 11-20.Designer.cs">
+      <DependentUpon>201611202135198_testing round 4 on 11-20.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
@@ -242,6 +258,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Music\AdvancedSearch.cshtml" />
+    <Content Include="Views\Music\SearchIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -251,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\201611202135063_testing round 4 on 11\" />
     <Folder Include="Models\Rating\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
@@ -270,6 +288,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611152032019_sixth1.resx">
       <DependentUpon>201611152032019_sixth1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611201928238_testingwithmeghan.resx">
+      <DependentUpon>201611201928238_testingwithmeghan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611201936349_testing round 2.resx">
+      <DependentUpon>201611201936349_testing round 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611201939464_testing round 3.resx">
+      <DependentUpon>201611201939464_testing round 3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611202135198_testing round 4 on 11-20.resx">
+      <DependentUpon>201611202135198_testing round 4 on 11-20.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
