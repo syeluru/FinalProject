@@ -1,0 +1,32 @@
+﻿@model Team1_Final_Project.Models.Purchases.CreditCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CreditCard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreditCardType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreditCardType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreditCardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreditCardNumber)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CreditCardID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
