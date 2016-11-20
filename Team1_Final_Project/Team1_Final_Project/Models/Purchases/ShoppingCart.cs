@@ -17,6 +17,8 @@ namespace Team1_Final_Project.Models.Purchases
         [ForeignKey("Customer")]
         public String ShoppingCartID { get; set; }
 
+
+
         [Required(ErrorMessage = "Total Price is required")]
         [Display(Name = "Total Price")]
         public Decimal TotalPrice { get; set; }
