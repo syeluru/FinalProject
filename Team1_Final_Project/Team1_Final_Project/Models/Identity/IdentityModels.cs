@@ -9,6 +9,8 @@ using System.ComponentModel.DataAnnotations;
 
 using Team1_Final_Project.Models.Purchases;
 using Team1_Final_Project.Models.Music;
+using System.ComponentModel;
+
 
 //TODO: Change the namespace here to match your project's name
 namespace Team1_Final_Project.Models.Identity
