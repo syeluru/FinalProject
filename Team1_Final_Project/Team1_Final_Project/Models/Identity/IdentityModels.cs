@@ -24,7 +24,7 @@ namespace Team1_Final_Project.Models.Identity
     public class AppUser : IdentityUser
     {
         //TODO: Put any additional fields that you need for your users here
-        
+
         //Scalar Properties
         [Required(ErrorMessage = "First Name is required.")]
         [Display(Name = "First Name")]
@@ -54,7 +54,7 @@ namespace Team1_Final_Project.Models.Identity
 
         [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
-        
+
         //Navigational Properties
         //TODO: need to add validation in terms of how many credit cards a person can or can't have
         public virtual List<CreditCard> CreditCards { get; set; }
@@ -65,7 +65,7 @@ namespace Team1_Final_Project.Models.Identity
         //TODO: add an Order model (or whatever we ended up doing to handle purchases) 
         public virtual List<Order> Orders { get; set; }
 
-         
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> manager)
         {
@@ -76,6 +76,8 @@ namespace Team1_Final_Project.Models.Identity
         public AppUser()
         {
             IsAccountEnabled = true;
+            //Have to add this for the list to be considered empty, not null
+            this.CreditCards = new List<CreditCard>();
         }
     }
 
@@ -88,7 +90,7 @@ namespace Team1_Final_Project.Models.Identity
         //TODO: Add your dbSets here.  As an example, I've included one for products
         //Remember - the IdentityDbContext already contains a db set for Users.  If you add another one, your code will break
         //public DbSet<Product> Products { get; set; }
-                
+
         public AppDbContext()
             : base("MyDbConnection", throwIfV1Schema: false)
         {
@@ -98,10 +100,14 @@ namespace Team1_Final_Project.Models.Identity
         {
             return new AppDbContext();
         }
-        
+
         //Add dbSet for roles
         public DbSet<AppRole> AppRoles { get; set; }
 
-        public System.Data.Entity.DbSet<Team1_Final_Project.Models.Purchases.ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
+        public DbSet<CreditCard> CreditCards { get; set; }
     }
+
+
 }

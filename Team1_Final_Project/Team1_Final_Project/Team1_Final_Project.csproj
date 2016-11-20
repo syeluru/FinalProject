@@ -188,6 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
@@ -221,7 +222,33 @@
     <Compile Include="Migrations\201611152100322_plswork.Designer.cs">
       <DependentUpon>201611152100322_plswork.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611190058046_ChangingCCDatatype.cs" />
+    <Compile Include="Migrations\201611190058046_ChangingCCDatatype.Designer.cs">
+      <DependentUpon>201611190058046_ChangingCCDatatype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611192103131_DBSET.cs" />
+    <Compile Include="Migrations\201611192103131_DBSET.Designer.cs">
+      <DependentUpon>201611192103131_DBSET.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611200331518_tablefix.cs" />
+    <Compile Include="Migrations\201611200331518_tablefix.Designer.cs">
+      <DependentUpon>201611200331518_tablefix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611201938230_UpdateFields.cs" />
+    <Compile Include="Migrations\201611201938230_UpdateFields.Designer.cs">
+      <DependentUpon>201611201938230_UpdateFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611201958363_stuff.cs" />
+    <Compile Include="Migrations\201611201958363_stuff.Designer.cs">
+      <DependentUpon>201611201958363_stuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611202141161_fixingstuff.cs" />
+    <Compile Include="Migrations\201611202141161_fixingstuff.Designer.cs">
+      <DependentUpon>201611202141161_fixingstuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Identity\IdentityModels.cs" />
+    <Compile Include="Models\Identity\TestModel.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
     <Compile Include="Models\Music\Genre.cs" />
@@ -229,7 +256,6 @@
     <Compile Include="Models\Music\Song.cs" />
     <Compile Include="Models\Purchases\AlbumOrderBridge.cs" />
     <Compile Include="Models\Purchases\CreditCard.cs" />
-    <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Identity\IdentityRoles.cs" />
     <Compile Include="Models\Identity\RoleViewModels.cs" />
     <Compile Include="Models\Identity\UserViewModels.cs" />
@@ -260,6 +286,11 @@
     <Content Include="Views\Members\Details.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\CreditCards\Create.cshtml" />
+    <Content Include="Views\CreditCards\Delete.cshtml" />
+    <Content Include="Views\CreditCards\Details.cshtml" />
+    <Content Include="Views\CreditCards\Edit.cshtml" />
+    <Content Include="Views\CreditCards\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -292,6 +323,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611152100322_plswork.resx">
       <DependentUpon>201611152100322_plswork.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611190058046_ChangingCCDatatype.resx">
+      <DependentUpon>201611190058046_ChangingCCDatatype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611192103131_DBSET.resx">
+      <DependentUpon>201611192103131_DBSET.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611200331518_tablefix.resx">
+      <DependentUpon>201611200331518_tablefix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611201938230_UpdateFields.resx">
+      <DependentUpon>201611201938230_UpdateFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611201958363_stuff.resx">
+      <DependentUpon>201611201958363_stuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611202141161_fixingstuff.resx">
+      <DependentUpon>201611202141161_fixingstuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

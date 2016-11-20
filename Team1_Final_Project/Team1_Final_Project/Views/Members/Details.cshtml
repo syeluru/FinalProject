@@ -69,6 +69,28 @@
 
     </dl>
 </div>
+
+    <!--Create Table-->
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Credit Card Number
+        </th>
+        <th>
+            Credit Card Type
+        </th>
+    </tr>
+    @foreach (var item in Model.CreditCards)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.CreditCardNumber)</td>
+            <td>@Html.DisplayFor(modelItem => item.CreditCardType)</td>
+        </tr>
+    }
+</table>
+
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
 </p>
