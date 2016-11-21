@@ -43,6 +43,8 @@ namespace Team1_Final_Project.Controllers
         [Authorize]
         public ActionResult Create()
         {
+            AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
+            ViewBag.UserCreditCards = GetAllCards(UserToChange);
             return View();
         }
 
@@ -62,9 +64,10 @@ namespace Team1_Final_Project.Controllers
             {
                 if (UserToChange.CreditCards != null)
                 {
-                    var result = (from n in UserToChange.CreditCards select n).ToList();
-                    //ViewBag.UserCreditCards = result;
-                    var count = result.Count;
+                    //find the list of members
+                    var query2 = (from m in UserToChange.CreditCards
+                                 select m).ToList();
+                    var count = query2.Count;
 
                     if (count >= 2)
                     {
@@ -82,12 +85,12 @@ namespace Team1_Final_Project.Controllers
                 UserToChange.CreditCards.Add(creditCard);
 
                 //add to viewbag
-                //ViewBag.UserCreditCards = UserToChange.CreditCards;
+                ViewBag.UserCreditCards = GetAllCards(UserToChange);
 
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("Index");
             }
             else if (creditCard.CreditCardNumber.Length == 16)
             {
@@ -112,12 +115,12 @@ namespace Team1_Final_Project.Controllers
                 UserToChange.CreditCards.Add(creditCard);
 
                 //add to viewbag
-                ViewBag.UserCreditCards = UserToChange.CreditCards;
+                ViewBag.UserCreditCards = GetAllCards(UserToChange);
 
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("Index");
             }
 
             else
@@ -186,21 +189,30 @@ namespace Team1_Final_Project.Controllers
         }
 
 
-        //public SelectList GetAllCreditCards(CreditCard creditCard) //Card ALREADY CHOSEN
-        //{
-        //    //populate list of committees
-        //    var query = from c in db.CreditCards
-        //                where c.Person.Id = User.Identity.GetUserId()
-        //                orderby c.Name
-        //                select c;
-        //    //create list and execute query
-        //    List<CreditCard> allCreditCards = query.ToList();
+        public MultiSelectList GetAllCards(AppUser UserToChange)
+        {
+            //find the list of creditcards
+            var query2 = from m in db.CreditCards
+                         select m;
 
-        //    //convert to select list
-        //    SelectList list = new SelectList(allCreditCards, "CreditCardID", "CreditCardType", creditCard.Person.Id);
+            //convert to list and execute query
+            List<CreditCard> allCreditCards = query2.ToList();
 
-        //    return list;
-        //}
+            //create list of selected Events
+            List<Int32> SelectedCreditCards = new List<Int32>();
+
+            //Loop through list of Events and add EventId
+            foreach (CreditCard m in UserToChange.CreditCards)
+            {
+                SelectedCreditCards.Add(m.CreditCardID);
+            }
+
+            //convert to multiselect
+            MultiSelectList allCreditCardsList = new MultiSelectList(allCreditCards, "CreditCardID", "CreditCardType", SelectedCreditCards);
+
+            return allCreditCardsList;
+        }
+
 
 
 

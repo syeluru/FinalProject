@@ -40,7 +40,7 @@ namespace Team1_Final_Project.Controllers
         // GET: ShoppingCarts/Create
         public ActionResult Create()
         {
-            ViewBag.ShoppingCartID = new SelectList(db.AppUsers, "Id", "FName");
+            ViewBag.ShoppingCartID = new SelectList(db.Users, "Id", "FName");
             return View();
         }
 
