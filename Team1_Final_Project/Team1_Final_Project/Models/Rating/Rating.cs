@@ -6,7 +6,7 @@ using Team1_Final_Project.Models.Music;
 
 namespace Team1_Final_Project.Models.Rating
 {
-    public class Rating
+    public class MusicRating
     {
         public int RatingID { get; set; }
 

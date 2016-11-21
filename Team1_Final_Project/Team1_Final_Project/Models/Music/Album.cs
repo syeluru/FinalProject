@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using Team1_Final_Project.Models.Identity;
 using Team1_Final_Project.Models.Rating;
-using Team1_Final_Project.Models.Music;
 
-namespace Team1_Final_Project
+
+namespace Team1_Final_Project.Models.Music
 {
     public class Album
     {
@@ -37,6 +37,6 @@ namespace Team1_Final_Project
 
         public virtual List<AppUser> SongOwners { get; set; }
 
-        public virtual List<Rating> AlbumRatings { get; set; }
+        public virtual List<MusicRating> AlbumRatings { get; set; }
     }
 }
