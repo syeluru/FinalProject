@@ -247,6 +247,10 @@
     <Compile Include="Migrations\201611202141161_fixingstuff.Designer.cs">
       <DependentUpon>201611202141161_fixingstuff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611202350230_same page.cs" />
+    <Compile Include="Migrations\201611202350230_same page.Designer.cs">
+      <DependentUpon>201611202350230_same page.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Identity\TestModel.cs" />
@@ -263,6 +267,7 @@
     <Compile Include="Models\Purchases\Order.cs" />
     <Compile Include="Models\Purchases\ShoppingCart.cs" />
     <Compile Include="Models\Purchases\SongOrderBridge.cs" />
+    <Compile Include="Models\Rating\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,7 +310,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Rating\" />
+    <Folder Include="Views\Ratings\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
@@ -345,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611202141161_fixingstuff.resx">
       <DependentUpon>201611202141161_fixingstuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611202350230_same page.resx">
+      <DependentUpon>201611202350230_same page.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

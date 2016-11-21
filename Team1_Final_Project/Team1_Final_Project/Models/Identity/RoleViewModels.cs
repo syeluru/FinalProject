@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Team1_Final_Project.Models.Identity;
 
 //TODO: Change the namespace here to match your project's name
-namespace Team1_Final_Project.Models.Identity
+namespace Team1_Final_Project
 {
     public class RoleEditModel
     {
