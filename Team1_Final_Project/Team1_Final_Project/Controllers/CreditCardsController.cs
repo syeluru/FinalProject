@@ -21,7 +21,20 @@ namespace Team1_Final_Project.Controllers
         // GET: CreditCards
         public ActionResult Index()
         {
-            return View(db.CreditCards.ToList());
+            AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
+            //create list of selected Cards
+            List<CreditCard> SelectedCreditCards = new List<CreditCard>();
+
+            //Loop through list of Cards and add CardId
+            foreach (CreditCard m in UserToChange.CreditCards)
+            {
+                SelectedCreditCards.Add(m);
+            }
+
+            //add to viewbag
+            ViewBag.UserCreditCards = SelectedCreditCards;
+
+            return View();
         }
 
         // GET: CreditCards/Details/5
@@ -43,8 +56,6 @@ namespace Team1_Final_Project.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
-            ViewBag.UserCreditCards = GetAllCards(UserToChange);
             return View();
         }
 
@@ -84,9 +95,6 @@ namespace Team1_Final_Project.Controllers
                 //add credit cards
                 UserToChange.CreditCards.Add(creditCard);
 
-                //add to viewbag
-                ViewBag.UserCreditCards = GetAllCards(UserToChange);
-
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
@@ -113,9 +121,6 @@ namespace Team1_Final_Project.Controllers
                 }
                 //add credit cards
                 UserToChange.CreditCards.Add(creditCard);
-
-                //add to viewbag
-                ViewBag.UserCreditCards = GetAllCards(UserToChange);
 
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
@@ -189,29 +194,21 @@ namespace Team1_Final_Project.Controllers
         }
 
 
-        public MultiSelectList GetAllCards(AppUser UserToChange)
-        {
-            //find the list of creditcards
-            var query2 = from m in db.CreditCards
-                         select m;
+        //public SelectList GetAllCards(AppUser UserToChange)
+        //{
+        //    //create list of selected Cards
+        //    List<String> SelectedCreditCards = new List<String>();
 
-            //convert to list and execute query
-            List<CreditCard> allCreditCards = query2.ToList();
+        //    //Loop through list of Cards and add CardId
+        //    foreach (CreditCard m in UserToChange.CreditCards)
+        //    {
+        //        SelectedCreditCards.Add(m.CreditCardNumber);
+        //    }
 
-            //create list of selected Events
-            List<Int32> SelectedCreditCards = new List<Int32>();
-
-            //Loop through list of Events and add EventId
-            foreach (CreditCard m in UserToChange.CreditCards)
-            {
-                SelectedCreditCards.Add(m.CreditCardID);
-            }
-
-            //convert to multiselect
-            MultiSelectList allCreditCardsList = new MultiSelectList(allCreditCards, "CreditCardID", "CreditCardType", SelectedCreditCards);
-
-            return allCreditCardsList;
-        }
+        //    //SelectList allCreditCardsList = new SelectList(SelectedCreditCards);
+            
+        //    return SelectedCreditCards;
+        //}
 
 
 

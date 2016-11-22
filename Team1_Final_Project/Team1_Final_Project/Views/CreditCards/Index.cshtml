@@ -10,10 +10,26 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+<!--Create Table-->
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Credit Card Number
+        </th>
+        <th>
+            Credit Card Type
+        </th>
+    </tr>
+@using (Html.BeginForm("Index", "CreditCards", FormMethod.Get))
+{
+    foreach( var item in ViewBag.UserCreditCards)
+    {
+        <tr>
+            <td>@item.CreditCardNumber</td>
+            <td>@item.CreditCardType</td>
+        </tr>
+    }
+}
+</table>
 
-<div class="form-group">
-    <div class="col-md-10">
-        @Html.DropDownList("CreditCardID", (MultiSelectList)ViewBag.UserCreditCards, new { @class = "form-control" })
-    </div>
-</div>
 
