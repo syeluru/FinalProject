@@ -302,7 +302,7 @@
     <Content Include="Views\CreditCards\Index.cshtml" />
     <Content Include="Views\ShoppingCarts\Delete.cshtml" />
     <Content Include="Views\ShoppingCarts\Index.cshtml" />
-    <Content Include="Views\Music\AdvancedSearch.cshtml" />
+    <Content Include="Views\Music\SongAdvancedSearch.cshtml" />
     <Content Include="Views\Music\SearchIndex.cshtml" />
     <Content Include="Views\Songs\Create.cshtml" />
     <Content Include="Views\Songs\Delete.cshtml" />
