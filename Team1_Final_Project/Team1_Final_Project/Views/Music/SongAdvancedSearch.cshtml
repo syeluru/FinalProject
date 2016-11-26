@@ -1,21 +1,21 @@
 ﻿@using Team1_Final_Project.Controllers
 
 @{
-    ViewBag.Title = "Advanced Search";
+    ViewBag.Title = "Song Advanced Search";
 }
 
 <h2>Advanced Music Search</h2>
 @*TODO: MAKE THE CONTROLLER FOR SEARCH WITH THE ACTION NAME AdvancedSearch*@
-@using (Html.BeginForm("AdvancedSearch", "Music", FormMethod.Get))
+@using (Html.BeginForm("SongAdvancedSearch", "Music", FormMethod.Get))
 {
     <p class="form-group">
-        Song Name: <br />@Html.TextBox("MusicSearchString", null, new { @class = "form-control" }) <br />
+        Song Name: <br />@Html.TextBox("SongSearchString", null, new { @class = "form-control" }) <br />
 
         Artist: <br />@Html.TextBox("ArtistSearchString", null, new { @class = "form-control" })<br />
 
         Album: <br/>@Html.TextBox("AlbumSearchString", null, new { @class = "form-control" })<br />
 
-        Genre: <br />@Html.DropDownList("SelectedGender", (MultiSelectList)ViewBag.AllFrequencies, new { @class = "form-control" }) <br />
+        Genre: <br />@Html.DropDownList("SelectedGenres", (MultiSelectList)ViewBag.AllGenres, new { @class = "form-control" }) <br />
 
 @*
         <div class="form-group">

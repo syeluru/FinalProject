@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Team1_Final_Project.Models.Identity;
+using Team1_Final_Project.Models.Rating;
+
 
 namespace Team1_Final_Project.Models.Music
 {
@@ -25,5 +27,7 @@ namespace Team1_Final_Project.Models.Music
         public virtual List<Song> ArtistSongs { get; set; }
 
         public virtual List<Album> ArtistAlbums { get; set; }
+
+        public virtual List<MusicRating> ArtistRatings { get; set; }
     }
 }
