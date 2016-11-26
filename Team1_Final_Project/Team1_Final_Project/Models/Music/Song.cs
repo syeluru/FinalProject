@@ -6,9 +6,8 @@ using System.Web;
 using Team1_Final_Project.Models;
 using Team1_Final_Project.Models.Identity;
 using Team1_Final_Project.Models.Rating;
-using Team1_Final_Project.Models.Music;
 
-namespace Team1_Final_Project
+namespace Team1_Final_Project.Models.Music
 {
 
     public enum CreditCardType
@@ -48,7 +47,7 @@ namespace Team1_Final_Project
 
         public virtual List<AppUser> SongOwners { get; set; }
 
-        public virtual List<Rating> SongRatings { get; set; }
+        public virtual List<MusicRating> SongRatings { get; set; }
 
     }
 }
