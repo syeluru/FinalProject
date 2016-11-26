@@ -47,6 +47,9 @@ namespace Team1_Final_Project.Models.Identity
         [Display(Name = "First Name")]
         public String FName { get; set; }
 
+        [Display(Name = "Middle Initial")]
+        public String MName { get; set; }
+
         [Required(ErrorMessage = "Last Name is required.")]
         [Display(Name = "Last Name")]
         public String LName { get; set; }
