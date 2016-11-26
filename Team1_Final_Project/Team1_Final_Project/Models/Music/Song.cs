@@ -49,5 +49,11 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<MusicRating> SongRatings { get; set; }
 
+        public Song()
+        {
+            this.SongAlbums = new List<Album>();
+            this.SongArtists = new List<Artist>();
+            this.SongGenres = new List<Genre>();
+        }
     }
 }
