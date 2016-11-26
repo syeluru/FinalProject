@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities.Expressions;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -52,18 +53,18 @@ namespace Team1_Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres)
         {
-            
+
             if (ModelState.IsValid)
             {
-
-                //add selected genres
-                if (SelectedGenres != null)
+                //associate list of genres with artist
+                if (SelectedGenres != null && SelectedGenres.Length > 0)
                 {
                     foreach (int genreID in SelectedGenres)
                     {
-                        Genre genreToAdd = db.Genres.Find(genreID);
-                        artist.ArtistGenres.Add(genreToAdd);
+                        Genre GenreToAdd = db.Genres.Find(genreID);
+                        artist.ArtistGenres.Add(GenreToAdd);
                     }
+
                 }
 
                 db.Artists.Add(artist);
