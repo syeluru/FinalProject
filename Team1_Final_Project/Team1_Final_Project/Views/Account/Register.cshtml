@@ -70,17 +70,17 @@
             @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="col-md-10">
-        <div class="form-group">
-            @Html.LabelFor(m => m.ZipCode, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
-            </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ZipCode, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
         </div>
     </div>
 
-        <!--END OF WHAT I ADDED-->
+    <!--END OF WHAT I ADDED-->
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />
