@@ -268,9 +268,12 @@
     <Compile Include="Migrations\201611262007062_constructors.Designer.cs">
       <DependentUpon>201611262007062_constructors.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611262313221_hopefullythisworks.cs" />
+    <Compile Include="Migrations\201611262313221_hopefullythisworks.Designer.cs">
+      <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
-    <Compile Include="Models\Identity\TestModel.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
     <Compile Include="Models\Music\Genre.cs" />
@@ -338,6 +341,7 @@
     <Content Include="Views\Genres\Details.cshtml" />
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
+    <Content Include="Views\Account\RegisterEmployee.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -399,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611262007062_constructors.resx">
       <DependentUpon>201611262007062_constructors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611262313221_hopefullythisworks.resx">
+      <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

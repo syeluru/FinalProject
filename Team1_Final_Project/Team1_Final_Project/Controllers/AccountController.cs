@@ -119,7 +119,7 @@ namespace Team1_Final_Project.Controllers
             {
                 //TODO: Add fields to user here so they will be saved to the database
                 //Create a new user with all the properties you need for the class
-                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled };
+                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled };
 
                 //Add the new user to the database
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -127,7 +127,7 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                //await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
+                await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Employee"
 
                 if (result.Succeeded) //user was created successfully
                 {
@@ -145,6 +145,57 @@ namespace Team1_Final_Project.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        //ADDING NEW STUFF STARTING NOW
+        //
+        // GET: /Account/RegisterEmployee
+        //TODO: change this to only authorize managers
+        [AllowAnonymous]
+        public ActionResult RegisterEmployee()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/RegisterEmployee
+        [HttpPost]
+        //TODO: change this to only authorize managers
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterEmployee(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //TODO: Add fields to user here so they will be saved to the database
+                //Create a new user with all the properties you need for the class
+                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled };
+
+                //Add the new user to the database
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                //TODO: Once you get roles working, you may want to add users to roles upon creation
+                //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
+                // --OR--
+                await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
+
+                if (result.Succeeded) //user was created successfully
+                {
+                    //sign the user in
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    //send them to the home page
+                    return RedirectToAction("Index", "Home");
+                }
+
+                //if there was a problem, add the error messages to what we will display
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        //ADDING NEW STUFF ENDING NOW
+
 
         // POST: /Account/LogOff
         [HttpPost]
