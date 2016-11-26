@@ -84,8 +84,8 @@ namespace Team1_Final_Project.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AllGenres = GetAllGenres(album);
-            ViewBag.AllArtists = GetAllArtists(album);
+            ViewBag.AllGenres = GetAllGenres();
+            ViewBag.AllArtists = GetAllArtists();
             return View(album);
         }
 
@@ -101,6 +101,10 @@ namespace Team1_Final_Project.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.AllGenres = GetAllGenres(album);
+            ViewBag.AllArtists = GetAllArtists(album);
+
             return View(album);
         }
 
@@ -109,14 +113,52 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,AlbumName,AlbumPrice,AlbumDiscount")] Album album)
+        public ActionResult Edit([Bind(Include = "AlbumID,AlbumName,AlbumPrice,AlbumDiscount")] Album album, int[] SelectedArtists, int[] SelectedGenres)
         {
+
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
+
+                //Find associated artist
+                Album albumToChange = db.Albums.Find(album.AlbumID);
+
+                //remove any existing genres
+                albumToChange.AlbumGenres.Clear();
+                albumToChange.AlbumArtists.Clear();
+
+                //if there are genres to add, add them
+                if (SelectedGenres != null)
+                {
+                    foreach (int genreID in SelectedGenres)
+                    {
+                        Genre genreToAdd = db.Genres.Find(genreID);
+                        albumToChange.AlbumGenres.Add(genreToAdd);
+                    }
+                }
+
+                //if there are artists to add, add them
+                if (SelectedArtists != null)
+                {
+                    foreach (int ArtistID in SelectedArtists)
+                    {
+                        Artist artistToAdd = db.Artists.Find(ArtistID);
+                        albumToChange.AlbumArtists.Add(artistToAdd);
+                    }
+                }
+
+                //update the rest of the fields
+                albumToChange.AlbumName = album.AlbumName;
+                albumToChange.AlbumPrice = album.AlbumPrice;
+                albumToChange.AlbumDiscount = album.AlbumDiscount;
+
+
+                db.Entry(albumToChange).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.AllGenres = GetAllGenres(album);
+            ViewBag.AllArtists = GetAllArtists(album);
             return View(album);
         }
 
