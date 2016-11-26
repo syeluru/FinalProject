@@ -1,0 +1,17 @@
+﻿@*@model Team1_Final_Project.Models.Identity.AppUser*@
+@using Microsoft.AspNet.Identity;
+@using Team1_Final_Project.Models.Identity;
+
+@{
+    ViewBag.Title = "View";
+}
+
+@{ 
+    AppDbContext db = new AppDbContext();
+    //Find associated Member
+    AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
+
+}
+
+<h2>Welcome to the Longhorns Music Store, @UserToChange.FName</h2>
+

@@ -6,12 +6,18 @@ using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 
 namespace Team1_Final_Project.Controllers
 {
+
+
+
     [Authorize]
     public class AccountController : Controller
     {
+
+
         public enum ManageMessageId
         {
             AddPhoneSuccess,
@@ -117,6 +123,7 @@ namespace Team1_Final_Project.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 //TODO: Add fields to user here so they will be saved to the database
                 //Create a new user with all the properties you need for the class
                 var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled };
@@ -127,7 +134,7 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                //await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
+                await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Employee"
 
                 if (result.Succeeded) //user was created successfully
                 {
@@ -135,7 +142,7 @@ namespace Team1_Final_Project.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     //send them to the home page
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("CustomerDashboard", "Home");
                 }
 
                 //if there was a problem, add the error messages to what we will display

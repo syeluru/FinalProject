@@ -118,5 +118,7 @@ namespace Team1_Final_Project.Models.Identity
         
         //Add dbSet for roles
          public DbSet<AppRole> AppRoles { get; set; }
+
+        //public System.Data.Entity.DbSet<Team1_Final_Project.Models.Identity.AppUser> AppUsers { get; set; }
     }
 }
