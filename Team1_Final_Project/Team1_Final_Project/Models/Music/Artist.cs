@@ -29,5 +29,10 @@ namespace Team1_Final_Project.Models.Music
         public virtual List<Album> ArtistAlbums { get; set; }
 
         public virtual List<MusicRating> ArtistRatings { get; set; }
+
+        public Artist()
+        {
+            this.ArtistGenres = new List<Genre>();
+        }
     }
 }
