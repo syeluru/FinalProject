@@ -35,6 +35,24 @@
         </dd>
 
     </dl>
+
+    <!--Create Table-->
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Genre Title
+            </th>
+        </tr>
+        @foreach (var item in Model.AlbumGenres)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.GenreName)</td>
+            </tr>
+        }
+    </table>
+
+
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |

@@ -29,7 +29,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Artist</label>
             <div class="col-md-10">
-                @Html.ListBox("ArtistID", (MultiSelectList)ViewBag.AlbumArtists, new { @class = "form-control" })
+                @Html.ListBox("ArtistID", (MultiSelectList)ViewBag.AllArtists, new { @class = "form-control" })
             </div>
         </div>
         <!--added code ends here-->
@@ -38,7 +38,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Genre</label>
             <div class="col-md-10">
-                @Html.ListBox("GenreID", (MultiSelectList)ViewBag.AlbumGenres, new { @class = "form-control" })
+                @Html.ListBox("GenreID", (MultiSelectList)ViewBag.AllGenres, new { @class = "form-control" })
             </div>
         </div>
         <!--added code ends here-->
@@ -49,14 +49,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AlbumPrice, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AlbumPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AlbumDiscount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AlbumDiscount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AlbumDiscount, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201611261702308_hello.Designer.cs">
       <DependentUpon>201611261702308_hello.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611261856537_deletingThings.cs" />
+    <Compile Include="Migrations\201611261856537_deletingThings.Designer.cs">
+      <DependentUpon>201611261856537_deletingThings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Identity\TestModel.cs" />
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611261702308_hello.resx">
       <DependentUpon>201611261702308_hello.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611261856537_deletingThings.resx">
+      <DependentUpon>201611261856537_deletingThings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
