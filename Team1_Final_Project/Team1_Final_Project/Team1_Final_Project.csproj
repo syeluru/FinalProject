@@ -191,6 +191,7 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
+    <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
@@ -253,6 +254,10 @@
     <Compile Include="Migrations\201611202350230_same page.cs" />
     <Compile Include="Migrations\201611202350230_same page.Designer.cs">
       <DependentUpon>201611202350230_same page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611261702308_hello.cs" />
+    <Compile Include="Migrations\201611261702308_hello.Designer.cs">
+      <DependentUpon>201611261702308_hello.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
@@ -319,6 +324,11 @@
     <Content Include="Views\Artists\Details.cshtml" />
     <Content Include="Views\Artists\Edit.cshtml" />
     <Content Include="Views\Artists\Index.cshtml" />
+    <Content Include="Views\Genres\Create.cshtml" />
+    <Content Include="Views\Genres\Delete.cshtml" />
+    <Content Include="Views\Genres\Details.cshtml" />
+    <Content Include="Views\Genres\Edit.cshtml" />
+    <Content Include="Views\Genres\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -328,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\201611261701429_up to date as of 11\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
@@ -370,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611202350230_same page.resx">
       <DependentUpon>201611202350230_same page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611261702308_hello.resx">
+      <DependentUpon>201611261702308_hello.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
