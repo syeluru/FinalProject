@@ -16,6 +16,13 @@ namespace Team1_Final_Project.Controllers
         EqualTo
     }
 
+    public enum SortOrder
+    {
+        Ascending,
+        Descending
+    }
+
+
     public class MusicController : Controller
     {
         // appdbcontext
@@ -24,8 +31,8 @@ namespace Team1_Final_Project.Controllers
 
 /*-----------------------------SEARCH------------------------------*/
 
-        // GET: Music Search
-        public ActionResult SearchIndex(string SearchString)
+        // GET: Basic Music Search
+        public ActionResult BasicSearch(string SearchString)
         {
 
             // create the list of songs with no data
@@ -43,149 +50,19 @@ namespace Team1_Final_Project.Controllers
 
             return View(SearchMusicViewModel);
         }
-/*---------------------------SONGS--------------------------------*/
-        // GET: Music/SongDetails/5
-        public ActionResult SongDetails(int? id)
+
+        // GET: Advanced Music Search
+        public ActionResult SongAdvancedSearch()
         {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Song song = db.Songs.Find(id);
-            if (song == null)
-            {
-                return HttpNotFound();
-            }
-
-
-            return View(song);
-        }
-
-        // GET
-        public ActionResult CreateSong()
-        {
+            ViewBag.AllGenres = GetAllGenres();
             return View();
         }
 
-        // POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateSong([Bind(Include = "SongID,SongName")] Song song)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Songs.Add(song);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(song);
-        }
-        
-
-
-
-
-
-/*-----------------------------ARTISTS------------------------------*/
-        // GET: Music/ArtistDetails/5
-        public ActionResult ArtistDetails(int? id)
-        {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
-            {
-                return HttpNotFound();
-            }
-
-
-            return View(artist);
-        }
-
-        // GET
-        public ActionResult CreateArtist()
+        // GET: Advanced Music Search
+        public ActionResult SongAdvancedSearch(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, string SongPriceString, Operation SelectedOperation, SortOrder SelectedSortOrder)
         {
             return View();
         }
-
-        // POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateArtist([Bind(Include = "ArtistID,ArtistName")] Artist artist)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Artists.Add(artist);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(artist);
-        }
-
-        /*---------------------------ALBUM-------------------------------*/
-
-        // GET: Music/AlbumDetails/5
-        public ActionResult AlbumDetails(int? id)
-        {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Album album = db.Albums.Find(id);
-            if (album == null)
-            {
-                return HttpNotFound();
-            }
-
-
-            return View(album);
-        }
-
-        // GET 
-        public ActionResult CreateAlbum()
-        {
-            return View();
-        }
-
-        // POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateAlbum([Bind(Include = "AlbumID,AlbumName")] Album album)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Albums.Add(album);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(album);
-        }
-
-        // GET: Music/EditAlbums/5
-        public ActionResult EditAlbum(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Album album = db.Albums.Find(id);
-            if (album == null)
-            {
-                return HttpNotFound();
-            }
-            return View(album);
-        }
-
-
-
         /*-----------------------other stuff---------------------------------*/
 
         public List<Song> GetSearchedSongs(String SearchString)
@@ -199,7 +76,8 @@ namespace Team1_Final_Project.Controllers
                 query = query;
             } else
             {
-                query = query.Where(c => c.SongName.Contains(SearchString));
+                // search for a song by name, a song by its artists' names, or by its albums' names
+                query = query.Where(c => c.SongName.Contains(SearchString) || c.SongArtists.Any(art => art.ArtistName.Contains(SearchString)) || c.SongAlbums.Any(alb => alb.AlbumName.Contains(SearchString)));
                 //c.SongArtists.Contains(SearchString) || c.SongGenres.Contains(SearchString)
             }
 
@@ -219,7 +97,7 @@ namespace Team1_Final_Project.Controllers
             }
             else
             {
-                query = query.Where(c => c.ArtistName.Contains(SearchString));
+                query = query.Where(c => c.ArtistName.Contains(SearchString) || c.ArtistSongs.Any(song => song.SongName.Contains(SearchString)) || c.ArtistAlbums.Any(alb => alb.AlbumName.Contains(SearchString)));
                 //c.SongArtists.Contains(SearchString) || c.SongGenres.Contains(SearchString)
             }
 
@@ -239,13 +117,171 @@ namespace Team1_Final_Project.Controllers
             }
             else
             {
-                query = query.Where(c => c.AlbumName.Contains(SearchString));
+                query = query.Where(c => c.AlbumName.Contains(SearchString) || c.AlbumSongs.Any(song => song.SongName.Contains(SearchString)) || c.AlbumArtists.Any(art => art.ArtistName.Contains(SearchString)));
                 //c.SongArtists.Contains(SearchString) || c.SongGenres.Contains(SearchString)
             }
 
             List<Album> SelectedAlbums = query.ToList();
             return SelectedAlbums;
         }
+
+        public MultiSelectList GetAllGenres()
+        {
+            var query = from c in db.Genres
+                        orderby c.GenreName
+                        select c;
+
+            List<Genre> GenreList = query.Distinct().ToList();
+
+            //Add in choice for not selecting a frequency
+            Genre NoChoice = new Genre() { GenreID = 0, GenreName = "All Genres" };
+            GenreList.Add(NoChoice);
+            MultiSelectList SelectedGenreList = new MultiSelectList(GenreList.OrderBy(f => f.GenreName), "GenreID", "GenreName");
+            return SelectedGenreList;
+        }
+
+        ///*---------------------------SONGS--------------------------------*/
+        //        // GET: Music/SongDetails/5
+        //        public ActionResult SongDetails(int? id)
+        //        {
+
+        //            if (id == null)
+        //            {
+        //                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //            }
+        //            Song song = db.Songs.Find(id);
+        //            if (song == null)
+        //            {
+        //                return HttpNotFound();
+        //            }
+
+
+        //            return View(song);
+        //        }
+
+        //        // GET
+        //        public ActionResult CreateSong()
+        //        {
+        //            return View();
+        //        }
+
+        //        // POST
+        //        [HttpPost]
+        //        [ValidateAntiForgeryToken]
+        //        public ActionResult CreateSong([Bind(Include = "SongID,SongName")] Song song)
+        //        {
+        //            if (ModelState.IsValid)
+        //            {
+        //                db.Songs.Add(song);
+        //                db.SaveChanges();
+        //                return RedirectToAction("Index");
+        //            }
+
+        //            return View(song);
+        //        }
+
+
+
+
+
+
+        ///*-----------------------------ARTISTS------------------------------*/
+        //        // GET: Music/ArtistDetails/5
+        //        public ActionResult ArtistDetails(int? id)
+        //        {
+
+        //            if (id == null)
+        //            {
+        //                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //            }
+        //            Artist artist = db.Artists.Find(id);
+        //            if (artist == null)
+        //            {
+        //                return HttpNotFound();
+        //            }
+
+
+        //            return View(artist);
+        //        }
+
+        //        // GET
+        //        public ActionResult CreateArtist()
+        //        {
+        //            return View();
+        //        }
+
+        //        // POST
+        //        [HttpPost]
+        //        [ValidateAntiForgeryToken]
+        //        public ActionResult CreateArtist([Bind(Include = "ArtistID,ArtistName")] Artist artist)
+        //        {
+        //            if (ModelState.IsValid)
+        //            {
+        //                db.Artists.Add(artist);
+        //                db.SaveChanges();
+        //                return RedirectToAction("Index");
+        //            }
+
+        //            return View(artist);
+        //        }
+
+        //        /*---------------------------ALBUM-------------------------------*/
+
+        //        // GET: Music/AlbumDetails/5
+        //        public ActionResult AlbumDetails(int? id)
+        //        {
+
+        //            if (id == null)
+        //            {
+        //                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //            }
+        //            Album album = db.Albums.Find(id);
+        //            if (album == null)
+        //            {
+        //                return HttpNotFound();
+        //            }
+
+
+        //            return View(album);
+        //        }
+
+        //        // GET 
+        //        public ActionResult CreateAlbum()
+        //        {
+        //            return View();
+        //        }
+
+        //        // POST
+        //        [HttpPost]
+        //        [ValidateAntiForgeryToken]
+        //        public ActionResult CreateAlbum([Bind(Include = "AlbumID,AlbumName")] Album album)
+        //        {
+        //            if (ModelState.IsValid)
+        //            {
+        //                db.Albums.Add(album);
+        //                db.SaveChanges();
+        //                return RedirectToAction("Index");
+        //            }
+
+        //            return View(album);
+        //        }
+
+        //        // GET: Music/EditAlbums/5
+        //        public ActionResult EditAlbum(int? id)
+        //        {
+        //            if (id == null)
+        //            {
+        //                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //            }
+        //            Album album = db.Albums.Find(id);
+        //            if (album == null)
+        //            {
+        //                return HttpNotFound();
+        //            }
+        //            return View(album);
+        //        }
+
+
 
 
     }
