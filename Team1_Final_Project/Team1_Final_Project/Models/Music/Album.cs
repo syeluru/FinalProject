@@ -23,8 +23,7 @@ namespace Team1_Final_Project.Models.Music
         [Required(ErrorMessage = "Album Price is required.")]
         [Display(Name = "Album Price")]
         public Decimal AlbumPrice { get; set; }
-
-        [Required(ErrorMessage = "Album Discount is required.")]
+        
         [Display(Name = "Album Discount")]
         public Decimal AlbumDiscount { get; set; }
 

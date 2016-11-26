@@ -34,8 +34,7 @@ namespace Team1_Final_Project.Models.Music
         [Required(ErrorMessage = "Song Price is required.")]
         [Display(Name = "Song Price")]
         public Decimal SongPrice { get; set; }
-
-        [Required(ErrorMessage = "Song Discount is required.")]
+        
         [Display(Name = "Song Discount")]
         public Decimal SongDiscount { get; set; }
 
