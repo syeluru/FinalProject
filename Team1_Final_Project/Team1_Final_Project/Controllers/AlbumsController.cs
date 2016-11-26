@@ -53,39 +53,36 @@ namespace Team1_Final_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Find associated Album
-                Album albumToChange = db.Albums.Find(album.AlbumID);
-
                 //if there are genres to add, add them
                 if (SelectedGenres != null)
                 {
-                    foreach (Int16 GenreID in SelectedGenres)
+                    foreach (int GenreID in SelectedGenres)
                     {
                         Genre genreToAdd = db.Genres.Find(GenreID);
-                        albumToChange.AlbumGenres.Add(genreToAdd);
-                        db.SaveChanges();
+                        album.AlbumGenres.Add(genreToAdd);
                     }
                 }
 
                 //if there are artists to add, add them
                 if (SelectedArtists != null)
                 {
-                    foreach (Int16 ArtistID in SelectedArtists)
+                    foreach (int ArtistID in SelectedArtists)
                     {
                         Artist artistToAdd = db.Artists.Find(ArtistID);
-                        albumToChange.AlbumArtists.Add(artistToAdd);
-                        db.SaveChanges();
+                        album.AlbumArtists.Add(artistToAdd);
                     }
                 }
+
+                //update the rest of the fields
+                album.AlbumName = album.AlbumName;
+                album.AlbumPrice = album.AlbumPrice;
+                album.AlbumDiscount = album.AlbumDiscount;
+
 
                 db.Albums.Add(album);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-
-
-
 
             ViewBag.AllGenres = GetAllGenres(album);
             ViewBag.AllArtists = GetAllArtists(album);

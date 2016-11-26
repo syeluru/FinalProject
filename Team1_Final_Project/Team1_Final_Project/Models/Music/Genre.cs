@@ -21,5 +21,11 @@ namespace Team1_Final_Project.Models.Music
         public virtual List<Song> Songs { get; set; }
         public virtual List<Artist> Artists { get; set; }
         public virtual List<Album> Albums { get; set; }
+
+        public Genre()
+        {
+            this.Artists = new List<Artist>();
+            this.Albums = new List<Album>();
+        }
     }
 }

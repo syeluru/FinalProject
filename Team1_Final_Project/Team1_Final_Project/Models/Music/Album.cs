@@ -37,5 +37,12 @@ namespace Team1_Final_Project.Models.Music
         public virtual List<AppUser> SongOwners { get; set; }
 
         public virtual List<MusicRating> AlbumRatings { get; set; }
+
+        public Album()
+        {
+            this.AlbumGenres = new List<Genre>();
+            this.AlbumArtists = new List<Artist>();
+        }
+        
     }
 }

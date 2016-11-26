@@ -40,7 +40,7 @@
     <table class="table table-bordered">
         <tr>
             <th>
-                Genre Title
+                Genre
             </th>
         </tr>
         @foreach (var item in Model.AlbumGenres)
@@ -50,7 +50,22 @@
             </tr>
         }
     </table>
+    <br />
 
+    <!--Create Table-->
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Artist Name
+            </th>
+        </tr>
+        @foreach (var item in Model.AlbumArtists)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ArtistName)</td>
+            </tr>
+        }
+    </table>
 
 
 </div>

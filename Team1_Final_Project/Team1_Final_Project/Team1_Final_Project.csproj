@@ -264,6 +264,10 @@
     <Compile Include="Migrations\201611261856537_deletingThings.Designer.cs">
       <DependentUpon>201611261856537_deletingThings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611262007062_constructors.cs" />
+    <Compile Include="Migrations\201611262007062_constructors.Designer.cs">
+      <DependentUpon>201611262007062_constructors.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Identity\TestModel.cs" />
@@ -392,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611261856537_deletingThings.resx">
       <DependentUpon>201611261856537_deletingThings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611262007062_constructors.resx">
+      <DependentUpon>201611262007062_constructors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
