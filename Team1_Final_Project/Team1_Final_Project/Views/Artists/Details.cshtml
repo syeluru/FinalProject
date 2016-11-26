@@ -17,6 +17,30 @@
         <dd>
             @Html.DisplayFor(model => model.ArtistName)
         </dd>
+        @*TODO: NEED TO ADD ADDITIONAL DETAILS STUFF FOR GENRES, SONGS, ALBUMS, ETC.*@
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Associated Genres
+                </th>
+            </tr>
+
+            @foreach (var item in Model.ArtistGenres)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.GenreName)</td>
+
+                </tr>
+            }
+            @*
+            @foreach (var item in Model.Members)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                </tr>
+            }*@
+        </table>
 
     </dl>
 </div>

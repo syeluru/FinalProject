@@ -39,7 +39,10 @@ namespace Team1_Final_Project.Controllers
         // GET: Artists/Create
         public ActionResult Create()
         {
+            
+            ViewBag.AllGenres = GetAllGenres();
             return View();
+
         }
 
         // POST: Artists/Create
@@ -47,15 +50,27 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtistID,ArtistName")] Artist artist)
+        public ActionResult Create([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres)
         {
+            
             if (ModelState.IsValid)
             {
+
+                //add selected genres
+                if (SelectedGenres != null)
+                {
+                    foreach (int genreID in SelectedGenres)
+                    {
+                        Genre genreToAdd = db.Genres.Find(genreID);
+                        artist.ArtistGenres.Add(genreToAdd);
+                    }
+                }
+
                 db.Artists.Add(artist);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.AllGenres = GetAllGenres(artist);
             return View(artist);
         }
 
@@ -71,6 +86,7 @@ namespace Team1_Final_Project.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AllGenres = GetAllGenres(artist);
             return View(artist);
         }
 
@@ -79,14 +95,41 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist)
+        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(artist).State = EntityState.Modified;
+
+                //Find associated artist
+                Artist artistToChange = db.Artists.Find(artist.ArtistID);
+
+                //remove any existing genres
+                artistToChange.ArtistGenres.Clear();
+
+                //if there are genres to add, add them
+                if (SelectedGenres != null)
+                {
+                    foreach (int genreID in SelectedGenres)
+                    {
+                        Genre genreToAdd = db.Genres.Find(genreID);
+                        artistToChange.ArtistGenres.Add(genreToAdd);
+                    }
+                }
+
+                //update the rest of the fields
+                artistToChange.ArtistName = artist.ArtistName;
+
+
+                db.Entry(artistToChange).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            //re-populate genre list and add to viewbag
+            ViewBag.AllGenres = GetAllGenres(artist);
+
+            db.Entry(artist).State = EntityState.Modified;
+            db.SaveChanges();
+
             return View(artist);
         }
 
@@ -115,6 +158,52 @@ namespace Team1_Final_Project.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public MultiSelectList GetAllGenres()
+        {
+            //find the list of members
+            var query = from m in db.Genres
+                        select m;
+
+
+            //convert to list and execute query
+            List<Genre> allGenres = query.ToList();
+
+            //convert to multiselect
+            MultiSelectList allGenresList = new MultiSelectList(allGenres, "GenreID", "GenreName");
+
+            // this line is important when they do it again
+            //ViewBag.AllMembers = GetAllMembers(@event);
+            return allGenresList;
+        }
+
+        public MultiSelectList GetAllGenres(Artist @artist)
+        {
+            //find the list of members
+            var query = from m in db.Genres
+                        select m;
+
+
+            //convert to list and execute query
+            List<Genre> allGenres = query.ToList();
+
+            //create list of selected members
+            List<Int32> SelectedGenres = new List<Int32>();
+
+            //Loop through list of members and add MemberId
+            foreach (Genre g in @artist.ArtistGenres)
+            {
+                SelectedGenres.Add(g.GenreID);
+            }
+
+            //convert to multiselect
+            MultiSelectList allGenresList = new MultiSelectList(allGenres, "GenreID", "GenreName", SelectedGenres);
+
+            // this line is important when they do it again
+            //ViewBag.AllMembers = GetAllMembers(@event);
+            return allGenresList;
+        }
+
 
         protected override void Dispose(bool disposing)
         {
