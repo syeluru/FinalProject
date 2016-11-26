@@ -39,7 +39,26 @@ namespace Team1_Final_Project.Controllers
         // GET: Albums/Create
         public ActionResult Create()
         {
+            //create list of genres
+            List<Genre> AlbumGenres = new List<Genre>();
+
+            //Loop through list of genres and add genre
+            foreach (Genre m in AlbumGenres)
+            {
+                ViewBag.AlbumGenres.Add(m);
+            }
+
+            //create list of artists
+            List<Artist> AlbumArtists = new List<Artist>();
+
+            //Loop through list of genres and add genre
+            foreach (Artist m in AlbumArtists)
+            {
+                ViewBag.AlbumArtists.Add(m);
+            }
+
             return View();
+
         }
 
         // POST: Albums/Create
