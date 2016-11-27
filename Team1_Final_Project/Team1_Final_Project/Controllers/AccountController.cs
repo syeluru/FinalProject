@@ -98,9 +98,8 @@ namespace Team1_Final_Project.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
-        }  
+        }
 
-        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -119,7 +118,7 @@ namespace Team1_Final_Project.Controllers
             {
                 //TODO: Add fields to user here so they will be saved to the database
                 //Create a new user with all the properties you need for the class
-                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled };
+                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, PhoneNumber = model.PhoneNumber, IsAccountEnabled = model.IsAccountEnabled };
 
                 //Add the new user to the database
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -127,15 +126,15 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Employee"
+                //await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Customer"
 
                 if (result.Succeeded) //user was created successfully
                 {
                     //sign the user in
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    //send them to the home page
-                    return RedirectToAction("Index", "Home");
+                    //send them to the page to add their credit cards
+                    return RedirectToAction("CustomerDashboard", "Member");
                 }
 
                 //if there was a problem, add the error messages to what we will display
@@ -176,7 +175,7 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
+                //await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
 
                 if (result.Succeeded) //user was created successfully
                 {
