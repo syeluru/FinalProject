@@ -127,7 +127,7 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                //await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
+                await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Employee"
 
                 if (result.Succeeded) //user was created successfully
                 {
