@@ -50,12 +50,12 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SongID,SongName,SongPrice,SongDiscount")] Song song, int[] SongArtists, int[] SelectedGenres)
+        public ActionResult Create([Bind(Include = "SongID,SongName,SongPrice,SongDiscount")] Song song, int[] SelectedArtists, int[] SelectedGenres, int[] SelectedAlbums)
         {
             if (ModelState.IsValid)
             {
                 //associate genres with song
-                if (SelectedGenres != null && SelectedGenres.Length > 0)
+                if (SelectedGenres != null)
                 {
                     foreach (int genreID in SelectedGenres)
                     {
@@ -66,14 +66,23 @@ namespace Team1_Final_Project.Controllers
                 }
 
                 //associate artists with song
-                if (SongArtists != null && SongArtists.Length > 0)
+                if (SelectedArtists != null)
                 {
-                    foreach (int artistID in SongArtists)
+                    foreach (int artistID in SelectedArtists)
                     {
                         Artist ArtistToAdd = db.Artists.Find(artistID);
                         song.SongArtists.Add(ArtistToAdd);
                     }
 
+                }
+
+                if (SelectedAlbums != null)
+                {
+                    foreach (int albumID in SelectedAlbums)
+                    {
+                        Album albumToAdd = db.Albums.Find(albumID);
+                        song.SongAlbums.Add(albumToAdd);
+                    }
                 }
 
                 db.Songs.Add(song);
