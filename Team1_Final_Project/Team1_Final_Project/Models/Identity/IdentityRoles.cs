@@ -5,12 +5,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System.Web.Mvc;
-using Team1_Final_Project.Models.Identity;
+
 
 
 
 //TODO: Change the namespace here to match your project's name
-namespace Team1_Final_Project
+namespace Team1_Final_Project.Models.Identity
 {
     public class AppRole: IdentityRole
     {
