@@ -59,7 +59,16 @@ namespace Team1_Final_Project.Models.Identity
 
         [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
-        
+
+        //Employee Stuff
+        [Required(ErrorMessage = "Employee SSN is required".)]
+        [Display(Name = "Social Security Number")]
+        public string SSN { get; set; }
+
+        [Required(ErrorMessage = "Employee Type is required.")]
+        [Display(Name = "Employee Type")]
+        public Int16 EmpType { get; set; }
+
         //Navigational Properties
         //TODO: need to add validation in terms of how many credit cards a person can or can't have
         public virtual List<CreditCard> CreditCards { get; set; }

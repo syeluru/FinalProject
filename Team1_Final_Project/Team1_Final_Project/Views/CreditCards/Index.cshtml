@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.CreditCard>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "My Credit Cards";
 }
 
 <h2>Index</h2>
@@ -19,6 +19,7 @@
         <th>
             Credit Card Type
         </th>
+        <th></th>
     </tr>
 @using (Html.BeginForm("Index", "CreditCards", FormMethod.Get))
 {
@@ -27,9 +28,14 @@
         <tr>
             <td>@item.CreditCardNumber</td>
             <td>@item.CreditCardType</td>
+            <td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>
         </tr>
+
+        
     }
 }
+
+    
 </table>
 
 

@@ -276,8 +276,8 @@
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
+    <Compile Include="Models\Music\CustomerMusicViewModel.cs" />
     <Compile Include="Models\Music\Genre.cs" />
-    <Compile Include="Models\Music\MusicViewModel.cs" />
     <Compile Include="Models\Music\Song.cs" />
     <Compile Include="Models\Purchases\AlbumOrderBridge.cs" />
     <Compile Include="Models\Purchases\CreditCard.cs" />
@@ -342,7 +342,8 @@
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
     <Content Include="Views\Account\RegisterEmployee.cshtml" />
-    <Content Include="Views\Members\CustomerDashboard.cshtml" />
+    <Content Include="Views\Account\CustomerDashboard.cshtml" />
+    <Content Include="Views\Account\ManagerDashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

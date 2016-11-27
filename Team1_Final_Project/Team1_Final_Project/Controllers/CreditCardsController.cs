@@ -71,7 +71,7 @@ namespace Team1_Final_Project.Controllers
                     if (count >= 2)
                     {
                         ViewBag.ErrorMessage = "You already have 2 credit cards on file.";
-                        return RedirectToAction("CustomerDashboard", "Members");
+                        return RedirectToAction("CustomerDashboard", "Account");
                     }
                 }
             }

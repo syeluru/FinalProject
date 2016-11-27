@@ -79,6 +79,16 @@ namespace Team1_Final_Project.Models.Identity
         [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
 
+        // Stuff for employees
+
+        [Required(ErrorMessage = "Employee SSN is required".)]
+        [Display(Name = "Social Security Number")]
+        public string SSN { get; set; }
+
+        [Required(ErrorMessage = "Employee Type is required.")]
+        [Display(Name = "Employee Type")]
+        public Int16 EmpType { get; set; }
+
     }
 
     public class ChangePasswordViewModel

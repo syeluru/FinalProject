@@ -40,13 +40,7 @@ namespace Team1_Final_Project.Controllers
             return View(Member);
         }
 
-        // GET: Members/CustomerDashboard
-        [Authorize]
-        public ActionResult CustomerDashboard()
-        {
-            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            return View(userLoggedIn);
-        }
+
 
         // GET: Members/Edit/5
         //TODO: Modify first and last name, email, address and phone number

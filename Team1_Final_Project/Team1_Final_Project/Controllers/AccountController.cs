@@ -12,6 +12,9 @@ namespace Team1_Final_Project.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
+        private AppDbContext db = new AppDbContext();
+
         public enum ManageMessageId
         {
             AddPhoneSuccess,
@@ -134,7 +137,7 @@ namespace Team1_Final_Project.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     //send them to the page to add their credit cards
-                    return RedirectToAction("CustomerDashboard", "Member");
+                    return RedirectToAction("CustomerDashboard", "Account");
                 }
 
                 //if there was a problem, add the error messages to what we will display
@@ -147,6 +150,16 @@ namespace Team1_Final_Project.Controllers
 
         //ADDING NEW STUFF STARTING NOW
         //
+
+
+        // GET: Account/CustomerDashboard
+        [Authorize]
+        public ActionResult CustomerDashboard()
+        {
+            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            return View(userLoggedIn);
+        }
+
         // GET: /Account/RegisterEmployee
         //TODO: change this to only authorize managers
         [AllowAnonymous]
@@ -155,7 +168,6 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
-        //
         // POST: /Account/RegisterEmployee
         [HttpPost]
         //TODO: change this to only authorize managers
@@ -167,7 +179,7 @@ namespace Team1_Final_Project.Controllers
             {
                 //TODO: Add fields to user here so they will be saved to the database
                 //Create a new user with all the properties you need for the class
-                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled };
+                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled, EmpType = model.EmpType, SSN = model.SSN };
 
                 //Add the new user to the database
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -175,7 +187,7 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                //await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
+                await UserManager.AddToRoleAsync(user.Id, "Employee"); //adds user to role called "Employee"
 
                 if (result.Succeeded) //user was created successfully
                 {
@@ -183,7 +195,7 @@ namespace Team1_Final_Project.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     //send them to the home page
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ManagerDashboard", "Account");
                 }
 
                 //if there was a problem, add the error messages to what we will display
@@ -211,6 +223,17 @@ namespace Team1_Final_Project.Controllers
         {
             return View();
         }
+
+        // see all songs
+        //TODO: seeing as this is quite the gamble in terms of code, need to display a list of songs that a customer owns. this is easy if we want to recreate the 
+        // song index view, but i'm trying to re-use that view. will get back to you on how that works.
+        public ActionResult SeeAllSongs()
+        {
+            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            return View("Index", "Songs", userLoggedIn.Songs);
+        }
+
+        // see all artists
 
 
         // POST: /Account/ChangePassword
