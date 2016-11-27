@@ -71,7 +71,7 @@ namespace Team1_Final_Project.Controllers
                     if (count >= 2)
                     {
                         ViewBag.ErrorMessage = "You already have 2 credit cards on file.";
-                        return RedirectToAction("CustomerDashboard", "Member");
+                        return RedirectToAction("CustomerDashboard", "Members");
                     }
                 }
             }
@@ -130,7 +130,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return View("Index");
+                return RedirectToAction("Index");
             }
 
             else
