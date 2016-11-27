@@ -134,7 +134,7 @@ namespace Team1_Final_Project.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     //send them to the page to add their credit cards
-                    return RedirectToAction("CustomerDashboard", "Member");
+                    return RedirectToAction("CustomerDashboard", "Members");
                 }
 
                 //if there was a problem, add the error messages to what we will display
