@@ -166,15 +166,12 @@ namespace Team1_Final_Project.Controllers
             var query = from m in db.Genres
                         select m;
 
-
             //convert to list and execute query
             List<Genre> allGenres = query.ToList();
 
             //convert to multiselect
             MultiSelectList allGenresList = new MultiSelectList(allGenres, "GenreID", "GenreName");
 
-            // this line is important when they do it again
-            //ViewBag.AllMembers = GetAllMembers(@event);
             return allGenresList;
         }
 
