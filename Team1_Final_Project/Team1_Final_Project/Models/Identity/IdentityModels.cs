@@ -32,6 +32,9 @@ namespace Team1_Final_Project.Models.Identity
         [Display(Name = "First Name")]
         public String FName { get; set; }
 
+        [Display(Name = "Middle Name")]
+        public String MName { get; set; }
+
         [Required(ErrorMessage = "Last Name is required.")]
         [Display(Name = "Last Name")]
         public String LName { get; set; }
@@ -56,7 +59,16 @@ namespace Team1_Final_Project.Models.Identity
 
         [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
+
+        //Employee Stuff
         
+        [Display(Name = "Social Security Number")]
+        public string SSN { get; set; }
+
+        
+        [Display(Name = "Employee Type")]
+        public Int16 EmpType { get; set; }
+
         //Navigational Properties
         //TODO: need to add validation in terms of how many credit cards a person can or can't have
         public virtual List<CreditCard> CreditCards { get; set; }

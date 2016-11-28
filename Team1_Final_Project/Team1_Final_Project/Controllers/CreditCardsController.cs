@@ -56,6 +56,26 @@ namespace Team1_Final_Project.Controllers
         [Authorize]
         public ActionResult Create()
         {
+
+            AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
+
+            if (UserToChange != null)
+            {
+                if (UserToChange.CreditCards != null)
+                {
+                    //find the list of credit cards
+                    var query2 = (from m in UserToChange.CreditCards
+                                  select m).ToList();
+                    var count = query2.Count;
+
+                    if (count >= 2)
+                    {
+                        ViewBag.ErrorMessage = "You already have 2 credit cards on file.";
+                        return RedirectToAction("CustomerDashboard", "Account");
+                    }
+                }
+            }
+
             return View();
         }
 
@@ -71,22 +91,7 @@ namespace Team1_Final_Project.Controllers
             //Find associated Member
             AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
 
-            if (UserToChange != null)
-            {
-                if (UserToChange.CreditCards != null)
-                {
-                    //find the list of members
-                    var query2 = (from m in UserToChange.CreditCards
-                                 select m).ToList();
-                    var count = query2.Count;
 
-                    if (count >= 2)
-                    {
-                        ViewBag.ErrorMessage = "You already have 2 credit cards on file.";
-                        return View(creditCard);
-                    }
-                }
-            }
 
             if (creditCard.CreditCardNumber.Length == 15)
             {
@@ -125,7 +130,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return View("Index");
+                return RedirectToAction("Index");
             }
 
             else
