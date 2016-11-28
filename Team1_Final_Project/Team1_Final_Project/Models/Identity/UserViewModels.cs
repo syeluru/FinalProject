@@ -29,7 +29,7 @@ namespace Team1_Final_Project.Models.Identity
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 0)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -46,6 +46,9 @@ namespace Team1_Final_Project.Models.Identity
         [Required(ErrorMessage = "First Name is required.")]
         [Display(Name = "First Name")]
         public String FName { get; set; }
+
+        [Display(Name = "Middle Initial")]
+        public String MName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required.")]
         [Display(Name = "Last Name")]
@@ -69,10 +72,22 @@ namespace Team1_Final_Project.Models.Identity
         [RegularExpression(@"^\d{5}$", ErrorMessage = "Invalid Zip Code")]
         public String ZipCode { get; set; }
 
+        [Required(ErrorMessage = "Phone Number is required.")]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
         [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
 
+        // Stuff for employees
 
+        
+        [Display(Name = "Social Security Number")]
+        public string SSN { get; set; }
+
+        
+        [Display(Name = "Employee Type")]
+        public Int16 EmpType { get; set; }
 
     }
 
@@ -84,7 +99,7 @@ namespace Team1_Final_Project.Models.Identity
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 0)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }

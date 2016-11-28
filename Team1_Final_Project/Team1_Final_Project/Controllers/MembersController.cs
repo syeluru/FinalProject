@@ -40,6 +40,8 @@ namespace Team1_Final_Project.Controllers
             return View(Member);
         }
 
+
+
         // GET: Members/Edit/5
         //TODO: Modify first and last name, email, address and phone number
         public ActionResult Edit(string id)
@@ -70,7 +72,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FName,LName,StreetAddress,City,State,ZipCode,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AppUser Member)//, int[] SelectedEvents)
+        public ActionResult Edit([Bind(Include = "Id,FName,MName,LName,StreetAddress,City,State,ZipCode,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AppUser Member)//, int[] SelectedEvents)
         {
             if (ModelState.IsValid)
             {
@@ -79,6 +81,7 @@ namespace Team1_Final_Project.Controllers
 
                 //update the rest of the fields
                 MemberToChange.FName = Member.FName;
+                MemberToChange.MName = Member.MName;
                 MemberToChange.LName = Member.LName;
                 MemberToChange.Email = Member.Email;
                 MemberToChange.StreetAddress = Member.StreetAddress;

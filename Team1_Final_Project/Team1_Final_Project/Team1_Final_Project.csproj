@@ -268,17 +268,28 @@
     <Compile Include="Migrations\201611262007062_constructors.Designer.cs">
       <DependentUpon>201611262007062_constructors.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611270307484_dan.cs" />
-    <Compile Include="Migrations\201611270307484_dan.Designer.cs">
-      <DependentUpon>201611270307484_dan.cs</DependentUpon>
+    <Compile Include="Migrations\201611262313221_hopefullythisworks.cs" />
+    <Compile Include="Migrations\201611262313221_hopefullythisworks.Designer.cs">
+      <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611280110471_uptodate as of nov27.cs" />
+    <Compile Include="Migrations\201611280110471_uptodate as of nov27.Designer.cs">
+      <DependentUpon>201611280110471_uptodate as of nov27.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611280115582_fixed some errors.cs" />
+    <Compile Include="Migrations\201611280115582_fixed some errors.Designer.cs">
+      <DependentUpon>201611280115582_fixed some errors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611280118185_fixed some more errors.cs" />
+    <Compile Include="Migrations\201611280118185_fixed some more errors.Designer.cs">
+      <DependentUpon>201611280118185_fixed some more errors.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
-    <Compile Include="Models\Identity\TestModel.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
-    <Compile Include="Models\Music\Genre.cs" />
     <Compile Include="Models\Music\MusicViewModel.cs" />
+    <Compile Include="Models\Music\Genre.cs" />
     <Compile Include="Models\Music\Song.cs" />
     <Compile Include="Models\Purchases\AlbumOrderBridge.cs" />
     <Compile Include="Models\Purchases\CreditCard.cs" />
@@ -342,6 +353,9 @@
     <Content Include="Views\Genres\Details.cshtml" />
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
+    <Content Include="Views\Account\RegisterEmployee.cshtml" />
+    <Content Include="Views\Account\CustomerDashboard.cshtml" />
+    <Content Include="Views\Account\ManagerDashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -404,8 +418,17 @@
     <EmbeddedResource Include="Migrations\201611262007062_constructors.resx">
       <DependentUpon>201611262007062_constructors.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611270307484_dan.resx">
-      <DependentUpon>201611270307484_dan.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611262313221_hopefullythisworks.resx">
+      <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611280110471_uptodate as of nov27.resx">
+      <DependentUpon>201611280110471_uptodate as of nov27.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611280115582_fixed some errors.resx">
+      <DependentUpon>201611280115582_fixed some errors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611280118185_fixed some more errors.resx">
+      <DependentUpon>201611280118185_fixed some more errors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
