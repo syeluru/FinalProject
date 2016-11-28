@@ -42,7 +42,7 @@
             @item2.SongPrice
         </td>
         <td>
-            @Html.ActionLink("Remove Song", "DeleteSong", new { id = Model.ShoppingCartID })
+            @Html.ActionLink("Remove Song", "DeleteSong", new { SongID = item2.SongID })
         </td>
 
     </tr>
@@ -85,7 +85,7 @@
                 @item2.AlbumPrice
             </td>
             <td>
-                @Html.ActionLink("Remove Album", "DeleteAlbum", new { id = Model.ShoppingCartID })
+                @Html.ActionLink("Remove Album", "DeleteAlbum", new { AlbumID = item2.AlbumID })
             </td>
         </tr>
         }
