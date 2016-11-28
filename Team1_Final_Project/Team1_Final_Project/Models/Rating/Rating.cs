@@ -8,6 +8,7 @@ namespace Team1_Final_Project.Models.Rating
 {
     public class MusicRating
     {
+
         public int MusicRatingID { get; set; }
 
         public Decimal RatingNumber { get; set; }

@@ -24,6 +24,23 @@ namespace Team1_Final_Project.Controllers
             return View(db.Users.ToList());
         }
 
+        //[Authorize(Roles = "Manager")]
+        public ActionResult CustomersIndex()
+        {
+
+            List<AppUser> CustomersList = new List<AppUser>();
+            foreach (var user in db.Users)
+            {
+                if (user.Roles.Any(role => role.RoleId == "302b3f6a-ff8b-4ffb-96f4-5f829a34d5d0"))
+                {
+                    CustomersList.Add(user);
+                }
+                   
+            }
+
+            return View(CustomersList);
+        }
+
         // GET: Members/Details/5
         [Authorize]
         public ActionResult Details(string id)

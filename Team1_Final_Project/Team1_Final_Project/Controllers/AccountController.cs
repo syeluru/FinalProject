@@ -160,6 +160,15 @@ namespace Team1_Final_Project.Controllers
             return View(userLoggedIn);
         }
 
+        // GET: Account/ManagerDashboard
+        //[Authorize(Roles = "Manager")]
+        [Authorize]
+        public ActionResult ManagerDashboard()
+        {
+            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            return View(userLoggedIn);
+        }
+
         // GET: /Account/RegisterEmployee
         //TODO: change this to only authorize managers
         [AllowAnonymous]

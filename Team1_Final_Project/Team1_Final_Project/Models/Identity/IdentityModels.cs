@@ -64,7 +64,6 @@ namespace Team1_Final_Project.Models.Identity
         
         [Display(Name = "Social Security Number")]
         public string SSN { get; set; }
-
         
         [Display(Name = "Employee Type")]
         public Int16 EmpType { get; set; }

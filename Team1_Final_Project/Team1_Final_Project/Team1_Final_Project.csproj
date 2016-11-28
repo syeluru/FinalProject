@@ -154,6 +154,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Padding.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -332,7 +333,7 @@
     <Content Include="Views\ShoppingCarts\Delete.cshtml" />
     <Content Include="Views\ShoppingCarts\Index.cshtml" />
     <Content Include="Views\Music\SongAdvancedSearch.cshtml" />
-    <Content Include="Views\Music\SearchIndex.cshtml" />
+    <Content Include="Views\Music\BasicSearch.cshtml" />
     <Content Include="Views\Songs\Create.cshtml" />
     <Content Include="Views\Songs\Delete.cshtml" />
     <Content Include="Views\Songs\Details.cshtml" />
@@ -356,6 +357,7 @@
     <Content Include="Views\Account\RegisterEmployee.cshtml" />
     <Content Include="Views\Account\CustomerDashboard.cshtml" />
     <Content Include="Views\Account\ManagerDashboard.cshtml" />
+    <Content Include="Views\Members\CustomersIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

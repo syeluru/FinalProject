@@ -26,18 +26,33 @@
 <br/>
 
 <div class="col-md-4">
-    <h4>Add Credit Card</h4>
-    <p>Click the button below to add a new credit card to your account. You can have up to two. You currently have @Html.DisplayTextFor(model => model.CreditCards.Count).</p>
-    <!--create a button that navigates to credit card info-->
-    <a class="btn btn-primary" href="/CreditCards/Create">Add Credit Card Information</a>
+    <h4>Add Employee</h4>
+    <p>Click the button below to add a new employee.</p>
+    <!--create a button that navigates to register employee-->
+    <a class="btn btn-primary" href="/Account/RegisterEmployee">Add Employee</a>
     <br /><br />
     <h4>Edit Personal Information</h4>
     <p>Click the buttons below to edit your personal information.</p>
+    <a class="btn btn-primary" href="/Members/Edit">Edit Information</a>
     <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
 </div>
 <div class="col-md-4 rightContent">
     <h4>Manage Customers</h4>
+    <p>Click the button below to see a list of all customers. There you can edit customer settings, such as personal information and active/inactive status.</p>
+    @*Currently pointing to the wrong thing. We need to create a page that lets us see all the customers. Some sort of for loop that lets us check the role as we loop through users.*@
+    @*Going to fail right now and not show anything*@
+    <a class="btn btn-primary" href="/Members/CustomersIndex">See All Customers</a>
+    <br/><br/>
+    <p></p>
 </div>
 <div class="col-md-4 rightContent">
-    <h4>Manage Songs</h4>
+    <h4>Manage Music Content</h4>
+    <p>Click the buttons below to see a list of all songs, artists, or albums. From there, you can add or delete music or edit music information.</p>
+    <a class="btn btn-primary" href="/Songs/Index">Songs</a>
+    <a class="btn btn-primary" href="/Artists/Index">Artists</a>
+    <a class="btn btn-primary" href="/Albums/Index">Albums</a>
+    <br /><br />
+
+    @*NEED TO MESS WITH SONG ALBUM AND ARTIST DETAIL PAGES TO ADD ROLE RELATED STUFF LIKE MESSING WITH *@
+
 </div>

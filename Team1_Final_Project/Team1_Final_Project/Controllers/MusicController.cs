@@ -35,9 +35,6 @@ namespace Team1_Final_Project.Controllers
         public ActionResult BasicSearch(string SearchString)
         {
 
-            // create the list of songs with no data
-            List<Song> SelectedSongs = new List<Song>();
-
             // create the instance of the music viewmodel
             MusicViewModel SearchMusicViewModel = new MusicViewModel();
 
@@ -45,9 +42,7 @@ namespace Team1_Final_Project.Controllers
             SearchMusicViewModel.Songs = GetSearchedSongs(SearchString);
             SearchMusicViewModel.Albums = GetSearchedAlbums(SearchString);
             SearchMusicViewModel.Artists = GetSearchedArtists(SearchString);
-
-
-
+            
             return View(SearchMusicViewModel);
         }
 
@@ -97,7 +92,7 @@ namespace Team1_Final_Project.Controllers
             }
             else
             {
-                query = query.Where(c => c.ArtistName.Contains(SearchString) || c.ArtistSongs.Any(song => song.SongName.Contains(SearchString)) || c.ArtistAlbums.Any(alb => alb.AlbumName.Contains(SearchString)));
+                query = query.Where(c => c.ArtistName.Contains(SearchString));
                 //c.SongArtists.Contains(SearchString) || c.SongGenres.Contains(SearchString)
             }
 
