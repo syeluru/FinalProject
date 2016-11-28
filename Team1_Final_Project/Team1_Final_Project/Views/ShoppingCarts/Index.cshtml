@@ -14,10 +14,10 @@
             Song Title
         </th>
         <th>
-           Rating
+            Artist
         </th>
         <th>
-            Artist
+            Rating
         </th>
         <th>
             Price
@@ -26,20 +26,23 @@
 
 @foreach (var item in Model)
 {
-    @foreach (var item2 in item.Songs)
+    @foreach (var item1 in item.Songs)
     {
     <tr>
         <td>
-            @item2.SongName
+            @item1.SongName
         </td>
         <td>
-            @item2.SongArtists
+            @item1.SongArtists
         </td>
         <td>
             <!--Ratings -->
         </td>
         <td>
-            @item2.SongPrice
+            @item1.SongPrice
+        </td>
+        <td>
+            @Html.ActionLink("Remove Song", "DeleteSong", new { Songid = item1.SongID })
         </td>
     </tr>
         }
@@ -54,10 +57,10 @@
             Album Title
         </th>
         <th>
-            Rating
+            Artist
         </th>
         <th>
-            Artist
+            Rating
         </th>
         <th>
             Price
@@ -82,7 +85,7 @@
                 @item2.AlbumPrice
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingCartID })
+                @Html.ActionLink("Remove Album", "DeleteAlbum", new { Albumid = item2.AlbumID })
             </td>
         </tr>
         }

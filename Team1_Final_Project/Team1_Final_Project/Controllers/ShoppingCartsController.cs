@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -96,9 +97,17 @@ namespace Team1_Final_Project.Controllers
             ViewBag.ShoppingCartID = new SelectList(db.AppUsers, "Id", "FName", shoppingCart.ShoppingCartID);
             return View(shoppingCart);
         }
-
         */
 
+        //Delete Song Method
+        public ActionResult DeleteSong(string id)
+        {
+            AppUser userloggedin = db.Users.Find(User.Identity.GetUserId( ));
+
+        }
+        //find the song in DB that was sent to delete method & delete from shoppingcart.songs
+
+        //Delete Album Method       
 
         // GET: ShoppingCarts/Delete/5
         public ActionResult Delete(string id)
