@@ -197,7 +197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
-    <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Controllers\ShoppingCartsController.cs" />
@@ -289,10 +289,6 @@
     <Compile Include="Migrations\201611280817330_change_back_normal.Designer.cs">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611282352215_all on same page 1128 552pm.cs" />
-    <Compile Include="Migrations\201611282352215_all on same page 1128 552pm.Designer.cs">
-      <DependentUpon>201611282352215_all on same page 1128 552pm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -366,9 +362,12 @@
     <Content Include="Views\Account\CustomerDashboard.cshtml" />
     <Content Include="Views\Account\ManagerDashboard.cshtml" />
     <Content Include="Views\Members\CustomersIndex.cshtml" />
-    <Content Include="Views\ShoppingCarts\CheckoutPage.cshtml" />
-    <Content Include="Views\CreditCards\AddCreditCard.cshtml" />
-    <Content Include="Views\ShoppingCarts\GiftCheckoutPage.cshtml" />
+    <Content Include="Views\Ratings\Create.cshtml" />
+    <Content Include="Views\Ratings\Delete.cshtml" />
+    <Content Include="Views\Ratings\Details.cshtml" />
+    <Content Include="Views\Ratings\Edit.cshtml" />
+    <Content Include="Views\Ratings\Index.cshtml" />
+    <Content Include="Views\Music\ArtistAdvancedSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -445,9 +444,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611280817330_change_back_normal.resx">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611282352215_all on same page 1128 552pm.resx">
-      <DependentUpon>201611282352215_all on same page 1128 552pm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
