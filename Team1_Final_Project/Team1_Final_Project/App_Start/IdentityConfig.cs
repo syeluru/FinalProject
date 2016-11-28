@@ -37,11 +37,13 @@ namespace Team1_Final_Project
             // TODO: Configure validation logic for passwords - what are the rules for your passwords?
             manager.PasswordValidator = new PasswordValidator
             {
+                /*
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,
+                */
             };
 
             return manager;
