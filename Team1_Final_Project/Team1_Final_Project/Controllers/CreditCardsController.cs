@@ -130,7 +130,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return View("Index");
+                return RedirectToAction("Index");
             }
 
             else

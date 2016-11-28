@@ -23,7 +23,7 @@
     </tr>
 @using (Html.BeginForm("Index", "CreditCards", FormMethod.Get))
 {
-    foreach( var item in ViewBag.UserCreditCards)
+    foreach( var item in dViewBag.UserCreditCards)
     {
         <tr>
             <td>@item.CreditCardNumber</td>
