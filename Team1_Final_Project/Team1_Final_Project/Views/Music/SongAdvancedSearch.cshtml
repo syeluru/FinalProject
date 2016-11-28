@@ -42,15 +42,15 @@
         <div class="form-check">
             <p>Operation</p>
             <label class="form-check-label">
-                @Html.RadioButton("SelectedOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
+                @Html.RadioButton("SelectedPriceOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
             </label>
             <br />
             <label class="form-check-label">
-                @Html.RadioButton("SelectedOperation", Operation.LessThan, new { @class = "form-check-input" }) Lesser Than
+                @Html.RadioButton("SelectedPriceOperation", Operation.LessThan, new { @class = "form-check-input" }) Less Than
             </label>
             <br />
             <label class="form-check-label">
-                @Html.RadioButton("SelectedOperation", Operation.EqualTo, new { @class = "form-check-input" }) Equal To
+                @Html.RadioButton("SelectedPriceOperation", Operation.EqualTo, new { @class = "form-check-input" }) Equal To
             </label>
         </div>
     </div>
@@ -67,6 +67,23 @@
             </label>
         </div>
     </div>*@
+
+    Song Rating: <br />@Html.TextBox("SongRatingDec", null, new { @class = "form-control" }) <br />
+
+    <div class="form-group">
+        <div class="form-check">
+            <p>Operation</p>
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
+            </label>
+            <br />
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedOperation", Operation.LessThan, new { @class = "form-check-input" }) Less Than
+            </label>
+        </div>
+    </div>
+
+
     <input type="submit" value="Search" class="btn btn-default" />
     </p>
 
