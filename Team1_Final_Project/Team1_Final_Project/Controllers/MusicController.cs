@@ -28,8 +28,12 @@ namespace Team1_Final_Project.Controllers
         // appdbcontext
         public static AppDbContext db = new AppDbContext();
 
+        //moved this line up here so it will also work for advanced search
+        // create the list of songs with no data
+        List<Song> SelectedSongs = new List<Song>();
 
-/*-----------------------------SEARCH------------------------------*/
+
+        /*-----------------------------SEARCH------------------------------*/
 
         // GET: Basic Music Search
         public ActionResult BasicSearch(string SearchString)
@@ -54,11 +58,116 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Advanced Music Search
-        public ActionResult SongAdvancedSearch(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, string SongPriceString, Operation SelectedOperation, SortOrder SelectedSortOrder)
+        public ActionResult SongAdvancedSearch(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, string SongPriceString, decimal? SongRatingDec, Operation SelectedPriceOperation, Operation SelectedSongRatingOperation, SortOrder SelectedSortOrder)
         {
+            //meghan's code
+            //TODO: textbox for average sales
+            //ensure only enter valid number
+            var query = from c in db.Songs
+                        select c;
+
+            if (SongRatingDec != null)
+            {
+                //if the user entered a number <1 or >5
+                if (SongRatingDec < 1 || SongRatingDec > 5)
+                {
+                    ViewBag.ErrorMessage = "Please specify a number between 1.0 and 5.0 inclusive.";
+                    return View("SongAdvancedSearch");
+                }
+
+                Decimal AverageRatingsSearch;
+                try
+                {
+                    AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
+                    if (SelectedSongRatingOperation == Operation.LessThan)
+                    {
+                        query = query.Where(c => GetSongAverage(c.SongID, SongRatingDec) < AverageRatingsSearch);
+                    }
+                    else
+                    {
+                        query = query.Where(c => GetSongAverage(c.SongID, SongRatingDec) > AverageRatingsSearch);
+                    }
+
+                }
+                catch  // will display when something is wrong
+                {
+                    //Add error message to viewbag
+                    ViewBag.ErrorMessage = "Please specify a valid rating number";
+                    return View("SongAdvancedSearch");
+                }
+
+                SelectedSongs = query.ToList();
+                ViewBag.TotalCount = db.Songs.Count();
+                ViewBag.ResultsCount = SelectedSongs.Count();
+                return View("SearchIndex", SelectedSongs);
+
+            }
+
+            //end of meghan's code
+
+
             return View();
         }
         /*-----------------------other stuff---------------------------------*/
+
+        // Start of Meghan's code
+        public decimal GetSongAverage(int SongID, decimal? SongRatingDec)
+        {
+            Song FoundSong = db.Songs.Find(SongID);
+
+            decimal countVariable = 0;
+            decimal count = 0;
+
+            foreach (var rating in FoundSong.SongRatings)
+            {
+
+                countVariable += rating.RatingNumber;
+                count += 1;
+            }
+
+            decimal RatingAverage = countVariable / count;
+            return RatingAverage;
+
+        }
+
+        //public decimal GetAlbumAverage(int AlbumID, decimal AlbumRatingDec)
+        //{
+        //    Album FoundAlbum = db.Albums.Find(AlbumID);
+
+        //    decimal countVariable = 0;
+        //    decimal count = 0;
+
+        //    foreach (var rating in FoundAlbum.AlbumRatings)
+        //    {
+
+        //        countVariable += rating.RatingNumber;
+        //        count += 1;
+        //    }
+
+        //    decimal RatingAverage = countVariable / count;
+        //    return RatingAverage;
+
+        //}
+
+        //public decimal GetArtistAverage(int ArtistID, decimal ArtistRatingDec)
+        //{
+        //    Artist FoundArtist = db.Artists.Find(ArtistID);
+
+        //    decimal countVariable = 0;
+        //    decimal count = 0;
+
+        //    foreach (var rating in FoundArtist.ArtistRatings)
+        //    {
+
+        //        countVariable += rating.RatingNumber;
+        //        count += 1;
+        //    }
+
+        //    decimal RatingAverage = countVariable / count;
+        //    return RatingAverage;
+
+        //}
+        //end of Meghan's code
 
         public List<Song> GetSearchedSongs(String SearchString)
         {
