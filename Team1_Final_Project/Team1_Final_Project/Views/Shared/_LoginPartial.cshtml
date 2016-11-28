@@ -5,7 +5,12 @@
     {
     @Html.AntiForgeryToken()
 
+    <ul class="nav navbar-nav navbar-left">
+        <li><a href="~/Views/ShoppingCarts/Index.cshtml">Cart</a></li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
+      
+        
         <li>
             @*//TODO: Current link takes you to change password page - you may want to modify this to go somewhere else*@
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })

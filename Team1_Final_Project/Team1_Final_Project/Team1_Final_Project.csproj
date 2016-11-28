@@ -272,6 +272,18 @@
     <Compile Include="Migrations\201611262313221_hopefullythisworks.Designer.cs">
       <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611280110471_uptodate as of nov27.cs" />
+    <Compile Include="Migrations\201611280110471_uptodate as of nov27.Designer.cs">
+      <DependentUpon>201611280110471_uptodate as of nov27.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611280115582_fixed some errors.cs" />
+    <Compile Include="Migrations\201611280115582_fixed some errors.Designer.cs">
+      <DependentUpon>201611280115582_fixed some errors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611280118185_fixed some more errors.cs" />
+    <Compile Include="Migrations\201611280118185_fixed some more errors.Designer.cs">
+      <DependentUpon>201611280118185_fixed some more errors.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -408,6 +420,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611262313221_hopefullythisworks.resx">
       <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611280110471_uptodate as of nov27.resx">
+      <DependentUpon>201611280110471_uptodate as of nov27.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611280115582_fixed some errors.resx">
+      <DependentUpon>201611280115582_fixed some errors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611280118185_fixed some more errors.resx">
+      <DependentUpon>201611280118185_fixed some more errors.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

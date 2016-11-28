@@ -30,8 +30,10 @@
     <a class="btn btn-primary" href="/CreditCards/Create">Add Credit Card Information</a>
     <br/><br/>
     <h4>Edit Personal Information</h4>
-    <p>Click the button below to edit your personal information.</p>
+    <p>Click the buttons below to edit your personal information.</p>
+    <a class="btn btn-primary" href="/Members/Edit">Edit Information</a>
     <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
+    
 </div>
 <div class="col-md-8 rightContent">
     <h4>Personal Music Database</h4>
@@ -68,25 +70,29 @@
             </tr>
         }
         *@
-        @for(int i = 0; i < 5; i++)
+        @if (Model.Songs.Count > 0)
         {
-            <tr>
-                <td>@Model.Songs[i].SongName</td>
-                <td>
-                    @foreach (var artist in Model.Songs[i].SongArtists)
+            for (int i = 0; i < 5; i++)
+            {
+                <tr>
+                    <td>Model.Songs[i].SongName</td>
+                    <td>
+                        foreach (var artist in Model.Songs[i].SongArtists)
                     {
-                        <pre>@Html.DisplayFor(modelItem => artist.ArtistName), </pre>
-                    }
-                </td>
+                            <pre>Html.DisplayFor(modelItem => artist.ArtistName), </pre>
+                        }
+                    </td>
 
-                <td>
-                    @foreach (var album in Model.Songs[i].SongAlbums)
+                    <td>
+                        foreach (var album in Model.Songs[i].SongAlbums)
                     {
-                        <pre>@Html.DisplayFor(modelItem => album.AlbumName), </pre>
-                    }
-                </td>
-            </tr>
+                            <pre>Html.DisplayFor(modelItem => album.AlbumName), </pre>
+                        }
+                    </td>
+                </tr>
+            }
         }
+        
 
     </table>
 
@@ -123,18 +129,22 @@
                 </tr>
             }
         *@
-        @for (int i = 0; i < 5; i++)
+        @if (Model.Albums.Count > 0)
         {
-            <tr>
-                <td>@Model.Albums[i].AlbumName</td>
-                <td>
-                    @foreach (var artist in Model.Albums[i].AlbumArtists)
+            for (int i = 0; i < 5; i++)
+            {
+                <tr>
+                    <td>Model.Albums[i].AlbumName</td>
+                    <td>
+                        foreach (var artist in Model.Albums[i].AlbumArtists)
                     {
-                        <pre>@Html.DisplayFor(modelItem => artist.ArtistName), </pre>
-                    }
-                </td>
-            </tr>
+                            <pre>Html.DisplayFor(modelItem => artist.ArtistName), </pre>
+                        }
+                    </td>
+                </tr>
+            }
         }
+        
 
     </table>
     @Html.ActionLink("See all albums", "SeeAllAlbums")
