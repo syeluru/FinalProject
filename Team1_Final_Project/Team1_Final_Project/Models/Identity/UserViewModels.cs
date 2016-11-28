@@ -81,7 +81,7 @@ namespace Team1_Final_Project.Models.Identity
 
         // Stuff for employees
 
-        [Required(ErrorMessage = "Employee SSN is required".)]
+        [Required(ErrorMessage = "Employee SSN is required")]
         [Display(Name = "Social Security Number")]
         public string SSN { get; set; }
 
