@@ -154,10 +154,20 @@ namespace Team1_Final_Project.Controllers
 
         // GET: Account/CustomerDashboard
         [Authorize]
-        public ActionResult CustomerDashboard()
+        public ActionResult CustomerDashboard(string SuccessMessage)
         {
-            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            return View(userLoggedIn);
+            if (SuccessMessage != null)
+            {
+                AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+                ViewBag.SuccessMessage = "";
+                return View(userLoggedIn);
+            } else
+            {
+                AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+                ViewBag.SuccessMessage = SuccessMessage;
+                return View(userLoggedIn);
+            }
+
         }
 
         // GET: Account/ManagerDashboard
