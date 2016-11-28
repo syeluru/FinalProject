@@ -132,15 +132,19 @@ namespace Team1_Final_Project.Controllers
                 db.Orders.Add(NewOrder);
                 db.SaveChanges();
 
+                // send a new email 
+
+
                 // return the customer to their customer dashboard so they can see the songs/albums they just purchased
                 return RedirectToAction("CustomerDashboard", "Account", new { SuccessMessage = "Congratulations on your purchase!" });
 
             }
-
-
-
-
         }
+
+        //public ActionResult GiftCheckout()
+        //{
+        //    m
+        //}
 
         public void RecalculateTotal()
         {
