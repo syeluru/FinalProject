@@ -1,4 +1,13 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Team1_Final_Project.Models.Identity
+@{ 
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+    int CountSongsInShoppingCart = userLoggedIn.ShoppingCart.Songs.Count;
+    int CountAlbumsInShoppingCart = userLoggedIn.ShoppingCart.Albums.Count;
+    int CountItemsInShoppingCart = CountSongsInShoppingCart + CountAlbumsInShoppingCart;
+
+}
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -7,7 +16,7 @@
 
     <ul class="nav navbar-nav navbar-left">
         
-        <li><a href="~/Views/ShoppingCarts/Index.cshtml">Cart</a></li>
+        <li><a href="~/Views/ShoppingCarts/Index.cshtml">Cart (@CountItemsInShoppingCart)</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       

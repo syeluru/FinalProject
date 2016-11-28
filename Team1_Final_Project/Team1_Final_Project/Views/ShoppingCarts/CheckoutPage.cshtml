@@ -1,0 +1,141 @@
+﻿@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
+
+@model Team1_Final_Project.Models.Purchases.ShoppingCart
+
+
+@{
+    ViewBag.Title = "CheckoutPage";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+}
+
+
+<h2>CheckoutPage</h2>
+
+<h3>Songs</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Song Title
+        </th>
+        <th>
+            Artists
+        </th>
+        <th>
+            Average Rating
+        </th>
+        <th>
+            Price
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item2 in Model.Songs)
+    {
+        <tr>
+            <td>
+                @item2.SongName
+            </td>
+            <td>
+                @item2.SongArtists
+            </td>
+            <td>
+                <!--Ratings -->
+            </td>
+            <td>
+                @item2.SongPrice
+            </td>
+            <td>
+                @Html.ActionLink("Remove Song", "DeleteSong", new { id = Model.ShoppingCartID })
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<h3>Albums</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Album Title
+        </th>
+        <th>
+            Artists
+        </th>
+        <th>
+            Average Rating
+        </th>
+        <th>
+            Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item2 in Model.Albums)
+    {
+        <tr>
+            <td>
+                @item2.AlbumName
+            </td>
+            <td>
+                @item2.AlbumArtists
+            </td>
+            <td>
+                <!--Ratings -->
+            </td>
+            <td>
+                @item2.AlbumPrice
+            </td>
+            <td>
+                @Html.ActionLink("Remove Album", "DeleteAlbum", new { id = Model.ShoppingCartID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<h3>Totals</h3>
+
+@{ 
+    decimal Tax = Model.TotalPrice * 8.25m;
+    decimal GrandTotal = Model.TotalPrice + Tax;
+}
+
+<table>
+    <th>Item</th>
+    <th>Amount</th>
+    <tr>
+        <td><em>Subtotal</em></td>
+        <td>@Model.TotalPrice</td>
+    </tr>
+    <tr>
+        <td><em>Tax</em></td>
+        <td>@Tax</td>
+    </tr>
+    <tr>
+        <td><em>Grand Total</em></td>
+        <td>@GrandTotal</td>
+    </tr>
+</table>
+
+<div class="form-group">
+    <div class="form-check">
+        <p>Select Credit Card</p>
+        @foreach (var card in Model.Customer.CreditCards)
+        {
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedCreditCard", card.CreditCardNumber, false, new { @class = "form-check-input" }) **** **** **** @card.CreditCardNumber.Substring(-4) @card.CreditCardType.ToString().ToUpper() <br />
+            </label>
+        }
+        @if (userLoggedIn.CreditCards.Count < 2) { 
+            @Html.ActionLink("Add New Credit Card", "AddCreditCard", "CreditCards", null, null)
+        }
+        
+    </div>
+</div>
+

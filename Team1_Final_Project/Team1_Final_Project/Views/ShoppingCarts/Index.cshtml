@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.ShoppingCart>
+﻿@model Team1_Final_Project.Models.Purchases.ShoppingCart
 
 @{
     ViewBag.Title = "Index";
@@ -14,19 +14,19 @@
             Song Title
         </th>
         <th>
-           Rating
+           Artists
         </th>
         <th>
-            Artist
+            Average Rating
         </th>
         <th>
             Price
         </th>
+        <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    @foreach (var item2 in item.Songs)
+
+    @foreach (var item2 in Model.Songs)
     {
     <tr>
         <td>
@@ -41,9 +41,13 @@
         <td>
             @item2.SongPrice
         </td>
+        <td>
+            @Html.ActionLink("Remove Song", "DeleteSong", new { id = Model.ShoppingCartID })
+        </td>
+
     </tr>
         }
-    }
+    
 </table>
 
 <h3>Albums</h3>
@@ -54,19 +58,18 @@
             Album Title
         </th>
         <th>
-            Rating
+            Artists
         </th>
         <th>
-            Artist
+            Average Rating
         </th>
         <th>
             Price
         </th>
+        <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        @foreach (var item2 in item.Albums)
+    @foreach (var item2 in Model.Albums)
         {
         <tr>
             <td>
@@ -82,9 +85,11 @@
                 @item2.AlbumPrice
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingCartID })
+                @Html.ActionLink("Remove Album", "DeleteAlbum", new { id = Model.ShoppingCartID })
             </td>
         </tr>
         }
-    }
+    
 </table>
+
+<a class="btn btn-primary" href="~/Controllers/ShoppingCarts/CheckoutPage">Check out!</a>
