@@ -5,7 +5,7 @@
 }
 
 <h2>Advanced Music Search</h2>
-@*TODO: MAKE THE CONTROLLER FOR SEARCH WITH THE ACTION NAME AdvancedSearch*@
+@*TODO: MAKE THE CONTROLLER FOR SEARCH WITH THE ACTION NAME AdvancedSearchResults*@
 @using (Html.BeginForm("SongAdvancedSearch", "Music", FormMethod.Get))
 {
     <p class="form-group">
@@ -15,7 +15,7 @@
 
         Album: <br/>@Html.TextBox("AlbumSearchString", null, new { @class = "form-control" })<br />
 
-        Genre: <br />@Html.DropDownList("SelectedGenres", (MultiSelectList)ViewBag.AllGenres, new { @class = "form-control" }) <br />
+        Genre: <br />@Html.ListBox("SelectedGenres", (MultiSelectList)ViewBag.AllGenres, new { @class = "form-control" }) <br />
 
 @*
         <div class="form-group">
@@ -74,11 +74,11 @@
         <div class="form-check">
             <p>Operation</p>
             <label class="form-check-label">
-                @Html.RadioButton("SelectedOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
+                @Html.RadioButton("SelectedSongRatingOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
             </label>
             <br />
             <label class="form-check-label">
-                @Html.RadioButton("SelectedOperation", Operation.LessThan, new { @class = "form-check-input" }) Less Than
+                @Html.RadioButton("SelectedSongRatingOperation", Operation.LessThan, new { @class = "form-check-input" }) Less Than
             </label>
         </div>
     </div>

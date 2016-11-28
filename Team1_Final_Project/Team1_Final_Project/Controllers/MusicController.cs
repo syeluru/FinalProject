@@ -54,19 +54,17 @@ namespace Team1_Final_Project.Controllers
         public ActionResult SongAdvancedSearch()
         {
             ViewBag.AllGenres = GetAllGenres();
-            return View();
+            return View("SongAdvancedSearch");
         }
 
         // GET: Advanced Music Search
-        public ActionResult SongAdvancedSearch(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, string SongPriceString, decimal? SongRatingDec, Operation SelectedPriceOperation, Operation SelectedSongRatingOperation, SortOrder SelectedSortOrder)
+        public ActionResult SongAdvancedSearchResults(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, string SongPriceString, Operation? SelectedPriceOperation, decimal? SongRatingDec, Operation? SelectedSongRatingOperation, SortOrder? SelectedSortOrder)
         {
             //meghan's code
             //TODO: textbox for average sales
             //ensure only enter valid number
-            var query = from c in db.Songs
-                        select c;
 
-            if (SongRatingDec != null)
+            if (SongRatingDec != null && SelectedSongRatingOperation != null)
             {
                 //if the user entered a number <1 or >5
                 if (SongRatingDec < 1 || SongRatingDec > 5)
@@ -81,11 +79,26 @@ namespace Team1_Final_Project.Controllers
                     AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
                     if (SelectedSongRatingOperation == Operation.LessThan)
                     {
-                        query = query.Where(c => GetSongAverage(c.SongID, SongRatingDec) < AverageRatingsSearch);
+                        foreach(Song c in db.Songs)
+                        {
+                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
+                            if (SongAverage < AverageRatingsSearch)
+                            {
+                                SelectedSongs.Add(c);
+                            }
+                        }
+                        
                     }
                     else
                     {
-                        query = query.Where(c => GetSongAverage(c.SongID, SongRatingDec) > AverageRatingsSearch);
+                        foreach(Song c in db.Songs)
+                        {
+                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
+                            if (SongAverage > AverageRatingsSearch)
+                            {
+                                SelectedSongs.Add(c);
+                            }
+                        }
                     }
 
                 }
@@ -96,15 +109,13 @@ namespace Team1_Final_Project.Controllers
                     return View("SongAdvancedSearch");
                 }
 
-                SelectedSongs = query.ToList();
                 ViewBag.TotalCount = db.Songs.Count();
                 ViewBag.ResultsCount = SelectedSongs.Count();
-                return View("SearchIndex", SelectedSongs);
-
+                //TODO: create a SongSearchIndex View
+                return View("SongSearchIndex", SelectedSongs);
             }
 
             //end of meghan's code
-
 
             return View();
         }
@@ -126,6 +137,7 @@ namespace Team1_Final_Project.Controllers
             }
 
             decimal RatingAverage = countVariable / count;
+            
             return RatingAverage;
 
         }
