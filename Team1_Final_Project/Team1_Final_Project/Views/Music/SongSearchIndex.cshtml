@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Team1_Final_Project.Models.Music.Song>
+
+@{
+    ViewBag.Title = "SongSearchIndex";
+}
+
+<h2>Song Search Index</h2>
+
+@* managers only?
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<!--Create Table-->
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Song Title
+        </th>
+        <th>
+            Artist
+        </th>
+        <th>
+            Rating
+        </th>
+        <th>
+            Price
+        </th>
+        <th></th>
+    </tr>
+@using (Html.BeginForm("SongAdvancedSearchResults", "Music", FormMethod.Get))
+{
+    foreach( var item in Model)
+    {
+        <tr>
+            <td>@item.SongName</td>
+
+            @{string StrSongArtists = "";}
+            @foreach (var item2 in item.SongArtists)
+                    {
+                        StrSongArtists += item2.ArtistName + ", ";
+                    }
+            <td>@StrSongArtists</td>
+
+            @{string StrSongRatings = "";}
+            @foreach (var item2 in item.SongRatings)
+                    {
+                        StrSongRatings += Convert.ToString(item2.RatingNumber) + ", ";
+                    }
+            <td>@StrSongRatings</td>
+
+            <td>@item.SongPrice</td>
+            @*<td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>*@
+        </tr>
+    }
+}
+    
+</table>

@@ -28,16 +28,15 @@ namespace Team1_Final_Project.Controllers
         // appdbcontext
         public static AppDbContext db = new AppDbContext();
 
-        //moved this line up here so it will also work for advanced search
-        // create the list of songs with no data
-        List<Song> SelectedSongs = new List<Song>();
-
 
         /*-----------------------------SEARCH------------------------------*/
 
         // GET: Basic Music Search
         public ActionResult BasicSearch(string SearchString)
         {
+
+            // create the list of songs with no data
+            List<Song> SelectedSongs = new List<Song>();
 
             // create the instance of the music viewmodel
             MusicViewModel SearchMusicViewModel = new MusicViewModel();
@@ -60,9 +59,40 @@ namespace Team1_Final_Project.Controllers
         // GET: Advanced Song Search
         public ActionResult SongAdvancedSearchResults(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, decimal? SongRatingDec, Operation? SelectedSongRatingOperation, SortOrder? SelectedSortOrder)
         {
-            //meghan's code
-            //TODO: textbox for average sales
-            //ensure only enter valid number
+            // create the list of songs with no data
+            List<Song> SelectedSongList = new List<Song>();
+
+            var query = from c in db.Songs
+                        select c;
+
+            //code to find songs by name
+            if (SongSearchString != null && SongSearchString != "")
+            {
+                query = query.Where(c => c.SongName == SongSearchString);
+            }
+
+            //code to find songs by genre
+            if (SelectedGenres != null)
+            {
+                foreach (var item in SelectedGenres)
+                {
+                    query = query.Where(c => c.SongGenres.Any(g => g.GenreID == item));
+                }
+            }
+
+            //code to find songs by artist
+            if (ArtistSearchString != null && ArtistSearchString != "")
+            {
+                query = query.Where(c => c.SongArtists.Any(g => g.ArtistName == ArtistSearchString));
+            }
+
+            //code to find songs by album
+            if (AlbumSearchString != null && AlbumSearchString != "")
+            {
+                query = query.Where(c => c.SongAlbums.Any(g => g.AlbumName == AlbumSearchString));
+            }
+
+            //code to find songs by rating
 
             if (SongRatingDec != null && SelectedSongRatingOperation != null)
             {
@@ -79,26 +109,11 @@ namespace Team1_Final_Project.Controllers
                     AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
                     if (SelectedSongRatingOperation == Operation.LessThan)
                     {
-                        foreach(Song c in db.Songs)
-                        {
-                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
-                            if (SongAverage < AverageRatingsSearch)
-                            {
-                                SelectedSongs.Add(c);
-                            }
-                        }
-                        
+                        query = query.Where(c => GetSongAverage(c.SongID, SongRatingDec) < AverageRatingsSearch);
                     }
                     else
                     {
-                        foreach(Song c in db.Songs)
-                        {
-                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
-                            if (SongAverage > AverageRatingsSearch)
-                            {
-                                SelectedSongs.Add(c);
-                            }
-                        }
+                        query = query.Where(c => GetSongAverage(c.SongID, SongRatingDec) < AverageRatingsSearch);
                     }
 
                 }
@@ -108,15 +123,13 @@ namespace Team1_Final_Project.Controllers
                     ViewBag.ErrorMessage = "Please specify a valid rating number";
                     return View("SongAdvancedSearch");
                 }
-
-                ViewBag.TotalCount = db.Songs.Count();
-                ViewBag.ResultsCount = SelectedSongs.Count();
-                //TODO: create a SongSearchIndex View
-                return View("SongSearchIndex", SelectedSongs);
             }
-            //end of meghan's code
 
-            return View();
+            SelectedSongList = query.ToList();
+            ViewBag.TotalCount = db.Songs.Count();
+            ViewBag.ResultsCount = SelectedSongList.Count();
+
+            return View("SongSearchIndex", SelectedSongList);
         }
 
         // GET: Advanced Artist Search
@@ -127,47 +140,127 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Advanced Artist Search
-        public ActionResult ArtistAdvancedSearchResults(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, decimal? SongRatingDec, Operation? SelectedSongRatingOperation, SortOrder? SelectedSortOrder)
-        {
-            //meghan's code
-            //TODO: textbox for average sales
-            //ensure only enter valid number
+        public ActionResult ArtistAdvancedSearchResults(string ArtistSearchString, int[] SelectedGenres, decimal? ArtistRatingDec, Operation? SelectedArtistRatingOperation, SortOrder? SelectedSortOrder)
+        {   
+            // create the list of Artists with no data
+            List<Artist> SelectedArtistList = new List<Artist>();
 
+            var query = from c in db.Artists
+                        select c;
+
+            //code to find artists by name
+            if (ArtistSearchString != null && ArtistSearchString != "")
+            {
+                query = query.Where(c => c.ArtistName == ArtistSearchString);
+            }
+
+            //code to find artists by genre
+            if (SelectedGenres != null)
+            {
+                foreach( var item in SelectedGenres)
+                {
+                    query = query.Where(c => c.ArtistGenres.Any(g => g.GenreID == item));
+                }
+            }
+
+            //code to find artists by rating
             if (ArtistRatingDec != null && SelectedArtistRatingOperation != null)
             {
                 //if the user entered a number <1 or >5
-                if (SongRatingDec < 1 || SongRatingDec > 5)
+                if (ArtistRatingDec < 1 || ArtistRatingDec > 5)
                 {
                     ViewBag.ErrorMessage = "Please specify a number between 1.0 and 5.0 inclusive.";
-                    return View("SongAdvancedSearch");
+                    return View("ArtistAdvancedSearch");
                 }
 
                 Decimal AverageRatingsSearch;
                 try
                 {
-                    AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
-                    if (SelectedSongRatingOperation == Operation.LessThan)
-                    {
-                        foreach (Song c in db.Songs)
-                        {
-                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
-                            if (SongAverage < AverageRatingsSearch)
-                            {
-                                SelectedSongs.Add(c);
-                            }
-                        }
-
+                    AverageRatingsSearch = Convert.ToDecimal(ArtistRatingDec);
+                    if (SelectedArtistRatingOperation == Operation.LessThan)
+                    {     
+                         query = query.Where(c => GetArtistAverage(c.ArtistID, ArtistRatingDec) < AverageRatingsSearch);
                     }
                     else
                     {
-                        foreach (Song c in db.Songs)
-                        {
-                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
-                            if (SongAverage > AverageRatingsSearch)
-                            {
-                                SelectedSongs.Add(c);
-                            }
-                        }
+                        query = query.Where(c => GetArtistAverage(c.ArtistID, ArtistRatingDec) > AverageRatingsSearch);
+                    }
+                }
+                catch  // will display when something is wrong
+                {
+                    //Add error message to viewbag
+                    ViewBag.ErrorMessage = "Please specify a valid rating number";
+                    return View("ArtistAdvancedSearch");
+                }
+            }
+            //-------------end of code to find artists by rating--------------------
+
+            SelectedArtistList = query.ToList();
+            ViewBag.TotalCount = db.Artists.Count();
+            ViewBag.ResultsCount = SelectedArtistList.Count();
+
+            return View("ArtistSearchIndex", SelectedArtistList);
+
+        }
+
+        // GET: Advanced Album Search
+        public ActionResult AlbumAdvancedSearch()
+        {
+            ViewBag.AllGenres = GetAllGenres();
+            return View("AlbumAdvancedSearch");
+        }
+
+        // GET: Advanced Album Search
+        public ActionResult AlbumAdvancedSearchResults(string AlbumSearchString, int[] SelectedGenres, string ArtistSearchString, decimal? AlbumRatingDec, Operation? SelectedAlbumRatingOperation, SortOrder? SelectedSortOrder)
+        {
+            // create the list of Albums with no data
+            List<Album> SelectedAlbumList = new List<Album>();
+
+            var query = from c in db.Albums
+                        select c;
+
+            //code to find albums by name
+            if (AlbumSearchString != null && AlbumSearchString != "")
+            {
+                query = query.Where(c => c.AlbumName == AlbumSearchString);
+            }
+
+            //code to find albums by genre
+            if (SelectedGenres != null)
+            {
+                foreach (var item in SelectedGenres)
+                {
+                    query = query.Where(c => c.AlbumGenres.Any(g => g.GenreID == item));
+                }
+            }
+
+            //code to find albums by artist
+            if (ArtistSearchString != null && ArtistSearchString != "")
+            {
+                query = query.Where(c => c.AlbumArtists.Any(g => g.ArtistName == ArtistSearchString));
+            }
+
+            //code to find albums by rating
+            if (AlbumRatingDec != null && SelectedAlbumRatingOperation != null)
+            {
+                //if the user entered a number <1 or >5
+                if (AlbumRatingDec < 1 || AlbumRatingDec > 5)
+                {
+                    ViewBag.ErrorMessage = "Please specify a number between 1.0 and 5.0 inclusive.";
+                    return View("AlbumAdvancedSearch");
+                }
+
+                Decimal AverageRatingsSearch;
+                try
+                {
+                    AverageRatingsSearch = Convert.ToDecimal(AlbumRatingDec);
+                    if (SelectedAlbumRatingOperation == Operation.LessThan)
+                    {
+                        query = query.Where(c => GetAlbumAverage(c.AlbumID, AlbumRatingDec) < AverageRatingsSearch);
+                    }
+                    else
+                    {
+                        query = query.Where(c => GetAlbumAverage(c.AlbumID, AlbumRatingDec) < AverageRatingsSearch);
                     }
 
                 }
@@ -175,21 +268,19 @@ namespace Team1_Final_Project.Controllers
                 {
                     //Add error message to viewbag
                     ViewBag.ErrorMessage = "Please specify a valid rating number";
-                    return View("SongAdvancedSearch");
+                    return View("AlbumAdvancedSearch");
                 }
-
-                ViewBag.TotalCount = db.Songs.Count();
-                ViewBag.ResultsCount = SelectedSongs.Count();
-                //TODO: create a SongSearchIndex View
-                return View("SongSearchIndex", SelectedSongs);
             }
-            //end of meghan's code
 
-            return View();
+            SelectedAlbumList = query.ToList();
+            ViewBag.TotalCount = db.Albums.Count();
+            ViewBag.ResultsCount = SelectedAlbumList.Count();
+
+            return View("AlbumSearchIndex", SelectedAlbumList);
         }
         /*-----------------------other stuff---------------------------------*/
 
-        // Start of Meghan's code
+
         public decimal GetSongAverage(int SongID, decimal? SongRatingDec)
         {
             Song FoundSong = db.Songs.Find(SongID);
@@ -210,24 +301,24 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-        //public decimal GetAlbumAverage(int AlbumID, decimal AlbumRatingDec)
-        //{
-        //    Album FoundAlbum = db.Albums.Find(AlbumID);
+        public decimal GetAlbumAverage(int AlbumID, decimal? AlbumRatingDec)
+        {
+            Album FoundAlbum = db.Albums.Find(AlbumID);
 
-        //    decimal countVariable = 0;
-        //    decimal count = 0;
+            decimal countVariable = 0;
+            decimal count = 0;
 
-        //    foreach (var rating in FoundAlbum.AlbumRatings)
-        //    {
+            foreach (var rating in FoundAlbum.AlbumRatings)
+            {
 
-        //        countVariable += rating.RatingNumber;
-        //        count += 1;
-        //    }
+                countVariable += rating.RatingNumber;
+                count += 1;
+            }
 
-        //    decimal RatingAverage = countVariable / count;
-        //    return RatingAverage;
+            decimal RatingAverage = countVariable / count;
+            return RatingAverage;
 
-        //}
+        }
 
         public decimal GetArtistAverage(int ArtistID, decimal? ArtistRatingDec)
         {
@@ -247,7 +338,6 @@ namespace Team1_Final_Project.Controllers
             return RatingAverage;
 
         }
-        //end of Meghan's code
 
         public List<Song> GetSearchedSongs(String SearchString)
         {

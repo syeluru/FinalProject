@@ -371,6 +371,10 @@
     <Content Include="Views\CreditCards\AddCreditCard.cshtml" />
     <Content Include="Views\ShoppingCarts\CheckoutPage.cshtml" />
     <Content Include="Views\ShoppingCarts\GiftCheckoutPage.cshtml" />
+    <Content Include="Views\Music\AlbumAdvancedSearch.cshtml" />
+    <Content Include="Views\Music\AlbumSearchIndex.cshtml" />
+    <Content Include="Views\Music\SongSearchIndex.cshtml" />
+    <Content Include="Views\Music\ArtistSearchIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
