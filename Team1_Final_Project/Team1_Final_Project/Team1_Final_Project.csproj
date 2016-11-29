@@ -381,7 +381,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Migrations\201611261701429_up to date as of 11\" />
-    <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
