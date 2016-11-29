@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 using Team1_Final_Project.Models.Purchases;
 using Team1_Final_Project.Models.Music;
+using Team1_Final_Project.Models.Rating;
 using System.ComponentModel;
 
 
@@ -82,6 +83,7 @@ namespace Team1_Final_Project.Models.Identity
 
         public virtual List<Album> Albums { get; set; }
 
+        public virtual List<MusicRating> Ratings { get; set; }
          
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> manager)
@@ -94,6 +96,7 @@ namespace Team1_Final_Project.Models.Identity
         {
             IsAccountEnabled = true;
             this.CreditCards = new List<CreditCard>();
+            
         }
     }
 
