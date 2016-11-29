@@ -293,6 +293,10 @@
     <Compile Include="Migrations\201611282352215_all on same page 1128 552pm.Designer.cs">
       <DependentUpon>201611282352215_all on same page 1128 552pm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611290309297_appuser should hopefully be done now.cs" />
+    <Compile Include="Migrations\201611290309297_appuser should hopefully be done now.Designer.cs">
+      <DependentUpon>201611290309297_appuser should hopefully be done now.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -448,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611282352215_all on same page 1128 552pm.resx">
       <DependentUpon>201611282352215_all on same page 1128 552pm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611290309297_appuser should hopefully be done now.resx">
+      <DependentUpon>201611290309297_appuser should hopefully be done now.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
