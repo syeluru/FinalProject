@@ -368,6 +368,8 @@
     <Content Include="Views\Ratings\Edit.cshtml" />
     <Content Include="Views\Ratings\Index.cshtml" />
     <Content Include="Views\Music\ArtistAdvancedSearch.cshtml" />
+    <Content Include="Views\CreditCards\AddCreditCard.cshtml" />
+    <Content Include="Views\ShoppingCarts\CheckoutPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

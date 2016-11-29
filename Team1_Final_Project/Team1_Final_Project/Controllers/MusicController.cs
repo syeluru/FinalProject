@@ -50,15 +50,15 @@ namespace Team1_Final_Project.Controllers
             return View(SearchMusicViewModel);
         }
 
-        // GET: Advanced Music Search
+        // GET: Advanced Song Search
         public ActionResult SongAdvancedSearch()
         {
             ViewBag.AllGenres = GetAllGenres();
             return View("SongAdvancedSearch");
         }
 
-        // GET: Advanced Music Search
-        public ActionResult SongAdvancedSearchResults(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, string SongPriceString, Operation? SelectedPriceOperation, decimal? SongRatingDec, Operation? SelectedSongRatingOperation, SortOrder? SelectedSortOrder)
+        // GET: Advanced Song Search
+        public ActionResult SongAdvancedSearchResults(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, decimal? SongRatingDec, Operation? SelectedSongRatingOperation, SortOrder? SelectedSortOrder)
         {
             //meghan's code
             //TODO: textbox for average sales
@@ -119,74 +119,74 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
-        //// GET: Advanced Music Search
-        //public ActionResult SongAdvancedSearch()
-        //{
-        //    ViewBag.AllGenres = GetAllGenres();
-        //    return View("SongAdvancedSearch");
-        //}
+        // GET: Advanced Artist Search
+        public ActionResult ArtistAdvancedSearch()
+        {
+            ViewBag.AllGenres = GetAllGenres();
+            return View("ArtistAdvancedSearch");
+        }
 
-        //// GET: Advanced Music Search
-        //public ActionResult SongAdvancedSearchResults(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, string SongPriceString, Operation? SelectedPriceOperation, decimal? SongRatingDec, Operation? SelectedSongRatingOperation, SortOrder? SelectedSortOrder)
-        //{
-        //    //meghan's code
-        //    //TODO: textbox for average sales
-        //    //ensure only enter valid number
+        // GET: Advanced Artist Search
+        public ActionResult ArtistAdvancedSearchResults(string SongSearchString, string ArtistSearchString, string AlbumSearchString, int[] SelectedGenres, decimal? SongRatingDec, Operation? SelectedSongRatingOperation, SortOrder? SelectedSortOrder)
+        {
+            //meghan's code
+            //TODO: textbox for average sales
+            //ensure only enter valid number
 
-        //    if (SongRatingDec != null && SelectedSongRatingOperation != null)
-        //    {
-        //        //if the user entered a number <1 or >5
-        //        if (SongRatingDec < 1 || SongRatingDec > 5)
-        //        {
-        //            ViewBag.ErrorMessage = "Please specify a number between 1.0 and 5.0 inclusive.";
-        //            return View("SongAdvancedSearch");
-        //        }
+            if (ArtistRatingDec != null && SelectedArtistRatingOperation != null)
+            {
+                //if the user entered a number <1 or >5
+                if (SongRatingDec < 1 || SongRatingDec > 5)
+                {
+                    ViewBag.ErrorMessage = "Please specify a number between 1.0 and 5.0 inclusive.";
+                    return View("SongAdvancedSearch");
+                }
 
-        //        Decimal AverageRatingsSearch;
-        //        try
-        //        {
-        //            AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
-        //            if (SelectedSongRatingOperation == Operation.LessThan)
-        //            {
-        //                foreach (Song c in db.Songs)
-        //                {
-        //                    var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
-        //                    if (SongAverage < AverageRatingsSearch)
-        //                    {
-        //                        SelectedSongs.Add(c);
-        //                    }
-        //                }
+                Decimal AverageRatingsSearch;
+                try
+                {
+                    AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
+                    if (SelectedSongRatingOperation == Operation.LessThan)
+                    {
+                        foreach (Song c in db.Songs)
+                        {
+                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
+                            if (SongAverage < AverageRatingsSearch)
+                            {
+                                SelectedSongs.Add(c);
+                            }
+                        }
 
-        //            }
-        //            else
-        //            {
-        //                foreach (Song c in db.Songs)
-        //                {
-        //                    var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
-        //                    if (SongAverage > AverageRatingsSearch)
-        //                    {
-        //                        SelectedSongs.Add(c);
-        //                    }
-        //                }
-        //            }
+                    }
+                    else
+                    {
+                        foreach (Song c in db.Songs)
+                        {
+                            var SongAverage = GetSongAverage(c.SongID, SongRatingDec);
+                            if (SongAverage > AverageRatingsSearch)
+                            {
+                                SelectedSongs.Add(c);
+                            }
+                        }
+                    }
 
-        //        }
-        //        catch  // will display when something is wrong
-        //        {
-        //            //Add error message to viewbag
-        //            ViewBag.ErrorMessage = "Please specify a valid rating number";
-        //            return View("SongAdvancedSearch");
-        //        }
+                }
+                catch  // will display when something is wrong
+                {
+                    //Add error message to viewbag
+                    ViewBag.ErrorMessage = "Please specify a valid rating number";
+                    return View("SongAdvancedSearch");
+                }
 
-        //        ViewBag.TotalCount = db.Songs.Count();
-        //        ViewBag.ResultsCount = SelectedSongs.Count();
-        //        //TODO: create a SongSearchIndex View
-        //        return View("SongSearchIndex", SelectedSongs);
-        //    }
-        //    //end of meghan's code
+                ViewBag.TotalCount = db.Songs.Count();
+                ViewBag.ResultsCount = SelectedSongs.Count();
+                //TODO: create a SongSearchIndex View
+                return View("SongSearchIndex", SelectedSongs);
+            }
+            //end of meghan's code
 
-        //    return View();
-        //}
+            return View();
+        }
         /*-----------------------other stuff---------------------------------*/
 
         // Start of Meghan's code
