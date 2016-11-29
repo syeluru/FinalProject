@@ -40,12 +40,12 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.SongName, "SongDetail", "Music", new { item.SongID }, null)
+                @Html.ActionLink(item.SongName, "Details", "Songs", new { id = item.SongID }, null)
             </td>
             <td>
                 @foreach (var artist in item.SongArtists)
                 {
-                    @Html.ActionLink(artist.ArtistName, "ArtistDetail", "Music", new { artist.ArtistID }, null)
+                    @Html.ActionLink(artist.ArtistName, "Details", "Artists", new { id = artist.ArtistID }, null)
                     <br />
                 }
             </td>
@@ -82,12 +82,12 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(item.AlbumName, "AlbumDetail", "Music", new { item.AlbumID }, null)
+                        @Html.ActionLink(item.AlbumName, "Details", "Albums", new { id = item.AlbumID }, null)
                     </td>
                     <td>
                         @foreach (var artist in item.AlbumArtists)
                         {
-                            @Html.ActionLink(artist.ArtistName, "ArtistDetail", "Music", new { artist.ArtistID }, null)
+                            @Html.ActionLink(artist.ArtistName, "Details", "Artists", new { id = artist.ArtistID }, null)
                             <br />
                         }
                     </td>
@@ -118,7 +118,7 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(item.ArtistName, "ArtistDetail", "Music", new { item.ArtistID }, null)
+                        @Html.ActionLink(item.ArtistName, "Details", "Artists", new { id = item.ArtistID }, null)
                     </td>
                     <td>
                         @*NEED TO ADD RATINGS TO THIS

@@ -1,4 +1,4 @@
-﻿@model Team1_Final_Project.Models.Purchases.Order
+﻿@model Team1_Final_Project.Models.Purchases.ShoppingCart
 
 @{
     ViewBag.Title = "Details";
@@ -11,16 +11,26 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            <!--Purchased Songs & Albums-->
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dt>
+            <!--Prices for them-->
             @Html.DisplayNameFor(model => model.TotalPrice)
         </dt>
 
         <dd>
+            <!--Purchased songs/albums-->
             @Html.DisplayFor(model => model.TotalPrice)
         </dd>
-
+        <dd>
+            <!--Prices for songs/albums-->
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
+    <!--Is edit necessary?-->
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) | 
     @Html.ActionLink("Back to List", "Index")
 </p>
