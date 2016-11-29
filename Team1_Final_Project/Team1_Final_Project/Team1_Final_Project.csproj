@@ -370,6 +370,7 @@
     <Content Include="Views\Music\ArtistAdvancedSearch.cshtml" />
     <Content Include="Views\CreditCards\AddCreditCard.cshtml" />
     <Content Include="Views\ShoppingCarts\CheckoutPage.cshtml" />
+    <Content Include="Views\ShoppingCarts\GiftCheckoutPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
