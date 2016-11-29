@@ -144,7 +144,7 @@ namespace Team1_Final_Project.Controllers
 
 
                 // return the customer to their customer dashboard so they can see the songs/albums they just purchased
-                return RedirectToAction("CustomerDashboard", "Account", new { SuccessMessage = "Congratulations on your purchase!" });
+                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = userLoggedIn, PlacedOrder = NewOrder });
 
             }
         }
@@ -220,9 +220,16 @@ namespace Team1_Final_Project.Controllers
 
 
                 // return the customer to their customer dashboard so they can see the songs/albums they just purchased
-                return RedirectToAction("CustomerDashboard", "Account", new { SuccessMessage = "Congratulations on your purchase! The recipient will be very happy." });
+                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = friend, PlacedOrder = NewOrder });
 
             }
+        }
+
+        public ActionResult CheckoutConfirmationPage(AppUser Recipient, Order PlacedOrder)
+        {
+            ViewBag.Recipient = Recipient;
+            ViewBag.PlacedOrder = PlacedOrder;
+            return View();
         }
 
         public void RecalculateTotal()

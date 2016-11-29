@@ -1,0 +1,145 @@
+﻿@using Team1_Final_Project.Models.Purchases
+@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
+
+@model Team1_Final_Project.Models.Identity.AppUser
+
+
+@{
+    ViewBag.Title = "Checkout Confirmation Page";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+    // need the viewbag.orderID to come through from the controller
+    Order PlacedOrder = db.Orders.Find(ViewBag.PlacedOrder.OrderID);
+}
+
+@*need a viewbag here that has the orderID*@
+
+<h2>Checkout Confirmation Page</h2>
+
+<h3>Songs</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Song Title
+        </th>
+        <th>
+            Artists
+        </th>
+        <th>
+            Average Rating
+        </th>
+        <th>
+            Price
+        </th>
+        
+    </tr>
+
+
+    @foreach (var item2 in PlacedOrder.SongsInOrder)
+    {
+        <tr>
+            <td>
+                @item2.Song.SongName
+            </td>
+            <td>
+                @foreach (var art in item2.Song.SongArtists) {
+                    <p>@art.ArtistName</p>
+                }
+                
+            </td>
+            <td>
+
+                <!-- Average Rating -->
+            </td>
+            <td>
+                @item2.Song.SongPrice
+            </td>
+
+
+        </tr>
+    }
+
+</table>
+
+<h3>Albums</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Album Title
+        </th>
+        <th>
+            Artists
+        </th>
+        <th>
+            Average Rating
+        </th>
+        <th>
+            Price
+        </th>
+        
+    </tr>
+
+    @foreach (var item2 in PlacedOrder.AlbumsInOrder)
+    {
+        <tr>
+            <td>
+                @item2.Album.AlbumName
+            </td>
+            <td>
+                @foreach (var art in item2.Album.AlbumArtists)
+                {
+                    <p>@art.ArtistName</p>
+                }
+            </td>
+            <td>
+                <!--Ratings -->
+            </td>
+            <td>
+                @item2.Album.AlbumPrice
+            </td>
+            
+        </tr>
+    }
+
+</table>
+
+<h3>Totals</h3>
+
+@{ 
+    decimal Tax = PlacedOrder.TotalPrice * 8.25m;
+    decimal GrandTotal = PlacedOrder.TotalPrice + Tax;
+}
+
+@{
+    CreditCard CreditCardUsed = PlacedOrder.CreditCardUsed;
+    string FormattedCreditCardUsed = "**** **** **** " + CreditCardUsed.CreditCardNumber.Substring(-4);
+    AppUser Recipient = db.Users.Find(ViewBag.RecipientID);
+    // need a viewbag.recipientID when calling this view
+}
+<p><em>Credit Card Used:</em> @FormattedCreditCardUsed</p>
+<p><em>Recipient:</em> @Recipient.FName + @Recipient.LName</p>
+
+<table>
+    <th>Item</th>
+    <th>Amount</th>
+    <tr>
+        <td><em>Subtotal</em></td>
+        <td>@PlacedOrder.TotalPrice</td>
+    </tr>
+    <tr>
+        <td><em>Tax</em></td>
+        <td>@Tax</td>
+    </tr>
+    <tr>
+        <td><em>Grand Total</em></td>
+        <td>@GrandTotal</td>
+    </tr>
+</table>
+
+
+
+
+

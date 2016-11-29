@@ -197,6 +197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
@@ -371,6 +372,12 @@
     <Content Include="Views\CreditCards\AddCreditCard.cshtml" />
     <Content Include="Views\ShoppingCarts\CheckoutPage.cshtml" />
     <Content Include="Views\ShoppingCarts\GiftCheckoutPage.cshtml" />
+    <Content Include="Views\ShoppingCarts\CheckoutConfirmationPage.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Refund.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

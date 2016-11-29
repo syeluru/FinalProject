@@ -20,6 +20,7 @@ namespace Team1_Final_Project.Models.Purchases
 
         // navigational properties
         public virtual AppUser Customer { get; set; }
+        public virtual CreditCard CreditCardUsed { get; set; }
         public virtual List<SongOrderBridge> SongsInOrder { get; set; }
         public virtual List<AlbumOrderBridge> AlbumsInOrder { get; set; }
         
