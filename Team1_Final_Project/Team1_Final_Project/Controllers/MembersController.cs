@@ -65,7 +65,7 @@ namespace Team1_Final_Project.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
             AppUser Member = db.Users.Find(id);
