@@ -294,6 +294,10 @@
     <Compile Include="Migrations\201611290700174_ratings name changes.Designer.cs">
       <DependentUpon>201611290700174_ratings name changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611291801469_undo.cs" />
+    <Compile Include="Migrations\201611291801469_undo.Designer.cs">
+      <DependentUpon>201611291801469_undo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -464,6 +468,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611290700174_ratings name changes.resx">
       <DependentUpon>201611290700174_ratings name changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611291801469_undo.resx">
+      <DependentUpon>201611291801469_undo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

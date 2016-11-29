@@ -72,15 +72,6 @@ namespace Team1_Final_Project.Controllers
                 query = query.Where(c => c.SongName == SongSearchString);
             }
 
-            //code to find songs by genre
-            if (SelectedGenres != null)
-            {
-                foreach (var item in SelectedGenres)
-                {
-                    query = query.Where(c => c.SongGenres.Any(g => g.GenreID == item));
-                }
-            }
-
             //code to find songs by artist
             if (ArtistSearchString != null && ArtistSearchString != "")
             {
@@ -126,6 +117,27 @@ namespace Team1_Final_Project.Controllers
                 }
             }
 
+            //code to find songss by genre
+            if (SelectedGenres != null)
+            {
+                List<Song> SongGenreList = new List<Song>();
+                foreach (var item in SelectedGenres)
+                {
+                    foreach (var item2 in query.Where(c => c.SongGenres.Any(g => g.GenreID == item)).ToList())
+                    {
+                        SongGenreList.Add(item2);
+                    }
+                }
+
+                //select disctinct item in list
+                var distinctNames = (from d in SongGenreList select d).Distinct();
+                //
+                ViewBag.TotalCount = db.Songs.Count();
+                ViewBag.ResultsCount = distinctNames.Count();
+
+                return View("SongSearchIndex", distinctNames);
+            }
+
             SelectedSongList = query.ToList();
             ViewBag.TotalCount = db.Songs.Count();
             ViewBag.ResultsCount = SelectedSongList.Count();
@@ -153,15 +165,6 @@ namespace Team1_Final_Project.Controllers
             if (ArtistSearchString != null && ArtistSearchString != "")
             {
                 query = query.Where(c => c.ArtistName == ArtistSearchString);
-            }
-
-            //code to find artists by genre
-            if (SelectedGenres != null)
-            {
-                foreach( var item in SelectedGenres)
-                {
-                    query = query.Where(c => c.ArtistGenres.Any(g => g.GenreID == item));
-                }
             }
 
             //code to find artists by rating
@@ -194,7 +197,27 @@ namespace Team1_Final_Project.Controllers
                     return View("ArtistAdvancedSearch");
                 }
             }
-            //-------------end of code to find artists by rating--------------------
+
+            //code to find artists by genre
+            if (SelectedGenres != null)
+            {
+                List<Artist> ArtistGenreList = new List<Artist>();
+                foreach (var item in SelectedGenres)
+                {
+                    foreach (var item2 in query.Where(c => c.ArtistGenres.Any(g => g.GenreID == item)).ToList())
+                    {
+                        ArtistGenreList.Add(item2);
+                    }
+                }
+
+                //select disctinct item in list
+                var distinctNames = (from d in ArtistGenreList select d).Distinct();
+                //
+                ViewBag.TotalCount = db.Artists.Count();
+                ViewBag.ResultsCount = distinctNames.Count();
+
+                return View("ArtistSearchIndex", distinctNames);
+            }
 
             SelectedArtistList = query.ToList();
             ViewBag.TotalCount = db.Artists.Count();
@@ -224,15 +247,6 @@ namespace Team1_Final_Project.Controllers
             if (AlbumSearchString != null && AlbumSearchString != "")
             {
                 query = query.Where(c => c.AlbumName == AlbumSearchString);
-            }
-
-            //code to find albums by genre
-            if (SelectedGenres != null)
-            {
-                foreach (var item in SelectedGenres)
-                {
-                    query = query.Where(c => c.AlbumGenres.Any(g => g.GenreID == item));
-                }
             }
 
             //code to find albums by artist
@@ -271,6 +285,27 @@ namespace Team1_Final_Project.Controllers
                     ViewBag.ErrorMessage = "Please specify a valid rating number";
                     return View("AlbumAdvancedSearch");
                 }
+            }
+
+            //code to find albums by genre
+            if (SelectedGenres != null)
+            {
+                List<Album> AlbumGenreList = new List<Album>();
+                foreach (var item in SelectedGenres)
+                {
+                    foreach (var item2 in query.Where(c => c.AlbumGenres.Any(g => g.GenreID == item)).ToList())
+                    {
+                        AlbumGenreList.Add(item2);
+                    }
+                }
+
+                //select disctinct item in list
+                var distinctNames = (from d in AlbumGenreList select d).Distinct();
+                //
+                ViewBag.TotalCount = db.Albums.Count();
+                ViewBag.ResultsCount = distinctNames.Count();
+
+                return View("AlbumSearchIndex", distinctNames);
             }
 
             SelectedAlbumList = query.ToList();
