@@ -382,6 +382,10 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Music\AlbumAdvancedSearch.cshtml" />
+    <Content Include="Views\Music\AlbumSearchIndex.cshtml" />
+    <Content Include="Views\Music\SongSearchIndex.cshtml" />
+    <Content Include="Views\Music\ArtistSearchIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
