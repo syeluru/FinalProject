@@ -10,13 +10,33 @@
 <table class="table">
     <tr>
         <th>
+            <!--Need order identifier -->
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+            <!--Need last 4 credit card numbers -->
+            @Html.DisplayNameFor(model => model.CreditCards)
+        <th>
+            <!--Need credit card type -->
+            @Html.DisplayNameFor(model => model.CreditCardType)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.TotalPrice)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            <!--Must limit credit card to last 4 -->
+            @Html.DisplayFor(modelItem => item.CreditCardUsed)
+        </td>
+        <td>
+            <!--idk how to get type -->
+            @Html.DisplayFor(modelItem => item.)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.TotalPrice)
         </td>
