@@ -1,0 +1,39 @@
+﻿@using Team1_Final_Project.Controllers
+
+@{
+    ViewBag.Title = "ArtistAdvancedSearch";
+}
+
+<h2>Artist Advanced Search</h2>
+@*TODO: MAKE THE CONTROLLER FOR SEARCH WITH THE ACTION NAME AdvancedSearchResults*@
+@using (Html.BeginForm("ArtistAdvancedSearch", "Music", FormMethod.Get))
+{
+    <p class="form-group">
+        Artist Name: <br />@Html.TextBox("SongSearchString", null, new { @class = "form-control" }) <br />
+
+        Genre: <br />@Html.ListBox("SelectedGenres", (MultiSelectList)ViewBag.AllGenres, new { @class = "form-control" }) <br />
+
+     Song Rating: <br />@Html.TextBox("SongRatingDec", null, new { @class = "form-control" }) <br />
+
+    <div class="form-group">
+        <div class="form-check">
+            <p>Operation</p>
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSongRatingOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
+            </label>
+            <br />
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSongRatingOperation", Operation.LessThan, new { @class = "form-check-input" }) Less Than
+            </label>
+        </div>
+    </div>
+
+
+    <input type="submit" value="Search" class="btn btn-default" />
+    </p>
+
+}
+
+
+
+
