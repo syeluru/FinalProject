@@ -6,7 +6,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
 using Team1_Final_Project.Models.Purchases;
 using Team1_Final_Project.Models.Music;
 using Team1_Final_Project.Models.Rating;
@@ -33,7 +32,8 @@ namespace Team1_Final_Project.Models.Identity
         [Display(Name = "First Name")]
         public String FName { get; set; }
 
-        [Display(Name = "Middle Name")]
+        [Display(Name = "Middle Name Initial")]
+        [StringLength(1, MinimumLength = 1, ErrorMessage = "Only one character allowed")]
         public String MName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required.")]
@@ -61,9 +61,18 @@ namespace Team1_Final_Project.Models.Identity
         [Required(ErrorMessage = "Need to know if account is enabled or not")]
         public Boolean IsAccountEnabled { get; set; }
 
+        /*
+        Figure out how to override PhoneNumber to specify length 
+        [Required(ErrorMessage = "Phone number is required.")]
+        [Display(Name = "Phone Number")]
+        [StringLength(10, MinimumLength = 10)]
+        public String PhoneNumber { get; set; }
+        */
+
         //Employee Stuff
-        
+
         [Display(Name = "Social Security Number")]
+        [StringLength(9, MinimumLength = 9)]
         public string SSN { get; set; }
         
         [Display(Name = "Employee Type")]
@@ -96,7 +105,12 @@ namespace Team1_Final_Project.Models.Identity
         {
             IsAccountEnabled = true;
             this.CreditCards = new List<CreditCard>();
-            
+            this.ShoppingCart = new ShoppingCart();
+            this.Orders = new List<Order>();
+            this.Songs = new List<Song>();
+            this.Albums = new List<Album>();
+            this.CreditCards = new List<CreditCard>();
+            this.Ratings = new List<MusicRating>();
         }
     }
 
@@ -117,7 +131,7 @@ namespace Team1_Final_Project.Models.Identity
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Order> Orders { get; set; }
-        //TODO: add ratings dbSets
+        public DbSet<MusicRating> Ratings { get; set; }
 
                 
         public AppDbContext()

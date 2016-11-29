@@ -193,11 +193,9 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
-    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
-    <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
@@ -289,6 +287,10 @@
     <Compile Include="Migrations\201611280817330_change_back_normal.cs" />
     <Compile Include="Migrations\201611280817330_change_back_normal.Designer.cs">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611290515560_IdentityModelsChanges.cs" />
+    <Compile Include="Migrations\201611290515560_IdentityModelsChanges.Designer.cs">
+      <DependentUpon>201611290515560_IdentityModelsChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
@@ -447,6 +449,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611280817330_change_back_normal.resx">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611290515560_IdentityModelsChanges.resx">
+      <DependentUpon>201611290515560_IdentityModelsChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

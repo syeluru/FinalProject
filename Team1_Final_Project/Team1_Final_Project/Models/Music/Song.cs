@@ -33,9 +33,11 @@ namespace Team1_Final_Project.Models.Music
 
         [Required(ErrorMessage = "Song Price is required.")]
         [Display(Name = "Song Price")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Invalid Price")]
         public Decimal SongPrice { get; set; }
         
         [Display(Name = "Song Discount")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Invalid Price")]
         public Decimal SongDiscount { get; set; }
 
         // navigational properties
