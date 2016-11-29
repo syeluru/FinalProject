@@ -3,9 +3,11 @@
 @{ 
     AppDbContext db = new AppDbContext();
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-    int CountSongsInShoppingCart = userLoggedIn.ShoppingCart.Songs.Count;
-    int CountAlbumsInShoppingCart = userLoggedIn.ShoppingCart.Albums.Count;
-    int CountItemsInShoppingCart = CountSongsInShoppingCart + CountAlbumsInShoppingCart;
+    // this code will work once we have a shopping cart:
+    //int CountSongsInShoppingCart = userLoggedIn.ShoppingCart.Songs.Count();
+    //int CountAlbumsInShoppingCart = userLoggedIn.ShoppingCart.Albums.Count();
+    //int CountItemsInShoppingCart = CountSongsInShoppingCart + CountAlbumsInShoppingCart;
+    int CountItemsInShoppingCart = 0;
 
 }
 @if (Request.IsAuthenticated)

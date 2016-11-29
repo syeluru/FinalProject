@@ -289,6 +289,10 @@
     <Compile Include="Migrations\201611280817330_change_back_normal.Designer.cs">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611282352215_all on same page 1128 552pm.cs" />
+    <Compile Include="Migrations\201611282352215_all on same page 1128 552pm.Designer.cs">
+      <DependentUpon>201611282352215_all on same page 1128 552pm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -364,6 +368,7 @@
     <Content Include="Views\Members\CustomersIndex.cshtml" />
     <Content Include="Views\ShoppingCarts\CheckoutPage.cshtml" />
     <Content Include="Views\CreditCards\AddCreditCard.cshtml" />
+    <Content Include="Views\ShoppingCarts\GiftCheckoutPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -440,6 +445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611280817330_change_back_normal.resx">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611282352215_all on same page 1128 552pm.resx">
+      <DependentUpon>201611282352215_all on same page 1128 552pm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red">@ViewBag.ErrorMessage</p>
+}
 
 <h2>Shopping Cart</h2>
 
@@ -92,4 +96,18 @@
     
 </table>
 
+<h3>Checkout!</h3>
+
 <a class="btn btn-primary" href="~/Controllers/ShoppingCarts/CheckoutPage">Check out!</a>
+
+<h3>Gift to Friend!</h3>
+@Html.BeginForm("GiftCheckoutPage", "ShoppingCart", FormMethod.Get) 
+{
+    <div class="form-group">
+        <input type="text" name="FriendEmail" class="form-control" placeholder="Email"> 
+    </div>
+    
+    <input type="submit" value="Gift Checkout" />
+
+
+}
