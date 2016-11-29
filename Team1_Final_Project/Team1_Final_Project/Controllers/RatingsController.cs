@@ -18,7 +18,7 @@ namespace Team1_Final_Project.Controllers
         // GET: Ratings
         public ActionResult Index()
         {
-            return View(db.MusicRatings.ToList());
+            return View(db.Ratings.ToList());
         }
 
         // GET: Ratings/Details/5
@@ -28,7 +28,7 @@ namespace Team1_Final_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MusicRating musicRating = db.MusicRatings.Find(id);
+            MusicRating musicRating = db.Ratings.Find(id);
             if (musicRating == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Team1_Final_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.MusicRatings.Add(musicRating);
+                db.Ratings.Add(musicRating);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Team1_Final_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MusicRating musicRating = db.MusicRatings.Find(id);
+            MusicRating musicRating = db.Ratings.Find(id);
             if (musicRating == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Team1_Final_Project.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MusicRating musicRating = db.MusicRatings.Find(id);
+            MusicRating musicRating = db.Ratings.Find(id);
             if (musicRating == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Team1_Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MusicRating musicRating = db.MusicRatings.Find(id);
-            db.MusicRatings.Remove(musicRating);
+            MusicRating musicRating = db.Ratings.Find(id);
+            db.Ratings.Remove(musicRating);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

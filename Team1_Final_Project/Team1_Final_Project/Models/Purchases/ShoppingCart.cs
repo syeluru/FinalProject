@@ -21,9 +21,10 @@ namespace Team1_Final_Project.Models.Purchases
         [Display(Name = "Total Price")]
         public Decimal TotalPrice { get; set; }
 
-        public ShoppingCart()
+        public ShoppingCart(string Id)
         {
-            this.TotalPrice = 0;
+            this.ShoppingCartID = Id;
+            this.TotalPrice = 0.0m;
         }
 
         // navigational properties

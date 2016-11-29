@@ -50,6 +50,7 @@ namespace Team1_Final_Project.Controllers
             return View(SearchMusicViewModel);
         }
 
+        /*
         // GET: Advanced Song Search
         public ActionResult SongAdvancedSearch()
         {
@@ -187,6 +188,7 @@ namespace Team1_Final_Project.Controllers
 
             return View();
         }
+        */
         /*-----------------------other stuff---------------------------------*/
 
         // Start of Meghan's code

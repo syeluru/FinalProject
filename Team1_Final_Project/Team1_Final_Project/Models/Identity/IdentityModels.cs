@@ -96,7 +96,13 @@ namespace Team1_Final_Project.Models.Identity
         {
             IsAccountEnabled = true;
             this.CreditCards = new List<CreditCard>();
-            
+            this.ShoppingCart = new ShoppingCart(this.Id);
+            //this.Orders = new List<Order>();
+            //this.Songs = new List<Song>();
+            //this.Albums = new List<Album>();
+            //this.Ratings = new List<MusicRating>();
+
+
         }
     }
 
@@ -113,10 +119,11 @@ namespace Team1_Final_Project.Models.Identity
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<AlbumOrderBridge> AlbumOrderBridge { get; set; }
-        public DbSet<SongOrderBridge> SongOrderBridge { get; set; } 
+        public DbSet<SongOrderBridge> SongOrderBridge { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<MusicRating> Ratings { get; set; }
         //TODO: add ratings dbSets
 
                 
@@ -133,6 +140,5 @@ namespace Team1_Final_Project.Models.Identity
         //Add dbSet for roles
          public DbSet<AppRole> AppRoles { get; set; }
 
-        public System.Data.Entity.DbSet<Team1_Final_Project.Models.Rating.MusicRating> MusicRatings { get; set; }
     }
 }

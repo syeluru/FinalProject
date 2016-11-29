@@ -290,6 +290,10 @@
     <Compile Include="Migrations\201611280817330_change_back_normal.Designer.cs">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611290700174_ratings name changes.cs" />
+    <Compile Include="Migrations\201611290700174_ratings name changes.Designer.cs">
+      <DependentUpon>201611290700174_ratings name changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -453,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611280817330_change_back_normal.resx">
       <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611290700174_ratings name changes.resx">
+      <DependentUpon>201611290700174_ratings name changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
