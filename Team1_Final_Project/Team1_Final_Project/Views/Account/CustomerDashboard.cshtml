@@ -1,5 +1,8 @@
 ﻿@model Team1_Final_Project.Models.Identity.AppUser
 
+<!--Added library to add sort functionality to customer song + album library (not tested)-->
+<script src="sorttable.js"></script>
+
 @{
     ViewBag.Title = "Customer Dashboard";
 
@@ -38,7 +41,7 @@
 <div class="col-md-8 rightContent">
     <h4>Personal Music Database</h4>
     <h5>Songs I Own</h5>
-    <table>
+    <table class="sortable">
         <tr>
             <th>
                 Song
