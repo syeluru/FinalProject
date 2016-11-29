@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201611291805076_please.Designer.cs">
       <DependentUpon>201611291805076_please.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611291839037_newstuff.cs" />
+    <Compile Include="Migrations\201611291839037_newstuff.Designer.cs">
+      <DependentUpon>201611291839037_newstuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201611300136286_pleasework.cs" />
     <Compile Include="Migrations\201611300136286_pleasework.Designer.cs">
       <DependentUpon>201611300136286_pleasework.cs</DependentUpon>
@@ -328,6 +332,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611291805076_please.resx">
       <DependentUpon>201611291805076_please.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611291839037_newstuff.resx">
+      <DependentUpon>201611291839037_newstuff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611300136286_pleasework.resx">
       <DependentUpon>201611300136286_pleasework.cs</DependentUpon>

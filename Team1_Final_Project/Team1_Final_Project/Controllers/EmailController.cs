@@ -1,16 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Team1_Final_Project.Models.Identity;
-using Team1_Final_Project.Models.Purchases;
-using Team1_Final_Project.Models.Music;
-using System.Net;
 using System.Net.Mail;
 
 namespace Team1_Final_Project.Controllers
@@ -96,7 +87,7 @@ namespace Team1_Final_Project.Controllers
             };
 
             //Need to send additional email to gift recipient
-            emailBody = userLoggedIn.FName + ", \n\n We are sorry for any inconveniences. You should receive your refund of _totalprice_. The following songs have been removed from your library: _list of songs_ \n\n Cheers, \n Longhorn Music"  
+            emailBody = userLoggedIn.FName + ", \n\n We are sorry for any inconveniences. You should receive your refund of _totalprice_. The following songs have been removed from your library: _list of songs_ \n\n Cheers, \n Longhorn Music";  
 
             string finalMessage = emailBody + "\n\n MIS 333K Team 1 ";
             emailSubject = "Team 1: Refund Processed";
@@ -113,5 +104,3 @@ namespace Team1_Final_Project.Controllers
         }
     }
 }
-
-*/
