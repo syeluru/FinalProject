@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using Team1_Final_Project.Models.Identity;
 using Team1_Final_Project.Models.Purchases;
 using Team1_Final_Project.Models.Music;
+using System.Net;
+using System.Net.Mail;
 
 namespace Team1_Final_Project.Controllers
 {
@@ -136,10 +138,6 @@ namespace Team1_Final_Project.Controllers
                 return RedirectToAction("CustomerDashboard", "Account", new { SuccessMessage = "Congratulations on your purchase!" });
 
             }
-
-
-
-
         }
 
         public void RecalculateTotal()
@@ -183,11 +181,7 @@ namespace Team1_Final_Project.Controllers
             // return true if duplicates
             var duplicateSongs = SongsList.GroupBy(a => new { a.SongName, a.SongArtists }).Where(g => g.Count() > 1);
             return (duplicateSongs.Count() > 0);            
-            
-
-
-
-
+           
         }
 
         // POST: ShoppingCarts/Create

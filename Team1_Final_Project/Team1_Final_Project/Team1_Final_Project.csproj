@@ -193,6 +193,7 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -374,6 +375,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Migrations\201611261701429_up to date as of 11\" />
+    <Folder Include="Views\Email\" />
     <Folder Include="Views\Rating\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
