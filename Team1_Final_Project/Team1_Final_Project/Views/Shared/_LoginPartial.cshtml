@@ -2,23 +2,45 @@
 @using Team1_Final_Project.Models.Identity
 @{ 
     AppDbContext db = new AppDbContext();
-    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-    // this code will work once we have a shopping cart:
-    //int CountSongsInShoppingCart = userLoggedIn.ShoppingCart.Songs.Count();
-    //int CountAlbumsInShoppingCart = userLoggedIn.ShoppingCart.Albums.Count();
-    //int CountItemsInShoppingCart = CountSongsInShoppingCart + CountAlbumsInShoppingCart;
-    int CountItemsInShoppingCart = 0;
+    int CountItems = 0;
+    if (Request.IsAuthenticated)
+    {
+        AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+        
 
-}
+        if (userLoggedIn.ShoppingCarts != null || userLoggedIn.ShoppingCarts.Count() > 0)
+        {
+            foreach (var cart in userLoggedIn.ShoppingCarts)
+            {
+                int CountSongsInShoppingCart = cart.Songs.Count();
+                int CountAlbumsInShoppingCart = cart.Albums.Count();
+                int CountItemsInShoppingCart = CountSongsInShoppingCart + CountAlbumsInShoppingCart;
+                CountItems += CountItemsInShoppingCart;
+            }
+            
+
+
+        } else
+        {
+            CountItems = 0;
+        }
+
+    }
+    // this code will work once we have a shopping cart:
+
+
+    }
 @if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-left">
         
-        <li><a href="~/Views/ShoppingCarts/Index.cshtml">Cart (@CountItemsInShoppingCart)</a></li>
+        @*<li><a href="~/Views/ShoppingCarts/Index">Cart (0)</a></li>*@
+        <li><a href="~/Views/ShoppingCarts/Index">Cart (<span> @string.Format("{0}", CountItems) </span>)</a></li>
+
     </ul>
     <ul class="nav navbar-nav navbar-right">
       

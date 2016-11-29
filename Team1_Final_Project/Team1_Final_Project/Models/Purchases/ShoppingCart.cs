@@ -11,20 +11,17 @@ namespace Team1_Final_Project.Models.Purchases
 {
     public class ShoppingCart
     {
-        // scalar properties
-        [Required(ErrorMessage = "Shopping Cart ID is required")]
+        [Required]
         [Display(Name = "Shopping Cart ID")]
-        [ForeignKey("Customer")]
-        public String ShoppingCartID { get; set; }
+        public int ShoppingCartID { get; set; }
 
-        [Required(ErrorMessage = "Total Price is required")]
         [Display(Name = "Total Price")]
         public Decimal TotalPrice { get; set; }
 
-        public ShoppingCart(string Id)
+        public ShoppingCart()
         {
-            this.ShoppingCartID = Id;
             this.TotalPrice = 0.0m;
+
         }
 
         // navigational properties

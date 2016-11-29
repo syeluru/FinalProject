@@ -96,7 +96,7 @@
     }
     else
     {
-        @Html.ActionLink("Add To Shopping Cart", "AddToShoppingCart", "ShoppingCart", new { SongID = Model.SongID }, null)
+        @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { SongID = Model.SongID }, null)
 
     }
     @Html.ActionLink("Edit", "Edit", new { id = Model.SongID })

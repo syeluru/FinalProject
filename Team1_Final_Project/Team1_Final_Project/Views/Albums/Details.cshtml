@@ -1,7 +1,12 @@
 ﻿@model Team1_Final_Project.Models.Music.Album
+@using Microsoft.AspNet.Identity
+@using Team1_Final_Project.Models.Identity
 
 @{
     ViewBag.Title = "Details";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+
 }
 
 <h2>Details</h2>
@@ -70,6 +75,17 @@
 
 </div>
 <p>
+    @if (userLoggedIn.Albums.Any(a => a.AlbumID == Model.AlbumID))
+    {
+        @Html.ActionLink("Add Review of Album", "AddAlbumReview", "Rating", new { AlbumID = Model.AlbumID }, null)
+    }
+    else
+    {
+        @Html.ActionLink("Add To Shopping Cart", "AddAlbum", "ShoppingCarts", new { AlbumID = Model.AlbumID }, null)
+
+    }
+
+
     @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -48,11 +48,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -206,93 +206,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611151727519_third.cs" />
-    <Compile Include="Migrations\201611151727519_third.Designer.cs">
-      <DependentUpon>201611151727519_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611151736417_fourth.cs" />
-    <Compile Include="Migrations\201611151736417_fourth.Designer.cs">
-      <DependentUpon>201611151736417_fourth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611151748344_fifth.cs" />
-    <Compile Include="Migrations\201611151748344_fifth.Designer.cs">
-      <DependentUpon>201611151748344_fifth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611151806173_sixth.cs" />
-    <Compile Include="Migrations\201611151806173_sixth.Designer.cs">
-      <DependentUpon>201611151806173_sixth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611152032019_sixth1.cs" />
-    <Compile Include="Migrations\201611152032019_sixth1.Designer.cs">
-      <DependentUpon>201611152032019_sixth1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611152100322_plswork.cs" />
-    <Compile Include="Migrations\201611152100322_plswork.Designer.cs">
-      <DependentUpon>201611152100322_plswork.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611190058046_ChangingCCDatatype.cs" />
-    <Compile Include="Migrations\201611190058046_ChangingCCDatatype.Designer.cs">
-      <DependentUpon>201611190058046_ChangingCCDatatype.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611192103131_DBSET.cs" />
-    <Compile Include="Migrations\201611192103131_DBSET.Designer.cs">
-      <DependentUpon>201611192103131_DBSET.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611200331518_tablefix.cs" />
-    <Compile Include="Migrations\201611200331518_tablefix.Designer.cs">
-      <DependentUpon>201611200331518_tablefix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611201938230_UpdateFields.cs" />
-    <Compile Include="Migrations\201611201938230_UpdateFields.Designer.cs">
-      <DependentUpon>201611201938230_UpdateFields.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611201958363_stuff.cs" />
-    <Compile Include="Migrations\201611201958363_stuff.Designer.cs">
-      <DependentUpon>201611201958363_stuff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611202141161_fixingstuff.cs" />
-    <Compile Include="Migrations\201611202141161_fixingstuff.Designer.cs">
-      <DependentUpon>201611202141161_fixingstuff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611202350230_same page.cs" />
-    <Compile Include="Migrations\201611202350230_same page.Designer.cs">
-      <DependentUpon>201611202350230_same page.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611261702308_hello.cs" />
-    <Compile Include="Migrations\201611261702308_hello.Designer.cs">
-      <DependentUpon>201611261702308_hello.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611261856537_deletingThings.cs" />
-    <Compile Include="Migrations\201611261856537_deletingThings.Designer.cs">
-      <DependentUpon>201611261856537_deletingThings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611262007062_constructors.cs" />
-    <Compile Include="Migrations\201611262007062_constructors.Designer.cs">
-      <DependentUpon>201611262007062_constructors.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611262313221_hopefullythisworks.cs" />
-    <Compile Include="Migrations\201611262313221_hopefullythisworks.Designer.cs">
-      <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611280110471_uptodate as of nov27.cs" />
-    <Compile Include="Migrations\201611280110471_uptodate as of nov27.Designer.cs">
-      <DependentUpon>201611280110471_uptodate as of nov27.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611280115582_fixed some errors.cs" />
-    <Compile Include="Migrations\201611280115582_fixed some errors.Designer.cs">
-      <DependentUpon>201611280115582_fixed some errors.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611280118185_fixed some more errors.cs" />
-    <Compile Include="Migrations\201611280118185_fixed some more errors.Designer.cs">
-      <DependentUpon>201611280118185_fixed some more errors.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611280817330_change_back_normal.cs" />
-    <Compile Include="Migrations\201611280817330_change_back_normal.Designer.cs">
-      <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611290700174_ratings name changes.cs" />
-    <Compile Include="Migrations\201611290700174_ratings name changes.Designer.cs">
-      <DependentUpon>201611290700174_ratings name changes.cs</DependentUpon>
+    <Compile Include="Migrations\201611291805076_please.cs" />
+    <Compile Include="Migrations\201611291805076_please.Designer.cs">
+      <DependentUpon>201611291805076_please.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
@@ -395,75 +311,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\201611261701429_up to date as of 11\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611151727519_third.resx">
-      <DependentUpon>201611151727519_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611151736417_fourth.resx">
-      <DependentUpon>201611151736417_fourth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611151748344_fifth.resx">
-      <DependentUpon>201611151748344_fifth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611151806173_sixth.resx">
-      <DependentUpon>201611151806173_sixth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611152032019_sixth1.resx">
-      <DependentUpon>201611152032019_sixth1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611152100322_plswork.resx">
-      <DependentUpon>201611152100322_plswork.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611190058046_ChangingCCDatatype.resx">
-      <DependentUpon>201611190058046_ChangingCCDatatype.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611192103131_DBSET.resx">
-      <DependentUpon>201611192103131_DBSET.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611200331518_tablefix.resx">
-      <DependentUpon>201611200331518_tablefix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611201938230_UpdateFields.resx">
-      <DependentUpon>201611201938230_UpdateFields.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611201958363_stuff.resx">
-      <DependentUpon>201611201958363_stuff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611202141161_fixingstuff.resx">
-      <DependentUpon>201611202141161_fixingstuff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611202350230_same page.resx">
-      <DependentUpon>201611202350230_same page.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611261702308_hello.resx">
-      <DependentUpon>201611261702308_hello.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611261856537_deletingThings.resx">
-      <DependentUpon>201611261856537_deletingThings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611262007062_constructors.resx">
-      <DependentUpon>201611262007062_constructors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611262313221_hopefullythisworks.resx">
-      <DependentUpon>201611262313221_hopefullythisworks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611280110471_uptodate as of nov27.resx">
-      <DependentUpon>201611280110471_uptodate as of nov27.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611280115582_fixed some errors.resx">
-      <DependentUpon>201611280115582_fixed some errors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611280118185_fixed some more errors.resx">
-      <DependentUpon>201611280118185_fixed some more errors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611280817330_change_back_normal.resx">
-      <DependentUpon>201611280817330_change_back_normal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611290700174_ratings name changes.resx">
-      <DependentUpon>201611290700174_ratings name changes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611291805076_please.resx">
+      <DependentUpon>201611291805076_please.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,4 @@
-﻿@model Team1_Final_Project.Models.Purchases.ShoppingCart
+﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.ShoppingCart>
 
 @{
     ViewBag.Title = "Index";
@@ -10,6 +10,8 @@
 
 <h2>Shopping Cart</h2>
 
+@foreach (var cart in Model)
+{
 <h3>Songs</h3>
 
 <table class="table">
@@ -30,7 +32,9 @@
     </tr>
 
 
-    @foreach (var item2 in Model.Songs)
+
+
+    @foreach (var item2 in cart.Songs)
     {
     <tr>
         <td>
@@ -50,7 +54,7 @@
         </td>
 
     </tr>
-        }
+    }
     
 </table>
 
@@ -73,8 +77,8 @@
         <th></th>
     </tr>
 
-    @foreach (var item2 in Model.Albums)
-        {
+    @foreach (var item2 in cart.Albums)
+    {
         <tr>
             <td>
                 @item2.AlbumName
@@ -92,9 +96,11 @@
                 @Html.ActionLink("Remove Album", "DeleteAlbum", new { AlbumID = item2.AlbumID })
             </td>
         </tr>
-        }
+    }
     
 </table>
+
+}
 
 <h3>Checkout!</h3>
 

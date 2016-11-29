@@ -126,7 +126,19 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Add fields to user here so they will be saved to the database
                 //Create a new user with all the properties you need for the class
                 var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, PhoneNumber = model.PhoneNumber, IsAccountEnabled = model.IsAccountEnabled};
-            
+                
+                ////create shopping cart with this user's id
+                //ShoppingCart NewShoppingCart = new ShoppingCart();
+                //ShoppingCart ShoppingCart2 = db.ShoppingCarts.Find(NewShoppingCart.ShoppingCartID);
+                ////NewShoppingCart.Id = user.Id;
+                
+
+                //AppUser userToChange = db.Users.Find(user.Id);
+                //userToChange.ShoppingCarts.Add(NewShoppingCart);
+
+                
+                db.SaveChanges();
+                                                    
                 //Add the new user to the database
                 var result = await UserManager.CreateAsync(user, model.Password);
 
@@ -202,7 +214,7 @@ namespace Team1_Final_Project.Controllers
             {
                 //TODO: Add fields to user here so they will be saved to the database
                 //Create a new user with all the properties you need for the class
-                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled, EmpType = model.EmpType, SSN = model.SSN, ShoppingCart = null, Songs = null, Albums = null, CreditCards = null };
+                var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, IsAccountEnabled = model.IsAccountEnabled, EmpType = model.EmpType, SSN = model.SSN, ShoppingCarts = null, Songs = null, Albums = null, CreditCards = null };
 
                 //Add the new user to the database
                 var result = await UserManager.CreateAsync(user, model.Password);

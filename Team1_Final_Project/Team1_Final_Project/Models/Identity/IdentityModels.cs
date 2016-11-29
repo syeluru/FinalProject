@@ -74,7 +74,7 @@ namespace Team1_Final_Project.Models.Identity
         public virtual List<CreditCard> CreditCards { get; set; }
 
         //TODO: add a ShoppingCart model (or whatever we ended up doing to handle purchases)
-        public virtual ShoppingCart ShoppingCart { get; set; }
+        public virtual List<ShoppingCart> ShoppingCarts { get; set; }
 
         //TODO: add an Order model (or whatever we ended up doing to handle purchases) 
         public virtual List<Order> Orders { get; set; }
@@ -96,7 +96,8 @@ namespace Team1_Final_Project.Models.Identity
         {
             IsAccountEnabled = true;
             this.CreditCards = new List<CreditCard>();
-            this.ShoppingCart = new ShoppingCart(this.Id);
+            this.ShoppingCarts = new List<ShoppingCart>();
+
             //this.Orders = new List<Order>();
             //this.Songs = new List<Song>();
             //this.Albums = new List<Album>();
