@@ -54,6 +54,7 @@ namespace Team1_Final_Project.Models.Music
             this.SongAlbums = new List<Album>();
             this.SongArtists = new List<Artist>();
             this.SongGenres = new List<Genre>();
+            this.SongRatings = new List<MusicRating>();
         }
     }
 }

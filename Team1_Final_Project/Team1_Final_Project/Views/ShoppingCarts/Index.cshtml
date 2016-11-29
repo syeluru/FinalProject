@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.ShoppingCart>
+﻿@model Team1_Final_Project.Models.Purchases.ShoppingCart
 
 @{
     ViewBag.Title = "Index";
@@ -14,39 +14,40 @@
             Song Title
         </th>
         <th>
-            Artist
+           Artists
         </th>
         <th>
-            Rating
+            Average Rating
         </th>
         <th>
             Price
         </th>
+        <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    @foreach (var item1 in item.Songs)
+
+    @foreach (var item2 in Model.Songs)
     {
     <tr>
         <td>
-            @item1.SongName
+            @item2.SongName
         </td>
         <td>
-            @item1.SongArtists
+            @item2.SongArtists
         </td>
         <td>
             <!--Ratings -->
         </td>
         <td>
-            @item1.SongPrice
+            @item2.SongPrice
         </td>
         <td>
-            @Html.ActionLink("Remove Song", "DeleteSong", new { Songid = item1.SongID })
+            @Html.ActionLink("Remove Song", "DeleteSong", new { id = Model.ShoppingCartID })
         </td>
+
     </tr>
         }
-    }
+    
 </table>
 
 <h3>Albums</h3>
@@ -57,19 +58,18 @@
             Album Title
         </th>
         <th>
-            Artist
+            Artists
         </th>
         <th>
-            Rating
+            Average Rating
         </th>
         <th>
             Price
         </th>
+        <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        @foreach (var item2 in item.Albums)
+    @foreach (var item2 in Model.Albums)
         {
         <tr>
             <td>
@@ -85,9 +85,11 @@
                 @item2.AlbumPrice
             </td>
             <td>
-                @Html.ActionLink("Remove Album", "DeleteAlbum", new { Albumid = item2.AlbumID })
+                @Html.ActionLink("Remove Album", "DeleteAlbum", new { id = Model.ShoppingCartID })
             </td>
         </tr>
         }
-    }
+    
 </table>
+
+<a class="btn btn-primary" href="~/Controllers/ShoppingCarts/CheckoutPage">Check out!</a>

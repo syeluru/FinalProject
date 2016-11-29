@@ -362,6 +362,8 @@
     <Content Include="Views\Account\CustomerDashboard.cshtml" />
     <Content Include="Views\Account\ManagerDashboard.cshtml" />
     <Content Include="Views\Members\CustomersIndex.cshtml" />
+    <Content Include="Views\ShoppingCarts\CheckoutPage.cshtml" />
+    <Content Include="Views\CreditCards\AddCreditCard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
