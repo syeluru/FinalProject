@@ -23,15 +23,13 @@
     </tr>
 @using (Html.BeginForm("Index", "CreditCards", FormMethod.Get))
 {
-    foreach( var item in dViewBag.UserCreditCards)
+    foreach( var item in ViewBag.UserCreditCards)
     {
         <tr>
             <td>@item.CreditCardNumber</td>
             <td>@item.CreditCardType</td>
             <td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>
         </tr>
-
-        
     }
 }
 

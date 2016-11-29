@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Team1_Final_Project.Models.Music.Album>
+
+@{
+    ViewBag.Title = "AlbumSearchIndex";
+}
+
+<h2>Album Search Index</h2>
+
+@*keep for manager?<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+<!--Create Table-->
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Album Title
+        </th>
+        <th>
+            Artist
+        </th>
+        <th>
+            Rating
+        </th>
+        <th>
+            Price
+        </th>
+        <th></th>
+    </tr>
+    @using (Html.BeginForm("SongAdvancedSearchResults", "Music", FormMethod.Get))
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AlbumName</td>
+
+                    @{string StrAlbumArtists = "";}
+                    @foreach (var item2 in item.AlbumArtists)
+                    {
+                        StrAlbumArtists += item2.ArtistName + ", ";
+                    }
+                <td>@StrAlbumArtists</td>
+
+                    @{string StrAlbumRatings = "";}
+                    @foreach (var item2 in item.AlbumRatings)
+                    {
+                        StrAlbumRatings += Convert.ToString(item2.RatingNumber) + ", ";
+                    }
+                <td>@StrAlbumRatings</td>
+
+                <td>@item.AlbumPrice</td>
+            </tr>
+        }
+    }
+
+</table>

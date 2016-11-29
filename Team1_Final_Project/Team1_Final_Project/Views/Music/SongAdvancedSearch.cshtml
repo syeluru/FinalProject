@@ -6,7 +6,7 @@
 
 <h2>Advanced Music Search</h2>
 @*TODO: MAKE THE CONTROLLER FOR SEARCH WITH THE ACTION NAME AdvancedSearchResults*@
-@using (Html.BeginForm("SongAdvancedSearch", "Music", FormMethod.Get))
+@using (Html.BeginForm("SongAdvancedSearchResults", "Music", FormMethod.Get))
 {
     <p class="form-group">
         Song Name: <br />@Html.TextBox("SongSearchString", null, new { @class = "form-control" }) <br />
@@ -37,23 +37,3 @@
     <input type="submit" value="Search" class="btn btn-default" />
     </p>
 }
-
-@*add this to search string too
-    Song Price: <br />@Html.TextBox("SongPriceString", null, new { @class = "form-control" }) <br />
-
-    <div class="form-group">
-        <div class="form-check">
-            <p>Operation</p>
-            <label class="form-check-label">
-                @Html.RadioButton("SelectedPriceOperation", Operation.GreaterThan, true, new { @class = "form-check-input" }) Greater Than <br />
-            </label>
-            <br />
-            <label class="form-check-label">
-                @Html.RadioButton("SelectedPriceOperation", Operation.LessThan, new { @class = "form-check-input" }) Less Than
-            </label>
-            <br />
-            <label class="form-check-label">
-                @Html.RadioButton("SelectedPriceOperation", Operation.EqualTo, new { @class = "form-check-input" }) Equal To
-            </label>
-        </div>
-    </div> *@
