@@ -32,20 +32,33 @@
     foreach( var item in Model)
     {
         <tr>
-            <td>@item.SongName</td>
+            <td>@Html.ActionLink(item.SongName, "SongDetail", "Music", new { item.SongID }, null)</td>
 
             @{string StrSongArtists = "";}
+            @{int count2 = 0;}
             @foreach (var item2 in item.SongArtists)
-                    {
-                        StrSongArtists += item2.ArtistName + ", ";
-                    }
+            {
+                StrSongArtists += item2.ArtistName;
+                count2 += 1;
+                if (count2 > 1)
+                {
+                    StrSongArtists += ", ";
+                }
+            }
             <td>@StrSongArtists</td>
 
             @{string StrSongRatings = "";}
+            @{int count = 0;}
             @foreach (var item2 in item.SongRatings)
-                    {
-                        StrSongRatings += Convert.ToString(item2.RatingNumber) + ", ";
-                    }
+            {
+                StrSongRatings += Convert.ToString(item2.RatingNumber);
+                count += 1;
+                if (count > 1)
+                {
+                    StrSongRatings += ", ";
+                }
+
+            }
             <td>@StrSongRatings</td>
 
             <td>@item.SongPrice</td>
