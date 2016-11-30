@@ -1,7 +1,12 @@
 ﻿@model Team1_Final_Project.Models.Music.Artist
+@using Microsoft.AspNet.Identity
+@using Team1_Final_Project.Models.Identity
 
 @{
     ViewBag.Title = "Details";
+    // add dbcontext
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 
 <h2>Details</h2>
@@ -17,7 +22,28 @@
         <dd>
             @Html.DisplayFor(model => model.ArtistName)
         </dd>
-        @*TODO: NEED TO ADD ADDITIONAL DETAILS STUFF FOR GENRES, SONGS, ALBUMS, ETC.*@
+
+        <dt>
+            Artist Rating
+        </dt>
+
+        @{string AverageArtistRatings = "N/A";}
+        @{decimal count = 0;}
+        @{decimal SumRatings = 0;}
+        @foreach (var item in Model.ArtistRatings)
+            {
+                SumRatings += item.RatingNumber;
+                count += 1;
+                if (count != 0)
+                {
+                    AverageArtistRatings = (SumRatings / count).ToString();
+                }
+            }
+        <dd>@AverageArtistRatings</dd>
+        
+        <br />
+
+        <!--Create table -->
         <table class="table table-bordered">
             <tr>
                 <th>
@@ -32,19 +58,70 @@
 
                 </tr>
             }
-            @*
-            @foreach (var item in Model.Members)
+
+        </table>
+
+        <!--Create Table-->
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Albums
+                </th>
+            </tr>
+            @foreach (var item in Model.ArtistAlbums)
             {
                 <tr>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
+                    <td>@Html.ActionLink(item.AlbumName, "Details", "Albums", new { id = item.AlbumID }, null)</td>
                 </tr>
-            }*@
+            }
+        </table>
+
+        <!--Create Table-->
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Songs
+                </th>
+            </tr>
+            @foreach (var item in Model.ArtistSongs)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.SongName, "Details", "Songs", new { id = item.SongID }, null)</td>
+                </tr>
+            }
+        </table>
+
+        <!--Create Table-->
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Reviews
+                </th>
+            </tr>
+            @{decimal count2 = 0;}
+            @foreach (var item in Model.ArtistRatings)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Review)</td>
+                </tr>
+                count2 += 1;
+            }
+            @if (count2 == 0)
+            {
+                <tr>
+                    <td>N/A</td>
+                </tr>
+            }
         </table>
 
     </dl>
 </div>
 <p>
+    @if (userLoggedIn.Songs.Any(x => Model.ArtistSongs.Any(y => y.SongID == x.SongID)) || userLoggedIn.Albums.Any(x => Model.ArtistAlbums.Any(y => y.AlbumID == x.AlbumID)))
+    {
+        @Html.ActionLink("Add Review of Artist", "AddArtistReview", "Rating", new { ArtistID = Model.ArtistID }, null)
+    }
+
     @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
