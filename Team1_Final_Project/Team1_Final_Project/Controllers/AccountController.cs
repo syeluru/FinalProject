@@ -129,61 +129,6 @@ namespace Team1_Final_Project.Controllers
                 //Create a new user with all the properties you need for the class
                 var user = new AppUser { UserName = model.Email, Email = model.Email, FName = model.FName, MName = model.MName, LName = model.LName, StreetAddress = model.StreetAddress, City = model.City, State = model.State, ZipCode = model.ZipCode, PhoneNumber = model.PhoneNumber, IsAccountEnabled = model.IsAccountEnabled};
                 
-                if (user.ShoppingCarts == null)
-                {
-                    throw new System.ApplicationException();
-                } else
-                {
-
-                    //ShoppingCartsController cartcontroller = new ShoppingCartsController();
-                    ShoppingCart sc = new ShoppingCart();
-                    sc.Customer = user;
-                    // get the latest shopping cart ID
-                    var query = from c in db.ShoppingCarts
-                                orderby c.ShoppingCartID
-                                select c;
-
-                    List<ShoppingCart> templist = new List<ShoppingCart>();
-
-                    foreach (ShoppingCart item in query.ToList())
-                    {
-                        templist.Add(item);
-                    }
-
-                    //if (templist.Count() == 0)
-                    //{
-                    //    sc.ShoppingCartID = 1;
-                    //} else
-                    //{
-                    //    sc.ShoppingCartID = templist[-1].ShoppingCartID + 1;
-                    //}
-                    sc.ShoppingCartID = 1;
-                    db.ShoppingCarts.Add(sc);
-                    db.SaveChanges();
-                    //cartcontroller.Create(sc, user);
-
-                    //// find the shopping cart we just created based on user
-                    //var query = from c in db.ShoppingCarts
-                    //            select c;
-                    //query = query.Where(d => d.Customer.Id == user.Id);
-                    //List<ShoppingCart> list_sc = query.ToList();
-                    //ShoppingCart importantsc = list_sc[0];
-                    //user.ShoppingCarts.Add(importantsc);
-
-                    //db.SaveChanges();
-
-                    //user.ShoppingCarts.Add(db.ShoppingCarts.Find(ShoppingCartToAdd.ShoppingCartID));
-
-                }
-                ////create shopping cart with this user's id
-                //ShoppingCart NewShoppingCart = new ShoppingCart();
-                //ShoppingCart ShoppingCart2 = db.ShoppingCarts.Find(NewShoppingCart.ShoppingCartID);
-                ////NewShoppingCart.Id = user.Id;
-                
-
-                //AppUser userToChange = db.Users.Find(user.Id);
-                //userToChange.ShoppingCarts.Add(NewShoppingCart);
-
                 
                 db.SaveChanges();
                                                     
