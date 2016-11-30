@@ -75,6 +75,7 @@ namespace Team1_Final_Project.Controllers
             newsong.Customer = userLoggedIn;
 
             userLoggedIn.SongsInShoppingCart.Add(newsong);
+            db.SaveChanges();
             
 
 
@@ -93,6 +94,7 @@ namespace Team1_Final_Project.Controllers
             newalbum.Customer = userLoggedIn;
 
             userLoggedIn.AlbumsInShoppingCart.Add(newalbum);
+            db.SaveChanges();
             
 
             // return them to song index after they're done browsing
@@ -390,7 +392,7 @@ namespace Team1_Final_Project.Controllers
             userloggedin.SongsInShoppingCart.Remove(songToRemove);
             db.SaveChanges();
 
-            return View("ShoppingCartIndex");
+            return View("Index");
 
         }
         //find the song in DB that was sent to delete method & delete from shoppingcart.songs
@@ -404,7 +406,7 @@ namespace Team1_Final_Project.Controllers
             userloggedin.AlbumsInShoppingCart.Remove(albumToRemove);
             db.SaveChanges();
 
-            return View("ShoppingCartIndex");
+            return View("Index");
 
         }
 

@@ -104,7 +104,8 @@
 
 <h3>Checkout!</h3>
 
-<a class="btn btn-primary" href="~/Controllers/ShoppingCarts/CheckoutPage">Check out!</a>
+@Html.ActionLink("Check out", "Checkout", "ShoppingCarts", null, new { @class = "btn btn-primary" })
+@*<a class="btn btn-primary" href="~/Controllers/ShoppingCarts/CheckoutPage">Check out!</a>*@
 
 <h3>Gift to Friend!</h3>
 @Html.BeginForm("GiftCheckoutPage", "ShoppingCart", FormMethod.Get) 

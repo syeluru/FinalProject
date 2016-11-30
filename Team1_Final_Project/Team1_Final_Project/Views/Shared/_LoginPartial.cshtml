@@ -8,17 +8,13 @@
         AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
         
 
-        if (userLoggedIn.ShoppingCarts != null || userLoggedIn.ShoppingCarts.Count() > 0)
+        if (userLoggedIn.SongsInShoppingCart.Count() > 0 || userLoggedIn.AlbumsInShoppingCart.Count() > 0)
         {
-            foreach (var cart in userLoggedIn.ShoppingCarts)
-            {
-                int CountSongsInShoppingCart = cart.Songs.Count();
-                int CountAlbumsInShoppingCart = cart.Albums.Count();
+            
+                int CountSongsInShoppingCart = userLoggedIn.SongsInShoppingCart.Count();
+                int CountAlbumsInShoppingCart = userLoggedIn.AlbumsInShoppingCart.Count();
                 int CountItemsInShoppingCart = CountSongsInShoppingCart + CountAlbumsInShoppingCart;
                 CountItems += CountItemsInShoppingCart;
-            }
-            
-
 
         } else
         {

@@ -13,4 +13,5 @@ namespace Team1_Final_Project.Models.Purchases
         public IEnumerable<SongInShoppingCart> SongsInShoppingCart { get; set; }
         public IEnumerable<AlbumInShoppingCart> AlbumsInShoppingCart { get; set; }
     }
+
 }
