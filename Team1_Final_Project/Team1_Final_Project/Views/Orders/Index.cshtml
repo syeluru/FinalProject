@@ -10,17 +10,14 @@
 <table class="table">
     <tr>
         <th>
-            <!--Need order identifier -->
-            @Html.DisplayNameFor(model => model.OrderID)
+            OrderID 
         </th>
-            <!--Need last 4 credit card numbers -->
-            @Html.DisplayNameFor(model => model.CreditCards)
+            Credit Card
         <th>
-            <!--Need credit card type -->
-            @Html.DisplayNameFor(model => model.CreditCardType)
+            CreditCardType
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalPrice)
+            Total Price
         </th>
     </tr>
 
@@ -30,12 +27,15 @@
             @Html.DisplayFor(modelItem => item.OrderID)
         </td>
         <td>
-            <!--Must limit credit card to last 4 -->
-            @Html.DisplayFor(modelItem => item.CreditCardUsed)
+            @{
+                var LastFourCreditCard = item.CreditCardUsed;
+                string FormattedCreditCardUsed = "**** **** ****" + LastFourCreditCard.CreditCardNumber.Substring(-4);
+                // need a viewbag.recipientID when calling this view
+            }
+            @Html.DisplayFor(modelItem => LastFourCreditCard)
         </td>
         <td>
-            <!--idk how to get type -->
-            @Html.DisplayFor(modelItem => item.)
+            @Html.DisplayFor(modelItem => item.CreditCardUsed.CreditCardType)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TotalPrice)

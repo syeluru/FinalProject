@@ -27,20 +27,32 @@
         foreach (var item in Model)
         {
             <tr>
-                <td>@item.ArtistName</td>
+                <td>@Html.ActionLink(item.ArtistName, "ArtistDetail", "Music", new { item.ArtistID }, null)</td>
 
                 @{string StrArtistGenres = "";}
+                @{int count2 = 0;}
                 @foreach (var item2 in item.ArtistGenres)
+                {
+                    StrArtistGenres += item2.GenreName;
+                    count2 += 1;
+                    if (count2 > 1)
                     {
-                        StrArtistGenres += item2.GenreName + ", ";
+                        StrArtistGenres += ", ";
                     }
+                }
                 <td>@StrArtistGenres</td>
                 
                 @{string StrArtistRatings = "";}
+                @{int count = 0;}
                 @foreach (var item2 in item.ArtistRatings)
+                {
+                    StrArtistRatings += Convert.ToString(item2.RatingNumber);
+                    count += 1;
+                    if (count > 1)
                     {
-                        StrArtistRatings += Convert.ToString(item2.RatingNumber) + ", ";
+                        StrArtistRatings += ", ";
                     }
+                }
                 <td>@StrArtistRatings</td>
                 @*<td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>*@
             </tr>

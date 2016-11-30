@@ -115,7 +115,7 @@
 
 @{
     CreditCard CreditCardUsed = PlacedOrder.CreditCardUsed;
-    string FormattedCreditCardUsed = "**** **** **** " + CreditCardUsed.CreditCardNumber.Substring(-4);
+    string FormattedCreditCardUsed = "**** **** ****" + CreditCardUsed.CreditCardNumber.Substring(-4);
     AppUser Recipient = db.Users.Find(ViewBag.RecipientID);
     // need a viewbag.recipientID when calling this view
 }

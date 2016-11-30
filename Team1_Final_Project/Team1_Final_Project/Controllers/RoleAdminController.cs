@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Team1_Final_Project.Models;
 using Team1_Final_Project;
 using Team1_Final_Project.Models.Identity;
+using System.Net;
 
 //TODO: Change the namespace here to match your project's name
 namespace Team1_Final_Project.Controllers
@@ -18,6 +19,8 @@ namespace Team1_Final_Project.Controllers
     //[Authorize]
     public class RoleAdminController : Controller
     {
+        private AppDbContext db = new AppDbContext();
+
         //
         // GET: /RoleAdmin/
         public ActionResult Index()
@@ -87,9 +90,6 @@ namespace Team1_Final_Project.Controllers
             }
             return View("Error", new string[] { "Role Not Found" });
         }
-
-
-
 
         private void AddErrorsFromResult(IdentityResult result)
         { 
