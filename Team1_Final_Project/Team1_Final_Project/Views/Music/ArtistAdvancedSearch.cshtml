@@ -28,6 +28,32 @@
 
         Artist Rating: <br />@Html.TextBox("ArtistRatingDec", null, new { @class = "form-control" }) <br />
 
+        Sort By: <br />
+
+        <div class="form-check">
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSortOrder", SortOrder.AscendingName, true, new { @class = "form-check-input" }) Ascending by Artist Name
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSortOrder", SortOrder.DescendingName, new { @class = "form-check-input" }) Descending by Artist Name
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSortOrder", SortOrder.AscendingRating, new { @class = "form-check-input" }) Ascending by Rating
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                @Html.RadioButton("SelectedSortOrder", SortOrder.DescendingRating, new { @class = "form-check-input" }) Descending by Rating
+            </label>
+        </div>
+
     <input type="submit" value="Search" class="btn btn-default" />
     </p>
 
