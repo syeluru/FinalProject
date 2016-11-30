@@ -52,9 +52,20 @@
 
         }
         <td>@StrSongArtists</td>
-        <td>
-            <!--Ratings -->
-        </td>
+
+        @{string AverageSongRatings = "N/A";}
+        @{decimal count = 0;}
+        @{decimal SumRatings = 0;}
+        @foreach (var item3 in item2.Song.SongRatings)
+        {
+            SumRatings += item3.RatingNumber;
+            count += 1;
+            if (count != 0)
+            {
+                AverageSongRatings = (SumRatings / count).ToString();
+            }
+        }
+        <td>@AverageSongRatings</td>
         <td>
             @item2.Song.SongPrice
         </td>
@@ -104,9 +115,20 @@
                 StrAlbumArtists += item3.ArtistName;
             }
             <td>@StrAlbumArtists</td>
-            <td>
-                <!--Ratings -->
-            </td>
+
+            @{string AverageAlbumRatings = "N/A";}
+            @{decimal count = 0;}
+            @{decimal SumRatings = 0;}
+            @foreach (var item3 in item2.Album.AlbumRatings)
+            {
+                SumRatings += item3.RatingNumber;
+                count += 1;
+                if (count != 0)
+                {
+                    AverageAlbumRatings = (SumRatings / count).ToString();
+                }
+            }
+            <td>@AverageAlbumRatings</td>
             <td>
                 @item2.Album.AlbumPrice
             </td>
