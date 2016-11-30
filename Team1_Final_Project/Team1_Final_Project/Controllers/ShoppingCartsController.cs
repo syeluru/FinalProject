@@ -120,7 +120,8 @@ namespace Team1_Final_Project.Controllers
 
                 // throw in total price, songs, and albums into a new order
                 Order NewOrder = new Order();
-                
+                NewOrder.Customer = userLoggedIn;
+
                 // add all the songs from shopping cart to this order
                 foreach (var song in userLoggedIn.SongsInShoppingCart)
                 {
@@ -200,6 +201,7 @@ namespace Team1_Final_Project.Controllers
 
                 // throw in total price, songs, and albums into a new order
                 Order NewOrder = new Order();
+                NewOrder.Customer = userLoggedIn;
                 
                 // add all the songs from shopping cart to this order
                 foreach (var song in userLoggedIn.SongsInShoppingCart)

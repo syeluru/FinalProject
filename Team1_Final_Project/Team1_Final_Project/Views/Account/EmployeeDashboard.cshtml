@@ -1,0 +1,53 @@
+﻿@model Team1_Final_Project.Models.Identity.AppUser
+
+@{
+    ViewBag.Title = "Employee Dashboard";
+
+}
+
+@*{
+        AppDbContext db = new AppDbContext();
+        //Find associated Member
+        AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
+
+    }*@
+
+<style>
+    div.rightContent {
+        min-height: 400px;
+        border-left: 1px solid gray;
+        float: left;
+    }
+</style>
+
+
+<h2>Welcome to the Employee Dashboard, @Html.DisplayFor(model => model.FName)!</h2>
+<h5>Here, you can manage personal information, customers, and music reviews. See below for options.</h5>
+<br/>
+
+<div class="col-md-4">
+    <h4>Manage Personal Information</h4>
+    <p>Click the buttons below to edit your personal information.</p>
+    <a class="btn btn-primary" href="/Members/EmployeeEdit">Edit Information</a>
+    <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
+</div>
+<div class="col-md-4 rightContent">
+    <h4>Manage Customers</h4>
+    <p>Click the button below to see a list of all customers. There you can edit customer settings, such as personal information and active/inactive status.</p>
+    @*Currently pointing to the wrong thing. We need to create a page that lets us see all the customers. Some sort of for loop that lets us check the role as we loop through users.*@
+    @*Going to fail right now and not show anything*@
+    <a class="btn btn-primary" href="/Members/CustomersIndex">See All Customers</a>
+    <br/><br/>
+    <p></p>
+</div>
+<div class="col-md-4 rightContent">
+    <h4>Manage Music Content</h4>
+    <p>Click the buttons below to see a list of all songs, artists, or albums. From there, you can add or delete music or edit music information.</p>
+    <a class="btn btn-primary" href="/Songs/Index">Songs</a>
+    <a class="btn btn-primary" href="/Artists/Index">Artists</a>
+    <a class="btn btn-primary" href="/Albums/Index">Albums</a>
+    <br /><br />
+
+    @*NEED TO MESS WITH SONG ALBUM AND ARTIST DETAIL PAGES TO ADD ROLE RELATED STUFF LIKE MESSING WITH *@
+
+</div>

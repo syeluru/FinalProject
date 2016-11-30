@@ -311,6 +311,7 @@
     <Content Include="Views\Music\AlbumSearchIndex.cshtml" />
     <Content Include="Views\Music\SongSearchIndex.cshtml" />
     <Content Include="Views\Music\ArtistSearchIndex.cshtml" />
+    <Content Include="Views\Account\EmployeeDashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
