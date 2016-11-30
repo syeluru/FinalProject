@@ -50,18 +50,19 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
                     }
                 <td>@StrAlbumArtists</td>
 
-                    @{string StrAlbumRatings = "";}
-                    @{int count = 0;}
+                    @{decimal AverageAlbumRatings = 0;}
+                    @{decimal count = 0;}
+                    @{decimal SumRatings = 0;}
                     @foreach (var item2 in item.AlbumRatings)
                     {
-                        StrAlbumRatings += Convert.ToString(item2.RatingNumber);
+                        SumRatings += item2.RatingNumber;
                         count += 1;
-                        if (count > 1)
+                        if (count != 0)
                         {
-                            StrAlbumRatings += ", ";
+                            AverageAlbumRatings = SumRatings / count;
                         }
                     }
-                <td>@StrAlbumRatings</td>
+                <td>@AverageAlbumRatings</td>
 
                 <td>@item.AlbumPrice</td>
             </tr>

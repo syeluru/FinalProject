@@ -28,6 +28,9 @@ namespace Team1_Final_Project.Models.Music
         [Display(Name = "Album Discount")]
         public Decimal AlbumDiscount { get; set; }
 
+        //[Display(Name = "Average Album Rating")]
+        //public decimal AverageAlbumRating { get; set; }
+
         // navigational properties
         public virtual List<Genre> AlbumGenres { get; set; }
 

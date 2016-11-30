@@ -50,19 +50,19 @@
             }
             <td>@StrSongArtists</td>
 
-            @{string StrSongRatings = "";}
-            @{int count = 0;}
+            @{decimal AverageSongRatings = 0;}
+            @{decimal count = 0;}
+            @{decimal SumRatings = 0;}
             @foreach (var item2 in item.SongRatings)
-            {
-                StrSongRatings += Convert.ToString(item2.RatingNumber);
-                count += 1;
-                if (count > 1)
-                {
-                    StrSongRatings += ", ";
-                }
-
-            }
-            <td>@StrSongRatings</td>
+                    {
+                        SumRatings += item2.RatingNumber;
+                        count += 1;
+                        if (count != 0)
+                        {
+                            AverageSongRatings = SumRatings / count;
+                        }
+                    }
+            <td>@AverageSongRatings</td>            
 
             <td>@item.SongPrice</td>
             @*<td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>*@

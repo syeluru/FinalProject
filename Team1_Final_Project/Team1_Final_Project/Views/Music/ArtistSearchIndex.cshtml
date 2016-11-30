@@ -42,19 +42,21 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
                     }
                 }
                 <td>@StrArtistGenres</td>
-                
-                @{string StrArtistRatings = "";}
-                @{int count = 0;}
+               
+                @{decimal AverageArtistRatings = 0;}
+                @{decimal count = 0;}
+                @{decimal SumRatings = 0;}
                 @foreach (var item2 in item.ArtistRatings)
-                {
-                    StrArtistRatings += Convert.ToString(item2.RatingNumber);
-                    count += 1;
-                    if (count > 1)
                     {
-                        StrArtistRatings += ", ";
+                        SumRatings += item2.RatingNumber;
+                        count += 1;
+                        if (count != 0)
+                        {
+                            AverageArtistRatings = SumRatings / count;
+                        }
                     }
-                }
-                <td>@StrArtistRatings</td>
+                <td>@AverageArtistRatings</td>
+
                 @*<td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>*@
             </tr>
         }
