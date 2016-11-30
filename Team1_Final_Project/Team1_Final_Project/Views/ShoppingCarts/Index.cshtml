@@ -39,10 +39,19 @@
         <td>
             @item2.Song.SongName
         </td>
-        @*need to fix the artists later*@
-        <td>
-            @item2.Song.SongArtists
-        </td>
+        @{string StrSongArtists = "";}
+        @{int count2 = 0;}
+        @foreach (var item3 in item2.Song.SongArtists)
+        {
+            count2 += 1;
+            if (count2 > 1)
+            {
+                StrSongArtists = StrSongArtists + ", ";
+            }
+            StrSongArtists += item3.ArtistName;
+
+        }
+        <td>@StrSongArtists</td>
         <td>
             <!--Ratings -->
         </td>
@@ -83,9 +92,18 @@
             <td>
                 @item2.Album.AlbumName
             </td>
-            <td>
-                @item2.Album.AlbumArtists
-            </td>
+            @{string StrAlbumArtists = "";}
+            @{int count2 = 0;}
+            @foreach (var item3 in item2.Album.AlbumArtists)
+            {
+                count2 += 1;
+                if (count2 > 1)
+                {
+                    StrAlbumArtists = StrAlbumArtists + ", ";
+                }
+                StrAlbumArtists += item3.ArtistName;
+            }
+            <td>@StrAlbumArtists</td>
             <td>
                 <!--Ratings -->
             </td>

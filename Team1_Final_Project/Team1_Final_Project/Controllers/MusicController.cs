@@ -51,7 +51,10 @@ namespace Team1_Final_Project.Controllers
             SearchMusicViewModel.Songs = GetSearchedSongs(SearchString);
             SearchMusicViewModel.Albums = GetSearchedAlbums(SearchString);
             SearchMusicViewModel.Artists = GetSearchedArtists(SearchString);
-            
+
+            ViewBag.TotalCount = db.Songs.Count() + db.Artists.Count() + db.Albums.Count();
+            ViewBag.ResultsCount = SearchMusicViewModel.Songs.Count() + SearchMusicViewModel.Albums.Count() + SearchMusicViewModel.Artists.Count();
+
             return View(SearchMusicViewModel);
         }
 

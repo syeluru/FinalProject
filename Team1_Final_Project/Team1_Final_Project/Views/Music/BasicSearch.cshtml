@@ -7,6 +7,10 @@
 
 <h2>SearchIndex</h2>
 
+<br />
+    Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
+<br /><br />
+
 
 @using (Html.BeginForm())
 {
@@ -15,9 +19,6 @@
         <input type="submit" value="Search" class="btn btn-default" />
         @Html.ActionLink("Advanced Search", "DetailedSearch", null, new { @class = "btn btn-default" })
         @Html.ActionLink("Show All", "Index", null, new { @class = "btn btn-default" })
-    </p>*@
-    @*<p>
-        Displaying @ViewBag.NumberSelectedCustomers of @ViewBag.NumberAllCustomers Customers.
     </p>*@
 
     <h2>Songs</h2>
