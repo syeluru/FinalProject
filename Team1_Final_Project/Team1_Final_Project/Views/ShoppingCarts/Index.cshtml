@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.ShoppingCart>
+﻿@model Team1_Final_Project.Models.Purchases.ShoppingCartViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -10,8 +10,7 @@
 
 <h2>Shopping Cart</h2>
 
-@foreach (var cart in Model)
-{
+
 <h3>Songs</h3>
 
 <table class="table">
@@ -34,23 +33,24 @@
 
 
 
-    @foreach (var item2 in cart.Songs)
+    @foreach (var item2 in Model.SongsInShoppingCart)
     {
     <tr>
         <td>
-            @item2.SongName
+            @item2.Song.SongName
         </td>
+        @*need to fix the artists later*@
         <td>
-            @item2.SongArtists
+            @item2.Song.SongArtists
         </td>
         <td>
             <!--Ratings -->
         </td>
         <td>
-            @item2.SongPrice
+            @item2.Song.SongPrice
         </td>
         <td>
-            @Html.ActionLink("Remove Song", "DeleteSong", new { SongID = item2.SongID })
+            @Html.ActionLink("Remove Song", "DeleteSong", new { SongID = item2.Song.SongID })
         </td>
 
     </tr>
@@ -77,30 +77,30 @@
         <th></th>
     </tr>
 
-    @foreach (var item2 in cart.Albums)
+    @foreach (var item2 in Model.AlbumsInShoppingCart)
     {
         <tr>
             <td>
-                @item2.AlbumName
+                @item2.Album.AlbumName
             </td>
             <td>
-                @item2.AlbumArtists
+                @item2.Album.AlbumArtists
             </td>
             <td>
                 <!--Ratings -->
             </td>
             <td>
-                @item2.AlbumPrice
+                @item2.Album.AlbumPrice
             </td>
             <td>
-                @Html.ActionLink("Remove Album", "DeleteAlbum", new { AlbumID = item2.AlbumID })
+                @Html.ActionLink("Remove Album", "DeleteAlbum", new { AlbumID = item2.Album.AlbumID })
             </td>
         </tr>
     }
     
 </table>
 
-}
+
 
 <h3>Checkout!</h3>
 

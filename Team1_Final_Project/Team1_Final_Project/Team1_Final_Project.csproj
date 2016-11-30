@@ -210,10 +210,15 @@
     <Compile Include="Migrations\201611291805076_please.Designer.cs">
       <DependentUpon>201611291805076_please.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611300136286_pleasework.cs" />
+    <Compile Include="Migrations\201611300136286_pleasework.Designer.cs">
+      <DependentUpon>201611300136286_pleasework.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
+    <Compile Include="Models\Purchases\ShoppingCartViewModel.cs" />
     <Compile Include="Models\Music\MusicViewModel.cs" />
     <Compile Include="Models\Music\Genre.cs" />
     <Compile Include="Models\Music\Song.cs" />
@@ -223,7 +228,8 @@
     <Compile Include="Models\Identity\RoleViewModels.cs" />
     <Compile Include="Models\Identity\UserViewModels.cs" />
     <Compile Include="Models\Purchases\Order.cs" />
-    <Compile Include="Models\Purchases\ShoppingCart.cs" />
+    <Compile Include="Models\Purchases\AlbumInShoppingCart.cs" />
+    <Compile Include="Models\Purchases\SongInShoppingCart.cs" />
     <Compile Include="Models\Purchases\SongOrderBridge.cs" />
     <Compile Include="Models\Rating\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -316,6 +322,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611291805076_please.resx">
       <DependentUpon>201611291805076_please.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611300136286_pleasework.resx">
+      <DependentUpon>201611300136286_pleasework.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

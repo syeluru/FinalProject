@@ -50,7 +50,7 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<MusicRating> SongRatings { get; set; }
 
-        public virtual List<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual List<SongInShoppingCart> SongsInShoppingCart { get; set; }
 
         public Song()
         {
@@ -58,6 +58,7 @@ namespace Team1_Final_Project.Models.Music
             this.SongArtists = new List<Artist>();
             this.SongGenres = new List<Genre>();
             this.SongRatings = new List<MusicRating>();
+            this.SongsInShoppingCart = new List<SongInShoppingCart>();
         }
     }
 }

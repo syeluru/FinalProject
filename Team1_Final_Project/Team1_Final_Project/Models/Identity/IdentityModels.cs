@@ -27,7 +27,7 @@ namespace Team1_Final_Project.Models.Identity
     public class AppUser : IdentityUser
     {
         //TODO: Put any additional fields that you need for your users here
-        
+
         //Scalar Properties
         [Required(ErrorMessage = "First Name is required.")]
         [Display(Name = "First Name")]
@@ -62,10 +62,10 @@ namespace Team1_Final_Project.Models.Identity
         public Boolean IsAccountEnabled { get; set; }
 
         //Employee Stuff
-        
+
         [Display(Name = "Social Security Number")]
         public string SSN { get; set; }
-        
+
         [Display(Name = "Employee Type")]
         public Int16 EmpType { get; set; }
 
@@ -73,8 +73,11 @@ namespace Team1_Final_Project.Models.Identity
         //TODO: need to add validation in terms of how many credit cards a person can or can't have
         public virtual List<CreditCard> CreditCards { get; set; }
 
+        public virtual List<SongInShoppingCart> SongsInShoppingCart {get; set; }
+        public virtual List<AlbumInShoppingCart> AlbumsInShoppingCart { get; set; }
+
         //TODO: add a ShoppingCart model (or whatever we ended up doing to handle purchases)
-        public virtual List<ShoppingCart> ShoppingCarts { get; set; }
+        //public virtual List<ShoppingCart> ShoppingCarts { get; set; }
 
         //TODO: add an Order model (or whatever we ended up doing to handle purchases) 
         public virtual List<Order> Orders { get; set; }
@@ -96,12 +99,13 @@ namespace Team1_Final_Project.Models.Identity
         {
             IsAccountEnabled = true;
             this.CreditCards = new List<CreditCard>();
-            this.ShoppingCarts = new List<ShoppingCart>();
+            this.SongsInShoppingCart = new List<SongInShoppingCart>();
+            this.AlbumsInShoppingCart = new List<AlbumInShoppingCart>();
 
-            //this.Orders = new List<Order>();
-            //this.Songs = new List<Song>();
-            //this.Albums = new List<Album>();
-            //this.Ratings = new List<MusicRating>();
+            this.Orders = new List<Order>();
+            this.Songs = new List<Song>();
+            this.Albums = new List<Album>();
+            this.Ratings = new List<MusicRating>();
 
 
         }
@@ -122,7 +126,8 @@ namespace Team1_Final_Project.Models.Identity
         public DbSet<AlbumOrderBridge> AlbumOrderBridge { get; set; }
         public DbSet<SongOrderBridge> SongOrderBridge { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<SongInShoppingCart> SongsInShoppingCart { get; set; }
+        public DbSet<AlbumInShoppingCart> AlbumsInShoppingCart { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<MusicRating> Ratings { get; set; }
         //TODO: add ratings dbSets

@@ -34,23 +34,23 @@
     </tr>
 
 
-    @foreach (var item2 in Model.ShoppingCart.Songs)
+    @foreach (var item2 in Model.SongsInShoppingCart)
     {
         <tr>
             <td>
-                @item2.SongName
+                @item2.Song.SongName
             </td>
             <td>
-                @item2.SongArtists
+                @item2.Song.SongArtists
             </td>
             <td>
                 <!--Ratings -->
             </td>
             <td>
-                @item2.SongPrice
+                @item2.Song.SongPrice
             </td>
             <td>
-                @Html.ActionLink("Remove Song", "DeleteSong", new { SongID = item2.SongID })
+                @Html.ActionLink("Remove Song", "DeleteSong", new { SongID = item2.Song.SongID })
             </td>
 
         </tr>
@@ -77,23 +77,23 @@
         <th></th>
     </tr>
 
-    @foreach (var item2 in Model.Albums)
+    @foreach (var item2 in Model.AlbumsInShoppingCart)
     {
         <tr>
             <td>
-                @item2.AlbumName
+                @item2.Album.AlbumName
             </td>
             <td>
-                @item2.AlbumArtists
+                @item2.Album.AlbumArtists
             </td>
             <td>
                 <!--Ratings -->
             </td>
             <td>
-                @item2.AlbumPrice
+                @item2.Album.AlbumPrice
             </td>
             <td>
-                @Html.ActionLink("Remove Album", "DeleteAlbum", new { lbumID = item2.AlbumID })
+                @Html.ActionLink("Remove Album", "DeleteAlbum", new { AlbumID = item2.Album.AlbumID })
             </td>
         </tr>
     }
@@ -103,8 +103,8 @@
 <h3>Totals</h3>
 
 @{ 
-    decimal Tax = Model.ShoppingCart.TotalPrice * 8.25m;
-    decimal GrandTotal = Model.ShoppingCart.TotalPrice + Tax;
+    decimal Tax = ViewBag.SubTotal * 8.25m;
+    decimal GrandTotal = ViewBag.Subtotal + Tax;
 }
 
 <table>
@@ -112,7 +112,7 @@
     <th>Amount</th>
     <tr>
         <td><em>Subtotal</em></td>
-        <td>@Model.ShoppingCart.TotalPrice</td>
+        <td>@ViewBag.Subtotal</td>
     </tr>
     <tr>
         <td><em>Tax</em></td>
@@ -139,6 +139,8 @@
             @Html.ActionLink("Add New Credit Card", "AddCreditCard", "CreditCards", null, null)
         }
 
+        <h3>You are gifting this to @ViewBag.Recipient.</h3>
+        <p>They're gonna love it!</p>
         <input type="submit" value="Confirm Checkout" />
 
     </div>

@@ -12,6 +12,8 @@ namespace Team1_Final_Project.Models.Purchases
     public class ShoppingCart
     {
         [Required]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Shopping Cart ID")]
         public int ShoppingCartID { get; set; }
 

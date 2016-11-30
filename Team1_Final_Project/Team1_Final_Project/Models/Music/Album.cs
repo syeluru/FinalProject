@@ -35,16 +35,20 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<Song> AlbumSongs { get; set; }
 
-        public virtual List<AppUser> SongOwners { get; set; }
+        public virtual List<AppUser> AlbumOwners { get; set; }
 
         public virtual List<MusicRating> AlbumRatings { get; set; }
 
-        public virtual List<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual List<AlbumInShoppingCart> AlbumsInShoppingCart { get; set; }
 
         public Album()
         {
             this.AlbumGenres = new List<Genre>();
             this.AlbumArtists = new List<Artist>();
+            this.AlbumSongs = new List<Song>();
+            this.AlbumOwners = new List<AppUser>();
+            this.AlbumRatings = new List<MusicRating>();
+            this.AlbumsInShoppingCart = new List<AlbumInShoppingCart>();
         }
         
     }

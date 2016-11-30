@@ -21,14 +21,25 @@ namespace Team1_Final_Project.Controllers
         public ActionResult Index()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            return View(userLoggedIn.ShoppingCarts);
+            ShoppingCartViewModel shoppingcart = new ShoppingCartViewModel();
+            shoppingcart.AlbumsInShoppingCart = userLoggedIn.AlbumsInShoppingCart;
+            shoppingcart.SongsInShoppingCart = userLoggedIn.SongsInShoppingCart;
+            ViewBag.SongTotal = CalculateSongTotal();
+            ViewBag.AlbumTotal = CalculateAlbumTotal();
+            return View(shoppingcart);
         }
 
         public ActionResult ShoppingCartIndex(String ErrorMessage)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             ViewBag.ErrorMessage = ErrorMessage;
-            return View("Index", userLoggedIn.ShoppingCarts);
+            ShoppingCartViewModel shoppingcart = new ShoppingCartViewModel();
+            shoppingcart.AlbumsInShoppingCart = userLoggedIn.AlbumsInShoppingCart;
+            shoppingcart.SongsInShoppingCart = userLoggedIn.SongsInShoppingCart;
+            ViewBag.SongTotal = CalculateSongTotal();
+            ViewBag.AlbumTotal = CalculateAlbumTotal();
+
+            return View("Index", shoppingcart);
 
         }
 
@@ -47,7 +58,7 @@ namespace Team1_Final_Project.Controllers
         //    return View(shoppingCart);
         //}
 
-        //// GET: ShoppingCarts/Create
+        // GET: ShoppingCarts/Create
         //public ActionResult Create()
         //{
         //    ViewBag.ShoppingCartID = new SelectList(db.Users, "Id", "FName");
@@ -59,12 +70,14 @@ namespace Team1_Final_Project.Controllers
         {
 
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            foreach (var cart in userLoggedIn.ShoppingCarts)
-            {
-                cart.Songs.Add(db.Songs.Find(SongID));
-                RecalculateTotal();
+            SongInShoppingCart newsong = new SongInShoppingCart();
+            newsong.Song = db.Songs.Find(SongID);
+            newsong.Customer = userLoggedIn;
 
-            }
+            userLoggedIn.SongsInShoppingCart.Add(newsong);
+            
+
+
 
 
             // return them to song index after they're done browsing
@@ -75,32 +88,32 @@ namespace Team1_Final_Project.Controllers
         {
 
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            foreach (var cart in userLoggedIn.ShoppingCarts)
-            {
-                cart.Albums.Add(db.Albums.Find(AlbumID));
-                RecalculateTotal();
+            AlbumInShoppingCart newalbum = new AlbumInShoppingCart();
+            newalbum.Album = db.Albums.Find(AlbumID);
+            newalbum.Customer = userLoggedIn;
 
-            }
+            userLoggedIn.AlbumsInShoppingCart.Add(newalbum);
+            
 
             // return them to song index after they're done browsing
             return RedirectToAction("BasicSearch", "Music");
         }
 
+        //still need to do
         public ActionResult CheckoutPage()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            foreach (var cart in userLoggedIn.ShoppingCarts)
+            if (userLoggedIn.AlbumsInShoppingCart.Count() == 0 && userLoggedIn.SongsInShoppingCart.Count() == 0)
             {
-                if (cart.Albums.Count == 0 && cart.Songs.Count == 0)
-                {
-                    return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "You need at least one item in your shopping cart before you can check out! I hear Taylor Swift has been quite the hit lately." });
-                }
-
+                return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "You need at least one item in your shopping cart before you can check out! I hear Taylor Swift has been quite the hit lately." });
             }
+
+
 
             return View(userLoggedIn);
         }
 
+        //still need to do
         public ActionResult Checkout()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -115,58 +128,54 @@ namespace Team1_Final_Project.Controllers
                 // throw in total price, songs, and albums into a new order
                 Order NewOrder = new Order();
 
-                foreach (var cart in userLoggedIn.ShoppingCarts)
+
+
+
+                // add all the songs from shopping cart to this order
+                foreach (var song in userLoggedIn.SongsInShoppingCart)
                 {
+                    Song songToAdd = db.Songs.Find(song.Song.SongID);
+                    SongOrderBridge songBridgeToAdd = new SongOrderBridge();
+                    songBridgeToAdd.Song = songToAdd;
+                    NewOrder.SongsInOrder.Add(songBridgeToAdd);
 
+                    // add all the songs to the customer's songs list
+                    userLoggedIn.Songs.Add(songToAdd);
 
-                    // add all the songs from shopping cart to this order
-                    foreach (var song in cart.Songs)
-                    {
-                        Song songToAdd = db.Songs.Find(song.SongID);
-                        SongOrderBridge songBridgeToAdd = new SongOrderBridge();
-                        songBridgeToAdd.Song = songToAdd;
-                        NewOrder.SongsInOrder.Add(songBridgeToAdd);
+                }
 
-                        // add all the songs to the customer's songs list
-                        userLoggedIn.Songs.Add(songToAdd);
+                // add all the albums from shopping cart to this order
+                foreach (var album in userLoggedIn.AlbumsInShoppingCart)
+                {
+                    Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
+                    AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
+                    albumBridgeToAdd.Album = albumToAdd;
+                    NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
 
-                    }
-
-                    // add all the albums from shopping cart to this order
-                    foreach (var album in cart.Albums)
-                    {
-                        Album albumToAdd = db.Albums.Find(album.AlbumID);
-                        AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
-                        albumBridgeToAdd.Album = albumToAdd;
-                        NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
-
-                        // add all the albums to the customer's albums list
-                        userLoggedIn.Albums.Add(albumToAdd);
-
-
-                    }
-
-                    // add the total price to the order
-                    NewOrder.TotalPrice = cart.TotalPrice;
-
-                    // clear out the shopping cart
-                    cart.Songs.Clear();
-                    cart.Albums.Clear();
-
-                    // add the order to the database
-                    db.Orders.Add(NewOrder);
-                    db.SaveChanges();
-
-                    // send a new email
-
-                    // return the customer to their customer dashboard so they can see the songs/albums they just purchased
+                    // add all the albums to the customer's albums list
+                    userLoggedIn.Albums.Add(albumToAdd);
 
 
                 }
+
+                // add the total price to the order
+                NewOrder.TotalPrice = CalculateSongTotal() + CalculateAlbumTotal();
+
+                // clear out the shopping cart
+                userLoggedIn.SongsInShoppingCart.Clear();
+                userLoggedIn.AlbumsInShoppingCart.Clear();
+
+                // add the order to the database
+                db.Orders.Add(NewOrder);
+                db.SaveChanges();
+
+                // send a new email
+
+                // take the customer to the confirmation pageso they can see the songs/albums they just purchased
                 return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = userLoggedIn, PlacedOrder = NewOrder });
-
-
             }
+
+            
         }
 
         public ActionResult GiftCheckoutPage(string FriendEmail)
@@ -175,7 +184,9 @@ namespace Team1_Final_Project.Controllers
 
             if (db.Users.Any(c => c.Email == FriendEmail))
             {
-                return View(FriendEmail);
+                ViewBag.Recipient = FriendEmail;
+                ViewBag.Subtotal = CalculateAlbumTotal() + CalculateSongTotal();
+                return View(userLoggedIn);
             } else
             {
                 return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "Sorry, doesn't look like that person is a customer yet. Check the email address on that!" });
@@ -187,68 +198,61 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             AppUser friend = db.Users.First(a => a.Email == FriendEmail);
-            // check to see that there are no duplicates first of all
             if (DuplicatesExist())
             {
                 return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "Looks like you have some duplicates in your shopping cart. Check back through your shopping cart!" });
             }
             else
             {
+
                 // throw in total price, songs, and albums into a new order
                 Order NewOrder = new Order();
-
-                foreach (var cart in userLoggedIn.ShoppingCarts)
+                
+                // add all the songs from shopping cart to this order
+                foreach (var song in userLoggedIn.SongsInShoppingCart)
                 {
-                    // add all the songs from shopping cart to this order
-                    foreach (var song in cart.Songs)
-                    {
-                        Song songToAdd = db.Songs.Find(song.SongID);
-                        SongOrderBridge songBridgeToAdd = new SongOrderBridge();
-                        songBridgeToAdd.Song = songToAdd;
-                        NewOrder.SongsInOrder.Add(songBridgeToAdd);
+                    Song songToAdd = db.Songs.Find(song.Song.SongID);
+                    SongOrderBridge songBridgeToAdd = new SongOrderBridge();
+                    songBridgeToAdd.Song = songToAdd;
+                    NewOrder.SongsInOrder.Add(songBridgeToAdd);
 
-                        // add all the songs to the customer friend's songs list
-                        friend.Songs.Add(songToAdd);
+                    // add all the songs to the recipient's songs list
+                    friend.Songs.Add(songToAdd);
 
-                    }
+                }
 
+                // add all the albums from shopping cart to this order
+                foreach (var album in userLoggedIn.AlbumsInShoppingCart)
+                {
+                    Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
+                    AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
+                    albumBridgeToAdd.Album = albumToAdd;
+                    NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
 
-
-                    // add all the albums from shopping cart to this order
-                    foreach (var album in cart.Albums)
-                    {
-                        Album albumToAdd = db.Albums.Find(album.AlbumID);
-                        AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
-                        albumBridgeToAdd.Album = albumToAdd;
-                        NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
-
-                        // add all the albums to the customer's albums list
-                        friend.Albums.Add(albumToAdd);
-
-                    }
-
-                    // add the total price to the order
-                    NewOrder.TotalPrice = cart.TotalPrice;
-
-                    // clear out the shopping cart
-                    cart.Songs.Clear();
-                    cart.Albums.Clear();
-
-                    // add the order to the database
-                    db.Orders.Add(NewOrder);
-                    db.SaveChanges();
-
-                    // send a new email 
-
+                    // add all the albums to the recipient's albums list
+                    friend.Albums.Add(albumToAdd);
 
 
                 }
 
+                // add the total price to the order
+                NewOrder.TotalPrice = CalculateSongTotal() + CalculateAlbumTotal();
 
-                // return the customer to their customer dashboard so they can see the songs/albums they just purchased
+                // clear out the shopping cart
+                userLoggedIn.SongsInShoppingCart.Clear();
+                userLoggedIn.AlbumsInShoppingCart.Clear();
+
+                // add the order to the database
+                db.Orders.Add(NewOrder);
+                db.SaveChanges();
+
+                // send a new email to the recipient and the user who just placed the order
+
+                // take the customer to the order confirmation page so they can see the songs/albums they just purchased
                 return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = friend, PlacedOrder = NewOrder });
-
             }
+
+
         }
 
         public ActionResult CheckoutConfirmationPage(AppUser Recipient, Order PlacedOrder)
@@ -258,42 +262,56 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
-        public void RecalculateTotal()
+        public decimal CalculateSongTotal()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             decimal TotalValueOfSongs = 0.0m;
-            decimal TotalValueOfAlbums = 0.0m;
-            foreach (var cart in userLoggedIn.ShoppingCarts)
+           
+            foreach (SongInShoppingCart scsong in userLoggedIn.SongsInShoppingCart)
             {
-                foreach (var song in cart.Songs)
-                {
-                    TotalValueOfSongs += (song.SongPrice - song.SongDiscount);
-                }
+                TotalValueOfSongs += (scsong.Song.SongPrice - scsong.Song.SongDiscount);
 
-                foreach (var album in cart.Albums)
-                {
-                    TotalValueOfSongs += (album.AlbumPrice - album.AlbumDiscount);
-                }
-
-                cart.TotalPrice = (TotalValueOfAlbums + TotalValueOfSongs);
+               
+                
             }
-            
-            
+
+            return TotalValueOfSongs;
+
+
         }
+
+        public decimal CalculateAlbumTotal()
+        {
+            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            decimal TotalValueOfAlbums = 0.0m;
+
+            foreach (AlbumInShoppingCart scalbum in userLoggedIn.AlbumsInShoppingCart)
+            {
+                TotalValueOfAlbums += (scalbum.Album.AlbumPrice - scalbum.Album.AlbumDiscount);
+
+
+
+            }
+
+            return TotalValueOfAlbums;
+
+
+        }
+        //need to test
 
         public bool DuplicatesExist()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             // get a list of all the songs in a given shopping cart
             List<Song> SongsList = new List<Song>();
-            foreach (var song in userLoggedIn.Songs)
+            foreach (var song in userLoggedIn.SongsInShoppingCart)
             {
-                SongsList.Add(db.Songs.Find(song.SongID));
+                SongsList.Add(db.Songs.Find(song.Song.SongID));
             }
 
-            foreach (var album in userLoggedIn.Albums)
+            foreach (var album in userLoggedIn.AlbumsInShoppingCart)
             {
-                foreach (var song in album.AlbumSongs)
+                foreach (var song in album.Album.AlbumSongs)
                 {
                     SongsList.Add(db.Songs.Find(song.SongID));
                 }
@@ -311,23 +329,23 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-        // POST: ShoppingCarts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //// POST: ShoppingCarts/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-
-        
-        //public ActionResult Create([Bind(Include = "Id,TotalPrice")] ShoppingCart shoppingCart)
+        //public void Create([Bind(Include = "Id,TotalPrice")] ShoppingCart shoppingCart, AppUser user)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        db.ShoppingCarts.Add(shoppingCart);
+        //        db.ShoppingCarts.Add(new ShoppingCart {
+        //            TotalPrice = shoppingCart.TotalPrice,
+        //            Customer = user
+        //        });
         //        db.SaveChanges();
-        //        return RedirectToAction("Index");
+                
         //    }
 
-        //    return View("Index", "Home");
         //}
 
         //// GET: ShoppingCarts/Edit/5
@@ -362,16 +380,14 @@ namespace Team1_Final_Project.Controllers
         //    ViewBag.ShoppingCartID = new SelectList(db.AppUsers, "Id", "FName", shoppingCart.ShoppingCartID);
         //    return View(shoppingCart);
         //}
-        
 
+        //UNFINISHED
         //Delete Song Method
-        public ActionResult DeleteSong(string SongID)
+        public ActionResult DeleteSong(int SongID)
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
-            foreach (var cart in userloggedin.ShoppingCarts)
-            {
-                cart.Songs.Remove(db.Songs.Find(SongID));
-            }
+            SongInShoppingCart songToRemove = db.SongsInShoppingCart.First(a => a.Song.SongID == SongID);
+            userloggedin.SongsInShoppingCart.Remove(songToRemove);
             db.SaveChanges();
 
             return View("ShoppingCartIndex");
@@ -379,41 +395,52 @@ namespace Team1_Final_Project.Controllers
         }
         //find the song in DB that was sent to delete method & delete from shoppingcart.songs
 
-        //Delete Album Method       
-
-        // GET: ShoppingCarts/Delete/5
-        public ActionResult Delete(string id)
+        //Delete Album Method   
+        //Delete Song Method
+        public ActionResult DeleteAlbum(int AlbumID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ShoppingCart shoppingCart = db.ShoppingCarts.Find(id);
-            if (shoppingCart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(shoppingCart);
-        }
-
-        // POST: ShoppingCarts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            ShoppingCart shoppingCart = db.ShoppingCarts.Find(id);
-            db.ShoppingCarts.Remove(shoppingCart);
+            AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
+            AlbumInShoppingCart albumToRemove = db.AlbumsInShoppingCart.First(a => a.Album.AlbumID == AlbumID);
+            userloggedin.AlbumsInShoppingCart.Remove(albumToRemove);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return View("ShoppingCartIndex");
+
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //// GET: ShoppingCarts/Delete/5
+        //public ActionResult Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ShoppingCart shoppingCart = db.ShoppingCarts.Find(id);
+        //    if (shoppingCart == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(shoppingCart);
+        //}
+
+        //// POST: ShoppingCarts/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(string id)
+        //{
+        //    ShoppingCart shoppingCart = db.ShoppingCarts.Find(id);
+        //    db.ShoppingCarts.Remove(shoppingCart);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
