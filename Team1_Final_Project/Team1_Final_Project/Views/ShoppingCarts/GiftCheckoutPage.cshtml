@@ -131,7 +131,7 @@
         @foreach (var card in Model.CreditCards)
         {
             <label class="form-check-label">
-                @Html.RadioButton("SelectedCreditCard", card.CreditCardNumber, false, new { @class = "form-check-input" }) **** **** **** @card.CreditCardNumber.Substring(-4) @card.CreditCardType.ToString().ToUpper() <br />
+                @Html.RadioButton("SelectedCreditCardID", card.CreditCardID, false, new { @class = "form-check-input" }) **** **** **** @card.CreditCardNumber.Substring(-4) @card.CreditCardType.ToString().ToUpper() <br />
             </label>
         }
         @if (userLoggedIn.CreditCards.Count < 2)
@@ -139,7 +139,8 @@
             @Html.ActionLink("Add New Credit Card", "AddCreditCard", "CreditCards", null, null)
         }
 
-        <h3>You are gifting this to @ViewBag.Recipient.</h3>
+        <h3>Recipient:</h3>
+        <input type="text" name="FriendEmail" value="@ViewBag.Recipient" />
         <p>They're gonna love it!</p>
         <input type="submit" value="Confirm Checkout" />
 

@@ -10,7 +10,7 @@
     AppDbContext db = new AppDbContext();
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
     // need the viewbag.orderID to come through from the controller
-    Order PlacedOrder = db.Orders.Find(ViewBag.PlacedOrder.OrderID);
+    Order PlacedOrder = db.Orders.Find(ViewBag.PlacedOrderID);
 }
 
 @*need a viewbag here that has the orderID*@

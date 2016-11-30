@@ -1,7 +1,15 @@
-﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.Order>
+﻿@using Team1_Final_Project.Models.Purchases
+@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
+
+@model IEnumerable<Team1_Final_Project.Models.Purchases.Order>
 
 @{
     ViewBag.Title = "Index";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+
+
 }
 
 <h2>Index</h2>
