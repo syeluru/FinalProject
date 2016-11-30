@@ -238,6 +238,9 @@ namespace Team1_Final_Project.Controllers
 
         }
 
+
+        //TODO: NEED TO BUILD EMPLOYEE DASHBOARD VIEW
+
         // GET: Account/ManagerDashboard
         //[Authorize(Roles = "Employee, Manager")]
         [Authorize]
@@ -247,7 +250,6 @@ namespace Team1_Final_Project.Controllers
             return View(userLoggedIn);
         }
 
-        //TODO: NEED TO BUILD EMPLOYEE DASHBOARD VIEW
 
         // GET: Account/ManagerDashboard
         //[Authorize(Roles = "Manager")]
