@@ -35,33 +35,34 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
         foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink(item.AlbumName, "AlbumDetail", "Music", new { item.AlbumID }, null)</td>
+                <td>@Html.ActionLink(item.AlbumName, "Details", "Albums", new { id = item.AlbumID }, null)</td>
 
                     @{string StrAlbumArtists = "";}
                     @{int count2 = 0;}
                     @foreach (var item2 in item.AlbumArtists)
                     {
-                        StrAlbumArtists += item2.ArtistName;
                         count2 += 1;
                         if (count2 > 1)
                         {
-                            StrAlbumArtists += ", ";
+                            StrAlbumArtists = StrAlbumArtists + ", ";
                         }
+                        StrAlbumArtists += item2.ArtistName;
                     }
                 <td>@StrAlbumArtists</td>
 
-                    @{string StrAlbumRatings = "";}
-                    @{int count = 0;}
+                    @{string AverageAlbumRatings = "N/A";}
+                    @{decimal count = 0;}
+                    @{decimal SumRatings = 0;}
                     @foreach (var item2 in item.AlbumRatings)
                     {
-                        StrAlbumRatings += Convert.ToString(item2.RatingNumber);
+                        SumRatings += item2.RatingNumber;
                         count += 1;
-                        if (count > 1)
+                        if (count != 0)
                         {
-                            StrAlbumRatings += ", ";
+                            AverageAlbumRatings = (SumRatings / count).ToString();
                         }
                     }
-                <td>@StrAlbumRatings</td>
+                <td>@AverageAlbumRatings</td>
 
                 <td>@item.AlbumPrice</td>
             </tr>

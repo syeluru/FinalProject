@@ -41,6 +41,49 @@
             @Html.DisplayFor(model => model.SongDiscount)
         </dd>
 
+        <dt>
+            Song Rating
+        </dt>
+
+            @{string AverageSongRatings = "N/A";}
+            @{decimal count = 0;}
+            @{decimal SumRatings = 0;}
+            @foreach (var item in Model.SongRatings)
+            {
+                SumRatings += item.RatingNumber;
+                count += 1;
+                if (count != 0)
+                {
+                    AverageSongRatings = (SumRatings / count).ToString();
+                }
+            }
+        <dd>@AverageSongRatings</dd>
+
+        <br />
+
+        <!--Create Table-->
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Reviews
+                </th>
+            </tr>
+            @{decimal count2 = 0;}
+            @foreach (var item in Model.SongRatings)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Review)</td>
+                </tr>
+                count2 += 1;
+            }
+            @if (count2 == 0)
+            {
+                <tr>
+                    <td>N/A</td>
+                </tr>
+            }
+        </table>
+
         <!--Create Table-->
         <table class="table table-bordered">
             <tr>
@@ -55,7 +98,6 @@
                 </tr>
             }
         </table>
-        <br />
 
         <!--Create Table-->
         <table class="table table-bordered">
@@ -75,13 +117,21 @@
         <table class="table table-bordered">
             <tr>
                 <th>
-                    Artist Name
+                    Album Name
                 </th>
             </tr>
+            @{decimal count3 = 0;}
             @foreach (var item in Model.SongAlbums)
             {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.AlbumName)</td>
+                </tr>
+                count3 += 1;
+            }
+            @if (count3 == 0)
+            {
+                <tr>
+                    <td>N/A</td>
                 </tr>
             }
         </table>
@@ -99,6 +149,7 @@
         @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { SongID = Model.SongID }, null)
 
     }
+    <br /><br />
     @Html.ActionLink("Edit", "Edit", new { id = Model.SongID })
     @Html.ActionLink("Back to List", "Index")
     
