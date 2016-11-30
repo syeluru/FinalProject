@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201611300136286_pleasework.Designer.cs">
       <DependentUpon>201611300136286_pleasework.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611300328261_cops.cs" />
+    <Compile Include="Migrations\201611300328261_cops.Designer.cs">
+      <DependentUpon>201611300328261_cops.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -325,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611300136286_pleasework.resx">
       <DependentUpon>201611300136286_pleasework.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611300328261_cops.resx">
+      <DependentUpon>201611300328261_cops.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
