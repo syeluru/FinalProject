@@ -7,7 +7,8 @@ namespace Team1_Final_Project.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class featureditemsanddiscounts : IMigrationMetadata
+    public sealed partial class featureditemsand
+        s : IMigrationMetadata
     {
         private readonly ResourceManager Resources = new ResourceManager(typeof(featureditemsanddiscounts));
         

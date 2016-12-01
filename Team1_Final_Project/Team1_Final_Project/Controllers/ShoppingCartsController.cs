@@ -301,7 +301,13 @@ namespace Team1_Final_Project.Controllers
            
             foreach (SongInShoppingCart scsong in userLoggedIn.SongsInShoppingCart)
             {
-                decimal TotalDiscountsOnSong = CalculateSongTotalDiscount(scsong.Song.SongID);
+                decimal Total
+                    
+                    
+                    
+                    
+                    
+                    sOnSong = CalculateSongTotalDiscount(scsong.Song.SongID);
                 TotalValueOfSongs += (scsong.Song.SongPrice - CalculateSongTotalDiscount(scsong.Song.SongID));
             }
 

@@ -3,7 +3,8 @@ namespace Team1_Final_Project.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class featureditemsanddiscounts : DbMigration
+    public partial class featureditemsand
+        s : DbMigration
     {
         public override void Up()
         {
