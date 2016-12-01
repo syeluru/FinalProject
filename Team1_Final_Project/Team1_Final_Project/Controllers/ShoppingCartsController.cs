@@ -112,7 +112,7 @@ namespace Team1_Final_Project.Controllers
                 db.SaveChanges();
             }
 
-            ViewBag.SubTotal = CalculateSongTotal() + CalculateAlbumTotal();
+            ViewBag.Subtotal = (CalculateSongTotal() + CalculateAlbumTotal()) * 1.0825m;
             return View(userLoggedIn);
         }
 
@@ -167,7 +167,7 @@ namespace Team1_Final_Project.Controllers
                 }
 
                 // add the total price to the order
-                NewOrder.TotalPrice = CalculateSongTotal() + CalculateAlbumTotal();
+                NewOrder.TotalPrice = (CalculateSongTotal() + CalculateAlbumTotal()) * 1.0825m;
 
                 // add the credit card to the order
                 NewOrder.CreditCardUsed = db.CreditCards.Find(SelectedCreditCardID);
@@ -183,7 +183,7 @@ namespace Team1_Final_Project.Controllers
                 // send a new email
 
                 // take the customer to the confirmation pageso they can see the songs/albums they just purchased
-                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = userLoggedIn, PlacedOrderID = NewOrder.OrderID });
+                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { RecipientID = userLoggedIn.Id, PlacedOrderID = NewOrder.OrderID });
             }
 
             
@@ -206,7 +206,7 @@ namespace Team1_Final_Project.Controllers
                     db.SaveChanges();
                 }
                 ViewBag.Recipient = FriendEmail;
-                ViewBag.Subtotal = CalculateAlbumTotal() + CalculateSongTotal();
+                ViewBag.Subtotal = (CalculateSongTotal() + CalculateAlbumTotal()) * 1.0825m;
                 return View(userLoggedIn);
             } else 
             {
@@ -265,7 +265,7 @@ namespace Team1_Final_Project.Controllers
                 }
 
                 // add the total price to the order
-                NewOrder.TotalPrice = CalculateSongTotal() + CalculateAlbumTotal();
+                NewOrder.TotalPrice = (CalculateSongTotal() + CalculateAlbumTotal()) * 1.0825m;
 
                 // add the credit card used
                 NewOrder.CreditCardUsed = db.CreditCards.Find(SelectedCreditCardID);
@@ -281,15 +281,15 @@ namespace Team1_Final_Project.Controllers
                 // send a new email to the recipient and the user who just placed the order
 
                 // take the customer to the order confirmation page so they can see the songs/albums they just purchased
-                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = friend, PlacedOrder = NewOrder });
+                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { RecipientID = friend.Id, PlacedOrderID = NewOrder.OrderID });
             }
 
 
         }
 
-        public ActionResult CheckoutConfirmationPage(AppUser Recipient, int PlacedOrderID)
+        public ActionResult CheckoutConfirmationPage(string RecipientID, int PlacedOrderID)
         {
-            ViewBag.Recipient = Recipient;
+            ViewBag.RecipientID = RecipientID;
             ViewBag.PlacedOrderID = PlacedOrderID;
             return View();
         }

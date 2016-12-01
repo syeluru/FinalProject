@@ -97,9 +97,9 @@
             <td>
                 @{
                     string LastFourCreditCard = item.CreditCardNumber;
-                    string FormattedCreditCardUsed = /*"**** **** **** " + */ LastFourCreditCard.Substring(LastFourCreditCard.Length - 4, 4);
+                    string FormattedCreditCardUsed = "**** **** **** " + LastFourCreditCard.Substring(item.CreditCardNumber.Length - 4);
                 }
-                @Html.DisplayFor(modelItem => LastFourCreditCard);
+                @Html.DisplayFor(modelItem => FormattedCreditCardUsed);
             </td>
             <td>@Html.DisplayFor(modelItem => item.CreditCardType)</td>
         </tr>

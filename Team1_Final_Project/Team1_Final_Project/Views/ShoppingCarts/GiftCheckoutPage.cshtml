@@ -106,9 +106,10 @@
 
 <h3>Totals</h3>
 
-@{ 
-    decimal Tax = ViewBag.SubTotal * 0.0825m;
-    decimal GrandTotal = ViewBag.Subtotal + Tax;
+@{
+    decimal Subtotal = ViewBag.Subtotal * 0.9175m;
+    decimal Tax = Subtotal * 0.0825m;
+    decimal GrandTotal = Subtotal + Tax;
 }
 
 <table>
@@ -116,7 +117,7 @@
     <th>Amount</th>
     <tr>
         <td><em>Subtotal</em></td>
-        <td>$@ViewBag.Subtotal</td>
+        <td> @String.Format("{0:C}", Subtotal)</td>
     </tr>
     <tr>
         <td><em>Tax</em></td>
@@ -135,16 +136,32 @@
 <div class="form-group">
     <div class="form-check">
         <p>Select Credit Card</p>
-        @foreach (var card in Model.CreditCards)
+        @if (userLoggedIn.CreditCards.Count() > 0)
         {
-            <label class="form-check-label">
-                @Html.RadioButton("SelectedCreditCardID", card.CreditCardID, false, new { @class = "form-check-input" }) **** **** **** @card.CreditCardNumber.Substring(-4) @card.CreditCardType.ToString().ToUpper() <br />
-            </label>
+
+            foreach (CreditCard card in userLoggedIn.CreditCards)
+            {
+                <label class="form-check">
+
+
+
+
+
+                    @Html.RadioButton("SelectedCreditCardID", card.CreditCardID) **** **** **** @card.CreditCardNumber.Substring(card.CreditCardNumber.Length - 4) @card.CreditCardType.ToString().ToUpper()
+
+
+                    @*@Html.RadioButton("**** **** **** " + card.CreditCardNumber.Substring(card.CreditCardNumber.Length - 5, card.CreditCardNumber.Length - 1) + " " + card.CreditCardType.ToString().ToUpper(), card.CreditCardID, false, new { @class = "form-check-input" })  <br />*@
+                </label>
+
+            }
+            <br />
+
         }
         @if (userLoggedIn.CreditCards.Count < 2)
-        {
+            {
             @Html.ActionLink("Add New Credit Card", "AddCreditCard", "CreditCards", null, null)
         }
+        <br />
 
         <h3>Recipient:</h3>
         <input type="text" name="FriendEmail" value="@ViewBag.Recipient" />

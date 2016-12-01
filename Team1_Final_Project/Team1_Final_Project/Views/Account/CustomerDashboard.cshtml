@@ -40,7 +40,8 @@
     <p>Click the buttons below to view your account information.</p>
 
     
-    ("Account Information", "Index", "Members", new { id = User.Identity.GetUserId()}, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Account Information", "Index", "Members", new { id = User.Identity.GetUserId()}, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Change Password", "ChangePassword", "Account", null, new { @class = "btn btn-primary" })
     
 </div>
 <div class="col-md-8 rightContent">

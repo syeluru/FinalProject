@@ -109,13 +109,13 @@
 <h3>Totals</h3>
 
 @{ 
-    decimal Tax = PlacedOrder.TotalPrice * 8.25m;
+    decimal Tax = PlacedOrder.TotalPrice * 0.0825m;
     decimal GrandTotal = PlacedOrder.TotalPrice + Tax;
 }
 
 @{
     CreditCard CreditCardUsed = PlacedOrder.CreditCardUsed;
-    string FormattedCreditCardUsed = "**** **** ****" + CreditCardUsed.CreditCardNumber.Substring(-4);
+    string FormattedCreditCardUsed = "**** **** ****" + CreditCardUsed.CreditCardNumber.Substring(CreditCardUsed.CreditCardNumber.Length-4);
     AppUser Recipient = db.Users.Find(ViewBag.RecipientID);
     // need a viewbag.recipientID when calling this view
 }

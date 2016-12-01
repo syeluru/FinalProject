@@ -330,6 +330,7 @@
     <Content Include="Views\Ratings\AddAlbumReview.cshtml" />
     <Content Include="Views\Ratings\AddArtistReview.cshtml" />
     <Content Include="Views\Ratings\AddSongReview.cshtml" />
+    <Content Include="Views\CreditCards\AddCreditCardForGiftCheckout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
