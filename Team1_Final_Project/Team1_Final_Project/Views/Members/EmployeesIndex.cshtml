@@ -37,10 +37,8 @@
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
-                @*Not sure if link below is pointing to right place*@
-                @Html.ActionLink("Edit", "EditFromManager", "AccountController", new { id = item.Id }, null) |
-                @*should be able to reuse methods from Members controller*@
-                @Html.ActionLink("Details", "Details", "Members", new { id = item.Id }, null) |
+                @Html.ActionLink("Edit", "EditFromManager", "Account", new { id = item.Id }, null) |
+                @Html.ActionLink("Details", "EmployeeDetails", "Members", new { id = item.Id }, null) |
                 @Html.ActionLink("Delete", "Delete", "Members", new { id = item.Id }, null)
             </td>
         </tr>

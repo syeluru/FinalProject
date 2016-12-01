@@ -63,7 +63,10 @@
         }
         </li>
         @*need to add an if statement here once we are done managing roles so that only an admin can manage roles*@
-        <li>@Html.ActionLink("Manage Roles", "Index", "RoleAdmin")</li>
+        @if (User.IsInRole("Manager"))
+        {
+            <li>@Html.ActionLink("Manage Roles", "Index", "RoleAdmin")</li>
+        }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
     }

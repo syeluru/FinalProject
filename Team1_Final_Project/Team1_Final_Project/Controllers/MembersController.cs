@@ -73,7 +73,21 @@ namespace Team1_Final_Project.Controllers
             return View(Member);
         }
 
-
+        // GET: Members/Details/5
+        [Authorize]
+        public ActionResult EmployeeDetails(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AppUser Member = db.Users.Find(id);
+            if (Member == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Member);
+        }
 
         // GET: Members/Edit/5
         //TODO: Modify first and last name, email, address and phone number

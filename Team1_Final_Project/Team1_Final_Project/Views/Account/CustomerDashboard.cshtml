@@ -22,12 +22,12 @@
     div.rightContent {
         min-height: 400px;
         border-left: 1px solid gray;
-        float:left; 
+        float: left;
     }
 </style>
 
 <h2>@ViewBag.SuccessMessage</h2>
-<h2>Welcome to your Customer Dashboard, @Html.DisplayFor(model => model.FName)!</h2><br/>
+<h2>Welcome to your Customer Dashboard, @Html.DisplayFor(model => model.FName)!</h2><br />
 
 <div class="col-md-4">
     <h4>Add Credit Card</h4>
@@ -35,14 +35,12 @@
     <!--create a button that navigates to credit card info-->
     <a class="btn btn-primary" href="/CreditCards/Create">Add Credit Card Information</a>
     <a class="btn btn-primary" href="/Orders/Index">Order History</a>
-    <br/><br/>
-    <h4>Account Information</h4>
-    <p>Click the buttons below to view your account information.</p>
+    <br /><br />
+    <h4>Edit Personal Information</h4>
+    <p>Click the buttons below to edit your personal information.</p>
+    @Html.ActionLink("Edit Information", "Edit", "Members", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
+    <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
 
-    
-    @Html.ActionLink("Account Information", "Index", "Members", new { id = User.Identity.GetUserId()}, new { @class = "btn btn-primary"})
-    @Html.ActionLink("Change Password", "ChangePassword", "Account", null, new { @class = "btn btn-primary" })
-    
 </div>
 <div class="col-md-8 rightContent">
     <h4>Personal Music Database</h4>
@@ -61,30 +59,31 @@
             <th>
                 Genre
             </th>
-        </tr> 
+        </tr>
 
-        @foreach(var item in Model.Songs)
+        @foreach (var item in Model.Songs)
         {
             <tr>
                 <td>@item.SongName</td>
-                
+
                 @*@item.SongArtists*@
 
-                <td>@foreach (var artist in item.SongArtists)
+                <td>
+                    @foreach (var artist in item.SongArtists)
                 {
                     <pre>@Html.DisplayFor(modelItem => artist.ArtistName), </pre>
                 }
-                </td>
-                
-                <td>@item.SongAlbums</td>
-               
-                <td>
-                    @foreach (var genre in item.SongGenres)
+            </td>
+
+            <td>@item.SongAlbums</td>
+
+            <td>
+                @foreach (var genre in item.SongGenres)
                 {
-                        <pre>@Html.DisplayFor(modelItem => genre.GenreName), </pre>
+                    <pre>@Html.DisplayFor(modelItem => genre.GenreName), </pre>
                 }
-                </td>
-            </tr>
+            </td>
+        </tr>
         }
 
         @if (Model.Songs.Count > 0)
@@ -95,21 +94,21 @@
                     <td>Model.Songs[i].SongName</td>
                     <td>
                         foreach (var artist in Model.Songs[i].SongArtists)
-                    {
-                            <pre>Html.DisplayFor(modelItem => artist.ArtistName), </pre>
+                        {
+                        <pre>Html.DisplayFor(modelItem => artist.ArtistName), </pre>
                         }
                     </td>
 
                     <td>
                         foreach (var album in Model.Songs[i].SongAlbums)
-                    {
-                            <pre>Html.DisplayFor(modelItem => album.AlbumName), </pre>
+                        {
+                        <pre>Html.DisplayFor(modelItem => album.AlbumName), </pre>
                         }
                     </td>
                 </tr>
             }
         }
-        
+
 
     </table>
 
@@ -128,43 +127,43 @@
 
         @*
 
-        @foreach(var item in Model.Songs)
-        {
-            <tr>
-                <td>@item.SongName</td>
-                <td>@foreach (var artist in item.SongArtists)
+                @foreach(var item in Model.Songs)
                 {
-                    <pre>@Html.DisplayFor(modelItem => artist.ArtistName), </pre>
-                }</td>
+                    <tr>
+                        <td>@item.SongName</td>
+                        <td>@foreach (var artist in item.SongArtists)
+                        {
+                            <pre>@Html.DisplayFor(modelItem => artist.ArtistName), </pre>
+                        }</td>
 
-                <td>
-                    @foreach (var album in item.SongAlbums)
-                {
-                    <pre>@Html.DisplayFor(modelItem => album.AlbumName), </pre>
+                        <td>
+                            @foreach (var album in item.SongAlbums)
+                        {
+                            <pre>@Html.DisplayFor(modelItem => album.AlbumName), </pre>
+                        }
+                        </td>
+
+
+                    </tr>
                 }
-                </td>
 
-
-            </tr>
-        }
-
-    @if (Model.Albums.Count > 0)
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            <tr>
-                <td>Model.Albums[i].AlbumName</td>
-                <td>
-                    foreach (var artist in Model.Albums[i].AlbumArtists)
+            @if (Model.Albums.Count > 0)
+            {
+                for (int i = 0; i < 5; i++)
                 {
-                        <pre>Html.DisplayFor(modelItem => artist.ArtistName), </pre>
-                    }
-                </td>
-            </tr>
-        }
-    }
+                    <tr>
+                        <td>Model.Albums[i].AlbumName</td>
+                        <td>
+                            foreach (var artist in Model.Albums[i].AlbumArtists)
+                        {
+                                <pre>Html.DisplayFor(modelItem => artist.ArtistName), </pre>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
 
-    *@
+        *@
 
     </table>
     @Html.ActionLink("See all albums", "SeeAllAlbums")

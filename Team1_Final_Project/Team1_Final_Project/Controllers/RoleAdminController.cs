@@ -11,6 +11,7 @@ using Team1_Final_Project.Models;
 using Team1_Final_Project;
 using Team1_Final_Project.Models.Identity;
 using System.Net;
+using System.Web.Security;
 
 //TODO: Change the namespace here to match your project's name
 namespace Team1_Final_Project.Controllers

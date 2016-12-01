@@ -232,7 +232,7 @@ namespace Team1_Final_Project.Controllers
 
 
         // GET: Account/CustomerDashboard
-        [Authorize]
+        [Authorize(Roles = "Customer")]
         public ActionResult CustomerDashboard(string SuccessMessage)
         {
             if (SuccessMessage != null)
@@ -249,8 +249,8 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-        // GET: Account/ManagerDashboard
-        [Authorize(Roles = "Employee, Manager")]
+        // GET: Account/EmployeeDashboard
+        [Authorize(Roles = "Employee")]
         public ActionResult EmployeeDashboard(string SuccessMessage)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -312,8 +312,6 @@ namespace Team1_Final_Project.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        //ADDING NEW STUFF ENDING NOW
-
 
         // POST: /Account/LogOff
         [HttpPost]
@@ -454,7 +452,7 @@ namespace Team1_Final_Project.Controllers
 
                 db.Entry(MemberToChange).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("EmployeeDashboard");
+                return RedirectToAction("ManagerDashboard");
             }
 
             return View(Member);
