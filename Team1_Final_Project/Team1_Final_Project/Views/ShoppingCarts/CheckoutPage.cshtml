@@ -104,7 +104,7 @@
 <h3>Totals</h3>
 
 @{
-    decimal Subtotal = ViewBag.Subtotal * 0.9175m;
+    decimal Subtotal = ViewBag.Subtotal * (1/1.0825m);
     decimal Tax = Subtotal * 0.0825m;
     decimal GrandTotal = Subtotal + Tax;
 }
