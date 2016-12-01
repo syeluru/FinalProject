@@ -140,15 +140,15 @@
     </dl>
 </div>
 <p>
-    @if (userLoggedIn.Songs.Any(a => a.SongID == Model.SongID))
-    {
-        @Html.ActionLink("Add Review of Song", "AddSongReview", "Rating", new { SongID = Model.SongID }, null)
-    }
-    else
-    {
-        @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { SongID = Model.SongID }, null)
+    @*if (userLoggedIn.Songs.Any(a => a.SongID == Model.SongID))*@
+    <!--{-->
+        @Html.ActionLink("Add Review of Song", "AddSongReview", "Ratings", new { id = Model.SongID }, null)
+    <!--}-->
+    <!--else-->
+    <!--{-->
+        @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { id = Model.SongID }, null)
 
-    }
+    <!--}-->
     <br /><br />
     @Html.ActionLink("Edit", "Edit", new { id = Model.SongID })
     @Html.ActionLink("Back to List", "Index")
