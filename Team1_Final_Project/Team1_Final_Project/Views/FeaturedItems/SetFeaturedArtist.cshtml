@@ -4,6 +4,9 @@
     ViewBag.Title = "Create";
 }
 
+<p style="color:red">@ViewBag.Exception</p>
+
+
 <h2>Create</h2>
 
 @using (Html.BeginForm()) 
@@ -21,6 +24,13 @@
                     @Html.EditorFor(model => model.IsActiveFeaturedItem)
                     @Html.ValidationMessageFor(model => model.IsActiveFeaturedItem, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FeaturedArtist, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBox("SelectedArtist", (SelectList)ViewBag.AllArtists, new { @class = "form-control" })
             </div>
         </div>
 

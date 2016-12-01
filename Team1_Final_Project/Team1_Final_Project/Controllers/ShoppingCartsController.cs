@@ -301,10 +301,8 @@ namespace Team1_Final_Project.Controllers
            
             foreach (SongInShoppingCart scsong in userLoggedIn.SongsInShoppingCart)
             {
-                TotalValueOfSongs += (scsong.Song.SongPrice - scsong.Song.SongDiscount);
-
-               
-                
+                decimal TotalDiscountsOnSong = CalculateSongTotalDiscount(scsong.Song.SongID);
+                TotalValueOfSongs += (scsong.Song.SongPrice - CalculateSongTotalDiscount(scsong.Song.SongID));
             }
 
             return TotalValueOfSongs;
@@ -319,17 +317,49 @@ namespace Team1_Final_Project.Controllers
 
             foreach (AlbumInShoppingCart scalbum in userLoggedIn.AlbumsInShoppingCart)
             {
-                TotalValueOfAlbums += (scalbum.Album.AlbumPrice - scalbum.Album.AlbumDiscount);
-
-
-
+                decimal TotalDiscountsOnAlbum = CalculateAlbumTotalDiscount(scalbum.Album.AlbumID);
+                TotalValueOfAlbums += (scalbum.Album.AlbumPrice - CalculateAlbumTotalDiscount(scalbum.Album.AlbumID));
             }
 
             return TotalValueOfAlbums;
 
 
         }
-        //need to test
+        
+
+        public decimal CalculateSongTotalDiscount(int SongID)
+        {
+            Song SongToCalc = db.Songs.Find(SongID);
+            decimal TotalDiscount = 0.0m;
+            foreach (Discount discount in SongToCalc.SongDiscounts)
+            {
+                if (discount.IsActiveDiscount)
+                {
+                    TotalDiscount += discount.DiscountAmount;
+                }
+                
+            }
+
+            return TotalDiscount;
+        }
+
+        public decimal CalculateAlbumTotalDiscount(int AlbumID)
+        {
+            Album AlbumToCalc = db.Albums.Find(AlbumID);
+            decimal TotalDiscount = 0.0m;
+            foreach (Discount discount in AlbumToCalc.AlbumDiscounts)
+            {
+                if (discount.IsActiveDiscount)
+                {
+                    TotalDiscount += discount.DiscountAmount;
+                }
+                
+            }
+
+            return TotalDiscount;
+        }
+
+        //TODO: need to test
 
         public bool DuplicatesExist()
         {

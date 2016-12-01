@@ -36,8 +36,8 @@ namespace Team1_Final_Project.Models.Music
         [Display(Name = "Song Price")]
         public Decimal SongPrice { get; set; }
         
-        [Display(Name = "Song Discount")]
-        public Decimal SongDiscount { get; set; }
+        //[Display(Name = "Song Discount")]
+        //public Decimal SongDiscount { get; set; }
 
         //[Display(Name = "Average Song Rating")]
         //public decimal AverageSongRating { get; set; }
@@ -59,6 +59,10 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<SongOrderBridge> SongOrderBridges { get; set; }
 
+        public virtual List<Discount> SongDiscounts { get; set; }
+
+
+
         public Song()
         {
             this.SongAlbums = new List<Album>();
@@ -68,6 +72,7 @@ namespace Team1_Final_Project.Models.Music
             this.SongsInShoppingCart = new List<SongInShoppingCart>();
             this.FeaturedItems = new List<FeaturedItem>();
             this.SongOrderBridges = new List<SongOrderBridge>();
+            this.SongDiscounts = new List<Discount>();
         }
     }
 }

@@ -25,8 +25,8 @@ namespace Team1_Final_Project.Models.Music
         [Display(Name = "Album Price")]
         public Decimal AlbumPrice { get; set; }
         
-        [Display(Name = "Album Discount")]
-        public Decimal AlbumDiscount { get; set; }
+        //[Display(Name = "Album Discount")]
+        //public Decimal AlbumDiscount { get; set; }
 
         //[Display(Name = "Average Album Rating")]
         //public decimal AverageAlbumRating { get; set; }
@@ -46,6 +46,8 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<FeaturedItem> FeaturedItems { get; set; }
 
+        public virtual List<Discount> AlbumDiscounts { get; set; }
+
         public Album()
         {
             this.AlbumGenres = new List<Genre>();
@@ -55,6 +57,7 @@ namespace Team1_Final_Project.Models.Music
             this.AlbumRatings = new List<MusicRating>();
             this.AlbumsInShoppingCart = new List<AlbumInShoppingCart>();
             this.FeaturedItems = new List<FeaturedItem>();
+            this.AlbumDiscounts = new List<Discount>();
         }
         
     }

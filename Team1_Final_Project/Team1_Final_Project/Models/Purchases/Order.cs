@@ -14,7 +14,7 @@ namespace Team1_Final_Project.Models.Purchases
         [Display(Name = "Order ID")]
         public Int16 OrderID { get; set; }
 
-        [Required(ErrorMessage = "Total Price is required")]
+        [Required(ErrorMessage = "Total Price is required")]    
         [Display(Name = "Total Price")]
         public Decimal TotalPrice { get; set; }
 

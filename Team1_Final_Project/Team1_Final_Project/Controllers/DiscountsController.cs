@@ -41,7 +41,6 @@ namespace Team1_Final_Project.Controllers
         public ActionResult CreateSongDiscount()
         {
             ViewBag.AllSongs = GetAllSongs();
-            
             return View();
         }
 
@@ -49,7 +48,6 @@ namespace Team1_Final_Project.Controllers
         public ActionResult CreateAlbumDiscount()
         {
             ViewBag.AllAlbums = GetAllAlbums();
-
             return View();
         }
 
@@ -90,7 +88,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Discounts/Edit/5
-        public ActionResult EditSongDiscount(short? id)
+        public ActionResult Edit(short? id)
         {
             if (id == null)
             {
@@ -109,38 +107,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditSongDiscount([Bind(Include = "DiscountID,DiscountAmount,IsActiveDiscount,DiscountedSong")] Discount discount)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(discount).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(discount);
-        }
-
-        // GET: Discounts/Edit/5
-        public ActionResult EditAlbumDiscount(short? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Discount discount = db.Discounts.Find(id);
-            if (discount == null)
-            {
-                return HttpNotFound();
-            }
-            return View(discount);
-        }
-
-        // POST: Discounts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditAlbumDiscount([Bind(Include = "DiscountID,DiscountAmount,IsActiveDiscount,DiscountedAlbum")] Discount discount)
+        public ActionResult Edit([Bind(Include = "DiscountID,DiscountAmount,IsActiveDiscount,DiscountedSong,DiscountedAlbum")] Discount discount)
         {
             if (ModelState.IsValid)
             {

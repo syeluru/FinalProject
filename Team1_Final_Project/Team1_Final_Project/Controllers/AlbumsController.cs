@@ -49,7 +49,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AlbumID,AlbumName,AlbumPrice,AlbumDiscount")] Album album, int[] SelectedArtists, int[] SelectedGenres)
+        public ActionResult Create([Bind(Include = "AlbumID,AlbumName,AlbumPrice")] Album album, int[] SelectedArtists, int[] SelectedGenres)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace Team1_Final_Project.Controllers
                 //update the rest of the fields
                 album.AlbumName = album.AlbumName;
                 album.AlbumPrice = album.AlbumPrice;
-                album.AlbumDiscount = album.AlbumDiscount;
+                
 
 
                 db.Albums.Add(album);
@@ -149,7 +149,7 @@ namespace Team1_Final_Project.Controllers
                 //update the rest of the fields
                 albumToChange.AlbumName = album.AlbumName;
                 albumToChange.AlbumPrice = album.AlbumPrice;
-                albumToChange.AlbumDiscount = album.AlbumDiscount;
+                
 
 
                 db.Entry(albumToChange).State = EntityState.Modified;

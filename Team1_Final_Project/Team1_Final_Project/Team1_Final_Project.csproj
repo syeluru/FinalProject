@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201612010953432_employeemodelchange.Designer.cs">
       <DependentUpon>201612010953432_employeemodelchange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612011328000_featureditemsallbuilt.cs" />
+    <Compile Include="Migrations\201612011328000_featureditemsallbuilt.Designer.cs">
+      <DependentUpon>201612011328000_featureditemsallbuilt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -334,7 +338,7 @@
     <Content Include="Views\Ratings\AddArtistReview.cshtml" />
     <Content Include="Views\Ratings\AddSongReview.cshtml" />
     <Content Include="Views\CreditCards\AddCreditCardForGiftCheckout.cshtml" />
-    <Content Include="Views\FeaturedItems\Create.cshtml" />
+    <Content Include="Views\FeaturedItems\SetFeaturedSong.cshtml" />
     <Content Include="Views\FeaturedItems\Delete.cshtml" />
     <Content Include="Views\FeaturedItems\Details.cshtml" />
     <Content Include="Views\FeaturedItems\Edit.cshtml" />
@@ -347,6 +351,8 @@
     <Content Include="Views\Discounts\CreateSongDiscount.cshtml" />
     <Content Include="Views\Account\EditFromManager.cshtml" />
     <Content Include="Views\Members\EmployeeDetails.cshtml" />
+    <Content Include="Views\FeaturedItems\SetFeaturedArtist.cshtml" />
+    <Content Include="Views\FeaturedItems\SetFeaturedAlbum.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -373,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612010953432_employeemodelchange.resx">
       <DependentUpon>201612010953432_employeemodelchange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612011328000_featureditemsallbuilt.resx">
+      <DependentUpon>201612011328000_featureditemsallbuilt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

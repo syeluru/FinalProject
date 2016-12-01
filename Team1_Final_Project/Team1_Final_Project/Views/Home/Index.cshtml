@@ -1,8 +1,36 @@
-﻿@{
+﻿@using Team1_Final_Project.Models.Music
+@using Team1_Final_Project.Models.Identity
+@using Team1_Final_Project.Models.Purchases
+
+<style>
+    div.rightContent {
+        min-height: 400px;
+        border-left: 1px solid gray;
+        float: left;
+    }
+</style>
+
+<div style="width:80%" class="container">
+    <h1>Welcome to the Longhorn Music Store!</h1>
+
+    <p>We are UT's newest music store, developed by Meghan Magee, Daniel Pimentel, and Sai Yeluru as a small (note: sarcasm) project for a small (note: more sarcasm) class of ours called MIS333K. The K stands for Kindness, in case you were wondering.</p>
+    <p>In any case, check out our featured item below, and use the menu to navigate through the site.</p>
+</div>
+
+@{
     ViewBag.Title = "Index";
+    AppDbContext db = new AppDbContext();
+    var query = from c in db.FeaturedItems
+                where c.IsActiveFeaturedItem == true
+                select c;
+
+    List<FeaturedItem> TheFeaturedItem = query.ToList();
+    
+
 }
 
-<h1>Welcome to the Longhorn Music Store!</h1>
+
+
 
 @*
 <!--create a button that navigates back to members page-->
@@ -10,12 +38,60 @@
 <br /><br />
 
 *@
+@if (TheFeaturedItem.Count() > 0)
+{
+    FeaturedItem feature = TheFeaturedItem[0];
+    <h2>Featured on Longhorn Music today:</h2>
+    <div class="container">
+        <div class="col-md-4">
+            Image
+        </div>
+        <div class="col-md-8 rightContent">
+            <div class="form-horizontal">
+                @if (feature.FeaturedAlbum != null)
+                {
+                    <h3>@feature.FeaturedAlbum.AlbumName</h3>
+                    foreach (Artist artist in feature.FeaturedAlbum.AlbumArtists)
+                    {
+                        <h4>@artist.ArtistName</h4>
+                    }
+                    foreach (Song song in feature.FeaturedAlbum.AlbumSongs)
+                    {
+                        <h6>@song.SongName</h6>
+                    }
+                }
+                else if (feature.FeaturedArtist != null)
+                {
+                    <h4>@feature.FeaturedArtist.ArtistName</h4>
 
-<a class="btn btn-primary" href="/Music/SongAdvancedSearch">Song Advanced Search</a>
-<br />
-<a class="btn btn-primary" href="/Music/ArtistAdvancedSearch">Artist Advanced Search</a>
-<br />
-<a class="btn btn-primary" href="/Music/AlbumAdvancedSearch">Album Advanced Search</a>
+                }
+                else if (feature.FeaturedSong != null)
+                {
+                    <h4>@feature.FeaturedSong.SongName</h4>
+                    foreach (Album album in feature.FeaturedSong.SongAlbums)
+                    {
+                        <h5>@album.AlbumName</h5>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+
+        }
+
+
+
+        @*
+            <a class="btn btn-primary" href="/Music/SongAdvancedSearch">Song Advanced Search</a>
+            <br />
+            <a class="btn btn-primary" href="/Music/ArtistAdvancedSearch">Artist Advanced Search</a>
+            <br />
+            <a class="btn btn-primary" href="/Music/AlbumAdvancedSearch">Album Advanced Search</a>
+
+        *@
+
+
 
 
 

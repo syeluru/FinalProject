@@ -52,7 +52,11 @@
     <a class="btn btn-primary" href="/Songs/Index">Songs</a>
     <a class="btn btn-primary" href="/Artists/Index">Artists</a>
     <a class="btn btn-primary" href="/Albums/Index">Albums</a>
-    <br /><br />
+    <br /><br/>
+    <h4>Featured Items and Discounts</h4>
+    <p>Click the buttons below to set the featured item or discounts. </p>
+    @Html.ActionLink("Featured Items", "Index", "FeaturedItems", null, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Discounts", "Index", "Discounts", null, new { @class = "btn btn-primary"})
 
     @*NEED TO MESS WITH SONG ALBUM AND ARTIST DETAIL PAGES TO ADD ROLE RELATED STUFF LIKE MESSING WITH *@
 

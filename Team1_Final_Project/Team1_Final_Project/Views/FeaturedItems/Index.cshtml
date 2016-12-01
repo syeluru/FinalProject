@@ -1,16 +1,60 @@
-﻿@model IEnumerable<Team1_Final_Project.Models.Music.FeaturedItem>
+﻿@using Team1_Final_Project.Models.Identity
+@using Team1_Final_Project.Models.Music
+@using Microsoft.AspNet.Identity
+@using System.Collections.Generic;
+@model IEnumerable<Team1_Final_Project.Models.Music.FeaturedItem>
 
 @{
     ViewBag.Title = "Index";
+    AppDbContext db = new AppDbContext();
+    var query = from c in Model
+                where c.IsActiveFeaturedItem == true
+                select c;
+
+    List<FeaturedItem> TheFeaturedItem = query.ToList();
+
 }
 
-<h2>Index</h2>
+@if (TheFeaturedItem.Count() == 0)
+{
+    <h4>There is no featured item currently. Set one below.</h4>
+}
+else if (TheFeaturedItem.Count() > 0)
+{
+    FeaturedItem feature = TheFeaturedItem[0];
+    <h2>Featured Items</h2>
+
+
+
+    if (feature.FeaturedAlbum != null)
+    {
+        <h4>The current featured item is the album @feature.FeaturedAlbum.AlbumName.</h4>
+    }
+    else if (feature.FeaturedArtist != null)
+    {
+        <h4>The current featured item is the artist @feature.FeaturedArtist.ArtistName.</h4>
+    }
+    else if (feature.FeaturedSong != null)
+    {
+        <h4>The current featured item is the song @feature.FeaturedSong.SongName.</h4>
+    }
+}
+
+
+
+<h6>Use the following links to set a featured item. Keep in mind that there can only be one featured item at a time.</h6>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Set Song as Featured Item", "SetFeaturedSong") | @Html.ActionLink("Set Artist as Featured Item", "SetFeaturedArtist") | @Html.ActionLink("Set Album as Featured Item", "SetFeaturedAlbum")
 </p>
 <table class="table">
     <tr>
+        <th>
+            Type
+        </th>
+        <th>
+            Name
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.IsActiveFeaturedItem)
         </th>
@@ -19,6 +63,24 @@
 
 @foreach (var item in Model) {
     <tr>
+        
+            @if (item.FeaturedAlbum != null )
+            {
+                <td>Album</td>
+                <td>@item.FeaturedAlbum.AlbumName</td>
+
+                
+            } else if (item.FeaturedArtist != null)
+            {
+                <td>Artist</td>
+                <td>@item.FeaturedArtist.ArtistName</td>
+            } else if (item.FeaturedSong != null)
+            {
+                <td>Song</td>
+                <td>@item.FeaturedSong.SongName</td>
+            }
+        
+
         <td>
             @Html.DisplayFor(modelItem => item.IsActiveFeaturedItem)
         </td>
