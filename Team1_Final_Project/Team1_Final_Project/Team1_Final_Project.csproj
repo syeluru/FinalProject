@@ -345,6 +345,8 @@
     <Content Include="Views\Discounts\Edit.cshtml" />
     <Content Include="Views\Discounts\Index.cshtml" />
     <Content Include="Views\Discounts\CreateSongDiscount.cshtml" />
+    <Content Include="Views\Account\EditFromManager.cshtml" />
+    <Content Include="Views\Members\EmployeeDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
