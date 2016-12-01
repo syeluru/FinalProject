@@ -194,6 +194,8 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
+    <Compile Include="Controllers\DiscountsController.cs" />
+    <Compile Include="Controllers\FeaturedItemsController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -231,6 +233,7 @@
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
+    <Compile Include="Models\Purchases\Discount.cs" />
     <Compile Include="Models\Music\FeaturedItem.cs" />
     <Compile Include="Models\Music\MusicViewModel.cs" />
     <Compile Include="Models\Music\Genre.cs" />
@@ -331,6 +334,17 @@
     <Content Include="Views\Ratings\AddArtistReview.cshtml" />
     <Content Include="Views\Ratings\AddSongReview.cshtml" />
     <Content Include="Views\CreditCards\AddCreditCardForGiftCheckout.cshtml" />
+    <Content Include="Views\FeaturedItems\Create.cshtml" />
+    <Content Include="Views\FeaturedItems\Delete.cshtml" />
+    <Content Include="Views\FeaturedItems\Details.cshtml" />
+    <Content Include="Views\FeaturedItems\Edit.cshtml" />
+    <Content Include="Views\FeaturedItems\Index.cshtml" />
+    <Content Include="Views\Discounts\CreateAlbumDiscount.cshtml" />
+    <Content Include="Views\Discounts\Delete.cshtml" />
+    <Content Include="Views\Discounts\Details.cshtml" />
+    <Content Include="Views\Discounts\Edit.cshtml" />
+    <Content Include="Views\Discounts\Index.cshtml" />
+    <Content Include="Views\Discounts\CreateSongDiscount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

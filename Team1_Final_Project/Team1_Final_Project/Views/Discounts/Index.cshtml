@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.Discount>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActiveDiscount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscountAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActiveDiscount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DiscountID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DiscountID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DiscountID })
+        </td>
+    </tr>
+}
+
+</table>

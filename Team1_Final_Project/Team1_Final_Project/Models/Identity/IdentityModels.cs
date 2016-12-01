@@ -133,6 +133,8 @@ namespace Team1_Final_Project.Models.Identity
         public DbSet<AlbumInShoppingCart> AlbumsInShoppingCart { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<MusicRating> Ratings { get; set; }
+        public DbSet<FeaturedItem> FeaturedItems { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
         //TODO: add ratings dbSets
 
                 
