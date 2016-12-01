@@ -36,10 +36,11 @@
     <a class="btn btn-primary" href="/CreditCards/Create">Add Credit Card Information</a>
     <a class="btn btn-primary" href="/Orders/Index">Order History</a>
     <br/><br/>
-    <h4>Edit Personal Information</h4>
-    <p>Click the buttons below to edit your personal information.</p>
-    @Html.ActionLink("Edit Information", "Edit", "Members", new { id = User.Identity.GetUserId()}, new { @class = "btn btn-primary"})
-    <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
+    <h4>Account Information</h4>
+    <p>Click the buttons below to view your account information.</p>
+
+    
+    ("Account Information", "Index", "Members", new { id = User.Identity.GetUserId()}, new { @class = "btn btn-primary"})
     
 </div>
 <div class="col-md-8 rightContent">

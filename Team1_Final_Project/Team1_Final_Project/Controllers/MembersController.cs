@@ -24,7 +24,7 @@ namespace Team1_Final_Project.Controllers
             return View(db.Users.ToList());
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Employee, Manager")]
         public ActionResult CustomersIndex()
         {
 
@@ -39,6 +39,22 @@ namespace Team1_Final_Project.Controllers
             }
 
             return View(CustomersList);
+        }
+
+        [Authorize(Roles = "Manager")]
+        public ActionResult EmployeesIndex()
+        {
+
+            List<AppUser> EmployeesList = new List<AppUser>();
+            foreach (var user in db.Users)
+            {
+                if (user.Roles.Any(role => role.RoleId == "4c919864-b4b2-4837-9e2f-7d171580fc99"))
+                {
+                    EmployeesList.Add(user);
+                }
+            }
+
+            return View(EmployeesList);
         }
 
         // GET: Members/Details/5
@@ -143,6 +159,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //TODO: Ensure bind does not create any issues
         public ActionResult EditFromEmployee([Bind(Include = "Id,FName,MName,LName,StreetAddress,City,State,ZipCode,Email,IsAccountEnabled,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AppUser Member)//, int[] SelectedEvents)
         {
             if (ModelState.IsValid)
@@ -151,18 +168,12 @@ namespace Team1_Final_Project.Controllers
                 AppUser MemberToChange = db.Users.Find(Member.Id);
 
                 //update the rest of the fields
-                MemberToChange.FName = Member.FName;
-                MemberToChange.MName = Member.MName;
-                MemberToChange.LName = Member.LName;
-                MemberToChange.UserName = Member.UserName;
-                MemberToChange.Email = Member.UserName;
                 MemberToChange.StreetAddress = Member.StreetAddress;
                 MemberToChange.City = Member.City;
                 MemberToChange.State = Member.State;
                 MemberToChange.ZipCode = Member.ZipCode;
                 MemberToChange.PhoneNumber = Member.PhoneNumber;
                 MemberToChange.IsAccountEnabled = Member.IsAccountEnabled;
-
 
                 db.Entry(MemberToChange).State = EntityState.Modified;
                 db.SaveChanges();

@@ -249,11 +249,7 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-
-        //TODO: NEED TO BUILD EMPLOYEE DASHBOARD VIEW
-
         // GET: Account/ManagerDashboard
-        //[Authorize(Roles = "Employee, Manager")]
         [Authorize(Roles = "Employee, Manager")]
         public ActionResult EmployeeDashboard(string SuccessMessage)
         {
@@ -272,8 +268,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: /Account/RegisterEmployee
-        //TODO: change this to only authorize managers
-        [AllowAnonymous]
+        [Authorize(Roles = "Manager")]
         public ActionResult RegisterEmployee()
         {
             return View();
@@ -281,8 +276,7 @@ namespace Team1_Final_Project.Controllers
 
         // POST: /Account/RegisterEmployee
         [HttpPost]
-        //TODO: change this to only authorize managers
-        [AllowAnonymous]
+        [Authorize(Roles = "Manager")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterEmployee(RegisterViewModel model)
         {
@@ -357,9 +351,9 @@ namespace Team1_Final_Project.Controllers
 
         // see all artists
 
-
         // GET: Account/EmployeeEdit/5
         //TODO: Modify phone number and address
+        [Authorize(Roles = "Employee")]
         public ActionResult EmployeeEdit(string id)
         {
             if (id == null)
@@ -388,6 +382,8 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
+
         public ActionResult EmployeeEdit([Bind(Include = "StreetAddress,City,State,ZipCode,PhoneNumber")] AppUser Member)//, int[] SelectedEvents)
         {
             if (ModelState.IsValid)
@@ -401,6 +397,59 @@ namespace Team1_Final_Project.Controllers
                 MemberToChange.State = Member.State;
                 MemberToChange.ZipCode = Member.ZipCode;
                 MemberToChange.PhoneNumber = Member.PhoneNumber;
+
+
+                db.Entry(MemberToChange).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("EmployeeDashboard");
+            }
+
+            return View(Member);
+        }
+
+
+        // GET: Account/EditFromManager/
+        //TODO: Modify phone number and address
+        [Authorize(Roles = "Manager")]
+        public ActionResult EditFromManager(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            AppUser Member = db.Users.Find(id);
+            if (Member == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(Member);
+        }
+
+        // POST: Account/EditFromManager/5
+        //Done: Modify address and phone number
+        // if anything looks strange, check out this
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
+
+        public ActionResult EditFromManager([Bind(Include = "StreetAddress,City,State,ZipCode,PhoneNumber,IsActive")] AppUser Member)//, int[] SelectedEvents)
+        {
+            if (ModelState.IsValid)
+            {
+                //Find associated Member
+                AppUser MemberToChange = db.Users.Find(Member.Id);
+
+                //update the rest of the fields
+                MemberToChange.StreetAddress = Member.StreetAddress;
+                MemberToChange.City = Member.City;
+                MemberToChange.State = Member.State;
+                MemberToChange.ZipCode = Member.ZipCode;
+                MemberToChange.PhoneNumber = Member.PhoneNumber;
+                MemberToChange.IsActive = Member.IsActive;
 
 
                 db.Entry(MemberToChange).State = EntityState.Modified;

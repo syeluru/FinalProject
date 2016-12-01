@@ -8,10 +8,13 @@
 <h2>My Account</h2>
 
 <p>
-    @Html.ActionLink("Modify My Account", "Edit", new { id = User.Identity.GetUserId() } ) |
+    @Html.ActionLink("Account Details", "Details", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" }) 
 </p>
 <p>
-    @Html.ActionLink("My Account Details", "Details", new { id = User.Identity.GetUserId() } ) |
+    @Html.ActionLink("Edit Information", "Edit", "Members", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
+</p>
+<p>
+    <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
 </p>
 
 

@@ -69,6 +69,9 @@ namespace Team1_Final_Project.Models.Identity
         [Display(Name = "Employee Type")]
         public Int16 EmpType { get; set; }
 
+        [Display(Name = "Is employee active?")]
+        public bool IsActive { get; set; }
+
         //Navigational Properties
         //TODO: need to add validation in terms of how many credit cards a person can or can't have
         public virtual List<CreditCard> CreditCards { get; set; }
