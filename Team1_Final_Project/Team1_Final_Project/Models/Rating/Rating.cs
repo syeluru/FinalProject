@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Team1_Final_Project.Models.Music;
 using Team1_Final_Project.Models.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace Team1_Final_Project.Models.Rating
 {
@@ -12,8 +13,10 @@ namespace Team1_Final_Project.Models.Rating
     {
         public int MusicRatingID { get; set; }
 
+        [Required]
         public Decimal RatingNumber { get; set; }
 
+        [StringLength(100, ErrorMessage = "The {0} must be at most {1} characters long.")]
         public String Review { get; set; }
 
         // navigational
