@@ -223,9 +223,13 @@
     <Compile Include="Migrations\201612010352340_gottabesupercareful.Designer.cs">
       <DependentUpon>201612010352340_gottabesupercareful.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612010953432_employeemodelchange.cs" />
-    <Compile Include="Migrations\201612010953432_employeemodelchange.Designer.cs">
-      <DependentUpon>201612010953432_employeemodelchange.cs</DependentUpon>
+    <Compile Include="Migrations\201612010417584_modelchanges.cs" />
+    <Compile Include="Migrations\201612010417584_modelchanges.Designer.cs">
+      <DependentUpon>201612010417584_modelchanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612010428266_validationadditions.cs" />
+    <Compile Include="Migrations\201612010428266_validationadditions.Designer.cs">
+      <DependentUpon>201612010428266_validationadditions.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
@@ -325,11 +329,12 @@
     <Content Include="Views\Account\EmployeeEdit.cshtml" />
     <Content Include="Views\Account\ChangeCustomerPassword.cshtml" />
     <Content Include="Views\Members\EditFromEmployee.cshtml" />
-    <Content Include="Views\Members\EmployeesIndex.cshtml" />
-    <Content Include="Views\Members\EditFromManager.cshtml" />
     <Content Include="Views\Ratings\AddAlbumReview.cshtml" />
     <Content Include="Views\Ratings\AddArtistReview.cshtml" />
     <Content Include="Views\Ratings\AddSongReview.cshtml" />
+    <Content Include="Views\Ratings\EditAlbumReview.cshtml" />
+    <Content Include="Views\Ratings\EditArtistReview.cshtml" />
+    <Content Include="Views\Ratings\EditSongReview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -354,8 +359,11 @@
     <EmbeddedResource Include="Migrations\201612010352340_gottabesupercareful.resx">
       <DependentUpon>201612010352340_gottabesupercareful.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612010953432_employeemodelchange.resx">
-      <DependentUpon>201612010953432_employeemodelchange.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612010417584_modelchanges.resx">
+      <DependentUpon>201612010417584_modelchanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612010428266_validationadditions.resx">
+      <DependentUpon>201612010428266_validationadditions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

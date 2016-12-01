@@ -31,14 +31,14 @@
         @{decimal count = 0;}
         @{decimal SumRatings = 0;}
         @foreach (var item in Model.ArtistRatings)
+        {
+            SumRatings += item.RatingNumber;
+            count += 1;
+            if (count != 0)
             {
-                SumRatings += item.RatingNumber;
-                count += 1;
-                if (count != 0)
-                {
-                    AverageArtistRatings = (SumRatings / count).ToString();
-                }
+                AverageArtistRatings = Decimal.Round((SumRatings / count), 1).ToString();
             }
+        }
         <dd>@AverageArtistRatings</dd>
         
         <br />
@@ -117,9 +117,12 @@
     </dl>
 </div>
 <p>
-    @if (userLoggedIn.Songs.Any(x => Model.ArtistSongs.Any(y => y.SongID == x.SongID)) || userLoggedIn.Albums.Any(x => Model.ArtistAlbums.Any(y => y.AlbumID == x.AlbumID)))
+    @if (userLoggedIn != null)
     {
-        @Html.ActionLink("Add Review of Artist", "AddArtistReview", "Rating", new { ArtistID = Model.ArtistID }, null)
+        if (userLoggedIn.Songs.Any(x => Model.ArtistSongs.Any(y => y.SongID == x.SongID)) || userLoggedIn.Albums.Any(x => Model.ArtistAlbums.Any(y => y.AlbumID == x.AlbumID)))
+        {
+            @Html.ActionLink("Add Review of Artist", "AddArtistReview", "Ratings", new { id = Model.ArtistID }, null)
+        }
     }
 
     @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |

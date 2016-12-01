@@ -66,7 +66,7 @@
             count += 1;
             if (count != 0)
             {
-                AverageSongRatings = (SumRatings / count).ToString();
+                AverageSongRatings = Decimal.Round((SumRatings / count), 1).ToString();
             }
         }
         <td>@AverageSongRatings</td>
@@ -129,7 +129,7 @@
                 count += 1;
                 if (count != 0)
                 {
-                    AverageAlbumRatings = (SumRatings / count).ToString();
+                    AverageAlbumRatings = Decimal.Round((SumRatings / count), 1).ToString();
                 }
             }
             <td>@AverageAlbumRatings</td>
