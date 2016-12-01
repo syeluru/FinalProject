@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Team1_Final_Project.Models.Identity.AppUser>
+
+@{
+    ViewBag.Title = "EmployeesIndex";
+}
+
+<h2>EmployeesIndex</h2>
+
+
+<p>
+    <a class="btn btn-primary" href="/Account/RegisterEmployee">Add Employee</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Employee Name
+        </th>
+        <th>
+            Employee Email
+        </th>
+        <th>
+            Employee Status
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)&nbsp;@Html.DisplayFor(modelItem => item.LName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @*Not sure if link below is pointing to right place*@
+                @Html.ActionLink("Edit", "EditFromManager", "AccountController", new { id = item.Id }, null) |
+                @*should be able to reuse methods from Members controller*@
+                @Html.ActionLink("Details", "Details", "Members", new { id = item.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "Members", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>

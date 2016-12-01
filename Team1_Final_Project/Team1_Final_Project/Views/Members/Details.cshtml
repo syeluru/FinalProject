@@ -1,5 +1,6 @@
 ﻿@model Team1_Final_Project.Models.Identity.AppUser
 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -88,10 +89,18 @@
             Credit Card Type
         </th>
     </tr>
+
+
     @foreach (var item in Model.CreditCards)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.CreditCardNumber)</td>
+            <td>
+                @{
+                    string LastFourCreditCard = item.CreditCardNumber;
+                    string FormattedCreditCardUsed = /*"**** **** **** " + */ LastFourCreditCard.Substring(LastFourCreditCard.Length - 4, 4);
+                }
+                @Html.DisplayFor(modelItem => LastFourCreditCard);
+            </td>
             <td>@Html.DisplayFor(modelItem => item.CreditCardType)</td>
         </tr>
     }
