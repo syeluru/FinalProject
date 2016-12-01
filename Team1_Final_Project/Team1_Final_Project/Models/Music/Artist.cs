@@ -33,9 +33,13 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<MusicRating> ArtistRatings { get; set; }
 
+        public virtual List<FeaturedItem> FeaturedItems { get; set; }
+
         public Artist()
         {
             this.ArtistGenres = new List<Genre>();
+            this.ArtistRatings = new List<MusicRating>();
+            this.FeaturedItems = new List<FeaturedItem>();
         }
     }
 }

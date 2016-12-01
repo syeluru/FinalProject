@@ -44,6 +44,8 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<AlbumInShoppingCart> AlbumsInShoppingCart { get; set; }
 
+        public virtual List<FeaturedItem> FeaturedItems { get; set; }
+
         public Album()
         {
             this.AlbumGenres = new List<Genre>();
@@ -52,6 +54,7 @@ namespace Team1_Final_Project.Models.Music
             this.AlbumOwners = new List<AppUser>();
             this.AlbumRatings = new List<MusicRating>();
             this.AlbumsInShoppingCart = new List<AlbumInShoppingCart>();
+            this.FeaturedItems = new List<FeaturedItem>();
         }
         
     }
