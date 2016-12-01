@@ -23,8 +23,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.DiscountID)
-        @Html.HiddenFor(model => model.DiscountedAlbum)
-        @Html.HiddenFor(model => model.DiscountedSong)
 
         <div class="form-group">
             @Html.LabelFor(model => model.DiscountAmount, htmlAttributes: new { @class = "control-label col-md-2" })

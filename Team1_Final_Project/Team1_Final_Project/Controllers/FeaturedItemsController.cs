@@ -99,7 +99,7 @@ namespace Team1_Final_Project.Controllers
                     featuredItem.FeaturedSong = db.Songs.Find(SelectedSong);
                     db.FeaturedItems.Add(featuredItem);
                     db.SaveChanges();
-                    return RedirectToAction("ManagerDashboard", "Account", null);
+                    return RedirectToAction("Index");
                 } catch (Exception e)
                 {
                     ViewBag.Exception = e.ToString();
@@ -140,7 +140,7 @@ namespace Team1_Final_Project.Controllers
                     featuredItem.FeaturedAlbum = db.Albums.Find(SelectedAlbum);
                     db.FeaturedItems.Add(featuredItem);
                     db.SaveChanges();
-                    return RedirectToAction("ManagerDashboard", "Account", null);
+                    return RedirectToAction("Index");
 
 
                 }
@@ -178,7 +178,7 @@ namespace Team1_Final_Project.Controllers
                     featuredItem.FeaturedArtist = db.Artists.Find(SelectedArtist);
                     db.FeaturedItems.Add(featuredItem);
                     db.SaveChanges();
-                    return RedirectToAction("ManagerDashboard", "Account", null);
+                    return RedirectToAction("Index");
 
                 } catch (Exception e)
                 {
