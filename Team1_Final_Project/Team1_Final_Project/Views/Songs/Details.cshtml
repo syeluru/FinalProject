@@ -152,6 +152,8 @@
         }
         else
         {
+            @* TODO: Delete the line of code directly before this once shopping cart works*@
+            @Html.ActionLink("Add Review of Song", "AddSongReview", "Ratings", new { id = Model.SongID }, null)
             @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { id = Model.SongID }, null)
         }
     }

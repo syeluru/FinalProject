@@ -331,6 +331,9 @@
     <Content Include="Views\Ratings\AddArtistReview.cshtml" />
     <Content Include="Views\Ratings\AddSongReview.cshtml" />
     <Content Include="Views\CreditCards\AddCreditCardForGiftCheckout.cshtml" />
+    <Content Include="Views\Ratings\EditAlbumReview.cshtml" />
+    <Content Include="Views\Ratings\EditArtistReview.cshtml" />
+    <Content Include="Views\Ratings\EditSongReview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
