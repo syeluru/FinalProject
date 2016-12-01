@@ -71,7 +71,7 @@
                 count += 1;
                 if (count != 0)
                 {
-                    AverageAlbumRatings = (SumRatings / count).ToString();
+                    AverageAlbumRatings = Decimal.Round((SumRatings / count), 1).ToString();
                 }
             }
         <dd>@AverageAlbumRatings</dd>
@@ -150,13 +150,16 @@
 
 </div>
 <p>
-    @if (userLoggedIn.Albums.Any(a => a.AlbumID == Model.AlbumID))
+    @if (userLoggedIn != null)
     {
-        @Html.ActionLink("Add Review of Album", "AddAlbumReview", "Rating", new { AlbumID = Model.AlbumID }, null)
-    }
-    else
-    {
-        @Html.ActionLink("Add To Shopping Cart", "AddAlbum", "ShoppingCarts", new { AlbumID = Model.AlbumID }, null)
+        if (userLoggedIn.Albums.Any(a => a.AlbumID == Model.AlbumID))
+        {
+            @Html.ActionLink("Add Review of Album", "AddAlbumReview", "Ratings", new { id = Model.AlbumID }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Add To Shopping Cart", "AddAlbum", "ShoppingCarts", new { AlbumID = Model.AlbumID }, null)
+        }
     }
 
     <br /><br />

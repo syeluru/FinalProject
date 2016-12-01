@@ -59,7 +59,7 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
                         count += 1;
                         if (count != 0)
                         {
-                            AverageAlbumRatings = (SumRatings / count).ToString();
+                            AverageAlbumRatings = Decimal.Round((SumRatings / count), 1).ToString();
                         }
                     }
                 <td>@AverageAlbumRatings</td>
