@@ -21,6 +21,41 @@ namespace Team1_Final_Project.Controllers
             return View(db.Ratings.ToList());
         }
 
+        // GET: Ratings/AddSongReview
+        public ActionResult AddSongReview(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            MusicRating SongRating = new MusicRating();
+            SongRating.ReviewedSong = db.Songs.Find(id);
+            
+
+            ViewBag.SongID = id;
+
+            return View(SongRating);
+        }
+
+        // POST: Ratings/AddSongReview
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult AddSongReview([Bind(Include = "RatingID,RatingNumber,Review")] MusicRating SongRating, int SongID)
+        {
+            if (ModelState.IsValid)
+            {
+                SongRating.ReviewedSong = db.Songs.Find(SongID);
+                db.Ratings.Add(SongRating);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Songs", new { id = SongRating.ReviewedSong.SongID});
+            }
+            else
+            {
+                return View(SongRating);
+            }
+        }
+
         // GET: Ratings/Details/5
         public ActionResult Details(int? id)
         {
