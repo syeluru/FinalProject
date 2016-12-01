@@ -12,6 +12,11 @@ using Team1_Final_Project.Models.Rating;
 using Team1_Final_Project.Models.Purchases;
 using System.Collections.Generic;
 using System.Web.Security;
+using System.Net;
+using System.Data.Entity;
+using System;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace Team1_Final_Project.Controllers
 {
@@ -96,9 +101,72 @@ namespace Team1_Final_Project.Controllers
                 return View(model);
             }
 
-            AppUser user = db.Users.First(a => a.Email == model.Email);
-            if (user == null)
+            if (db.Users.Any(a => a.Email == model.Email))
             {
+                AppUser user = db.Users.First(a => a.Email == model.Email);
+                if (user.Roles.Count(a => a.RoleId == "302b3f6a-ff8b-4ffb-96f4-5f829a34d5d0") > 0)
+                {
+                    // This doesn't count login failures towards account lockout
+                    // To enable password failures to trigger account lockout, change to shouldLockout: true
+                    var CustResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                    switch (CustResult)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToLocal(returnUrl);
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View(model);
+                    }
+                }
+                else if (user.Roles.Count(a => a.RoleId == "d2a5f583-4bd5-4470-a241-855a1047a407") > 0)
+                {
+                    // This doesn't count login failures towards account lockout
+                    // To enable password failures to trigger account lockout, change to shouldLockout: true
+                    var ManagerResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                    switch (ManagerResult)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToAction("ManagerDashboard");
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View(model);
+                    }
+
+                }
+                else if (user.Roles.Count(a => a.RoleId == "4c919864-b4b2-4837-9e2f-7d171580fc99") > 0)
+                {
+                    var EmpResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                    switch (EmpResult)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToAction("EmployeeDashboard");
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Invalid login attempt.");
+                            return View(model);
+                    }
+                }
+
+
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
+
+
+            }
+            else { 
+            
                 var initialresult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
                 ModelState.AddModelError("", "Invalid login attempt.");
                 return View(model);
@@ -109,64 +177,6 @@ namespace Team1_Final_Project.Controllers
             // add the following code at the bottom into three if statements, each with similar code but different return views
 
             
-            if (user.Roles.Count(a => a.RoleId == "302b3f6a-ff8b-4ffb-96f4-5f829a34d5d0") > 0)
-            {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, change to shouldLockout: true
-                var CustResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                switch (CustResult)
-                {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View(model);
-                }
-            }
-            else if (user.Roles.Count(a => a.RoleId == "d2a5f583-4bd5-4470-a241-855a1047a407") > 0)
-            {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, change to shouldLockout: true
-                var ManagerResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                switch (ManagerResult)
-                {
-                    case SignInStatus.Success:
-                        return RedirectToAction("ManagerDashboard");
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View(model);
-                }
-
-            } 
-            else if (user.Roles.Count(a => a.RoleId == "4c919864-b4b2-4837-9e2f-7d171580fc99") > 0)
-            {
-                var EmpResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                switch (EmpResult)
-                {
-                    case SignInStatus.Success:
-                        return RedirectToAction("EmployeeDashboard");
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
-                        return View(model);
-                }
-            } 
-            
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
         }
 
         // GET: /Account/Register
@@ -244,17 +254,17 @@ namespace Team1_Final_Project.Controllers
 
         // GET: Account/ManagerDashboard
         //[Authorize(Roles = "Employee, Manager")]
-        [Authorize]
-        public ActionResult EmployeeDashboard()
+        [Authorize(Roles = "Employee, Manager")]
+        public ActionResult EmployeeDashboard(string SuccessMessage)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            ViewBag.SuccessMessage = SuccessMessage;
             return View(userLoggedIn);
         }
 
 
         // GET: Account/ManagerDashboard
-        //[Authorize(Roles = "Manager")]
-        [Authorize]
+        [Authorize(Roles = "Manager")]
         public ActionResult ManagerDashboard()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -327,6 +337,15 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
+        // GET: /Account/ChangeCustomerPassword?Id=whatever
+        public ActionResult ChangeCustomerPassword(string Id)
+        {
+            ViewBag.Id = Id;
+            return View();
+        }
+
+
+
         // see all songs
         //TODO: seeing as this is quite the gamble in terms of code, need to display a list of songs that a customer owns. this is easy if we want to recreate the 
         // song index view, but i'm trying to re-use that view. will get back to you on how that works.
@@ -337,6 +356,60 @@ namespace Team1_Final_Project.Controllers
         }
 
         // see all artists
+
+
+        // GET: Account/EmployeeEdit/5
+        //TODO: Modify phone number and address
+        public ActionResult EmployeeEdit(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            AppUser Member = db.Users.Find(id);
+            if (Member == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (Member.Id != User.Identity.GetUserId())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(Member);
+        }
+
+        // POST: Account/Edit/5
+        //Done: Modify address and phone number
+        // if anything looks strange, check out this
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EmployeeEdit([Bind(Include = "StreetAddress,City,State,ZipCode,PhoneNumber")] AppUser Member)//, int[] SelectedEvents)
+        {
+            if (ModelState.IsValid)
+            {
+                //Find associated Member
+                AppUser MemberToChange = db.Users.Find(Member.Id);
+
+                //update the rest of the fields
+                MemberToChange.StreetAddress = Member.StreetAddress;
+                MemberToChange.City = Member.City;
+                MemberToChange.State = Member.State;
+                MemberToChange.ZipCode = Member.ZipCode;
+                MemberToChange.PhoneNumber = Member.PhoneNumber;
+
+
+                db.Entry(MemberToChange).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("EmployeeDashboard");
+            }
+
+            return View(Member);
+        }
 
 
         // POST: /Account/ChangePassword
@@ -360,6 +433,66 @@ namespace Team1_Final_Project.Controllers
             }
             AddErrors(result);
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeCustomerPassword(/*ChangePasswordViewModel model, */string Id, string NewPassword, string ConfirmPassword)
+        {
+            var provider = new DpapiDataProtectionProvider("YourAppName");
+            UserManager.UserTokenProvider = new DataProtectorTokenProvider<AppUser, string>(provider.Create("UserToken"))
+                as IUserTokenProvider<AppUser, string>;
+
+            if (!ModelState.IsValid)
+
+
+            {
+                ViewBag.Id = Id;
+                ViewBag.TestMessage = "Test Message from ChangeCustomerPassword Post Method in the initial IsValid if statement";
+                return View();
+            }
+
+            // check to see that the two passwords are the same
+            if (NewPassword != ConfirmPassword)
+            {
+                ViewBag.Id = Id;
+                ViewBag.ErrorMessage = "Make sure your passwords are the same.";
+                return View();
+            }
+
+            
+            try
+            {
+                string resetToken = await UserManager.GeneratePasswordResetTokenAsync(Id);
+                IdentityResult passwordChangeResult = await UserManager.ResetPasswordAsync(Id, resetToken, NewPassword);
+
+                db.SaveChanges();
+
+                return RedirectToAction("EmployeeDashboard", new { SuccessMessage = ManageMessageId.ChangePasswordSuccess });
+                
+
+
+            } catch(Exception e)
+            {
+                ViewBag.ErrorMessage = "Looks like some error happened. It might be " + e.ToString();
+                ViewBag.Id = Id;
+                return View("ChangeCustomerPassword");
+
+            }
+
+
+
+
+
+            //var result = await UserManager.ChangePasswordAsync(Id, model.OldPassword, model.NewPassword);
+            //if (result.Succeeded)
+            //{
+
+            //    return RedirectToAction("EmployeeDashboard", new { SuccessMessage = ManageMessageId.ChangePasswordSuccess });
+            //}
+            //AddErrors(result);
+            //ViewBag.Id = Id;
+            //ViewBag.TestMessage = "Test Message from ChangeCustomerPassword Post Method in the end of the method";
         }
 
         // GET: /Account/Index

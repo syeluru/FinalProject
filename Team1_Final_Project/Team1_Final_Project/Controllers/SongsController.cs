@@ -36,6 +36,19 @@ namespace Team1_Final_Project.Controllers
             return View(song);
         }
 
+        /* create post
+         * 
+         * Bind[Include(fields)] MusicRating SongRating, int SongID {
+         *      SongRating.Song = db.Songs.Find(songID);
+         *      db.Ratings.Add(MusicRating)
+         *      db.SaveChanges()
+         * }
+         * 
+         * 
+         * in your view:
+         * <input type="number" name = "SongID" value="@ViewBag.SongID" style="display:none" />
+         */
+
         // GET: Songs/Create
         public ActionResult Create()
         {

@@ -1,10 +1,12 @@
 ﻿@model Team1_Final_Project.Models.Identity.AppUser
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Customer";
 }
 
-<h2>Edit</h2>
+<p style="color:red">@ViewBag.ErrorMessage</p>
+
+<h2>Edit Customer</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +14,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>AppUser</h4>
+        <h4>@Model.FName &nbsp; @Model.LName</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -41,7 +43,8 @@
             </div>
         </div>
 
-        <div class="form-group">
+
+        <div class="form-group" >
             @Html.LabelFor(model => model.StreetAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StreetAddress, new { htmlAttributes = new { @class = "form-control" } })
@@ -89,6 +92,18 @@
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <!--I think you change username, not email, but I'm not sure. Can you change your email without changing your username?-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsAccountEnabled, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.IsAccountEnabled, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsAccountEnabled, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <h4>Change customer's password</h4>
+        @Html.ActionLink("Change password", "ChangeCustomerPassword", "Account", new { Id = Model.Id }, null)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
