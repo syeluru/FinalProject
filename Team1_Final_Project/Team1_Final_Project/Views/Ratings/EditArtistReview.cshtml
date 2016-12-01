@@ -1,12 +1,12 @@
 ﻿@model Team1_Final_Project.Models.Rating.MusicRating
 
 @{
-    ViewBag.Title = "AddArtistReview";
+    ViewBag.Title = "EditArtistReview";
 }
 
-<h2>AddArtistReview</h2>
+<h2>Edit Artist Review</h2>
 
-@using (Html.BeginForm("AddArtistReview", "Ratings", FormMethod.Post))
+@using (Html.BeginForm("EditArtistReview", "Ratings", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     
@@ -14,6 +14,8 @@
         <h4>MusicRating</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MusicRatingID)
+
         <div class="form-group">
             @Html.LabelFor(model => model.RatingNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -30,11 +32,9 @@
             </div>
         </div>
 
-        <input type="number" name="ArtistID" value="@ViewBag.ArtistID" style="display:none" />
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="AddArtistReview" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>

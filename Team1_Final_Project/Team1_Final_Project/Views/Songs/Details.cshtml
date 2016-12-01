@@ -54,7 +54,7 @@
                 count += 1;
                 if (count != 0)
                 {
-                    AverageSongRatings = (SumRatings / count).ToString();
+                    AverageSongRatings = Decimal.Round((SumRatings / count), 1).ToString();
                 }
             }
         <dd>@AverageSongRatings</dd>
@@ -71,9 +71,13 @@
             @{decimal count2 = 0;}
             @foreach (var item in Model.SongRatings)
             {
+                if (item.Review != "" && item.Review != null)
+                {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.Review)</td>
                 </tr>
+                }
+
                 count2 += 1;
             }
             @if (count2 == 0)
@@ -140,15 +144,18 @@
     </dl>
 </div>
 <p>
-    @*if (userLoggedIn.Songs.Any(a => a.SongID == Model.SongID))*@
-    <!--{-->
-        @Html.ActionLink("Add Review of Song", "AddSongReview", "Ratings", new { id = Model.SongID }, null)
-    <!--}-->
-    <!--else-->
-    <!--{-->
-        @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { SongID = Model.SongID }, null)
-
-    <!--}-->
+    @if (userLoggedIn != null)
+    {
+        if (userLoggedIn.Songs.Any(a => a.SongID == Model.SongID))
+        {
+            @Html.ActionLink("Add Review of Song", "AddSongReview", "Ratings", new { id = Model.SongID }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { id = Model.SongID }, null)
+        }
+    }
+    
     <br /><br />
     @Html.ActionLink("Edit", "Edit", new { id = Model.SongID })
     @Html.ActionLink("Back to List", "Index")
