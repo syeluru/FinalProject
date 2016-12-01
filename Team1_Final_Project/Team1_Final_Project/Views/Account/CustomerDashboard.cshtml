@@ -1,16 +1,19 @@
-﻿@model Team1_Final_Project.Models.Identity.AppUser
+﻿@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
+@model Team1_Final_Project.Models.Identity.AppUser
+
 
 @{
     ViewBag.Title = "Customer Dashboard";
 
 }
 
-@*{
+@{
     AppDbContext db = new AppDbContext();
     //Find associated Member
     AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
 
-}*@
+}
 
 <style>
     div.rightContent {
@@ -31,7 +34,7 @@
     <br/><br/>
     <h4>Edit Personal Information</h4>
     <p>Click the buttons below to edit your personal information.</p>
-    <a class="btn btn-primary" href="/Members/Edit">Edit Information</a>
+    @Html.ActionLink("Edit Information", "Edit", "Members", new { id = User.Identity.GetUserId()}, new { @class = "btn btn-primary"})
     <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
     
 </div>

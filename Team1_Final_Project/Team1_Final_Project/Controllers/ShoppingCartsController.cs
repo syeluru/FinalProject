@@ -96,7 +96,12 @@ namespace Team1_Final_Project.Controllers
         public ActionResult CheckoutPage()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            if (userLoggedIn.AlbumsInShoppingCart.Count() == 0 && userLoggedIn.SongsInShoppingCart.Count() == 0)
+            if (!userLoggedIn.IsAccountEnabled)
+            {
+                return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "Your account is disabled. Please contact a manager to re-enable your account." });
+
+            }
+            else if (userLoggedIn.AlbumsInShoppingCart.Count() == 0 && userLoggedIn.SongsInShoppingCart.Count() == 0)
             {
                 return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "You need at least one item in your shopping cart before you can check out! I hear Taylor Swift has been quite the hit lately." });
             }
@@ -176,12 +181,17 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 
-            if (db.Users.Any(c => c.Email == FriendEmail))
+            if (!userLoggedIn.IsAccountEnabled)
+            {
+                return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "Your account is disabled. Please contact a manager to re-enable your account." });
+            }
+
+            else if (db.Users.Any(c => c.Email == FriendEmail))
             {
                 ViewBag.Recipient = FriendEmail;
                 ViewBag.Subtotal = CalculateAlbumTotal() + CalculateSongTotal();
                 return View(userLoggedIn);
-            } else
+            } else 
             {
                 return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "Sorry, doesn't look like that person is a customer yet. Check the email address on that!" });
             }

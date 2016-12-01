@@ -100,7 +100,8 @@ namespace Team1_Final_Project.Controllers
                 MemberToChange.FName = Member.FName;
                 MemberToChange.MName = Member.MName;
                 MemberToChange.LName = Member.LName;
-                MemberToChange.Email = Member.Email;
+                MemberToChange.UserName = Member.UserName;
+                MemberToChange.Email = Member.UserName;
                 MemberToChange.StreetAddress = Member.StreetAddress;
                 MemberToChange.City = Member.City;
                 MemberToChange.State = Member.State;
@@ -115,6 +116,63 @@ namespace Team1_Final_Project.Controllers
 
             return View(Member);
         }
+
+        // GET: Members/Edit/5
+        //TODO: Modify first and last name, email, address and phone number
+        [Authorize (Roles = "Employee, Manager")]
+        public ActionResult EditFromEmployee(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            AppUser Member = db.Users.Find(id);
+            if (Member == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(Member);
+        }
+
+        // POST: Members/Edit/5
+        //Done: Modify first and last name, email, address and phone number
+        // if anything looks strange, check out this
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditFromEmployee([Bind(Include = "Id,FName,MName,LName,StreetAddress,City,State,ZipCode,Email,IsAccountEnabled,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AppUser Member)//, int[] SelectedEvents)
+        {
+            if (ModelState.IsValid)
+            {
+                //Find associated Member
+                AppUser MemberToChange = db.Users.Find(Member.Id);
+
+                //update the rest of the fields
+                MemberToChange.FName = Member.FName;
+                MemberToChange.MName = Member.MName;
+                MemberToChange.LName = Member.LName;
+                MemberToChange.UserName = Member.UserName;
+                MemberToChange.Email = Member.UserName;
+                MemberToChange.StreetAddress = Member.StreetAddress;
+                MemberToChange.City = Member.City;
+                MemberToChange.State = Member.State;
+                MemberToChange.ZipCode = Member.ZipCode;
+                MemberToChange.PhoneNumber = Member.PhoneNumber;
+                MemberToChange.IsAccountEnabled = Member.IsAccountEnabled;
+
+
+                db.Entry(MemberToChange).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CustomersIndex");
+            }
+
+            ViewBag.ErrorMessage = "Something went wrong";
+            return View(Member);
+        }
+
 
 
 

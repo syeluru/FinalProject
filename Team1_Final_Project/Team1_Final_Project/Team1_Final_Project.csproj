@@ -312,6 +312,9 @@
     <Content Include="Views\Music\SongSearchIndex.cshtml" />
     <Content Include="Views\Music\ArtistSearchIndex.cshtml" />
     <Content Include="Views\Account\EmployeeDashboard.cshtml" />
+    <Content Include="Views\Account\EmployeeEdit.cshtml" />
+    <Content Include="Views\Account\ChangeCustomerPassword.cshtml" />
+    <Content Include="Views\Members\EditFromEmployee.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
