@@ -7,10 +7,15 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a song discount", "CreateSongDiscount") |
+    @Html.ActionLink("Add an album discount", "CreateAlbumDiscount")
+    
 </p>
 <table class="table">
     <tr>
+        <th>
+            Item Name
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.DiscountAmount)
         </th>
@@ -22,6 +27,13 @@
 
 @foreach (var item in Model) {
     <tr>
+        @if (item.DiscountedAlbum != null)
+        {
+            <td>Album: @item.DiscountedAlbum.AlbumName</td>
+        } else if (item.DiscountedSong != null)
+        {
+            <td>Song: @item.DiscountedSong.SongName</td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.DiscountAmount)
         </td>

@@ -18,8 +18,8 @@ namespace Team1_Final_Project.Models.Purchases
         [Display(Name = "Discount Amount")]
         public decimal DiscountAmount { get; set; }
 
-        [Required(ErrorMessage = "Need to know if this is the active featured item or not.")]
-        [Display(Name = "Is Featured Item?")]
+        [Required(ErrorMessage = "Need to know if this is discount is active or not.")]
+        [Display(Name = "Is Discount Active?")]
         public Boolean IsActiveDiscount { get; set; }
 
         // navigational properties

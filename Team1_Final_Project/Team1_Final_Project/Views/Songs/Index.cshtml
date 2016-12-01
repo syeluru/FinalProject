@@ -1,7 +1,13 @@
-﻿@model IEnumerable<Team1_Final_Project.Models.Music.Song>
+﻿@using Microsoft.AspNet.Identity
+@using Team1_Final_Project.Models.Identity
+@using Team1_Final_Project.Models.Purchases
+
+@model IEnumerable<Team1_Final_Project.Models.Music.Song>
 
 @{
     ViewBag.Title = "Index";
+
+
 }
 
 <h2>Index</h2>
@@ -17,23 +23,39 @@
         <th>
             @Html.DisplayNameFor(model => model.SongPrice)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SongDiscount)
-        </th>
+        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
+    decimal TotalDiscounts = 0.0m;
+    foreach (Discount discount in item.SongDiscounts)
+    {
+        if (discount.IsActiveDiscount)
+        {
+            TotalDiscounts += discount.DiscountAmount;
+
+        }
+
+    }
+    decimal SalePrice = item.SongPrice - TotalDiscounts;
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.SongName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SongPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SongDiscount)
-        </td>
+        @if (SalePrice != item.SongPrice)
+        {
+            <td style="color:green">
+                @SalePrice
+            </td>
+        }
+        else
+        {
+            <td>
+                @SalePrice
+            </td>
+        }
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SongID }) |
             @Html.ActionLink("Details", "Details", new { id=item.SongID }) |
