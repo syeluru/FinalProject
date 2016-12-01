@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201612010352340_gottabesupercareful.Designer.cs">
       <DependentUpon>201612010352340_gottabesupercareful.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612010612038_featureditem.cs" />
+    <Compile Include="Migrations\201612010612038_featureditem.Designer.cs">
+      <DependentUpon>201612010612038_featureditem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -347,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612010352340_gottabesupercareful.resx">
       <DependentUpon>201612010352340_gottabesupercareful.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612010612038_featureditem.resx">
+      <DependentUpon>201612010612038_featureditem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

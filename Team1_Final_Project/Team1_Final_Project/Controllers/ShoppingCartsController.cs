@@ -106,15 +106,27 @@ namespace Team1_Final_Project.Controllers
                 return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "You need at least one item in your shopping cart before you can check out! I hear Taylor Swift has been quite the hit lately." });
             }
 
+            if (userLoggedIn.CreditCards == null)
+            {
+                userLoggedIn.CreditCards = new List<CreditCard>();
+                db.SaveChanges();
+            }
 
-
+            ViewBag.SubTotal = CalculateSongTotal() + CalculateAlbumTotal();
             return View(userLoggedIn);
         }
 
         //still need to do
-        public ActionResult Checkout(int SelectedCreditCardID)
+        public ActionResult Checkout(int? SelectedCreditCardID)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            // check to see if they have a credit card that they're purchasing with
+            if (SelectedCreditCardID == null)
+            {
+                return RedirectToAction("CheckoutPage", new { ErrorMessage = "Looks like you forgot to select a credit card. If you don't have a credit card, make sure to add one!" });
+
+            }
+
             // check to see that there are no duplicates first of all
             if (DuplicatesExist())
             {
@@ -188,6 +200,11 @@ namespace Team1_Final_Project.Controllers
 
             else if (db.Users.Any(c => c.Email == FriendEmail))
             {
+                if (userLoggedIn.CreditCards == null)
+                {
+                    userLoggedIn.CreditCards = new List<CreditCard>();
+                    db.SaveChanges();
+                }
                 ViewBag.Recipient = FriendEmail;
                 ViewBag.Subtotal = CalculateAlbumTotal() + CalculateSongTotal();
                 return View(userLoggedIn);
@@ -198,10 +215,17 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-        public ActionResult GiftCheckout(string FriendEmail, int SelectedCreditCardID)
+        public ActionResult GiftCheckout(string FriendEmail, int? SelectedCreditCardID)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             AppUser friend = db.Users.First(a => a.Email == FriendEmail);
+
+            if (SelectedCreditCardID == null)
+            {
+                return RedirectToAction("CheckoutPage", new { ErrorMessage = "Looks like you forgot to select a credit card. If you don't have a credit card, make sure to add one!" });
+
+            }
+
             if (DuplicatesExist())
             {
                 return RedirectToAction("ShoppingCartIndex", new { ErrorMessage = "Looks like you have some duplicates in your shopping cart. Check back through your shopping cart!" });

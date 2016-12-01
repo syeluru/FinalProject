@@ -34,17 +34,35 @@
     <ul class="nav navbar-nav navbar-left">
         
         @*<li><a href="~/Views/ShoppingCarts/Index">Cart (0)</a></li>*@
-        <li>@Html.ActionLink("Cart" + " (" + string.Format("{0}", CountItems) + ")", "ShoppingCartIndex", "ShoppingCarts", null, null)</li>
+        @if(User.IsInRole("Customer"))
+        {
+            <li>@Html.ActionLink("Cart" + " (" + string.Format("{0}", CountItems) + ")", "ShoppingCartIndex", "ShoppingCarts", null, null)</li>
+        }
+        
         @*<li><a href="~/Views/ShoppingCarts/Index">Cart (<span> @string.Format("{0}", CountItems) </span>)</a></li>*@
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      
-        
         <li>
-            @*//TODO: Current link takes you to change password page - you may want to modify this to go somewhere else*@
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+        @if (User.IsInRole("Manager"))
+        {
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "ManagerDashboard", "Account", routeValues: null, htmlAttributes: null)
+        }
+        else if (User.IsInRole("Employee"))
+        {
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "EmployeeDashboard", "Account", routeValues: null, htmlAttributes: null)
+
+        }
+        else if (User.IsInRole("Customer"))
+        {
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "CustomerDashboard", "Account", routeValues: null, htmlAttributes: null)
+
+        } else
+        {
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Home", routeValues: null, htmlAttributes: null)
+        }
         </li>
+        @*need to add an if statement here once we are done managing roles so that only an admin can manage roles*@
         <li>@Html.ActionLink("Manage Roles", "Index", "RoleAdmin")</li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

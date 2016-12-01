@@ -148,12 +148,12 @@
 
 <h3>Checkout!</h3>
 
-@Html.ActionLink("Check out", "Checkout", "ShoppingCarts", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Check out", "CheckoutPage", "ShoppingCarts", null, new { @class = "btn btn-primary" })
 @*<a class="btn btn-primary" href="~/Controllers/ShoppingCarts/CheckoutPage">Check out!</a>*@
 
 <h3>Gift to Friend!</h3>
 @Html.BeginForm("GiftCheckoutPage", "ShoppingCart", FormMethod.Get) 
-{
+
     <div class="form-group">
         <input type="text" name="FriendEmail" class="form-control" placeholder="Email"> 
     </div>
@@ -161,4 +161,3 @@
     <input type="submit" value="Gift Checkout" />
 
 
-}

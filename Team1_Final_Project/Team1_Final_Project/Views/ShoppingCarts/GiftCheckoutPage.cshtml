@@ -11,6 +11,7 @@
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 
+<h5 style="color:red">@ViewBag.ErrorMessage</h5>
 
 <h2>CheckoutPage</h2>
 
@@ -100,10 +101,13 @@
 
 </table>
 
+<br />
+<br />
+
 <h3>Totals</h3>
 
 @{ 
-    decimal Tax = ViewBag.SubTotal * 8.25m;
+    decimal Tax = ViewBag.SubTotal * 0.0825m;
     decimal GrandTotal = ViewBag.Subtotal + Tax;
 }
 
@@ -112,17 +116,20 @@
     <th>Amount</th>
     <tr>
         <td><em>Subtotal</em></td>
-        <td>@ViewBag.Subtotal</td>
+        <td>$@ViewBag.Subtotal</td>
     </tr>
     <tr>
         <td><em>Tax</em></td>
-        <td>@Tax</td>
+        <td> @String.Format("{0:C}", Tax)</td>
     </tr>
     <tr>
-        <td><em>Grand Total</em></td>
-        <td>@GrandTotal</td>
+        <td><em>Grand Total &nbsp; &nbsp; &nbsp;</em></td>
+        <td> @String.Format("{0:C}", GrandTotal) </td>
     </tr>
 </table>
+
+<br />
+<br />
 
 @Html.BeginForm("GiftCheckout", "ShoppingCarts", FormMethod.Post) {
 <div class="form-group">
