@@ -47,14 +47,14 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
                 @{decimal count = 0;}
                 @{decimal SumRatings = 0;}
                 @foreach (var item2 in item.ArtistRatings)
+                {
+                    SumRatings += item2.RatingNumber;
+                    count += 1;
+                    if (count != 0)
                     {
-                        SumRatings += item2.RatingNumber;
-                        count += 1;
-                        if (count != 0)
-                        {
-                            AverageArtistRatings = (SumRatings / count).ToString();
-                        }
+                        AverageArtistRatings = Decimal.Round((SumRatings / count), 1).ToString();
                     }
+                }
                 <td>@AverageArtistRatings</td>
                 @ViewBag.ErrorMessage
 

@@ -1,39 +1,107 @@
 ﻿@model IEnumerable<Team1_Final_Project.Models.Rating.MusicRating>
+@using Microsoft.AspNet.Identity
+@using Team1_Final_Project.Models.Identity
 
 @{
     ViewBag.Title = "Index";
+    // add dbcontext
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+@foreach (var item in userLoggedIn.Ratings)
+{
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RatingNumber)
+            Rating Number
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Review)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.RatingNumber)
+            @item.RatingNumber
         </td>
+
+        <th>
+            Review
+        </th>
+
         <td>
-            @Html.DisplayFor(modelItem => item.Review)
+            @item.Review
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MusicRatingID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MusicRatingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MusicRatingID })
+            Edit
+        </td>
+
+        <td>
+            @if (item.ReviewedAlbum != null)
+            {
+                @Html.ActionLink("Edit Review", "Ratings", "EditAlbumReview", new { id = item.MusicRatingID })
+            }
+            @if (item.ReviewedArtist != null)
+            {
+                @Html.ActionLink("Edit Review", "Ratings", "EditArtistReview", new { id = item.MusicRatingID })
+            }
+            @if (item.ReviewedSong != null)
+            {
+                @Html.ActionLink("Edit Review", "Ratings", "EditSongReview", new { id = item.MusicRatingID })
+            }
         </td>
     </tr>
 }
 
-</table>
+
+@*<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.RatingNumber)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.RatingNumber)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Review)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Review)
+    </dd>
+
+</dl>
+</div>*@
+
+@*
+        <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RatingNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Review)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RatingNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Review)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MusicRatingID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MusicRatingID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MusicRatingID })
+            </td>
+        </tr>
+    }
+
+    </table>
+*@
