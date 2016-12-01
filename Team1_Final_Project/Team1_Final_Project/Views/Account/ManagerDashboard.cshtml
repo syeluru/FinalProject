@@ -1,4 +1,6 @@
 ﻿@model Team1_Final_Project.Models.Identity.AppUser
+@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Manager Dashboard";
@@ -29,20 +31,20 @@
     <h4>Add Employee</h4>
     <p>Click the button below to add a new employee.</p>
     <a class="btn btn-primary" href="/Account/RegisterEmployee">Add Employee</a>
-    <p>Click the button below to view all employees</p>
-    <a class="btn btn-primary" href="/Members/EmployeesIndex">Add Employee</a>
     <br /><br />
     <h4>Edit Personal Information</h4>
     <p>Click the buttons below to edit your personal information.</p>
-    <a class="btn btn-primary" href="/Members/Edit">Edit Information</a>
+    @Html.ActionLink("Edit Information", "EmployeeEdit", "Account", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
     <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
 </div>
 <div class="col-md-4 rightContent">
     <h4>Manage Customers</h4>
     <p>Click the button below to see a list of all customers. There you can edit customer settings, such as personal information and active/inactive status.</p>
-    <a class="btn btn-primary" href="/Members/CustomersIndex">See All Customers</a>
+    <a class="btn btn-primary" href="/Members/CustomersIndex">View All Customers</a>
     <br/><br/>
-    <p></p>
+    <h4>Manage Employees</h4>
+    <p>Click the button below to see a list of all employees. There you can edit customer settings, such as personal information and active/inactive status.</p>
+    <a class="btn btn-primary" href="/Members/EmployeesIndex">View All Employees</a>
 </div>
 <div class="col-md-4 rightContent">
     <h4>Manage Music Content</h4>

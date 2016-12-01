@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201612010953432_employeemodelchange.Designer.cs">
       <DependentUpon>201612010953432_employeemodelchange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612011013230_NewShit.cs" />
+    <Compile Include="Migrations\201612011013230_NewShit.Designer.cs">
+      <DependentUpon>201612011013230_NewShit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -326,10 +330,11 @@
     <Content Include="Views\Account\ChangeCustomerPassword.cshtml" />
     <Content Include="Views\Members\EditFromEmployee.cshtml" />
     <Content Include="Views\Members\EmployeesIndex.cshtml" />
-    <Content Include="Views\Members\EditFromManager.cshtml" />
+    <Content Include="Views\Account\EditFromManager.cshtml" />
     <Content Include="Views\Ratings\AddAlbumReview.cshtml" />
     <Content Include="Views\Ratings\AddArtistReview.cshtml" />
     <Content Include="Views\Ratings\AddSongReview.cshtml" />
+    <Content Include="Views\Members\EmployeeDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -356,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612010953432_employeemodelchange.resx">
       <DependentUpon>201612010953432_employeemodelchange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612011013230_NewShit.resx">
+      <DependentUpon>201612011013230_NewShit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
