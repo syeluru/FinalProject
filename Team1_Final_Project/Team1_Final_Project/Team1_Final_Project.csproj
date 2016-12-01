@@ -321,6 +321,9 @@
     <Content Include="Views\Account\EmployeeEdit.cshtml" />
     <Content Include="Views\Account\ChangeCustomerPassword.cshtml" />
     <Content Include="Views\Members\EditFromEmployee.cshtml" />
+    <Content Include="Views\Ratings\AddAlbumReview.cshtml" />
+    <Content Include="Views\Ratings\AddArtistReview.cshtml" />
+    <Content Include="Views\Ratings\AddSongReview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
