@@ -14,6 +14,7 @@ namespace Team1_Final_Project.Models.Rating
         public int MusicRatingID { get; set; }
 
         [Required]
+        [RatingNumberValidation(ErrorMessage = "rating must be between 1.0 and 5.0 inclusive")]
         public Decimal RatingNumber { get; set; }
 
         [StringLength(100, ErrorMessage = "The {0} must be at most {1} characters long.")]
@@ -26,5 +27,27 @@ namespace Team1_Final_Project.Models.Rating
         public virtual Album ReviewedAlbum { get; set; }
         public virtual AppUser Customer { get; set; }
 
+    }
+
+    public class RatingNumberValidation : ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            if (value == null)
+            {
+                return true;
+            }
+            decimal getal;
+            if (decimal.TryParse(value.ToString(), out getal))
+            {
+
+                if (getal < 1)
+                    return false;
+
+                if (getal > 5)
+                    return false;
+            }
+            return true;
+        }
     }
 }
