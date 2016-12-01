@@ -222,6 +222,7 @@
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
+    <Compile Include="Models\Music\FeaturedItem.cs" />
     <Compile Include="Models\Music\MusicViewModel.cs" />
     <Compile Include="Models\Music\Genre.cs" />
     <Compile Include="Models\Music\Song.cs" />
