@@ -11,7 +11,7 @@ using Team1_Final_Project.Models.Music;
 using Team1_Final_Project.Models.Rating;
 using Team1_Final_Project.Models.Purchases;
 using System.Collections.Generic;
-
+using System.Web.Security;
 
 namespace Team1_Final_Project.Controllers
 {
@@ -96,6 +96,65 @@ namespace Team1_Final_Project.Controllers
                 return View(model);
             }
 
+            AppUser user = db.Users.First(a => a.Email == model.Email);
+            if (user == null)
+            {
+                var initialresult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+
+            }
+            //pseudocode:
+            // get the user that has the corresponding email from the LoginViewModel
+            // add the following code at the bottom into three if statements, each with similar code but different return views
+
+            
+            if (user.Roles.Count(a => a.RoleId == "302b3f6a-ff8b-4ffb-96f4-5f829a34d5d0") > 0)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var CustResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (CustResult)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
+            }
+            else if (user.Roles.Count(a => a.RoleId == "d2a5f583-4bd5-4470-a241-855a1047a407") > 0)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var ManagerResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (ManagerResult)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToAction("ManagerDashboard");
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
+
+            } 
+            else if (user.Roles.Count(a => a.RoleId == "4c919864-b4b2-4837-9e2f-7d171580fc99") > 0)
+            {
+                var EmpResult = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (EmpResult)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToAction("EmployeeDashboard");
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
+            } 
+            
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -139,7 +198,7 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                //await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Customer"
+                await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Customer"
 
                 if (result.Succeeded) //user was created successfully
                 {
@@ -179,6 +238,19 @@ namespace Team1_Final_Project.Controllers
             }
 
         }
+
+
+        //TODO: NEED TO BUILD EMPLOYEE DASHBOARD VIEW
+
+        // GET: Account/ManagerDashboard
+        //[Authorize(Roles = "Employee, Manager")]
+        [Authorize]
+        public ActionResult EmployeeDashboard()
+        {
+            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            return View(userLoggedIn);
+        }
+
 
         // GET: Account/ManagerDashboard
         //[Authorize(Roles = "Manager")]

@@ -35,35 +35,36 @@
     foreach( var item in Model)
     {
         <tr>
-            <td>@Html.ActionLink(item.SongName, "SongDetail", "Music", new { item.SongID }, null)</td>
+            <td>@Html.ActionLink(item.SongName, "Details", "Songs", new { id = item.SongID }, null)</td>
 
             @{string StrSongArtists = "";}
             @{int count2 = 0;}
             @foreach (var item2 in item.SongArtists)
             {
-                StrSongArtists += item2.ArtistName;
                 count2 += 1;
                 if (count2 > 1)
                 {
-                    StrSongArtists += ", ";
+                    StrSongArtists = StrSongArtists + ", ";
                 }
+                StrSongArtists += item2.ArtistName;
+
             }
             <td>@StrSongArtists</td>
 
-            @{string StrSongRatings = "";}
-            @{int count = 0;}
+            @{string AverageSongRatings = "N/A";}
+            @{decimal count = 0;}
+            @{decimal SumRatings = 0;}
             @foreach (var item2 in item.SongRatings)
-            {
-                StrSongRatings += Convert.ToString(item2.RatingNumber);
-                count += 1;
-                if (count > 1)
                 {
-                    StrSongRatings += ", ";
-                }
-
+                    SumRatings += item2.RatingNumber;
+                    count += 1;
+                    if (count != 0)
+                    {
+                        AverageSongRatings = (SumRatings / count).ToString();
+                    }
             }
-            <td>@StrSongRatings</td>
-
+            <td>@AverageSongRatings</td>
+   
             <td>@item.SongPrice</td>
             @*<td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>*@
         </tr>

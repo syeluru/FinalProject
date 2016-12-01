@@ -21,25 +21,16 @@ namespace Team1_Final_Project.Controllers
         public ActionResult Index()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-            ShoppingCartViewModel shoppingcart = new ShoppingCartViewModel();
-            shoppingcart.AlbumsInShoppingCart = userLoggedIn.AlbumsInShoppingCart;
-            shoppingcart.SongsInShoppingCart = userLoggedIn.SongsInShoppingCart;
             ViewBag.SongTotal = CalculateSongTotal();
             ViewBag.AlbumTotal = CalculateAlbumTotal();
-            return View(shoppingcart);
+            return View();
         }
 
         public ActionResult ShoppingCartIndex(String ErrorMessage)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             ViewBag.ErrorMessage = ErrorMessage;
-            ShoppingCartViewModel shoppingcart = new ShoppingCartViewModel();
-            shoppingcart.AlbumsInShoppingCart = userLoggedIn.AlbumsInShoppingCart;
-            shoppingcart.SongsInShoppingCart = userLoggedIn.SongsInShoppingCart;
-            ViewBag.SongTotal = CalculateSongTotal();
-            ViewBag.AlbumTotal = CalculateAlbumTotal();
-
-            return View("Index", shoppingcart);
+            return View("Index");
 
         }
 
@@ -116,7 +107,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         //still need to do
-        public ActionResult Checkout()
+        public ActionResult Checkout(int SelectedCreditCardID)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             // check to see that there are no duplicates first of all
@@ -129,9 +120,7 @@ namespace Team1_Final_Project.Controllers
 
                 // throw in total price, songs, and albums into a new order
                 Order NewOrder = new Order();
-
-
-
+                NewOrder.Customer = userLoggedIn;
 
                 // add all the songs from shopping cart to this order
                 foreach (var song in userLoggedIn.SongsInShoppingCart)
@@ -163,6 +152,9 @@ namespace Team1_Final_Project.Controllers
                 // add the total price to the order
                 NewOrder.TotalPrice = CalculateSongTotal() + CalculateAlbumTotal();
 
+                // add the credit card to the order
+                NewOrder.CreditCardUsed = db.CreditCards.Find(SelectedCreditCardID);
+
                 // clear out the shopping cart
                 userLoggedIn.SongsInShoppingCart.Clear();
                 userLoggedIn.AlbumsInShoppingCart.Clear();
@@ -174,7 +166,7 @@ namespace Team1_Final_Project.Controllers
                 // send a new email
 
                 // take the customer to the confirmation pageso they can see the songs/albums they just purchased
-                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = userLoggedIn, PlacedOrder = NewOrder });
+                return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { Recipient = userLoggedIn, PlacedOrderID = NewOrder.OrderID });
             }
 
             
@@ -196,7 +188,7 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-        public ActionResult GiftCheckout(string FriendEmail)
+        public ActionResult GiftCheckout(string FriendEmail, int SelectedCreditCardID)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
             AppUser friend = db.Users.First(a => a.Email == FriendEmail);
@@ -209,6 +201,7 @@ namespace Team1_Final_Project.Controllers
 
                 // throw in total price, songs, and albums into a new order
                 Order NewOrder = new Order();
+                NewOrder.Customer = userLoggedIn;
                 
                 // add all the songs from shopping cart to this order
                 foreach (var song in userLoggedIn.SongsInShoppingCart)
@@ -240,6 +233,9 @@ namespace Team1_Final_Project.Controllers
                 // add the total price to the order
                 NewOrder.TotalPrice = CalculateSongTotal() + CalculateAlbumTotal();
 
+                // add the credit card used
+                NewOrder.CreditCardUsed = db.CreditCards.Find(SelectedCreditCardID);
+
                 // clear out the shopping cart
                 userLoggedIn.SongsInShoppingCart.Clear();
                 userLoggedIn.AlbumsInShoppingCart.Clear();
@@ -257,10 +253,10 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-        public ActionResult CheckoutConfirmationPage(AppUser Recipient, Order PlacedOrder)
+        public ActionResult CheckoutConfirmationPage(AppUser Recipient, int PlacedOrderID)
         {
             ViewBag.Recipient = Recipient;
-            ViewBag.PlacedOrder = PlacedOrder;
+            ViewBag.PlacedOrderID = PlacedOrderID;
             return View();
         }
 
@@ -389,7 +385,7 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
             SongInShoppingCart songToRemove = db.SongsInShoppingCart.First(a => a.Song.SongID == SongID);
-            userloggedin.SongsInShoppingCart.Remove(songToRemove);
+            userloggedin.SongsInShoppingCart.Remove(userloggedin.SongsInShoppingCart.Single(x => x.Song.SongID == SongID));
             db.SaveChanges();
 
             return View("Index");
@@ -403,7 +399,7 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
             AlbumInShoppingCart albumToRemove = db.AlbumsInShoppingCart.First(a => a.Album.AlbumID == AlbumID);
-            userloggedin.AlbumsInShoppingCart.Remove(albumToRemove);
+            userloggedin.AlbumsInShoppingCart.Remove(userloggedin.AlbumsInShoppingCart.Single(x => x.Album.AlbumID == AlbumID));
             db.SaveChanges();
 
             return View("Index");

@@ -1,7 +1,15 @@
-﻿@model IEnumerable<Team1_Final_Project.Models.Purchases.Order>
+﻿@using Team1_Final_Project.Models.Purchases
+@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
+
+@*
+@model IEnumerable<Team1_Final_Project.Models.Purchases.Order>
+*@
 
 @{
     ViewBag.Title = "Index";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 
 <h2>Index</h2>
@@ -21,14 +29,14 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in userLoggedIn.Orders) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.OrderID)
         </td>
         <td>
             @{
-                var LastFourCreditCard = item.CreditCardUsed;
+                CreditCard LastFourCreditCard = item.CreditCardUsed;
                 string FormattedCreditCardUsed = "**** **** ****" + LastFourCreditCard.CreditCardNumber.Substring(-4);
                 // need a viewbag.recipientID when calling this view
             }

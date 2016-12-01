@@ -28,33 +28,36 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
         foreach (var item in Model)
         {
             <tr>
-                <td>@Html.ActionLink(item.ArtistName, "ArtistDetail", "Music", new { item.ArtistID }, null)</td>
+                <td>@Html.ActionLink(item.ArtistName, "Details", "Artists", new { id = item.ArtistID }, null)</td>             
 
                 @{string StrArtistGenres = "";}
                 @{int count2 = 0;}
                 @foreach (var item2 in item.ArtistGenres)
                 {
-                    StrArtistGenres += item2.GenreName;
                     count2 += 1;
                     if (count2 > 1)
                     {
-                        StrArtistGenres += ", ";
+                        StrArtistGenres = StrArtistGenres + ", ";
                     }
+                    StrArtistGenres += item2.GenreName;
                 }
                 <td>@StrArtistGenres</td>
-                
-                @{string StrArtistRatings = "";}
-                @{int count = 0;}
+               
+                @{string AverageArtistRatings = "N/A";}
+                @{decimal count = 0;}
+                @{decimal SumRatings = 0;}
                 @foreach (var item2 in item.ArtistRatings)
-                {
-                    StrArtistRatings += Convert.ToString(item2.RatingNumber);
-                    count += 1;
-                    if (count > 1)
                     {
-                        StrArtistRatings += ", ";
+                        SumRatings += item2.RatingNumber;
+                        count += 1;
+                        if (count != 0)
+                        {
+                            AverageArtistRatings = (SumRatings / count).ToString();
+                        }
                     }
-                }
-                <td>@StrArtistRatings</td>
+                <td>@AverageArtistRatings</td>
+                @ViewBag.ErrorMessage
+
                 @*<td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>*@
             </tr>
         }

@@ -23,6 +23,15 @@ namespace Team1_Final_Project.Models.Purchases
         public virtual CreditCard CreditCardUsed { get; set; }
         public virtual List<SongOrderBridge> SongsInOrder { get; set; }
         public virtual List<AlbumOrderBridge> AlbumsInOrder { get; set; }
-        
+
+        public Order()
+        {
+            this.SongsInOrder = new List<SongOrderBridge>();
+            this.AlbumsInOrder = new List<AlbumOrderBridge>();
+
+        }
+
     }
+
+
 }

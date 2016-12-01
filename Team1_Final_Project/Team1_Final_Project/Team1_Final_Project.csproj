@@ -223,7 +223,6 @@
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
     <Compile Include="Models\Music\Artist.cs" />
-    <Compile Include="Models\Purchases\ShoppingCartViewModel.cs" />
     <Compile Include="Models\Music\MusicViewModel.cs" />
     <Compile Include="Models\Music\Genre.cs" />
     <Compile Include="Models\Music\Song.cs" />
@@ -313,6 +312,7 @@
     <Content Include="Views\Music\AlbumSearchIndex.cshtml" />
     <Content Include="Views\Music\SongSearchIndex.cshtml" />
     <Content Include="Views\Music\ArtistSearchIndex.cshtml" />
+    <Content Include="Views\Account\EmployeeDashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

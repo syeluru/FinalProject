@@ -1,7 +1,11 @@
-﻿@model Team1_Final_Project.Models.Purchases.ShoppingCartViewModel
+﻿@using Team1_Final_Project.Models.Purchases
+@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Index";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 @if (ViewBag.ErrorMessage != null)
 {
@@ -33,19 +37,39 @@
 
 
 
-    @foreach (var item2 in Model.SongsInShoppingCart)
+    @foreach (var item2 in userLoggedIn.SongsInShoppingCart)
     {
     <tr>
         <td>
             @item2.Song.SongName
         </td>
-        @*need to fix the artists later*@
-        <td>
-            @item2.Song.SongArtists
-        </td>
-        <td>
-            <!--Ratings -->
-        </td>
+        @{string StrSongArtists = "";}
+        @{int count2 = 0;}
+        @foreach (var item3 in item2.Song.SongArtists)
+        {
+            count2 += 1;
+            if (count2 > 1)
+            {
+                StrSongArtists = StrSongArtists + ", ";
+            }
+            StrSongArtists += item3.ArtistName;
+
+        }
+        <td>@StrSongArtists</td>
+
+        @{string AverageSongRatings = "N/A";}
+        @{decimal count = 0;}
+        @{decimal SumRatings = 0;}
+        @foreach (var item3 in item2.Song.SongRatings)
+        {
+            SumRatings += item3.RatingNumber;
+            count += 1;
+            if (count != 0)
+            {
+                AverageSongRatings = (SumRatings / count).ToString();
+            }
+        }
+        <td>@AverageSongRatings</td>
         <td>
             @item2.Song.SongPrice
         </td>
@@ -77,18 +101,38 @@
         <th></th>
     </tr>
 
-    @foreach (var item2 in Model.AlbumsInShoppingCart)
+    @foreach (var item2 in userLoggedIn.AlbumsInShoppingCart)
     {
         <tr>
             <td>
                 @item2.Album.AlbumName
             </td>
-            <td>
-                @item2.Album.AlbumArtists
-            </td>
-            <td>
-                <!--Ratings -->
-            </td>
+            @{string StrAlbumArtists = "";}
+            @{int count2 = 0;}
+            @foreach (var item3 in item2.Album.AlbumArtists)
+            {
+                count2 += 1;
+                if (count2 > 1)
+                {
+                    StrAlbumArtists = StrAlbumArtists + ", ";
+                }
+                StrAlbumArtists += item3.ArtistName;
+            }
+            <td>@StrAlbumArtists</td>
+
+            @{string AverageAlbumRatings = "N/A";}
+            @{decimal count = 0;}
+            @{decimal SumRatings = 0;}
+            @foreach (var item3 in item2.Album.AlbumRatings)
+            {
+                SumRatings += item3.RatingNumber;
+                count += 1;
+                if (count != 0)
+                {
+                    AverageAlbumRatings = (SumRatings / count).ToString();
+                }
+            }
+            <td>@AverageAlbumRatings</td>
             <td>
                 @item2.Album.AlbumPrice
             </td>
