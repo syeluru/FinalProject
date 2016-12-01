@@ -11,6 +11,7 @@
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 
+<h5 style="color:red">@ViewBag.ErrorMessage</h5>
 
 <h2>CheckoutPage</h2>
 
@@ -102,9 +103,10 @@
 
 <h3>Totals</h3>
 
-@{ 
-    decimal Tax = ViewBag.SubTotal * 8.25m;
-    decimal GrandTotal = ViewBag.Subtotal + Tax;
+@{
+    decimal Subtotal = ViewBag.Subtotal * (1/1.0825m);
+    decimal Tax = Subtotal * 0.0825m;
+    decimal GrandTotal = Subtotal + Tax;
 }
 
 <table>
@@ -112,38 +114,60 @@
     <th>Amount</th>
     <tr>
         <td><em>Subtotal</em></td>
-        <td>@ViewBag.Subtotal</td>
+        <td> @String.Format("{0:C}", Subtotal)</td>
     </tr>
     <tr>
         <td><em>Tax</em></td>
-        <td>@Tax</td>
+        <td> @String.Format("{0:C}", Tax)</td>
     </tr>
     <tr>
-        <td><em>Grand Total</em></td>
-        <td>@GrandTotal</td>
-    </tr>
-</table>
+        <td><em>Grand Total &nbsp; &nbsp; &nbsp;</em></td>
+        <td> @String.Format("{0:C}", GrandTotal) </td >
+    </tr >
+</table >
 
-@Html.BeginForm("Checkout", "ShoppingCarts", FormMethod.Post) {
-<div class="form-group">
-    <div class="form-check">
+<br />
+<br />  
+
+@using (Html.BeginForm("Checkout", "ShoppingCarts", FormMethod.Post))
+{
+    <div class="form-group">
+
         <p>Select Credit Card</p>
-        @foreach (var card in Model.CreditCards)
+        @if (userLoggedIn.CreditCards.Count() > 0)
         {
-            <label class="form-check-label">
-                @Html.RadioButton("SelectedCreditCardID", card.CreditCardID, false, new { @class = "form-check-input" }) **** **** **** @card.CreditCardNumber.Substring(-4) @card.CreditCardType.ToString().ToUpper() <br />
-            </label>
+
+            foreach (CreditCard card in userLoggedIn.CreditCards)
+            {
+                    <label class="form-check">
+                        
+
+
+
+                        
+                        @Html.RadioButton("SelectedCreditCardID", card.CreditCardID) **** **** **** @card.CreditCardNumber.Substring(card.CreditCardNumber.Length-4) @card.CreditCardType.ToString().ToUpper()
+
+
+                        @*@Html.RadioButton("**** **** **** " + card.CreditCardNumber.Substring(card.CreditCardNumber.Length - 5, card.CreditCardNumber.Length - 1) + " " + card.CreditCardType.ToString().ToUpper(), card.CreditCardID, false, new { @class = "form-check-input" })  <br />*@
+                    </label>
+
+            }
+            <br/>
+
         }
         @if (userLoggedIn.CreditCards.Count < 2)
-        {
-            @Html.ActionLink("Add New Credit Card", "AddCreditCard", "CreditCards", null, null)
-        }
-
+            {
+                @Html.ActionLink("Add New Credit Card", "AddCreditCard", "CreditCards", null, null)
+            }
+        <br/>
         <input type="submit" value="Confirm Checkout" />
 
     </div>
-</div>
+
 }
+
+    
+
 
 
 

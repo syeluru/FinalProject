@@ -192,7 +192,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View("CheckoutPage", "ShoppingCart");
             }
             else if (creditCard.CreditCardNumber.Length == 16)
             {
@@ -229,6 +229,96 @@ namespace Team1_Final_Project.Controllers
                 return View(creditCard);
             }
         }
+
+        // GET: CreditCards/Create
+        [Authorize]
+        public ActionResult AddCreditCardForGiftCheckout()
+        {
+
+            AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
+
+            if (UserToChange != null)
+            {
+                if (UserToChange.CreditCards != null)
+                {
+                    //find the list of credit cards
+                    var query2 = (from m in UserToChange.CreditCards
+                                  select m).ToList();
+                    var count = query2.Count;
+
+                    if (count >= 2)
+                    {
+                        ViewBag.ErrorMessage = "You already have 2 credit cards on file.";
+                        return RedirectToAction("CheckoutPage", "ShoppingCart");
+                    }
+                }
+            }
+
+            return View();
+        }
+
+        // POST: CreditCards/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCreditCardForGiftCheckout([Bind(Include = "CreditCardID, CreditCardNumber")] CreditCard creditCard)
+        {
+
+            //Find associated Member
+            AppUser UserToChange = db.Users.Find(User.Identity.GetUserId());
+
+
+
+            if (creditCard.CreditCardNumber.Length == 15)
+            {
+                creditCard.CreditCardType = CreditCardType.AmericanExpress;
+
+                //add credit cards
+                UserToChange.CreditCards.Add(creditCard);
+
+                //add the credit card to the db
+                db.CreditCards.Add(creditCard);
+                db.SaveChanges();
+                return View("GiftCheckoutPage", "ShoppingCart");
+            }
+            else if (creditCard.CreditCardNumber.Length == 16)
+            {
+                if (creditCard.CreditCardNumber.Substring(0, 2) == "54")
+                {
+                    creditCard.CreditCardType = CreditCardType.MasterCard;
+                }
+                else if (creditCard.CreditCardNumber.Substring(0, 1) == "4")
+                {
+                    creditCard.CreditCardType = CreditCardType.Visa;
+                }
+                else if (creditCard.CreditCardNumber.Substring(0, 1) == "6")
+                {
+                    creditCard.CreditCardType = CreditCardType.Discover;
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Please enter a valid credit card number";
+                    return View(creditCard);
+                }
+                //add credit cards
+                UserToChange.CreditCards.Add(creditCard);
+
+                //add the credit card to the db
+                db.CreditCards.Add(creditCard);
+                db.SaveChanges();
+                return View("GiftCheckoutPage", "ShoppingCart");
+            }
+
+            else
+            {
+                //this means something is wrong
+                ViewBag.ErrorMessage = "Please enter a valid credit card number";
+                return View(creditCard);
+            }
+        }
+
 
 
         // GET: CreditCards/Edit/5
