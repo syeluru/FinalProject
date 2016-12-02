@@ -50,7 +50,7 @@
             <div class="form-horizontal">
                 @if (feature.FeaturedAlbum != null)
                 {
-                    <h3>@feature.FeaturedAlbum.AlbumName</h3>
+                    <h3>@Html.ActionLink(feature.FeaturedAlbum.AlbumName,"Details","Albums",new {id = feature.FeaturedAlbum.AlbumID }, null)</h3>
                     foreach (Artist artist in feature.FeaturedAlbum.AlbumArtists)
                     {
                         <h4>@artist.ArtistName</h4>
@@ -62,12 +62,13 @@
                 }
                 else if (feature.FeaturedArtist != null)
                 {
-                    <h4>@feature.FeaturedArtist.ArtistName</h4>
+                    <h3>@Html.ActionLink(feature.FeaturedArtist.ArtistName, "Details", "Artists", new { id = feature.FeaturedArtist.ArtistID }, null)</h3>
+
 
                 }
                 else if (feature.FeaturedSong != null)
                 {
-                    <h4>@feature.FeaturedSong.SongName</h4>
+                    <h3>@Html.ActionLink(feature.FeaturedSong.SongName, "Details", "Songs", new { id = feature.FeaturedSong.SongID }, null)</h3>
                     foreach (Album album in feature.FeaturedSong.SongAlbums)
                     {
                         <h5>@album.AlbumName</h5>

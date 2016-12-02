@@ -14,9 +14,9 @@ namespace Team1_Final_Project.Models.Purchases
         [Display(Name = "Discounted Item ID")]
         public Int16 DiscountID { get; set; }
 
-        [Required(ErrorMessage = "Discount Amount is Required")]
-        [Display(Name = "Discount Amount")]
-        public decimal DiscountAmount { get; set; }
+        [Required(ErrorMessage = "Discount Percentage is Required")]
+        [Display(Name = "Discount Percentage")]
+        public decimal DiscountPercentage { get; set; }
 
         [Required(ErrorMessage = "Need to know if this is discount is active or not.")]
         [Display(Name = "Is Discount Active?")]

@@ -147,17 +147,15 @@ namespace Team1_Final_Project.Controllers
                     decimal SongPricePostDiscounts = 0.0m;
 
                     // calculate total discounts
-                    decimal TotalDiscounts = 0.0m;
                     foreach (Discount discount in songToAdd.SongDiscounts)
                     {
                         if (discount.IsActiveDiscount)
                         {
-                            TotalDiscounts += discount.DiscountAmount;
+                            SongPricePostDiscounts = songToAdd.SongPrice * (1 - discount.DiscountPercentage);
 
                         }
 
                     }
-                    SongPricePostDiscounts = songToAdd.SongPrice - TotalDiscounts;
 
                     //properties of songbridgetoadd
                     songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
@@ -177,21 +175,16 @@ namespace Team1_Final_Project.Controllers
                 {
                     Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
                     AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
-
                     decimal AlbumPricePostDiscounts = 0.0m;
-
-                    // calculate total discounts
-                    decimal TotalDiscounts = 0.0m;
                     foreach (Discount discount in albumToAdd.AlbumDiscounts)
                     {
                         if (discount.IsActiveDiscount)
                         {
-                            TotalDiscounts += discount.DiscountAmount;
+                            AlbumPricePostDiscounts = albumToAdd.AlbumPrice * (1 - discount.DiscountPercentage);
 
                         }
 
                     }
-                    AlbumPricePostDiscounts = albumToAdd.AlbumPrice - TotalDiscounts;
 
                     //properties of songbridgetoadd
                     albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
@@ -289,18 +282,17 @@ namespace Team1_Final_Project.Controllers
 
                     decimal SongPricePostDiscounts = 0.0m;
 
+
                     // calculate total discounts
-                    decimal TotalDiscounts = 0.0m;
                     foreach (Discount discount in songToAdd.SongDiscounts)
                     {
                         if (discount.IsActiveDiscount)
                         {
-                            TotalDiscounts += discount.DiscountAmount;
+                            SongPricePostDiscounts = songToAdd.SongPrice * (1 - discount.DiscountPercentage);
 
                         }
 
                     }
-                    SongPricePostDiscounts = songToAdd.SongPrice - TotalDiscounts;
 
                     //properties of songbridgetoadd
                     songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
@@ -322,18 +314,15 @@ namespace Team1_Final_Project.Controllers
 
                     decimal AlbumPricePostDiscounts = 0.0m;
 
-                    // calculate total discounts
-                    decimal TotalDiscounts = 0.0m;
                     foreach (Discount discount in albumToAdd.AlbumDiscounts)
                     {
                         if (discount.IsActiveDiscount)
                         {
-                            TotalDiscounts += discount.DiscountAmount;
+                            AlbumPricePostDiscounts = albumToAdd.AlbumPrice * (1 - discount.DiscountPercentage);
 
                         }
 
                     }
-                    AlbumPricePostDiscounts = albumToAdd.AlbumPrice - TotalDiscounts;
 
                     //properties of songbridgetoadd
                     albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
@@ -389,8 +378,20 @@ namespace Team1_Final_Project.Controllers
            
             foreach (SongInShoppingCart scsong in userLoggedIn.SongsInShoppingCart)
             {
-                decimal TotalDiscountsOnSong = CalculateSongTotalDiscount(scsong.Song.SongID);
-                TotalValueOfSongs += (scsong.Song.SongPrice - CalculateSongTotalDiscount(scsong.Song.SongID));
+
+                decimal SongPricePostDiscounts = 0.0m;
+                // calculate total discounts
+                foreach (Discount discount in scsong.Song.SongDiscounts)
+                {
+                    if (discount.IsActiveDiscount)
+                    {
+                        SongPricePostDiscounts = scsong.Song.SongPrice * (1 - discount.DiscountPercentage);
+
+                    }
+
+                }
+
+                TotalValueOfSongs += SongPricePostDiscounts;
             }
 
             return TotalValueOfSongs;
@@ -405,8 +406,19 @@ namespace Team1_Final_Project.Controllers
 
             foreach (AlbumInShoppingCart scalbum in userLoggedIn.AlbumsInShoppingCart)
             {
-                decimal TotalDiscountsOnAlbum = CalculateAlbumTotalDiscount(scalbum.Album.AlbumID);
-                TotalValueOfAlbums += (scalbum.Album.AlbumPrice - CalculateAlbumTotalDiscount(scalbum.Album.AlbumID));
+                decimal AlbumPricePostDiscounts = 0.0m;
+                // calculate total discounts
+                foreach (Discount discount in scalbum.Album.AlbumDiscounts)
+                {
+                    if (discount.IsActiveDiscount)
+                    {
+                        AlbumPricePostDiscounts = scalbum.Album.AlbumPrice * (1 - discount.DiscountPercentage);
+
+                    }
+
+                }
+
+                TotalValueOfAlbums += AlbumPricePostDiscounts;
             }
 
             return TotalValueOfAlbums;
@@ -415,37 +427,37 @@ namespace Team1_Final_Project.Controllers
         }
         
 
-        public decimal CalculateSongTotalDiscount(int SongID)
-        {
-            Song SongToCalc = db.Songs.Find(SongID);
-            decimal TotalDiscount = 0.0m;
-            foreach (Discount discount in SongToCalc.SongDiscounts)
-            {
-                if (discount.IsActiveDiscount)
-                {
-                    TotalDiscount += discount.DiscountAmount;
-                }
+        //public decimal CalculateSongTotalDiscount(int SongID)
+        //{
+        //    Song SongToCalc = db.Songs.Find(SongID);
+        //    decimal TotalDiscount = 0.0m;
+        //    foreach (Discount discount in SongToCalc.SongDiscounts)
+        //    {
+        //        if (discount.IsActiveDiscount)
+        //        {
+        //            TotalDiscount += discount.DiscountAmount;
+        //        }
                 
-            }
+        //    }
 
-            return TotalDiscount;
-        }
+        //    return TotalDiscount;
+        //}
 
-        public decimal CalculateAlbumTotalDiscount(int AlbumID)
-        {
-            Album AlbumToCalc = db.Albums.Find(AlbumID);
-            decimal TotalDiscount = 0.0m;
-            foreach (Discount discount in AlbumToCalc.AlbumDiscounts)
-            {
-                if (discount.IsActiveDiscount)
-                {
-                    TotalDiscount += discount.DiscountAmount;
-                }
+        //public decimal CalculateAlbumTotalDiscount(int AlbumID)
+        //{
+        //    Album AlbumToCalc = db.Albums.Find(AlbumID);
+        //    decimal TotalDiscount = 0.0m;
+        //    foreach (Discount discount in AlbumToCalc.AlbumDiscounts)
+        //    {
+        //        if (discount.IsActiveDiscount)
+        //        {
+        //            TotalDiscount += discount.DiscountAmount;
+        //        }
                 
-            }
+        //    }
 
-            return TotalDiscount;
-        }
+        //    return TotalDiscount;
+        //}
 
         //TODO: need to test
 
