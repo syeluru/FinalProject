@@ -237,10 +237,6 @@
     <Compile Include="Migrations\201612020714227_orderrefundchanges.Designer.cs">
       <DependentUpon>201612020714227_orderrefundchanges.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612021011202_sorrydonthateme.cs" />
-    <Compile Include="Migrations\201612021011202_sorrydonthateme.Designer.cs">
-      <DependentUpon>201612021011202_sorrydonthateme.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -399,9 +395,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612020714227_orderrefundchanges.resx">
       <DependentUpon>201612020714227_orderrefundchanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021011202_sorrydonthateme.resx">
-      <DependentUpon>201612021011202_sorrydonthateme.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
