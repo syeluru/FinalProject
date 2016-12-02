@@ -35,7 +35,8 @@ namespace Team1_Final_Project.Controllers
             }
             return View(album);
         }
-        // GET: Albums/Create
+        // GET: Albums
+        [Authorize(Roles = "Manager")]
         public ActionResult Create()
         {
             ViewBag.AllGenres = GetAllGenres();
@@ -49,6 +50,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Create([Bind(Include = "AlbumID,AlbumName,AlbumPrice")] Album album, int[] SelectedArtists, int[] SelectedGenres, string NewGenreName)
         {
             if (ModelState.IsValid)
@@ -102,6 +104,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Albums/Edit/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit(short? id)
         {
             if (id == null)
@@ -125,6 +128,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit([Bind(Include = "AlbumID,AlbumName,AlbumPrice")] Album album, int[] SelectedArtists, int[] SelectedGenres, string NewGenreName )
         {
 
@@ -188,6 +192,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Albums/Delete/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Delete(short? id)
         {
             if (id == null)
@@ -205,6 +210,7 @@ namespace Team1_Final_Project.Controllers
         // POST: Albums/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult DeleteConfirmed(short id)
         {
             Album album = db.Albums.Find(id);

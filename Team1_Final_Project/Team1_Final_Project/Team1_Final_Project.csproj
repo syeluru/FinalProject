@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201612021433199_averageshopefullyworking.Designer.cs">
       <DependentUpon>201612021433199_averageshopefullyworking.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021438552_sai122838am.cs" />
+    <Compile Include="Migrations\201612021438552_sai122838am.Designer.cs">
+      <DependentUpon>201612021438552_sai122838am.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -444,6 +448,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021433199_averageshopefullyworking.resx">
       <DependentUpon>201612021433199_averageshopefullyworking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021438552_sai122838am.resx">
+      <DependentUpon>201612021438552_sai122838am.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

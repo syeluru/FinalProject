@@ -484,6 +484,8 @@ namespace Team1_Final_Project.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        [Authorize(Roles = "Employee,Manager")]
         public async Task<ActionResult> ChangeCustomerPassword(/*ChangePasswordViewModel model, */string Id, string NewPassword, string ConfirmPassword)
         {
             var provider = new DpapiDataProtectionProvider("YourAppName");
@@ -495,7 +497,6 @@ namespace Team1_Final_Project.Controllers
 
             {
                 ViewBag.Id = Id;
-                ViewBag.TestMessage = "Test Message from ChangeCustomerPassword Post Method in the initial IsValid if statement";
                 return View();
             }
 

@@ -38,6 +38,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Artists/Create
+        [Authorize(Roles = "Manager")]
         public ActionResult Create()
         {
             
@@ -51,6 +52,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Create([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres, string NewGenreName)
         {
 
@@ -88,6 +90,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Artists/Edit/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit(short? id)
         {
             if (id == null)
@@ -108,6 +111,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres, string NewGenreName)
         {
             if (ModelState.IsValid)
@@ -159,6 +163,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Artists/Delete/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Delete(short? id)
         {
             if (id == null)
@@ -176,6 +181,7 @@ namespace Team1_Final_Project.Controllers
         // POST: Artists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult DeleteConfirmed(short id)
         {
             Artist artist = db.Artists.Find(id);

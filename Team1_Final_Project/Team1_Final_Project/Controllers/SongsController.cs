@@ -49,7 +49,9 @@ namespace Team1_Final_Project.Controllers
          * <input type="number" name = "SongID" value="@ViewBag.SongID" style="display:none" />
          */
 
+       
         // GET: Songs/Create
+        [Authorize (Roles = "Manager")]
         public ActionResult Create()
         {
             ViewBag.AllGenres = GetAllGenres();
@@ -63,6 +65,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Create([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedArtists, int[] SelectedGenres, int[] SelectedAlbums, string NewGenreName)
         {
             if (ModelState.IsValid)
@@ -122,6 +125,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Songs/Edit/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit(short? id)
         {
             if (id == null)
@@ -144,6 +148,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedGenres, int[] SelectedArtists, int[] SelectedAlbums, string NewGenreName)
         {
             if (ModelState.IsValid)
@@ -220,6 +225,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Songs/Delete/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Delete(short? id)
         {
             if (id == null)
@@ -237,6 +243,7 @@ namespace Team1_Final_Project.Controllers
         // POST: Songs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult DeleteConfirmed(short id)
         {
             Song song = db.Songs.Find(id);

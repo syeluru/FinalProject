@@ -38,6 +38,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Discounts/CreateSongDiscount
+        [Authorize(Roles = "Manager")]
         public ActionResult CreateSongDiscount()
         {
             ViewBag.AllSongs = GetAllSongs();
@@ -45,6 +46,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Discounts/CreateSongDiscount
+        [Authorize(Roles = "Manager")]
         public ActionResult CreateAlbumDiscount()
         {
             ViewBag.AllAlbums = GetAllAlbums();
@@ -56,6 +58,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult CreateSongDiscount([Bind(Include = "DiscountID,DiscountPercentage,IsActiveDiscount")] Discount discount, int SelectedSong)
         {
             if (ModelState.IsValid)
@@ -84,6 +87,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult CreateAlbumDiscount([Bind(Include = "DiscountID,DiscountPercentage,IsActiveDiscount")] Discount discount, int SelectedAlbum)
         {
             if (ModelState.IsValid)
@@ -108,6 +112,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: Discounts/Edit/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit(short? id)
         {
             if (id == null)
@@ -127,6 +132,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit([Bind(Include = "DiscountID,DiscountPercentage,IsActiveDiscount")] Discount discount)
         {
             if (ModelState.IsValid)
@@ -140,6 +146,7 @@ namespace Team1_Final_Project.Controllers
 
 
         // GET: Discounts/Delete/5
+        [Authorize(Roles = "Manager")]
         public ActionResult Delete(short? id)
         {
             if (id == null)
@@ -157,6 +164,7 @@ namespace Team1_Final_Project.Controllers
         // POST: Discounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")]
         public ActionResult DeleteConfirmed(short id)
         {
             Discount discount = db.Discounts.Find(id);

@@ -18,6 +18,7 @@ namespace Team1_Final_Project.Controllers
         private AppDbContext db = new AppDbContext();
 
         // GET: ShoppingCarts
+        [Authorize(Roles = "Customer")]
         public ActionResult Index()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -26,6 +27,7 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Customer")]
         public ActionResult ShoppingCartIndex(String ErrorMessage)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -57,6 +59,7 @@ namespace Team1_Final_Project.Controllers
         //}
 
         // Add a song to the shopping cart
+        [Authorize(Roles = "Customer")]
         public ActionResult AddSong(int SongID)
         {
 
@@ -76,6 +79,7 @@ namespace Team1_Final_Project.Controllers
             return RedirectToAction("ShoppingCartIndex");
         }
 
+        [Authorize(Roles = "Customer")]
         public ActionResult AddAlbum(int AlbumID)
         {
 
@@ -93,6 +97,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         //still need to do
+        [Authorize(Roles = "Customer")]
         public ActionResult CheckoutPage()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -117,6 +122,7 @@ namespace Team1_Final_Project.Controllers
         }
 
         //still need to do
+        [Authorize(Roles = "Customer")]
         public ActionResult Checkout(int? SelectedCreditCardID)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -226,6 +232,7 @@ namespace Team1_Final_Project.Controllers
             
         }
 
+        [Authorize(Roles = "Customer")]
         public ActionResult GiftCheckoutPage(string FriendEmail)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -252,6 +259,7 @@ namespace Team1_Final_Project.Controllers
 
         }
 
+        [Authorize(Roles = "Customer")]
         public ActionResult GiftCheckout(string FriendEmail, int? SelectedCreditCardID)
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -364,6 +372,7 @@ namespace Team1_Final_Project.Controllers
 
         }
 
+        [Authorize(Roles = "Customer")]
         public ActionResult CheckoutConfirmationPage(string RecipientID, int PlacedOrderID)
         {
             ViewBag.RecipientID = RecipientID;
@@ -371,6 +380,7 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Customer")]
         public decimal CalculateSongTotal()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -399,6 +409,7 @@ namespace Team1_Final_Project.Controllers
 
         }
 
+        [Authorize(Roles = "Customer")]
         public decimal CalculateAlbumTotal()
         {
             AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
@@ -505,7 +516,7 @@ namespace Team1_Final_Project.Controllers
         //            Customer = user
         //        });
         //        db.SaveChanges();
-                
+
         //    }
 
         //}
@@ -545,6 +556,7 @@ namespace Team1_Final_Project.Controllers
 
         //UNFINISHED
         //Delete Song Method
+        [Authorize(Roles = "Customer")]
         public ActionResult DeleteSong(int SongID)
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
@@ -559,6 +571,7 @@ namespace Team1_Final_Project.Controllers
 
         //Delete Album Method   
         //Delete Song Method
+        [Authorize(Roles = "Customer")]
         public ActionResult DeleteAlbum(int AlbumID)
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());

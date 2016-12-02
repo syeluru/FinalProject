@@ -34,7 +34,7 @@
         <th>
             Total Revenue
         </th>
-@*
+
     </tr>
 
     @foreach (Genre genre in db.Genres)
@@ -70,7 +70,14 @@
                 int SongCount = 0;
                 foreach (SongOrderBridge songorder in song.SongOrderBridges)
                 {
-                    IndividualSongRevenue += songorder.PriceAtPointOfPurchase;
+                    if (songorder.PriceAtPointOfPurchase != null)
+                    {
+                        IndividualSongRevenue += songorder.PriceAtPointOfPurchase;
+                    } else
+                    {
+                        IndividualSongRevenue += 0;
+                    }
+
                     SongCount += 1;
                 }
                 TotalSongRevenue += IndividualSongRevenue;
@@ -83,7 +90,14 @@
                 int AlbumCount = 0;
                 foreach (AlbumOrderBridge albumorder in album.AlbumOrderBridges)
                 {
-                    IndividualAlbumRevenue += albumorder.PriceAtPointOfPurchase;
+                    if (albumorder.PriceAtPointOfPurchase != null)
+                    {
+                        IndividualAlbumRevenue += albumorder.PriceAtPointOfPurchase;
+                    }
+                    else
+                    {
+                        IndividualAlbumRevenue += 0;
+                    }
                     AlbumCount += 1;
                 }
                 TotalAlbumRevenue += IndividualAlbumRevenue;
@@ -108,7 +122,8 @@
                 @genre.GenreName
             </td>
             <td>
-                @TopSellingArtist.ArtistName
+                @*TopSellingArtist.ArtistName*@
+
             </td>
             <td>
                 @ArtistSongCountDictionary.FirstOrDefault(a => a.Key == max)
@@ -132,7 +147,7 @@
             </td>
         </tr>
     }
-    *@
+    
 
 </table>
 
