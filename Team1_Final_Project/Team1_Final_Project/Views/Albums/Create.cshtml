@@ -36,6 +36,13 @@
                 @Html.ListBox("SelectedGenres", (MultiSelectList)ViewBag.AllGenres, new { @class = "form-control" })
             </div>
         </div>
+
+        <div class="form-group">
+            Add New Genre: <br/>
+            <div class="col-md-10">
+                <input type="text" name="NewGenreName" />
+            </div>
+        </div>
         <!--added code ends here-->
 
         <div class="form-group">

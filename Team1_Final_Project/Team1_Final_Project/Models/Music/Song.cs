@@ -36,8 +36,8 @@ namespace Team1_Final_Project.Models.Music
         [Display(Name = "Song Price")]
         public Decimal SongPrice { get; set; }
 
-        [Display(Name = "Average Song Rating")]
-        public Decimal AverageSongRating { get; set; }
+        //[Display(Name = "Average Song Rating")]
+        //public Decimal AverageSongRating { get; set; }
         
         //[Display(Name = "Song Discount")]
         //public Decimal SongDiscount { get; set; }
