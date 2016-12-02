@@ -1,4 +1,5 @@
 ﻿@model Team1_Final_Project.Models.Music.MusicViewModel
+@using Team1_Final_Project.Models.Purchases
 @using Team1_Final_Project.Controllers;
 
 @{
@@ -39,6 +40,16 @@
         </tr>       
     @foreach (var item in Model.Songs)
     {
+        decimal TotalDiscountPercentage = 0.0m;
+        foreach (Discount discount in item.SongDiscounts)
+        {
+            if (discount.IsActiveDiscount)
+            {
+                TotalDiscountPercentage += discount.DiscountPercentage * (1 - TotalDiscountPercentage);
+            }
+
+        }
+        decimal SalePrice = item.SongPrice * (1 - TotalDiscountPercentage);
         <tr>
             <td>
                 @Html.ActionLink(item.SongName, "Details", "Songs", new { id = item.SongID }, null)
@@ -64,9 +75,20 @@
                 }
             }
             <td>@AverageSongRatings</td>
-            <td>
-                @item.SongPrice
-            </td>
+            @if (SalePrice != item.SongPrice)
+            {
+                <td style="color:green">
+                    @String.Format("{0:C}", SalePrice)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @String.Format("{0:C}", SalePrice)
+                </td>
+
+            }
+
         </tr>   
     }
 
@@ -90,6 +112,17 @@
             </tr>
             @foreach (var item in Model.Albums)
             {
+                decimal TotalDiscountPercentage = 0.0m;
+                foreach (Discount discount in item.AlbumDiscounts)
+                {
+                    if (discount.IsActiveDiscount)
+                    {
+                        TotalDiscountPercentage += discount.DiscountPercentage * (1 - TotalDiscountPercentage);
+                    }
+
+                }
+                decimal SalePrice = item.AlbumPrice * (1 - TotalDiscountPercentage);
+
                 <tr>
                     <td>
                         @Html.ActionLink(item.AlbumName, "Details", "Albums", new { id = item.AlbumID }, null)
@@ -114,9 +147,18 @@
                         }
                     }
                     <td>@AverageAlbumRatings</td>
-                    <td>
-                        @item.AlbumPrice
+                    @if (SalePrice != item.AlbumPrice)
+                    {
+                    <td style="color:green">
+                        @String.Format("{0:C}", SalePrice);
                     </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @String.Format("{0:C}", SalePrice);
+                        </td>
+                    }
                 </tr>
             }
 

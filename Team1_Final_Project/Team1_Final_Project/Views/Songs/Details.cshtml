@@ -10,16 +10,17 @@
     // add dbcontext
     AppDbContext db = new AppDbContext();
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-    decimal TotalDiscounts = 0.0m;
+    decimal TotalDiscountPercentage = 0.0m;
     foreach (Discount discount in Model.SongDiscounts)
     {
         if (discount.IsActiveDiscount)
         {
-            TotalDiscounts += discount.DiscountAmount;
-
+            TotalDiscountPercentage += discount.DiscountPercentage * (1 - TotalDiscountPercentage);
         }
+
     }
-    decimal SalePrice = Model.SongPrice - TotalDiscounts;
+    decimal SalePrice = Model.SongPrice * (1 - TotalDiscountPercentage);
+
 }
 
 <h2>Details</h2>
@@ -41,15 +42,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SongPrice)
+            @String.Format("{0:C}", Model.SongPrice)
         </dd>
 
         <dt>
-            Album Discounts
+            Song Discounts
         </dt>
 
         <dd>
-            @TotalDiscounts
+            @String.Format("{0:P2}", @TotalDiscountPercentage)
         </dd>
 
         <dt>
@@ -57,7 +58,7 @@
         </dt>
 
         <dd>
-            @SalePrice
+            @String.Format("{0:C}", SalePrice)
         </dd>
 
         <dt>

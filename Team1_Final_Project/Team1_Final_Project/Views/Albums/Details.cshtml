@@ -7,17 +7,16 @@
     ViewBag.Title = "Details";
     AppDbContext db = new AppDbContext();
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
-    decimal TotalDiscounts = 0.0m;
+    decimal TotalDiscountPercentage = 0.0m;
     foreach (Discount discount in Model.AlbumDiscounts )
     {
         if (discount.IsActiveDiscount)
         {
-            TotalDiscounts += discount.DiscountAmount;
-
+            TotalDiscountPercentage += discount.DiscountPercentage * (1 - TotalDiscountPercentage);
         }
 
     }
-    decimal SalePrice = Model.AlbumPrice - TotalDiscounts;
+    decimal SalePrice = Model.AlbumPrice * (1 - TotalDiscountPercentage);
 }
 
 <h2>Details</h2>
@@ -39,7 +38,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AlbumPrice)
+            @String.Format("{0:C}", Model.AlbumPrice)
         </dd>
 
         <dt>
@@ -47,7 +46,7 @@
         </dt>
 
         <dd>
-            @TotalDiscounts
+            @String.Format("{0:P2}", @TotalDiscountPercentage)
         </dd>
 
         <dt>
@@ -55,7 +54,7 @@
         </dt>
 
         <dd>
-            @SalePrice
+            @String.Format("{0:C}", SalePrice)
         </dd>
 
         <dt>
