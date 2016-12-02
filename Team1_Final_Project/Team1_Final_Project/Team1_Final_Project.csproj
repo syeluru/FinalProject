@@ -168,6 +168,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\MIS333kFinalProjectTeam1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\MIS333kFinalProjectTeam1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -350,7 +352,6 @@
     <Content Include="Views\Account\ChangeCustomerPassword.cshtml" />
     <Content Include="Views\Members\EditFromEmployee.cshtml" />
     <Content Include="Views\Members\EmployeesIndex.cshtml" />
-    <Content Include="Views\Members\EditFromManager.cshtml" />
     <Content Include="Views\Ratings\AddAlbumReview.cshtml" />
     <Content Include="Views\Ratings\AddArtistReview.cshtml" />
     <Content Include="Views\Ratings\AddSongReview.cshtml" />

@@ -382,57 +382,9 @@ namespace Team1_Final_Project.Controllers
             return View(Member);
         }
 
-        // POST: Account/Edit/5
-        //Done: Modify address and phone number
-        // if anything looks strange, check out this
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employee")]
-
-        public ActionResult EmployeeEdit([Bind(Include = "StreetAddress,City,State,ZipCode,PhoneNumber")] AppUser Member)//, int[] SelectedEvents)
-        {
-            if (ModelState.IsValid)
-            {
-                //Find associated Member
-                AppUser MemberToChange = db.Users.Find(Member.Id);
-
-                //update the rest of the fields
-                MemberToChange.StreetAddress = Member.StreetAddress;
-                MemberToChange.City = Member.City;
-                MemberToChange.State = Member.State;
-                MemberToChange.ZipCode = Member.ZipCode;
-                MemberToChange.PhoneNumber = Member.PhoneNumber;
 
 
-                db.Entry(MemberToChange).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("EmployeeDashboard");
-            }
 
-            return View(Member);
-        }
-
-
-        // GET: Account/EditFromManager/
-        //TODO: Modify phone number and address
-        [Authorize(Roles = "Manager")]
-        public ActionResult EditFromManager(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            AppUser Member = db.Users.Find(id);
-            if (Member == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(Member);
-        }
 
         // POST: Account/EditFromManager/5
         //Done: Modify address and phone number
@@ -443,7 +395,7 @@ namespace Team1_Final_Project.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager")]
 
-        public ActionResult EditFromManager([Bind(Include = "StreetAddress,City,State,ZipCode,PhoneNumber,IsActive")] AppUser Member)//, int[] SelectedEvents)
+        public ActionResult EmployeeEdit([Bind(Include = "StreetAddress,City,State,ZipCode,PhoneNumber,IsActive")] AppUser Member)//, int[] SelectedEvents)
         {
             if (ModelState.IsValid)
             {
