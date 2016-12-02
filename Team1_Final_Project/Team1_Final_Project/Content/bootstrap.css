@@ -792,7 +792,8 @@ th {
 .glyphicon-export:before {
   content: "\e170";
 }
-.glyphicon-send:before {
+.glyphicon-
+:before {
   content: "\e171";
 }
 .glyphicon-floppy-disk:before {
