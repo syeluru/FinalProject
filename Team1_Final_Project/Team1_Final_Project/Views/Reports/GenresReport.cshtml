@@ -115,35 +115,40 @@
         }
 
         int max = ArtistRevenueDictionary.OrderByDescending(x => x.Value).FirstOrDefault().Key;
-        Artist TopSellingArtist = db.Artists.Find(max);
+
+        string TopSellingArtistName = "";
+        if (max != 0)
+        {
+            Artist TopSellingArtist = db.Artists.Find(max);
+            TopSellingArtistName += TopSellingArtist.ArtistName;
+
+        } else
+        {
+            TopSellingArtistName = "N/A";
+        }
 
         <tr>
             <td>
                 @genre.GenreName
             </td>
             <td>
-                @*TopSellingArtist.ArtistName*@
+                @TopSellingArtistName
+            </td>
+            <td>
+                @ArtistSongCountDictionary.FirstOrDefault(a => a.Key == max).Value
 
             </td>
             <td>
-                @ArtistSongCountDictionary.FirstOrDefault(a => a.Key == max)
-                Number of Songs Purchased
+                @String.Format("{0:C}",@ArtistSongRevenueDictionary.FirstOrDefault(a => a.Key == max).Value)
             </td>
             <td>
-                @ArtistSongRevenueDictionary.FirstOrDefault(a => a.Key == max)
-                Total Song Revenue
+                @ArtistAlbumCountDictionary.FirstOrDefault(a => a.Key == max).Value
             </td>
             <td>
-                @ArtistAlbumCountDictionary.FirstOrDefault(a => a.Key == max)
-                Number of Albums Purchased
+                @String.Format("{0:C}", @ArtistAlbumRevenueDictionary.FirstOrDefault(a => a.Key == max).Value)
             </td>
             <td>
-                @ArtistAlbumRevenueDictionary.FirstOrDefault(a => a.Key == max)
-                Total Album Revenue
-            </td>
-            <td>
-                @ArtistRevenueDictionary.FirstOrDefault(a => a.Key == max)
-                Total Revenue
+                @String.Format("{0:C}", @ArtistRevenueDictionary.FirstOrDefault(a => a.Key == max).Value)
             </td>
         </tr>
     }

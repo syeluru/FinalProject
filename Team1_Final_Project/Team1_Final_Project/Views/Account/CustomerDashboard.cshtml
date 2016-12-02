@@ -37,12 +37,13 @@
 
     <h4>Credit Card Information</h4>
     <p>Click the buttons below to view existing credit cards or add a new credit card to your account. You can have up to two. You currently have @Html.DisplayTextFor(model => model.CreditCards.Count).</p>
-    <a class="btn btn-primary" href="/CreditCards/Details">View Credit Card Information</a>
+    @Html.ActionLink("View Information", "Details", "Members", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
     <a class="btn btn-primary" href="/CreditCards/Create">Add Credit Card Information</a>
     <br /><br />
 
     <h4>Edit Personal Information</h4>
-    <p>Click the buttons below to edit your personal information.</p>
+    <p>Click the buttons below to view and edit your personal information.</p>
+    @Html.ActionLink("View Information", "Details", "Members", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Edit Information", "Edit", "Members", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
     <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
     <br /><br />

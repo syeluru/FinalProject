@@ -38,18 +38,21 @@ namespace Team1_Final_Project.Controllers
         }
 
         // GET: CreditCards/Details/5
-        public ActionResult Details(short? id)
+        public ActionResult Details()
         {
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CreditCard creditCard = db.CreditCards.Find(id);
+            
+                CreditCard creditCard = db.CreditCards.Find(id);
             if (creditCard == null)
             {
                 return HttpNotFound();
             }
-            return View(creditCard);
+            */
+            return View();
         }
 
         // GET: CreditCards/Create
