@@ -56,10 +56,17 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateSongDiscount([Bind(Include = "DiscountID,DiscountAmount,IsActiveDiscount")] Discount discount, int SelectedSong)
+        public ActionResult CreateSongDiscount([Bind(Include = "DiscountID,DiscountPercentage,IsActiveDiscount")] Discount discount, int SelectedSong)
         {
             if (ModelState.IsValid)
             {
+                // find the current discount for the song
+
+                Discount currentDiscountForThisSong = db.Discounts.First(a => a.DiscountedSong.SongID == SelectedSong);
+                if (currentDiscountForThisSong != null)
+                {
+                    currentDiscountForThisSong.IsActiveDiscount = false;
+                }
                 discount.DiscountedSong = db.Songs.Find(SelectedSong);
                 db.Discounts.Add(discount);
                 db.SaveChanges();
@@ -74,10 +81,16 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAlbumDiscount([Bind(Include = "DiscountID,DiscountAmount,IsActiveDiscount")] Discount discount, int SelectedAlbum)
+        public ActionResult CreateAlbumDiscount([Bind(Include = "DiscountID,DiscountPercentage,IsActiveDiscount")] Discount discount, int SelectedAlbum)
         {
             if (ModelState.IsValid)
             {
+                Discount currentDiscountForThisAlbum = db.Discounts.First(a => a.DiscountedSong.SongID == SelectedAlbum);
+                if (currentDiscountForThisAlbum != null)
+                {
+                    currentDiscountForThisAlbum.IsActiveDiscount = false;
+                }
+
                 discount.DiscountedAlbum = db.Albums.Find(SelectedAlbum);
                 db.Discounts.Add(discount);
                 db.SaveChanges();
