@@ -116,11 +116,11 @@ namespace Team1_Final_Project.Controllers
                     AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
                     if (SelectedSongRatingOperation == Operation.LessThan)
                     {
-                        query = query.Where(c => c.AverageSongRating < AverageRatingsSearch);
+                        query = query.Where(c => GetSongAverage(c.SongID) < AverageRatingsSearch);
                     }
                     else
                     {
-                        query = query.Where(c => c.AverageSongRating < AverageRatingsSearch);
+                        query = query.Where(c => GetSongAverage(c.SongID) < AverageRatingsSearch);
                     }
 
                 }
@@ -168,11 +168,11 @@ namespace Team1_Final_Project.Controllers
                     }
                     else if (SelectedSortOrder == SortOrder.AscendingRating)
                     {
-                        distinctNames = distinctNames.OrderBy(d => d.AverageSongRating);
+                        distinctNames = distinctNames.OrderBy(d => GetSongAverage(d.SongID));
                     }
                     else if (SelectedSortOrder == SortOrder.DescendingRating)
                     {
-                        distinctNames = distinctNames.OrderByDescending(d => d.AverageSongRating);
+                        distinctNames = distinctNames.OrderByDescending(d => GetSongAverage(d.SongID));
                     }
                 }
 
@@ -203,11 +203,11 @@ namespace Team1_Final_Project.Controllers
                     }
                 else if (SelectedSortOrder == SortOrder.AscendingRating)
                 {
-                    query = query.OrderBy(d => d.AverageSongRating);
+                    query = query.OrderBy(d => GetSongAverage(d.SongID));
                 }
                 else if (SelectedSortOrder == SortOrder.DescendingRating)
                 {
-                    query = query.OrderByDescending(d => d.AverageSongRating);
+                    query = query.OrderByDescending(d => GetSongAverage(d.SongID));
                 }
             }
 
@@ -255,7 +255,7 @@ namespace Team1_Final_Project.Controllers
                 {
                     AverageRatingsSearch = Convert.ToDecimal(ArtistRatingDec);
                     if (SelectedArtistRatingOperation == Operation.LessThan)
-                    {     
+                    {    
                          query = query.Where(c => GetArtistAverage(c.ArtistID) < AverageRatingsSearch);
                     }
                     else
@@ -488,35 +488,35 @@ namespace Team1_Final_Project.Controllers
 
             return View("AlbumSearchIndex", SelectedAlbumList);
         }
-        
+
         /*-----------------------other stuff---------------------------------*/
 
 
-        //public decimal GetSongAverage(int SongID)
-        //{
-        //    Song FoundSong = db.Songs.Find(SongID);
+        public decimal GetSongAverage(int SongID)
+        {
+            Song FoundSong = db.Songs.Find(SongID);
 
-        //    decimal countVariable = 0;
-        //    decimal count = 0;
-        //    decimal RatingAverage = 0;
+            decimal countVariable = 0;
+            decimal count = 0;
+            decimal RatingAverage = 0;
 
-        //    foreach (var rating in FoundSong.SongRatings)
-        //    {
+            foreach (var rating in FoundSong.SongRatings)
+            {
 
-        //        countVariable += rating.RatingNumber;
-        //        count += 1;
-        //    }
+                countVariable += rating.RatingNumber;
+                count += 1;
+            }
 
-        //    if (count != 0)
-        //    {
-        //        RatingAverage = countVariable / count;
-        //    }
+            if (count != 0)
+            {
+                RatingAverage = countVariable / count;
+            }
 
-        //    //ViewBag.SongRatingAverage = RatingAverage;
+            //ViewBag.SongRatingAverage = RatingAverage;
 
-        //    return RatingAverage;
+            return RatingAverage;
 
-        //}
+        }
 
         public decimal GetAlbumAverage(int AlbumID)
         {
