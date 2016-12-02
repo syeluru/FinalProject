@@ -43,7 +43,19 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
                 }
                 <td>@StrArtistGenres</td>
                
-                <td>@Decimal.Round(item.ArtistAverage,1)</td>
+                @{string AverageArtistRatings = "N/A";}
+                @{decimal count = 0;}
+                @{decimal SumRatings = 0;}
+                @foreach (var item2 in item.ArtistRatings)
+                {
+                    SumRatings += item2.RatingNumber;
+                    count += 1;
+                    if (count != 0)
+                    {
+                        AverageArtistRatings = Decimal.Round((SumRatings / count), 1).ToString();
+                    }
+                }
+                <td>@AverageArtistRatings</td>
                 @ViewBag.ErrorMessage
 
                 @*<td>@Html.ActionLink("Delete", "Delete", new { id = item.CreditCardID })</td>*@

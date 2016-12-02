@@ -50,7 +50,20 @@ Displaying @ViewBag.ResultsCount of @ViewBag.TotalCount Records
                     }
                 <td>@StrAlbumArtists</td>
 
-                <td>@Decimal.Round(item.AlbumAverage, 1)</td>
+                @{string AverageAlbumRatings = "N/A";}
+                @{decimal count = 0;}
+                @{decimal SumRatings = 0;}
+                @foreach (var item2 in item.AlbumRatings)
+                {
+                    SumRatings += item2.RatingNumber;
+                    count += 1;
+                    if (count != 0)
+                    {
+                        AverageAlbumRatings = Decimal.Round((SumRatings / count), 1).ToString();
+                    }
+                }
+                <td>@AverageAlbumRatings</td>
+         
 
                 <td>@item.AlbumPrice</td>
             </tr>
