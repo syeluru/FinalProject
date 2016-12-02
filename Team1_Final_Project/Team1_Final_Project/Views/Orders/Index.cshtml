@@ -2,17 +2,13 @@
 @using Team1_Final_Project.Models.Identity
 @using Microsoft.AspNet.Identity;
 
-@*
-@model IEnumerable<Team1_Final_Project.Models.Purchases.Order>
-*@
-
 @{
     ViewBag.Title = "Index";
     AppDbContext db = new AppDbContext();
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 
-<h2>Index</h2>
+<h2>Order History</h2>
 
 
 <table class="table">
@@ -20,27 +16,35 @@
         <th>
             OrderID 
         </th>
-            Credit Card
         <th>
-            CreditCardType
+            Credit Card
+        </th>
+        <th>
+            Credit Card Type
         </th>
         <th>
             Total Price
         </th>
+        <th></th>
     </tr>
 
-@foreach (var item in userLoggedIn.Orders) {
+    @{ 
+        var query = from c in userLoggedIn.Orders orderby c.OrderID descending select c;
+        List<Order> OrderList = query.ToList(); 
+    }
+
+@foreach (var item in OrderList)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.OrderID)
         </td>
         <td>
             @{
-                CreditCard LastFourCreditCard = item.CreditCardUsed;
-                string FormattedCreditCardUsed = "**** **** ****" + LastFourCreditCard.CreditCardNumber.Substring(-4);
-                // need a viewbag.recipientID when calling this view
+                string CreditCard = item.CreditCardUsed.CreditCardNumber;
+                string FormattedCreditCardUsed = "**** **** **** " + CreditCard.Substring(CreditCard.Length-4);
             }
-            @Html.DisplayFor(modelItem => LastFourCreditCard)
+            @Html.DisplayFor(modelItem => FormattedCreditCardUsed)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreditCardUsed.CreditCardType)

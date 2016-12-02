@@ -195,6 +195,7 @@
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\DiscountsController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\FeaturedItemsController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -361,6 +362,7 @@
     <Content Include="Views\Ratings\EditArtistReview.cshtml" />
     <Content Include="Views\Ratings\EditSongReview.cshtml" />
     <Content Include="Views\Music\AdvancedSearchIndex.cshtml" />
+    <Content Include="Views\Account\CustomerLibrary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -370,6 +372,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Email\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>

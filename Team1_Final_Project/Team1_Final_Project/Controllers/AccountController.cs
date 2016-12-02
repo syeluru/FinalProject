@@ -74,6 +74,11 @@ namespace Team1_Final_Project.Controllers
             }
         }
 
+        public ActionResult CustomerLibrary()
+        {
+            AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+            return View(userLoggedIn);
+        }
 
         //
         // GET: /Account/Login
