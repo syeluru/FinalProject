@@ -49,11 +49,13 @@ namespace Team1_Final_Project.Controllers
                 AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 
                 SongRating.ReviewedSong = db.Songs.Find(SongID);
-                db.Ratings.Add(SongRating);
-                db.SaveChanges();
 
                 userLoggedIn.Ratings.Add(SongRating);
 
+                db.Ratings.Add(SongRating);
+                db.SaveChanges();
+
+                
                 return RedirectToAction("Details", "Songs", new { id = SongRating.ReviewedSong.SongID});
 
 
@@ -177,6 +179,69 @@ namespace Team1_Final_Project.Controllers
             }
             return View(musicRating);
         }
+
+        // GET: Ratings/EditAlbumReview/5
+        public ActionResult EditAlbumReview(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MusicRating musicRating = db.Ratings.Find(id);
+            if (musicRating == null)
+            {
+                return HttpNotFound();
+            }
+            return View(musicRating);
+        }
+
+        // POST: Ratings/EditAlbumReview/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAlbumReview([Bind(Include = "MusicRatingID,RatingNumber,Review")] MusicRating musicRating)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(musicRating).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(musicRating);
+        }
+
+        // GET: Ratings/EditArtistReview/5
+        public ActionResult EditArtistReview(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MusicRating musicRating = db.Ratings.Find(id);
+            if (musicRating == null)
+            {
+                return HttpNotFound();
+            }
+            return View(musicRating);
+        }
+
+        // POST: Ratings/EditArtistReview/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditArtistReview([Bind(Include = "MusicRatingID,RatingNumber,Review")] MusicRating musicRating)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(musicRating).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(musicRating);
+        }
+
 
         // GET: Ratings/Details/5
         public ActionResult Details(int? id)

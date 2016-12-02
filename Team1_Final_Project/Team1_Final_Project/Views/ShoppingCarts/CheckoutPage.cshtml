@@ -42,11 +42,24 @@
                 @item2.Song.SongName
             </td>
             <td>
-                @item2.Song.SongArtists
+                @foreach (var item in item2.Song.SongArtists)
+                {
+                    <p>@item.ArtistName</p>
+                }
             </td>
-            <td>
-                <!--Ratings -->
-            </td>
+            @{string AverageSongRatings = "N/A";}
+            @{decimal count = 0;}
+            @{decimal SumRatings = 0;}
+            @foreach (var item in item2.Song.SongRatings)
+                {
+                    SumRatings += item.RatingNumber;
+                    count += 1;
+                    if (count != 0)
+                    {
+                        AverageSongRatings = Decimal.Round((SumRatings / count), 1).ToString();
+                    }
+                }
+            <td>@AverageSongRatings</td>
             <td>
                 @item2.Song.SongPrice
             </td>
@@ -85,11 +98,24 @@
                 @item2.Album.AlbumName
             </td>
             <td>
-                @item2.Album.AlbumArtists
+                @foreach (var item in item2.Album.AlbumArtists)
+                {
+                    <p>@item.ArtistName</p>
+                }
             </td>
-            <td>
-                <!--Ratings -->
-            </td>
+                @{string AverageAlbumRatings = "N/A";}
+                @{decimal count = 0;}
+                @{decimal SumRatings = 0;}
+                @foreach (var item in item2.Album.AlbumRatings)
+                {
+                    SumRatings += item.RatingNumber;
+                    count += 1;
+                    if (count != 0)
+                    {
+                        AverageAlbumRatings = Decimal.Round((SumRatings / count), 1).ToString();
+                    }
+                }
+            <td>@AverageAlbumRatings</td>
             <td>
                 @item2.Album.AlbumPrice
             </td>
