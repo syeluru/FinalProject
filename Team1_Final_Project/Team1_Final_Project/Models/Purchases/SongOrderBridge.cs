@@ -16,7 +16,7 @@ namespace Team1_Final_Project.Models.Purchases
         public decimal PriceAtPointOfPurchase { get; set; }
 
         //nav properties
-        public virtual Song Song { get; set; }
+        public virtual Song SongInOrder { get; set; }
         public virtual Order Order { get; set; }
     }
 }

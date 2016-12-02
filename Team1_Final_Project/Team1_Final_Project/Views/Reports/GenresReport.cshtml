@@ -1,0 +1,140 @@
+﻿@using Team1_Final_Project.Models.Music
+@using Team1_Final_Project.Models.Purchases
+@using Team1_Final_Project.Models.Identity
+
+@{
+    ViewBag.Title = "BandsReport";
+    AppDbContext db = new AppDbContext();
+
+}
+
+<h2>Genres Report</h2>
+<p>Listed by genre, the top selling band for each genre, along with song purchases, song revenue, album purchases by album, revenue by album, and total revenue</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Genre Name
+        </th>
+        <th>
+            Top Selling Band
+        </th>
+        <th>
+            Number of Songs Purchased
+        </th>
+        <th>
+            Total Song Revenue
+        </th>
+        <th>
+            Number of Albums Purchased
+        </th>
+        <th>
+            Total Album Revenue
+        </th>
+        <th>
+            Total Revenue
+        </th>
+@*
+    </tr>
+
+    @foreach (Genre genre in db.Genres)
+    {
+        //int NumberPurchases = 0;
+        //NumberPurchases = song.SongOrderBridges.Count();
+
+        //decimal TotalRevenue = 0.0m;
+        //foreach (SongOrderBridge songorder in song.SongOrderBridges)
+        //{
+        //    TotalRevenue += songorder.PriceAtPointOfPurchase;
+        //}
+        var query = from c in db.Artists
+                    select c;
+        List<Artist> ArtistsList = query.ToList();
+
+        Dictionary<int, decimal> ArtistRevenueDictionary = new Dictionary<int, decimal>();
+        Dictionary<int, decimal> ArtistSongRevenueDictionary = new Dictionary<int, decimal>();
+        Dictionary<int, decimal> ArtistAlbumRevenueDictionary = new Dictionary<int, decimal>();
+        Dictionary<int, int> ArtistSongCountDictionary = new Dictionary<int, int>();
+        Dictionary<int, int> ArtistAlbumCountDictionary = new Dictionary<int, int>();
+
+        // for a given artist, loop through every song under that artist, get that song.songorderbridge.priceatpointofpurchase and add that up
+        foreach (Artist artist in genre.Artists)
+        {
+            decimal TotalSongRevenue = 0.0m;
+            decimal TotalAlbumRevenue = 0.0m;
+            int TotalSongsSold = 0;
+            int TotalAlbumsSold = 0;
+            foreach (Song song in artist.ArtistSongs)
+            {
+                decimal IndividualSongRevenue = 0.0m;
+                int SongCount = 0;
+                foreach (SongOrderBridge songorder in song.SongOrderBridges)
+                {
+                    IndividualSongRevenue += songorder.PriceAtPointOfPurchase;
+                    SongCount += 1;
+                }
+                TotalSongRevenue += IndividualSongRevenue;
+                TotalSongsSold += SongCount;
+
+            }
+            foreach (Album album in artist.ArtistAlbums)
+            {
+                decimal IndividualAlbumRevenue = 0.0m;
+                int AlbumCount = 0;
+                foreach (AlbumOrderBridge albumorder in album.AlbumOrderBridges)
+                {
+                    IndividualAlbumRevenue += albumorder.PriceAtPointOfPurchase;
+                    AlbumCount += 1;
+                }
+                TotalAlbumRevenue += IndividualAlbumRevenue;
+                TotalAlbumsSold += AlbumCount;
+
+            }
+            decimal TotalArtistRevenue = TotalSongRevenue + TotalAlbumRevenue;
+
+            ArtistRevenueDictionary.Add(artist.ArtistID, TotalArtistRevenue);
+            ArtistAlbumCountDictionary.Add(artist.ArtistID, TotalAlbumsSold);
+            ArtistSongCountDictionary.Add(artist.ArtistID, TotalSongsSold);
+            ArtistSongRevenueDictionary.Add(artist.ArtistID, TotalSongRevenue);
+            ArtistAlbumRevenueDictionary.Add(artist.ArtistID, TotalAlbumRevenue);
+
+        }
+
+        int max = ArtistRevenueDictionary.OrderByDescending(x => x.Value).FirstOrDefault().Key;
+        Artist TopSellingArtist = db.Artists.Find(max);
+
+        <tr>
+            <td>
+                @genre.GenreName
+            </td>
+            <td>
+                @TopSellingArtist.ArtistName
+            </td>
+            <td>
+                @ArtistSongCountDictionary.FirstOrDefault(a => a.Key == max)
+                Number of Songs Purchased
+            </td>
+            <td>
+                @ArtistSongRevenueDictionary.FirstOrDefault(a => a.Key == max)
+                Total Song Revenue
+            </td>
+            <td>
+                @ArtistAlbumCountDictionary.FirstOrDefault(a => a.Key == max)
+                Number of Albums Purchased
+            </td>
+            <td>
+                @ArtistAlbumRevenueDictionary.FirstOrDefault(a => a.Key == max)
+                Total Album Revenue
+            </td>
+            <td>
+                @ArtistRevenueDictionary.FirstOrDefault(a => a.Key == max)
+                Total Revenue
+            </td>
+        </tr>
+    }
+    *@
+
+</table>
+
+
+

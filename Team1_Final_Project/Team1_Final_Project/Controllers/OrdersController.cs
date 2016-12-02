@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Team1_Final_Project.Models.Identity;
+using Team1_Final_Project.Models.Music;
 using Team1_Final_Project.Models.Purchases;
 
 namespace Team1_Final_Project.Controllers
@@ -113,7 +114,36 @@ namespace Team1_Final_Project.Controllers
         public ActionResult DeleteConfirmed(short id)
         {
             Order order = db.Orders.Find(id);
+            // remove the songs from person
+            AppUser owner = db.Users.Find(order.RecipientID);
+            foreach (SongOrderBridge song in order.SongsInOrder)
+            {
+                Song songToRemove = db.Songs.Find(song.SongInOrder.SongID);
+                owner.Songs.Remove(songToRemove);
+            }
+            // remove the albums from person
+
+            foreach (AlbumOrderBridge album in order.AlbumsInOrder)
+            {
+                Album albumToRemove = db.Albums.Find(album.AlbumInOrder.AlbumID);
+                owner.Albums.Remove(albumToRemove);
+            }
+
+            // remove the song order bridge from bridge table
+            foreach (SongOrderBridge songorder in order.SongsInOrder)
+            {
+                order.SongsInOrder.Remove(songorder);
+            }
+
+            // remove the album order bridge from bridge table
+            foreach (AlbumOrderBridge albumorder in order.AlbumsInOrder)
+            {
+                order.AlbumsInOrder.Remove(albumorder);
+            }
+
             db.Orders.Remove(order);
+
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

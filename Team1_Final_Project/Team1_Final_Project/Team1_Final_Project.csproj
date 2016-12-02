@@ -237,6 +237,10 @@
     <Compile Include="Migrations\201612012145428_featureditemsanddiscounts.Designer.cs">
       <DependentUpon>201612012145428_featureditemsanddiscounts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612020714227_orderrefundchanges.cs" />
+    <Compile Include="Migrations\201612020714227_orderrefundchanges.Designer.cs">
+      <DependentUpon>201612020714227_orderrefundchanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -363,6 +367,7 @@
     <Content Include="Views\Music\AdvancedSearchIndex.cshtml" />
     <Content Include="Views\Reports\SongsReport.cshtml" />
     <Content Include="Views\Reports\AlbumsReport.cshtml" />
+    <Content Include="Views\Reports\GenresReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -394,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612012145428_featureditemsanddiscounts.resx">
       <DependentUpon>201612012145428_featureditemsanddiscounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612020714227_orderrefundchanges.resx">
+      <DependentUpon>201612020714227_orderrefundchanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

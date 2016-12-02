@@ -31,7 +31,7 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
-        public ActionResult ArtistsReport()
+        public ActionResult GenresReport()
         {
             return View();
         }

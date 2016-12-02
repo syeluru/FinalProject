@@ -161,7 +161,7 @@ namespace Team1_Final_Project.Controllers
 
                     //properties of songbridgetoadd
                     songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
-                    songBridgeToAdd.Song = songToAdd;
+                    songBridgeToAdd.SongInOrder = songToAdd;
 
                     // add to the order
                     NewOrder.SongsInOrder.Add(songBridgeToAdd);
@@ -195,7 +195,7 @@ namespace Team1_Final_Project.Controllers
 
                     //properties of songbridgetoadd
                     albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
-                    albumBridgeToAdd.Album = albumToAdd;
+                    albumBridgeToAdd.AlbumInOrder = albumToAdd;
 
                     // add to the order
                     NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
@@ -211,6 +211,10 @@ namespace Team1_Final_Project.Controllers
 
                 // add the credit card to the order
                 NewOrder.CreditCardUsed = db.CreditCards.Find(SelectedCreditCardID);
+
+                //isgift?
+                NewOrder.IsGift = false;
+                NewOrder.RecipientID = userLoggedIn.Id;
 
                 // clear out the shopping cart
                 userLoggedIn.SongsInShoppingCart.Clear();
@@ -300,7 +304,7 @@ namespace Team1_Final_Project.Controllers
 
                     //properties of songbridgetoadd
                     songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
-                    songBridgeToAdd.Song = songToAdd;
+                    songBridgeToAdd.SongInOrder = songToAdd;
 
                     // add to order
                     NewOrder.SongsInOrder.Add(songBridgeToAdd);
@@ -333,7 +337,7 @@ namespace Team1_Final_Project.Controllers
 
                     //properties of songbridgetoadd
                     albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
-                    albumBridgeToAdd.Album = albumToAdd;
+                    albumBridgeToAdd.AlbumInOrder = albumToAdd;
 
                     // add to the order
                     NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
@@ -349,6 +353,10 @@ namespace Team1_Final_Project.Controllers
 
                 // add the credit card used
                 NewOrder.CreditCardUsed = db.CreditCards.Find(SelectedCreditCardID);
+
+                // is gift?
+                NewOrder.IsGift = true;
+                NewOrder.RecipientID = friend.Id;
 
                 // clear out the shopping cart
                 userLoggedIn.SongsInShoppingCart.Clear();

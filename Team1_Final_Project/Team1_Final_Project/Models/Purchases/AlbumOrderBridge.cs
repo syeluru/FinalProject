@@ -18,7 +18,7 @@ namespace Team1_Final_Project.Models.Purchases
         public decimal PriceAtPointOfPurchase { get; set; }
 
         //these could be lists or virtuals, depending on the relationship. Pretty sure virtuals
-        public virtual Album Album { get; set; }
+        public virtual Album AlbumInOrder { get; set; }
         public virtual Order Order { get; set; }
     }
 }

@@ -126,8 +126,8 @@ namespace Team1_Final_Project.Models.Identity
         public DbSet<Album> Albums { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<AlbumOrderBridge> AlbumOrderBridge { get; set; }
-        public DbSet<SongOrderBridge> SongOrderBridge { get; set; }
+        public DbSet<AlbumOrderBridge> AlbumOrderBridges { get; set; }
+        public DbSet<SongOrderBridge> SongOrderBridges { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<SongInShoppingCart> SongsInShoppingCart { get; set; }
         public DbSet<AlbumInShoppingCart> AlbumsInShoppingCart { get; set; }

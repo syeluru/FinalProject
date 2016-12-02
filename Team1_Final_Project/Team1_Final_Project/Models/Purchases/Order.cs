@@ -18,9 +18,14 @@ namespace Team1_Final_Project.Models.Purchases
         [Display(Name = "Total Price")]
         public Decimal TotalPrice { get; set; }
 
+        public Boolean IsGift { get; set; }
+
+        public String RecipientID { get; set; }
+
         // navigational properties
         public virtual AppUser Customer { get; set; }
         public virtual CreditCard CreditCardUsed { get; set; }
+        
         public virtual List<SongOrderBridge> SongsInOrder { get; set; }
         public virtual List<AlbumOrderBridge> AlbumsInOrder { get; set; }
 
