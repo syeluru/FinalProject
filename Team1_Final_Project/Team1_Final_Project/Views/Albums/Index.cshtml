@@ -28,17 +28,19 @@
     </tr>
 
 @foreach (var item in Model) {
-    decimal TotalDiscounts = 0.0m;
+    decimal SongPricePostDiscounts = item.AlbumPrice;
+
+    // calculate total discounts
     foreach (Discount discount in item.AlbumDiscounts)
     {
         if (discount.IsActiveDiscount)
         {
-            //TotalDiscounts += discount.DiscountAmount;
+            SongPricePostDiscounts = SongPricePostDiscounts * (1 - discount.DiscountPercentage);
 
         }
 
     }
-    decimal SalePrice = item.AlbumPrice - TotalDiscounts;
+    decimal SalePrice = SongPricePostDiscounts;
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.AlbumName)
@@ -46,13 +48,13 @@
         @if (SalePrice != item.AlbumPrice)
         {
             <td style="color:green">
-                @SalePrice
+                @String.Format("{0:C}", SalePrice)
             </td>
         }
         else
         {
             <td>
-                @SalePrice
+                @String.Format("{0:C}", SalePrice)
             </td>
         }
         <td>

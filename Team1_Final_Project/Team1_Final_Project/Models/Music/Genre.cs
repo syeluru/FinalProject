@@ -26,6 +26,7 @@ namespace Team1_Final_Project.Models.Music
         {
             this.Artists = new List<Artist>();
             this.Albums = new List<Album>();
+            this.Songs = new List<Song>();
         }
     }
 }

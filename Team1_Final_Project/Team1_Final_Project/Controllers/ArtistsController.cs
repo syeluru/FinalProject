@@ -51,7 +51,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres)
+        public ActionResult Create([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres, string NewGenreName)
         {
 
             if (ModelState.IsValid)
@@ -65,6 +65,18 @@ namespace Team1_Final_Project.Controllers
                         artist.ArtistGenres.Add(GenreToAdd);
                     }
 
+                }
+
+                //if there are genres to add, add them
+                if (NewGenreName != null && NewGenreName != "")
+                {
+                    Genre NewGenre = new Genre();
+                    NewGenre.GenreName = NewGenreName;
+                    db.Genres.Add(NewGenre);
+                    db.SaveChanges();
+
+
+                    artist.ArtistGenres.Add(db.Genres.First(a => a.GenreName == NewGenreName));
                 }
 
                 db.Artists.Add(artist);
@@ -96,7 +108,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres)
+        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres, string NewGenreName)
         {
             if (ModelState.IsValid)
             {
@@ -115,6 +127,18 @@ namespace Team1_Final_Project.Controllers
                         Genre genreToAdd = db.Genres.Find(genreID);
                         artistToChange.ArtistGenres.Add(genreToAdd);
                     }
+                }
+
+                //if there are genres to add, add them
+                if (NewGenreName != null && NewGenreName != "")
+                {
+                    Genre NewGenre = new Genre();
+                    NewGenre.GenreName = NewGenreName;
+                    db.Genres.Add(NewGenre);
+                    db.SaveChanges();
+
+
+                    artist.ArtistGenres.Add(db.Genres.First(a => a.GenreName == NewGenreName));
                 }
 
                 //update the rest of the fields

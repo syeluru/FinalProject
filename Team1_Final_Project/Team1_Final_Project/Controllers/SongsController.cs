@@ -63,7 +63,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedArtists, int[] SelectedGenres, int[] SelectedAlbums)
+        public ActionResult Create([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedArtists, int[] SelectedGenres, int[] SelectedAlbums, string NewGenreName)
         {
             if (ModelState.IsValid)
             {
@@ -96,6 +96,18 @@ namespace Team1_Final_Project.Controllers
                         Album albumToAdd = db.Albums.Find(albumID);
                         song.SongAlbums.Add(albumToAdd);
                     }
+                }
+
+                if (NewGenreName != null && NewGenreName != "")
+                {
+                    Genre NewGenre = new Genre();
+                    NewGenre.GenreName = NewGenreName;
+                    db.Genres.Add(NewGenre);
+                    db.SaveChanges();
+
+                    song.SongGenres.Add(db.Genres.Last(a => a.GenreName == NewGenreName));
+
+
                 }
 
                 db.Songs.Add(song);
@@ -132,7 +144,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedGenres, int[] SelectedArtists, int[] SelectedAlbums)
+        public ActionResult Edit([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedGenres, int[] SelectedArtists, int[] SelectedAlbums, string NewGenreName)
         {
             if (ModelState.IsValid)
             {
@@ -161,6 +173,18 @@ namespace Team1_Final_Project.Controllers
                         Album albumToAdd = db.Albums.Find(albumID);
                         songToChange.SongAlbums.Add(albumToAdd);
                     }
+                }
+
+                if (NewGenreName != null && NewGenreName != "")
+                {
+                    Genre NewGenre = new Genre();
+                    NewGenre.GenreName = NewGenreName;
+                    db.Genres.Add(NewGenre);
+                    db.SaveChanges();
+
+                    songToChange.SongGenres.Add(db.Genres.Last(a => a.GenreName == NewGenreName));
+
+
                 }
 
                 //if there are genres to add, add them
