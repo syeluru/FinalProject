@@ -25,6 +25,9 @@
         <th>
             Edit Review
         </th>
+        <th>
+            Delete Review
+        </th>
     </tr>
 
     @foreach (var item in userLoggedIn.Ratings)
@@ -45,7 +48,7 @@
                 }
             </td>
             <td>
-                @item.RatingNumber
+                @Decimal.Round(item.RatingNumber, 1)
             </td>
 
             <td>
@@ -65,6 +68,10 @@
                 {
                     @Html.ActionLink("Edit Review", "EditSongReview", new { id = item.MusicRatingID })
                 }
+            </td>
+
+            <td>
+                @Html.ActionLink("Delete Review", "Delete", new { id = item.MusicRatingID })
             </td>
         </tr>
     }

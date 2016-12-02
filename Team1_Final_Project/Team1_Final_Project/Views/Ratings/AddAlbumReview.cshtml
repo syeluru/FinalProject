@@ -4,6 +4,7 @@
     ViewBag.Title = "AddAlbumReview";
 }
 
+
 <h2>AddAlbumReview</h2>
 
 @using (Html.BeginForm("AddAlbumReview", "Ratings", FormMethod.Post))
@@ -29,6 +30,8 @@
                 @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <h5 style="color:red">@ViewBag.ErrorMessage</h5>
 
         <input type="number" name="AlbumID" value="@ViewBag.AlbumID" style="display:none" />
 
