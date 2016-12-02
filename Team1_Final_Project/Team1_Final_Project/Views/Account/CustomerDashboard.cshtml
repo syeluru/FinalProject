@@ -40,6 +40,10 @@
     <p>Click the buttons below to edit your personal information.</p>
     @Html.ActionLink("Edit Information", "Edit", "Members", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-primary" })
     <a class="btn btn-primary" href="/Account/ChangePassword">Change Password</a>
+    <br /><br />
+    <h4>See My Reviews</h4>
+    <p>Click the buttons below to see and edit all the reviews you created.</p>
+    <a class="btn btn-primary" href="/Ratings/Index">See My Reviews</a>
 
 </div>
 <div class="col-md-8 rightContent">

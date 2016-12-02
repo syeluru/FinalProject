@@ -119,12 +119,16 @@
 <p>
     @if (userLoggedIn != null)
     {
-        if (userLoggedIn.Songs.Any(x => Model.ArtistSongs.Any(y => y.SongID == x.SongID)) || userLoggedIn.Albums.Any(x => Model.ArtistAlbums.Any(y => y.AlbumID == x.AlbumID)))
+        if (User.IsInRole("Customer"))
         {
+            if (userLoggedIn.Songs.Any(x => Model.ArtistSongs.Any(y => y.SongID == x.SongID)) || userLoggedIn.Albums.Any(x => Model.ArtistAlbums.Any(y => y.AlbumID == x.AlbumID)))
+            {
             @Html.ActionLink("Add Review of Artist", "AddArtistReview", "Ratings", new { id = Model.ArtistID }, null)
+            }
         }
     }
+
     <br /><br />
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID }) |*@
     @Html.ActionLink("Back to List", "Index")
 </p>

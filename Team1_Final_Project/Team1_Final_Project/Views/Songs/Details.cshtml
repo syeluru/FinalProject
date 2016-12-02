@@ -98,11 +98,14 @@
                     <td>@Html.DisplayFor(modelItem => item.Review)</td>
                     @if (User.IsInRole("Customer"))
                     {
-                    <td>@Html.ActionLink("Edit Review", "EditSongReview", "Ratings", new { id = item.ReviewedSong.SongID }, null)</td>
+                        if (item.Customer.Id == userLoggedIn.Id)
+                        {
+                            <td>@Html.ActionLink("Edit Rating and Review", "EditSongReview", "Ratings", new { id = item.MusicRatingID }, null)</td>
+                        }
                     }
-                    else
+                    else if(User.IsInRole("Manager") || User.IsInRole("Employee"))
                     {
-                        <td>@Html.ActionLink("Edit Rating and Review", "EditSongReview", "Ratings", new { id = item.ReviewedSong.SongID }, null)</td>
+                    <td>@Html.ActionLink("Edit Review", "EditSongReview", "Ratings", new { id = item.MusicRatingID }, null)</td>
                     }
                     
                 </tr>
@@ -176,18 +179,21 @@
 <p>
     @if (userLoggedIn != null)
     {
-        if (userLoggedIn.Songs.Any(a => a.SongID == Model.SongID))
+        if (User.IsInRole("Customer"))
         {
-            @Html.ActionLink("Add Review of Song", "AddSongReview", "Ratings", new { id = Model.SongID }, null)
-        }
-        else
-        {
-            @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { SongID = Model.SongID }, null)
-        }
+            if (userLoggedIn.Songs.Any(a => a.SongID == Model.SongID))
+            {
+                @Html.ActionLink("Add Review of Song", "AddSongReview", "Ratings", new { id = Model.SongID }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Add To Shopping Cart", "AddSong", "ShoppingCarts", new { SongID = Model.SongID }, null)
+            }
+        } 
     }
     
     <br /><br />
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SongID })
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.SongID })*@
     @Html.ActionLink("Back to List", "Index")
     
 </p>

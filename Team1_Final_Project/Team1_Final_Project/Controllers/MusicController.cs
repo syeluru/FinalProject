@@ -78,6 +78,11 @@ namespace Team1_Final_Project.Controllers
             // create the list of songs with no data
             List<Song> SelectedSongList = new List<Song>();
 
+            foreach (var item in db.Songs)
+            {
+                item.SongAverage = GetSongAverage(item.SongID);
+            }
+
             var query = from c in db.Songs
                         select c;
 
@@ -116,11 +121,11 @@ namespace Team1_Final_Project.Controllers
                     AverageRatingsSearch = Convert.ToDecimal(SongRatingDec);
                     if (SelectedSongRatingOperation == Operation.LessThan)
                     {
-                        query = query.Where(c => GetSongAverage(c.SongID) < AverageRatingsSearch);
+                        query = query.Where(c => c.SongAverage < AverageRatingsSearch);
                     }
                     else
                     {
-                        query = query.Where(c => GetSongAverage(c.SongID) < AverageRatingsSearch);
+                        query = query.Where(c => c.SongAverage < AverageRatingsSearch);
                     }
 
                 }
@@ -168,11 +173,11 @@ namespace Team1_Final_Project.Controllers
                     }
                     else if (SelectedSortOrder == SortOrder.AscendingRating)
                     {
-                        distinctNames = distinctNames.OrderBy(d => GetSongAverage(d.SongID));
+                        distinctNames = distinctNames.OrderBy(d => d.SongAverage);
                     }
                     else if (SelectedSortOrder == SortOrder.DescendingRating)
                     {
-                        distinctNames = distinctNames.OrderByDescending(d => GetSongAverage(d.SongID));
+                        distinctNames = distinctNames.OrderByDescending(d => d.SongAverage);
                     }
                 }
 
@@ -203,11 +208,11 @@ namespace Team1_Final_Project.Controllers
                     }
                 else if (SelectedSortOrder == SortOrder.AscendingRating)
                 {
-                    query = query.OrderBy(d => GetSongAverage(d.SongID));
+                    query = query.OrderBy(d => d.SongAverage);
                 }
                 else if (SelectedSortOrder == SortOrder.DescendingRating)
                 {
-                    query = query.OrderByDescending(d => GetSongAverage(d.SongID));
+                    query = query.OrderByDescending(d => d.SongAverage);
                 }
             }
 
@@ -230,6 +235,12 @@ namespace Team1_Final_Project.Controllers
         {   
             // create the list of Artists with no data
             List<Artist> SelectedArtistList = new List<Artist>();
+
+            foreach (var item in db.Artists)
+            {
+                item.ArtistAverage = GetArtistAverage(item.ArtistID);
+            }
+
 
             var query = from c in db.Artists
                         select c;
@@ -256,11 +267,11 @@ namespace Team1_Final_Project.Controllers
                     AverageRatingsSearch = Convert.ToDecimal(ArtistRatingDec);
                     if (SelectedArtistRatingOperation == Operation.LessThan)
                     {    
-                         query = query.Where(c => GetArtistAverage(c.ArtistID) < AverageRatingsSearch);
+                         query = query.Where(c => c.ArtistAverage < AverageRatingsSearch);
                     }
                     else
                     {
-                        query = query.Where(c => GetArtistAverage(c.ArtistID) > AverageRatingsSearch);
+                        query = query.Where(c => c.ArtistAverage > AverageRatingsSearch);
                     }
                 }
                 catch  // will display when something is wrong
@@ -299,11 +310,11 @@ namespace Team1_Final_Project.Controllers
                     }
                     else if (SelectedSortOrder == SortOrder.AscendingRating)
                     {
-                        distinctNames = distinctNames.OrderBy(d => GetArtistAverage(d.ArtistID));
+                        distinctNames = distinctNames.OrderBy(d => d.ArtistAverage);
                     }
                     else if (SelectedSortOrder == SortOrder.DescendingRating)
                     {
-                        distinctNames = distinctNames.OrderByDescending(d => GetArtistAverage(d.ArtistID));
+                        distinctNames = distinctNames.OrderByDescending(d => d.ArtistAverage);
                     }
                 }
 
@@ -325,11 +336,11 @@ namespace Team1_Final_Project.Controllers
                 }
                 else if (SelectedSortOrder == SortOrder.AscendingRating)
                 {
-                    query = query.OrderBy(d => GetArtistAverage(d.ArtistID));
+                    query = query.OrderBy(d => d.ArtistAverage);
                 }
                 else if (SelectedSortOrder == SortOrder.DescendingRating)
                 {
-                    query = query.OrderByDescending(d => GetArtistAverage(d.ArtistID));
+                    query = query.OrderByDescending(d => d.ArtistAverage);
                 }
             }
 
@@ -353,6 +364,11 @@ namespace Team1_Final_Project.Controllers
         {
             // create the list of Albums with no data
             List<Album> SelectedAlbumList = new List<Album>();
+
+            foreach (var item in db.Albums)
+            {
+                item.AlbumAverage = GetAlbumAverage(item.AlbumID);
+            }
 
             var query = from c in db.Albums
                         select c;
@@ -385,11 +401,11 @@ namespace Team1_Final_Project.Controllers
                     AverageRatingsSearch = Convert.ToDecimal(AlbumRatingDec);
                     if (SelectedAlbumRatingOperation == Operation.LessThan)
                     {
-                        query = query.Where(c => GetAlbumAverage(c.AlbumID) < AverageRatingsSearch);
+                        query = query.Where(c => c.AlbumAverage < AverageRatingsSearch);
                     }
                     else
                     {
-                        query = query.Where(c => GetAlbumAverage(c.AlbumID) < AverageRatingsSearch);
+                        query = query.Where(c => c.AlbumAverage < AverageRatingsSearch);
                     }
 
                 }
@@ -437,11 +453,11 @@ namespace Team1_Final_Project.Controllers
                     }
                     else if (SelectedSortOrder == SortOrder.AscendingRating)
                     {
-                        distinctNames = distinctNames.OrderBy(d => GetAlbumAverage(d.AlbumID));
+                        distinctNames = distinctNames.OrderBy(d => d.AlbumAverage);
                     }
                     else if (SelectedSortOrder == SortOrder.DescendingRating)
                     {
-                        distinctNames = distinctNames.OrderByDescending(d => GetAlbumAverage(d.AlbumID));
+                        distinctNames = distinctNames.OrderByDescending(d => d.AlbumAverage);
                     }
                 }
 
@@ -474,11 +490,11 @@ namespace Team1_Final_Project.Controllers
                 }
                 else if (SelectedSortOrder == SortOrder.AscendingRating)
                 {
-                    query = query.OrderBy(d => GetAlbumAverage(d.AlbumID));
+                    query = query.OrderBy(d => d.AlbumAverage);
                 }
                 else if (SelectedSortOrder == SortOrder.DescendingRating)
                 {
-                    query = query.OrderByDescending(d => GetAlbumAverage(d.AlbumID));
+                    query = query.OrderByDescending(d => d.AlbumAverage);
                 }
             }
 
@@ -513,6 +529,7 @@ namespace Team1_Final_Project.Controllers
             }
 
             //ViewBag.SongRatingAverage = RatingAverage;
+            //FoundSong.SongAverage = RatingAverage;
 
             return RatingAverage;
 

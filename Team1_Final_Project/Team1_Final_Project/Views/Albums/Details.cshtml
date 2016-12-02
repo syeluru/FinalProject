@@ -163,31 +163,35 @@
 <p>
     @if (userLoggedIn != null)
     {
-        bool Found = true;
-        foreach (var item in Model.AlbumSongs)
+        if (User.IsInRole("Customer"))
         {
-            if (userLoggedIn.Songs.Any(a => a.SongID == item.SongID))
+            bool Found = true;
+            foreach (var item in Model.AlbumSongs)
             {
-                //keep going through the loop
-                Found = Found;
+                if (userLoggedIn.Songs.Any(a => a.SongID == item.SongID))
+                {
+                    //keep going through the loop
+                    Found = Found;
+                }
+                else
+                {
+                    Found = false;
+                }
+            }
+
+            if (userLoggedIn.Albums.Any(a => a.AlbumID == Model.AlbumID) || Found == true)
+            {
+            @Html.ActionLink("Add Review of Album", "AddAlbumReview", "Ratings", new { id = Model.AlbumID }, null)
             }
             else
             {
-                Found = false;
-            }
-        }
-
-        if (userLoggedIn.Albums.Any(a => a.AlbumID == Model.AlbumID) || Found == true )
-        {
-            @Html.ActionLink("Add Review of Album", "AddAlbumReview", "Ratings", new { id = Model.AlbumID }, null)
-        }
-        else
-        {
             @Html.ActionLink("Add To Shopping Cart", "AddAlbum", "ShoppingCarts", new { AlbumID = Model.AlbumID }, null)
+            }
         }
     }
 
+
     <br /><br />
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |*@
     @Html.ActionLink("Back to List", "Index")
 </p>

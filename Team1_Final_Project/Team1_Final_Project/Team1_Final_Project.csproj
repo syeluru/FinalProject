@@ -249,6 +249,18 @@
     <Compile Include="Migrations\201612021108025_notapieceofshit.Designer.cs">
       <DependentUpon>201612021108025_notapieceofshit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021144000_fuckthis.cs" />
+    <Compile Include="Migrations\201612021144000_fuckthis.Designer.cs">
+      <DependentUpon>201612021144000_fuckthis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021405037_averagestuff.cs" />
+    <Compile Include="Migrations\201612021405037_averagestuff.Designer.cs">
+      <DependentUpon>201612021405037_averagestuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021433199_averageshopefullyworking.cs" />
+    <Compile Include="Migrations\201612021433199_averageshopefullyworking.Designer.cs">
+      <DependentUpon>201612021433199_averageshopefullyworking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -416,6 +428,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021108025_notapieceofshit.resx">
       <DependentUpon>201612021108025_notapieceofshit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021144000_fuckthis.resx">
+      <DependentUpon>201612021144000_fuckthis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021405037_averagestuff.resx">
+      <DependentUpon>201612021405037_averagestuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021433199_averageshopefullyworking.resx">
+      <DependentUpon>201612021433199_averageshopefullyworking.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

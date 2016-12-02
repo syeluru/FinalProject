@@ -21,8 +21,8 @@ namespace Team1_Final_Project.Models.Music
         [Display(Name = "Artist Name")]
         public String ArtistName { get; set; }
 
-        //[Display(Name = "Average Artist Rating")]
-        //public decimal AverageArtistRating { get; set; }
+        [Display(Name = "Average Artist Rating")]
+        public decimal ArtistAverage { get; set; }
 
         // navigational properties
         public virtual List<Genre> ArtistGenres { get; set; }
