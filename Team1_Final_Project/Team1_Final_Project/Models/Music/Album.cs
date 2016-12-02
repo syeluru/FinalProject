@@ -48,6 +48,8 @@ namespace Team1_Final_Project.Models.Music
 
         public virtual List<Discount> AlbumDiscounts { get; set; }
 
+        public virtual List<AlbumOrderBridge> AlbumOrderBridges { get; set; }
+
         public Album()
         {
             this.AlbumGenres = new List<Genre>();
@@ -58,6 +60,7 @@ namespace Team1_Final_Project.Models.Music
             this.AlbumsInShoppingCart = new List<AlbumInShoppingCart>();
             this.FeaturedItems = new List<FeaturedItem>();
             this.AlbumDiscounts = new List<Discount>();
+            this.AlbumOrderBridges = new List<AlbumOrderBridge>();
         }
         
     }

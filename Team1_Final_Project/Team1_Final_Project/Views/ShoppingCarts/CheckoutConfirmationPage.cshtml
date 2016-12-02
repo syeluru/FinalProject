@@ -111,7 +111,7 @@
 @{ 
     decimal Subtotal = PlacedOrder.TotalPrice * (1/1.0825m);
     decimal Tax = PlacedOrder.TotalPrice * 0.0825m;
-    decimal GrandTotal = PlacedOrder.TotalPrice + Tax;
+    decimal GrandTotal = PlacedOrder.TotalPrice;
 }
 
 @{
@@ -124,8 +124,11 @@
 <p><em>Recipient:</em> @Recipient.FName + @Recipient.LName</p>
 
 <table>
-    <th>Item</th>
-    <th>Amount</th>
+    <tr>
+        <th>Item</th>
+        <th>Amount</th>
+    </tr>
+    
     <tr>
         <td><em>Subtotal</em></td>
         <td> @String.Format("{0:C}", Subtotal)</td>

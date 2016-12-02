@@ -48,6 +48,7 @@ namespace Team1_Final_Project.Controllers
             MusicViewModel SearchMusicViewModel = new MusicViewModel();
 
             //TODO: write the following methods
+            
             SearchMusicViewModel.Songs = GetSearchedSongs(SearchString);
             SearchMusicViewModel.Albums = GetSearchedAlbums(SearchString);
             SearchMusicViewModel.Artists = GetSearchedArtists(SearchString);

@@ -113,7 +113,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,AlbumName,AlbumPrice,AlbumDiscount")] Album album, int[] SelectedArtists, int[] SelectedGenres)
+        public ActionResult Edit([Bind(Include = "AlbumID,AlbumName,AlbumPrice")] Album album, int[] SelectedArtists, int[] SelectedGenres)
         {
 
             if (ModelState.IsValid)

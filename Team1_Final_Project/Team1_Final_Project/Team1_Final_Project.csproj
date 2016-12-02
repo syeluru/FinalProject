@@ -357,6 +357,8 @@
     <Content Include="Views\Ratings\EditArtistReview.cshtml" />
     <Content Include="Views\Ratings\EditSongReview.cshtml" />
     <Content Include="Views\Music\AdvancedSearchIndex.cshtml" />
+    <Content Include="Views\Reports\SongsReport.cshtml" />
+    <Content Include="Views\Reports\AlbumsReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -366,7 +368,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611291805076_please.resx">

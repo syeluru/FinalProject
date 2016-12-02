@@ -63,7 +63,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SongID,SongName,SongPrice,SongDiscount")] Song song, int[] SelectedArtists, int[] SelectedGenres, int[] SelectedAlbums)
+        public ActionResult Create([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedArtists, int[] SelectedGenres, int[] SelectedAlbums)
         {
             if (ModelState.IsValid)
             {
@@ -132,7 +132,7 @@ namespace Team1_Final_Project.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SongID,SongName,SongPrice,SongDiscount")] Song song, int[] SelectedGenres, int[] SelectedArtists, int[] SelectedAlbums)
+        public ActionResult Edit([Bind(Include = "SongID,SongName,SongPrice")] Song song, int[] SelectedGenres, int[] SelectedArtists, int[] SelectedAlbums)
         {
             if (ModelState.IsValid)
             {

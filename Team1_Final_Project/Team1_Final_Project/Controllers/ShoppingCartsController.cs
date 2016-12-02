@@ -73,7 +73,7 @@ namespace Team1_Final_Project.Controllers
 
 
             // return them to song index after they're done browsing
-            return RedirectToAction("BasicSearch","Music");
+            return RedirectToAction("BasicSearch","Music",new {SearchString = ""});
         }
 
         public ActionResult AddAlbum(int AlbumID)
@@ -144,11 +144,31 @@ namespace Team1_Final_Project.Controllers
                 {
                     Song songToAdd = db.Songs.Find(song.Song.SongID);
                     SongOrderBridge songBridgeToAdd = new SongOrderBridge();
+                    decimal SongPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in songToAdd.SongDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    SongPricePostDiscounts = songToAdd.SongPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
                     songBridgeToAdd.Song = songToAdd;
+
+                    // add to the order
                     NewOrder.SongsInOrder.Add(songBridgeToAdd);
 
                     // add all the songs to the customer's songs list
                     userLoggedIn.Songs.Add(songToAdd);
+                    db.SaveChanges();
 
                 }
 
@@ -157,7 +177,27 @@ namespace Team1_Final_Project.Controllers
                 {
                     Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
                     AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
+
+                    decimal AlbumPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in albumToAdd.AlbumDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    AlbumPricePostDiscounts = albumToAdd.AlbumPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
                     albumBridgeToAdd.Album = albumToAdd;
+
+                    // add to the order
                     NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
 
                     // add all the albums to the customer's albums list
@@ -242,7 +282,27 @@ namespace Team1_Final_Project.Controllers
                 {
                     Song songToAdd = db.Songs.Find(song.Song.SongID);
                     SongOrderBridge songBridgeToAdd = new SongOrderBridge();
+
+                    decimal SongPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in songToAdd.SongDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    SongPricePostDiscounts = songToAdd.SongPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
                     songBridgeToAdd.Song = songToAdd;
+
+                    // add to order
                     NewOrder.SongsInOrder.Add(songBridgeToAdd);
 
                     // add all the songs to the recipient's songs list
@@ -255,7 +315,27 @@ namespace Team1_Final_Project.Controllers
                 {
                     Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
                     AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
+
+                    decimal AlbumPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in albumToAdd.AlbumDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    AlbumPricePostDiscounts = albumToAdd.AlbumPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
                     albumBridgeToAdd.Album = albumToAdd;
+
+                    // add to the order
                     NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
 
                     // add all the albums to the recipient's albums list
@@ -449,7 +529,7 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
             SongInShoppingCart songToRemove = db.SongsInShoppingCart.First(a => a.Song.SongID == SongID);
-            userloggedin.SongsInShoppingCart.Remove(userloggedin.SongsInShoppingCart.Single(x => x.Song.SongID == SongID));
+            userloggedin.SongsInShoppingCart.Remove(userloggedin.SongsInShoppingCart.First(x => x.Song.SongID == SongID));
             db.SaveChanges();
 
             return View("Index");
@@ -463,7 +543,7 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
             AlbumInShoppingCart albumToRemove = db.AlbumsInShoppingCart.First(a => a.Album.AlbumID == AlbumID);
-            userloggedin.AlbumsInShoppingCart.Remove(userloggedin.AlbumsInShoppingCart.Single(x => x.Album.AlbumID == AlbumID));
+            userloggedin.AlbumsInShoppingCart.Remove(userloggedin.AlbumsInShoppingCart.First(x => x.Album.AlbumID == AlbumID));
             db.SaveChanges();
 
             return View("Index");
