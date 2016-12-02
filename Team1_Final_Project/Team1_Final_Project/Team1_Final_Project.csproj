@@ -233,10 +233,6 @@
     <Compile Include="Migrations\201612011328000_featureditemsallbuilt.Designer.cs">
       <DependentUpon>201612011328000_featureditemsallbuilt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612012145428_featureditemsanddiscounts.cs" />
-    <Compile Include="Migrations\201612012145428_featureditemsanddiscounts.Designer.cs">
-      <DependentUpon>201612012145428_featureditemsanddiscounts.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -390,9 +386,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612011328000_featureditemsallbuilt.resx">
       <DependentUpon>201612011328000_featureditemsallbuilt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612012145428_featureditemsanddiscounts.resx">
-      <DependentUpon>201612012145428_featureditemsanddiscounts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
