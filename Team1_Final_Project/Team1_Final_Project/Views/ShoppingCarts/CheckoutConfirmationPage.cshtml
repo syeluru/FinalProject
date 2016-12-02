@@ -48,19 +48,7 @@
                     <p>@art.ArtistName</p>
                 }     
             </td>
-            @{string AverageSongRatings = "N/A";}
-            @{decimal count = 0;}
-            @{decimal SumRatings = 0;}
-            @foreach (var item in item2.Song.SongRatings)
-                {
-                    SumRatings += item.RatingNumber;
-                    count += 1;
-                    if (count != 0)
-                    {
-                        AverageSongRatings = Decimal.Round((SumRatings / count), 1).ToString();
-                    }
-                }
-            <td>@AverageSongRatings</td>
+            <td>@item2.SongInOrder.AverageSongRating</td>
             <td>
                 @item2.SongInOrder.SongPrice
             </td>

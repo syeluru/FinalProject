@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Team1_Final_Project.Models.Identity;
 using Team1_Final_Project.Models.Rating;
+using Team1_Final_Project.Models.Music;
 
 namespace Team1_Final_Project.Controllers
 {
@@ -60,21 +61,47 @@ namespace Team1_Final_Project.Controllers
                     }      
                 }
 
-                //everything checks out, add it to the database
                 userLoggedIn.Ratings.Add(SongRating);
 
                 db.Ratings.Add(SongRating);
                 db.SaveChanges();
 
+                SongRating.ReviewedSong.AverageSongRating = Decimal.Round(GetSongAverage(SongID),1);
+                db.SaveChanges();
+
                 return RedirectToAction("Details", "Songs", new { id = SongRating.ReviewedSong.SongID});
-
-
             }
             else
             {
                 ViewBag.SongID = SongID;
                 return View(SongRating);
             }
+        }
+
+        public decimal GetSongAverage(int SongID)
+        {
+            Song FoundSong = db.Songs.Find(SongID);
+
+            decimal countVariable = 0;
+            decimal count = 0;
+            decimal RatingAverage = 0;
+
+            foreach (var rating in FoundSong.SongRatings)
+            {
+
+                countVariable += rating.RatingNumber;
+                count += 1;
+            }
+
+            if (count != 0)
+            {
+                RatingAverage = countVariable / count;
+            }
+
+            //ViewBag.SongRatingAverage = RatingAverage;
+
+            return RatingAverage;
+
         }
 
         // GET: Ratings/AddArtistReview

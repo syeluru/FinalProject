@@ -35,12 +35,12 @@ namespace Team1_Final_Project.Models.Music
         [Required(ErrorMessage = "Song Price is required.")]
         [Display(Name = "Song Price")]
         public Decimal SongPrice { get; set; }
+
+        [Display(Name = "Average Song Rating")]
+        public Decimal AverageSongRating { get; set; }
         
         //[Display(Name = "Song Discount")]
         //public Decimal SongDiscount { get; set; }
-
-        //[Display(Name = "Average Song Rating")]
-        //public decimal AverageSongRating { get; set; }
 
         // navigational properties
         public virtual List<Genre> SongGenres { get; set; }
