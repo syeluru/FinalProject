@@ -174,7 +174,7 @@ namespace Team1_Final_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //TODO: Ensure bind does not create any issues
-        public ActionResult EditFromEmployee([Bind(Include = "Id,FName,MName,LName,StreetAddress,City,State,ZipCode,Email,IsAccountEnabled,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AppUser Member)//, int[] SelectedEvents)
+        public ActionResult EditFromEmployee([Bind(Include = "Id,FName,MName,LName,StreetAddress,City,State,ZipCode,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AppUser Member)//, int[] SelectedEvents)
         {
             if (ModelState.IsValid)
             {

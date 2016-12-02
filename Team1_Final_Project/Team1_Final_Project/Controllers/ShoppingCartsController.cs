@@ -215,14 +215,6 @@ namespace Team1_Final_Project.Controllers
                 NewOrder.IsGift = false;
                 NewOrder.RecipientID = userLoggedIn.Id;
 
-                // clear out the shopping cart
-                userLoggedIn.SongsInShoppingCart.Clear();
-                userLoggedIn.AlbumsInShoppingCart.Clear();
-
-                // add the order to the database
-                db.Orders.Add(NewOrder);
-                db.SaveChanges();
-
                 //pick random song
                 //take genre from song
                 //query song with highest rating of that genre
@@ -237,8 +229,9 @@ namespace Team1_Final_Project.Controllers
                         {
                             SongsList.Add(item2.GenreID);
                         }
-                    }     
-                } else
+                    }
+                }
+                else
                 {
                     foreach (var item in userLoggedIn.AlbumsInShoppingCart)
                     {
@@ -262,13 +255,23 @@ namespace Team1_Final_Project.Controllers
                 }
 
                 short RandomGenre = SongsList[0];
-        
+
                 var query = from s in db.Songs where (s.SongGenres.Any(a => a.GenreID == RandomGenre)) select s;
                 //query = from s in db.Songs where (s == s.SongRatings.First(x => x.RatingNumber.Max)) select s; 
-                List <Song> BestSongs = query.ToList();
+                List<Song> BestSongs = query.ToList();
                 String SongRecommendation = BestSongs[0].SongName;
 
                 EmailController.OrderCustomer(userLoggedIn, AllSongsPurchased, AllAlbumsPurchased, SongRecommendation, NewOrder.OrderID);
+
+
+                // clear out the shopping cart
+                userLoggedIn.SongsInShoppingCart.Clear();
+                userLoggedIn.AlbumsInShoppingCart.Clear();
+
+                // add the order to the database
+                db.Orders.Add(NewOrder);
+                db.SaveChanges();
+
 
                 // take the customer to the confirmation pageso they can see the songs/albums they just purchased
                 return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { RecipientID = userLoggedIn.Id, PlacedOrderID = NewOrder.OrderID });
