@@ -11,97 +11,61 @@
 
 <h2>Index</h2>
 
-@foreach (var item in userLoggedIn.Ratings)
-{
+<table class="table">
     <tr>
         <th>
-            Rating Number
+            Item Reviewed
         </th>
-
-        <td>
-            @item.RatingNumber
-        </td>
-
         <th>
-            Review
+            @Html.DisplayNameFor(model => model.RatingNumber)
         </th>
-
-        <td>
-            @item.Review
-        </td>
-
-        <td>
-            Edit
-        </td>
-
-        <td>
-            @if (item.ReviewedAlbum != null)
-            {
-                @Html.ActionLink("Edit Review", "Ratings", "EditAlbumReview", new { id = item.MusicRatingID })
-            }
-            @if (item.ReviewedArtist != null)
-            {
-                @Html.ActionLink("Edit Review", "Ratings", "EditArtistReview", new { id = item.MusicRatingID })
-            }
-            @if (item.ReviewedSong != null)
-            {
-                @Html.ActionLink("Edit Review", "Ratings", "EditSongReview", new { id = item.MusicRatingID })
-            }
-        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Review)
+        </th>
+        <th>
+            Edit Review
+        </th>
     </tr>
-}
 
-
-@*<dl class="dl-horizontal">
-    <dt>
-        @Html.DisplayNameFor(model => model.RatingNumber)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.RatingNumber)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.Review)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.Review)
-    </dd>
-
-</dl>
-</div>*@
-
-@*
-        <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RatingNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Review)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
+    @foreach (var item in userLoggedIn.Ratings)
+    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RatingNumber)
+                @if (item.ReviewedAlbum != null)
+                {
+                    @Html.ActionLink(item.ReviewedAlbum.AlbumName, "Details", "Albums", new { id = item.ReviewedAlbum.AlbumID }, null)
+                }
+                @if (item.ReviewedArtist != null)
+                {
+                    @Html.ActionLink(item.ReviewedArtist.ArtistName, "Details", "Artists", new { id = item.ReviewedArtist.ArtistID }, null)
+                }
+                @if (item.ReviewedSong != null)
+                {
+                    @Html.ActionLink(item.ReviewedSong.SongName, "Details", "Songs", new { id = item.ReviewedSong.SongID }, null)
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Review)
+                @item.RatingNumber
             </td>
+
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MusicRatingID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.MusicRatingID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MusicRatingID })
+                @item.Review
+            </td>
+
+            <td>
+                @if (item.ReviewedAlbum != null)
+                {
+                    @Html.ActionLink("Edit Review", "EditAlbumReview", new { id = item.MusicRatingID })
+                }
+                @if (item.ReviewedArtist != null)
+                {
+                    @Html.ActionLink("Edit Review", "EditArtistReview", new { id = item.MusicRatingID })
+                }
+                @if (item.ReviewedSong != null)
+                {
+                    @Html.ActionLink("Edit Review", "EditSongReview", new { id = item.MusicRatingID })
+                }
             </td>
         </tr>
     }
-
-    </table>
-*@
+</table>

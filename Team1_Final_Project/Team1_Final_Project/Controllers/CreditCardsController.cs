@@ -160,7 +160,7 @@ namespace Team1_Final_Project.Controllers
                     if (count >= 2)
                     {
                         ViewBag.ErrorMessage = "You already have 2 credit cards on file.";
-                        return RedirectToAction("CheckoutPage", "ShoppingCart");
+                        return RedirectToAction("CheckoutPage", "ShoppingCarts");
                     }
                 }
             }
@@ -192,7 +192,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return View("CheckoutPage", "ShoppingCart");
+                return View("CheckoutPage", "ShoppingCarts");
             }
             else if (creditCard.CreditCardNumber.Length == 16)
             {
@@ -219,7 +219,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return View("CheckoutPage","ShoppingCart");
+                return View("CheckoutPage","ShoppingCarts");
             }
 
             else
@@ -249,7 +249,7 @@ namespace Team1_Final_Project.Controllers
                     if (count >= 2)
                     {
                         ViewBag.ErrorMessage = "You already have 2 credit cards on file.";
-                        return RedirectToAction("CheckoutPage", "ShoppingCart");
+                        return RedirectToAction("CheckoutPage", "ShoppingCarts");
                     }
                 }
             }
@@ -281,7 +281,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return View("GiftCheckoutPage", "ShoppingCart");
+                return View("GiftCheckoutPage", "ShoppingCarts");
             }
             else if (creditCard.CreditCardNumber.Length == 16)
             {
@@ -308,7 +308,7 @@ namespace Team1_Final_Project.Controllers
                 //add the credit card to the db
                 db.CreditCards.Add(creditCard);
                 db.SaveChanges();
-                return View("GiftCheckoutPage", "ShoppingCart");
+                return View("GiftCheckoutPage", "ShoppingCarts");
             }
 
             else
