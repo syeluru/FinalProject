@@ -357,6 +357,10 @@
     <Content Include="Views\Members\EmployeeDetails.cshtml" />
     <Content Include="Views\FeaturedItems\SetFeaturedArtist.cshtml" />
     <Content Include="Views\FeaturedItems\SetFeaturedAlbum.cshtml" />
+    <Content Include="Views\Ratings\EditAlbumReview.cshtml" />
+    <Content Include="Views\Ratings\EditArtistReview.cshtml" />
+    <Content Include="Views\Ratings\EditSongReview.cshtml" />
+    <Content Include="Views\Music\AdvancedSearchIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
