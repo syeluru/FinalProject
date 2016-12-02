@@ -217,6 +217,9 @@ namespace Team1_Final_Project.Controllers
 
                 if (result.Succeeded) //user was created successfully
                 {
+                    //Send confirmation email
+                    EmailController.AccountCreation(user, "dpimentel.p@gmail.com", null, null);
+
                     //sign the user in
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
