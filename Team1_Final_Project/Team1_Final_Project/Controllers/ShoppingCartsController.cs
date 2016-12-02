@@ -231,7 +231,7 @@ namespace Team1_Final_Project.Controllers
                         }
                     }
                 }
-                else
+                if (userLoggedIn.AlbumsInShoppingCart != null || userLoggedIn.AlbumsInShoppingCart.Count() > 0)
                 {
                     foreach (var item in userLoggedIn.AlbumsInShoppingCart)
                     {
@@ -263,7 +263,6 @@ namespace Team1_Final_Project.Controllers
 
                 EmailController.OrderCustomer(userLoggedIn, AllSongsPurchased, AllAlbumsPurchased, SongRecommendation, NewOrder.OrderID);
 
-
                 // clear out the shopping cart
                 userLoggedIn.SongsInShoppingCart.Clear();
                 userLoggedIn.AlbumsInShoppingCart.Clear();
@@ -271,7 +270,6 @@ namespace Team1_Final_Project.Controllers
                 // add the order to the database
                 db.Orders.Add(NewOrder);
                 db.SaveChanges();
-
 
                 // take the customer to the confirmation pageso they can see the songs/albums they just purchased
                 return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { RecipientID = userLoggedIn.Id, PlacedOrderID = NewOrder.OrderID });

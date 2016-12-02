@@ -1,7 +1,11 @@
-﻿@model Team1_Final_Project.Models.Purchases.CreditCard
+﻿@using Team1_Final_Project.Models.Identity
+@using Team1_Final_Project.Models.Purchases
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Details";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 }
 
 <h2>Credit Card Information</h2>
@@ -9,24 +13,25 @@
 <div>
     <h4>Credit Cards</h4>
     <hr />
+
+    @foreach (CreditCard card in userLoggedIn.CreditCards) {
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CreditCardType)
+            Credit Card Info
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreditCardType)
+            **** **** **** @card.CreditCardNumber.Substring(@card.CreditCardNumber.Length - 4) @card.CreditCardType.ToString()
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CreditCardNumber)
+            @Html.ActionLink("Edit", "Edit", new { id = card.CreditCardID }) |
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreditCardNumber)
-        </dd>
+        <dd></dd>
     </dl>
+    }
 </div>
+
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CreditCardID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
