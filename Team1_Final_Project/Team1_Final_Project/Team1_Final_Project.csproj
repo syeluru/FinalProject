@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201612020847293_discount-changes.Designer.cs">
       <DependentUpon>201612020847293_discount-changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612021028254_discountchangesround4.cs" />
+    <Compile Include="Migrations\201612021028254_discountchangesround4.Designer.cs">
+      <DependentUpon>201612021028254_discountchangesround4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -402,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612020847293_discount-changes.resx">
       <DependentUpon>201612020847293_discount-changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021028254_discountchangesround4.resx">
+      <DependentUpon>201612021028254_discountchangesround4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

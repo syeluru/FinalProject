@@ -62,10 +62,13 @@ namespace Team1_Final_Project.Controllers
             {
                 // find the current discount for the song
 
-                Discount currentDiscountForThisSong = db.Discounts.First(a => a.DiscountedSong.SongID == SelectedSong);
-                if (currentDiscountForThisSong != null)
-                {
-                    currentDiscountForThisSong.IsActiveDiscount = false;
+                if (db.Discounts.Any(a => a.DiscountedSong.SongID == SelectedSong)) {
+                    Discount currentDiscountForThisSong = db.Discounts.First(a => a.DiscountedSong.SongID == SelectedSong);
+                    if (currentDiscountForThisSong != null)
+                    {
+                        currentDiscountForThisSong.IsActiveDiscount = false;
+                    }
+
                 }
                 discount.DiscountedSong = db.Songs.Find(SelectedSong);
                 db.Discounts.Add(discount);
@@ -85,10 +88,14 @@ namespace Team1_Final_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                Discount currentDiscountForThisAlbum = db.Discounts.First(a => a.DiscountedSong.SongID == SelectedAlbum);
-                if (currentDiscountForThisAlbum != null)
+                if (db.Discounts.Any(a => a.DiscountedSong.SongID == SelectedAlbum))
                 {
-                    currentDiscountForThisAlbum.IsActiveDiscount = false;
+                    Discount currentDiscountForThisAlbum = db.Discounts.First(a => a.DiscountedAlbum.AlbumID == SelectedAlbum);
+                    if (currentDiscountForThisAlbum != null)
+                    {
+                        currentDiscountForThisAlbum.IsActiveDiscount = false;
+                    }
+
                 }
 
                 discount.DiscountedAlbum = db.Albums.Find(SelectedAlbum);

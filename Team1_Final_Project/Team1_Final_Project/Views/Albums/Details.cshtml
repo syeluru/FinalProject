@@ -86,11 +86,23 @@
         </tr>
         @{decimal count4 = 0;}
         @foreach (var item in Model.AlbumRatings)
+        {
+            if (item.Review != "" && item.Review != null)
             {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Review)</td>
-            </tr>
-            count4 += 1;
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Review)</td>
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <td>@Html.ActionLink("Edit Review", "EditAlbumReview", "Ratings", new { id = item.ReviewedAlbum.AlbumID }, null)</td>
+                    }
+                    else
+                    {
+                        <td>@Html.ActionLink("Edit Rating and Review", "EditAlbumReview", "Ratings", new { id = item.ReviewedAlbum.AlbumID }, null)</td>
+                    }
+
+                </tr>
+            }
+
         }
         @if (count4 == 0)
             {

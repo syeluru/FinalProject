@@ -87,6 +87,7 @@
                 <th>
                     Reviews
                 </th>
+                <th></th>
             </tr>
             @{decimal count2 = 0;}
             @foreach (var item in Model.SongRatings)
@@ -95,6 +96,15 @@
                 {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.Review)</td>
+                    @if (User.IsInRole("Customer"))
+                    {
+                    <td>@Html.ActionLink("Edit Review", "EditSongReview", "Ratings", new { id = item.ReviewedSong.SongID }, null)</td>
+                    }
+                    else
+                    {
+                        <td>@Html.ActionLink("Edit Rating and Review", "EditSongReview", "Ratings", new { id = item.ReviewedSong.SongID }, null)</td>
+                    }
+                    
                 </tr>
                 }
 
