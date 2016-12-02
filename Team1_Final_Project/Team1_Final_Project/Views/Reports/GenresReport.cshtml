@@ -3,8 +3,20 @@
 @using Team1_Final_Project.Models.Identity
 
 @{
-    ViewBag.Title = "BandsReport";
-    AppDbContext db = new AppDbContext();
+        ViewBag.Title = "BandsReport";
+        AppDbContext db = new AppDbContext();
+    }
+@{ 
+    //int computeTotalRevenue(Artist artist)
+    {
+
+
+
+
+
+
+        
+    }
 
 }
 
@@ -34,7 +46,7 @@
         <th>
             Total Revenue
         </th>
-@*
+
     </tr>
 
     @foreach (Genre genre in db.Genres)
@@ -100,6 +112,7 @@
 
         }
 
+        // assuming that the artist revenue dictionary correctly populated
         int max = ArtistRevenueDictionary.OrderByDescending(x => x.Value).FirstOrDefault().Key;
         Artist TopSellingArtist = db.Artists.Find(max);
 
@@ -132,7 +145,7 @@
             </td>
         </tr>
     }
-    *@
+    
 
 </table>
 

@@ -301,7 +301,6 @@
     <Content Include="Views\CreditCards\Details.cshtml" />
     <Content Include="Views\CreditCards\Edit.cshtml" />
     <Content Include="Views\CreditCards\Index.cshtml" />
-    <Content Include="Views\ShoppingCarts\Delete.cshtml" />
     <Content Include="Views\ShoppingCarts\Index.cshtml" />
     <Content Include="Views\Music\SongAdvancedSearch.cshtml" />
     <Content Include="Views\Music\BasicSearch.cshtml" />
