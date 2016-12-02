@@ -538,8 +538,6 @@ namespace Team1_Final_Project.Controllers
                 RatingAverage = countVariable / count;
             }
 
-            //ViewBag.AlbumRatingAverage = RatingAverage;
-
             return RatingAverage;
 
         }

@@ -233,13 +233,13 @@
     <Compile Include="Migrations\201612011328000_featureditemsallbuilt.Designer.cs">
       <DependentUpon>201612011328000_featureditemsallbuilt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612012145428_featureditemsanddiscounts.cs" />
-    <Compile Include="Migrations\201612012145428_featureditemsanddiscounts.Designer.cs">
-      <DependentUpon>201612012145428_featureditemsanddiscounts.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201612020714227_orderrefundchanges.cs" />
     <Compile Include="Migrations\201612020714227_orderrefundchanges.Designer.cs">
       <DependentUpon>201612020714227_orderrefundchanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612021011202_sorrydonthateme.cs" />
+    <Compile Include="Migrations\201612021011202_sorrydonthateme.Designer.cs">
+      <DependentUpon>201612021011202_sorrydonthateme.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
@@ -397,11 +397,11 @@
     <EmbeddedResource Include="Migrations\201612011328000_featureditemsallbuilt.resx">
       <DependentUpon>201612011328000_featureditemsallbuilt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612012145428_featureditemsanddiscounts.resx">
-      <DependentUpon>201612012145428_featureditemsanddiscounts.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612020714227_orderrefundchanges.resx">
       <DependentUpon>201612020714227_orderrefundchanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612021011202_sorrydonthateme.resx">
+      <DependentUpon>201612021011202_sorrydonthateme.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
