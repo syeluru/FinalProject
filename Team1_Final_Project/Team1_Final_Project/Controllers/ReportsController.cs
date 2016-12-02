@@ -26,6 +26,16 @@ namespace Team1_Final_Project.Controllers
 
         }
 
+        public ActionResult AlbumsReport()
+        {
+            return View();
+        }
+
+        public ActionResult ArtistsReport()
+        {
+            return View();
+        }
+
         //// GET: Reports/SongsReport
         //public ActionResult SongsReport()
         //{

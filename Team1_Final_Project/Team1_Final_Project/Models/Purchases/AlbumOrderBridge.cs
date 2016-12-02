@@ -11,7 +11,8 @@ namespace Team1_Final_Project.Models.Purchases
 {
     public class AlbumOrderBridge
     {   
-        //just adding an ID so that the website stops throwing errors, can change the variable name later
+        [Required]
+        [Display(Name = "Album in Order Bridge ID")]
         public Int32 AlbumOrderBridgeID { get; set; }
 
         public decimal PriceAtPointOfPurchase { get; set; }

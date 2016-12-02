@@ -1,0 +1,53 @@
+﻿@using Team1_Final_Project.Models.Music
+@using Team1_Final_Project.Models.Purchases
+@using Team1_Final_Project.Models.Identity
+
+@{
+    ViewBag.Title = "AlbumsReport";
+    AppDbContext db = new AppDbContext();
+
+}
+
+<h2>Albums Report</h2>
+<p>Report to list all albums, the number of purchases per album, and the amount of revenue earned on that album.</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Album Name
+        </th>
+        <th>
+            Number of Purchases
+        </th>
+        <th>
+            Total Revenue Earned
+        </th>
+
+    </tr>
+
+    @foreach (Album album in db.Albums)
+    {
+        int NumberPurchases = 0;
+        NumberPurchases = album.AlbumOrderBridges.Count();
+
+        decimal TotalRevenue = 0.0m;
+        foreach (AlbumOrderBridge albumorder in album.AlbumOrderBridges)
+        {
+            TotalRevenue += albumorder.PriceAtPointOfPurchase;
+        }
+
+        <tr>
+            <td>
+                @album.AlbumName
+            </td>
+            <td>
+                @NumberPurchases
+            </td>
+            <td>
+                @String.Format("{0:C}", TotalRevenue)
+            </td>
+        </tr>
+    }
+
+
+</table>

@@ -144,11 +144,31 @@ namespace Team1_Final_Project.Controllers
                 {
                     Song songToAdd = db.Songs.Find(song.Song.SongID);
                     SongOrderBridge songBridgeToAdd = new SongOrderBridge();
+                    decimal SongPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in songToAdd.SongDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    SongPricePostDiscounts = songToAdd.SongPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
                     songBridgeToAdd.Song = songToAdd;
+
+                    // add to the order
                     NewOrder.SongsInOrder.Add(songBridgeToAdd);
 
                     // add all the songs to the customer's songs list
                     userLoggedIn.Songs.Add(songToAdd);
+                    db.SaveChanges();
 
                 }
 
@@ -157,7 +177,27 @@ namespace Team1_Final_Project.Controllers
                 {
                     Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
                     AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
+
+                    decimal AlbumPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in albumToAdd.AlbumDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    AlbumPricePostDiscounts = albumToAdd.AlbumPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
                     albumBridgeToAdd.Album = albumToAdd;
+
+                    // add to the order
                     NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
 
                     // add all the albums to the customer's albums list
@@ -242,7 +282,27 @@ namespace Team1_Final_Project.Controllers
                 {
                     Song songToAdd = db.Songs.Find(song.Song.SongID);
                     SongOrderBridge songBridgeToAdd = new SongOrderBridge();
+
+                    decimal SongPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in songToAdd.SongDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    SongPricePostDiscounts = songToAdd.SongPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    songBridgeToAdd.PriceAtPointOfPurchase = SongPricePostDiscounts * 1.0825m;
                     songBridgeToAdd.Song = songToAdd;
+
+                    // add to order
                     NewOrder.SongsInOrder.Add(songBridgeToAdd);
 
                     // add all the songs to the recipient's songs list
@@ -255,7 +315,27 @@ namespace Team1_Final_Project.Controllers
                 {
                     Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
                     AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
+
+                    decimal AlbumPricePostDiscounts = 0.0m;
+
+                    // calculate total discounts
+                    decimal TotalDiscounts = 0.0m;
+                    foreach (Discount discount in albumToAdd.AlbumDiscounts)
+                    {
+                        if (discount.IsActiveDiscount)
+                        {
+                            TotalDiscounts += discount.DiscountAmount;
+
+                        }
+
+                    }
+                    AlbumPricePostDiscounts = albumToAdd.AlbumPrice - TotalDiscounts;
+
+                    //properties of songbridgetoadd
+                    albumBridgeToAdd.PriceAtPointOfPurchase = AlbumPricePostDiscounts * 1.0825m;
                     albumBridgeToAdd.Album = albumToAdd;
+
+                    // add to the order
                     NewOrder.AlbumsInOrder.Add(albumBridgeToAdd);
 
                     // add all the albums to the recipient's albums list
