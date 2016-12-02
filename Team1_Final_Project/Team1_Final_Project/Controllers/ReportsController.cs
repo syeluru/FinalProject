@@ -17,7 +17,7 @@ namespace Team1_Final_Project.Controllers
             return View();
         }
 
-        /*
+        
         // GET: Reports/Create
         public ActionResult SongsReport()
         {
@@ -26,32 +26,31 @@ namespace Team1_Final_Project.Controllers
 
         }
 
-        // POST: Reports/Create
-        [HttpPost]
-        public ActionResult SongsReport()
-        {
+        //// GET: Reports/SongsReport
+        //public ActionResult SongsReport()
+        //{
    
-            foreach (var item in db.Songs)
-            {
+        //    foreach (var item in db.Songs)
+        //    {
 
-                var query = from songs in item.SongOrderBridges
-                            select songs;
+        //        var query = from songs in item.SongOrderBridges
+        //                    select songs;
 
-                query = item.SongOrderBridges.Count()
+        //        query = item.SongOrderBridges.Count()
 
-                    Songs.Song
+        //            Songs.Song
 
-            }
+        //    }
 
-            int count = (from x in  select x).Count();
+        //    int count = (from x in  select x).Count();
 
-            query = 
+        //    query = 
 
-            return View();
-            }
+        //    return View();
+        //    }
 
 
-    */
+    
 
         
     }
