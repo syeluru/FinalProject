@@ -1,12 +1,23 @@
 ﻿@model Team1_Final_Project.Models.Music.Album
 @using Microsoft.AspNet.Identity
 @using Team1_Final_Project.Models.Identity
+@using Team1_Final_Project.Models.Purchases
 
 @{
     ViewBag.Title = "Details";
     AppDbContext db = new AppDbContext();
     AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+    decimal TotalDiscounts = 0.0m;
+    foreach (Discount discount in Model.AlbumDiscounts )
+    {
+        if (discount.IsActiveDiscount)
+        {
+            TotalDiscounts += discount.DiscountAmount;
 
+        }
+
+    }
+    decimal SalePrice = Model.AlbumPrice - TotalDiscounts;
 }
 
 <h2>Details</h2>
@@ -32,11 +43,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AlbumDiscount)
+            Album Discounts
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AlbumDiscount)
+            @TotalDiscounts
+        </dd>
+
+        <dt>
+            Sale Price
+        </dt>
+
+        <dd>
+            @SalePrice
         </dd>
 
         <dt>

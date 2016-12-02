@@ -58,7 +58,12 @@ namespace Team1_Final_Project.Controllers
             return View(SearchMusicViewModel);
         }
 
-        
+        // GET: Advanced Search Index
+        public ActionResult AdvancedSearchIndex()
+        {
+            return View();
+        }
+
         // GET: Advanced Song Search
         public ActionResult SongAdvancedSearch()
         {
