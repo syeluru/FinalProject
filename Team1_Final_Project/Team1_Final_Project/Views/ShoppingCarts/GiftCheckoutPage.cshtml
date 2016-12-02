@@ -42,7 +42,10 @@
                 @item2.Song.SongName
             </td>
             <td>
-                @item2.Song.SongArtists
+                @foreach (var artist in item2.Song.SongArtists)
+                {
+                    @artist.ArtistName<span>&nbsp;|&nbsp;</span>
+                }
             </td>
             <td>
                 <!--Ratings -->
@@ -85,7 +88,10 @@
                 @item2.Album.AlbumName
             </td>
             <td>
-                @item2.Album.AlbumArtists
+                @foreach (var artist in item2.Song.SongArtists)
+                {
+                    @artist.ArtistName<span>&nbsp;|&nbsp;</span>
+                }
             </td>
             <td>
                 <!--Ratings -->

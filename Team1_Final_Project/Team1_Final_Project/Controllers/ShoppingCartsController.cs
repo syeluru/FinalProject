@@ -67,13 +67,13 @@ namespace Team1_Final_Project.Controllers
 
             userLoggedIn.SongsInShoppingCart.Add(newsong);
             db.SaveChanges();
-            
+
 
 
 
 
             // return them to song index after they're done browsing
-            return RedirectToAction("BasicSearch","Music",new {SearchString = ""});
+            return RedirectToAction("ShoppingCartIndex");
         }
 
         public ActionResult AddAlbum(int AlbumID)
@@ -89,7 +89,7 @@ namespace Team1_Final_Project.Controllers
             
 
             // return them to song index after they're done browsing
-            return RedirectToAction("BasicSearch", "Music");
+            return RedirectToAction("ShoppingCartIndex");
         }
 
         //still need to do

@@ -41,10 +41,10 @@
     {
         <tr>
             <td>
-                @item2.Song.SongName
+                @item2.SongInOrder.SongName
             </td>
             <td>
-                @foreach (var art in item2.Song.SongArtists) {
+                @foreach (var art in item2.SongInOrder.SongArtists) {
                     <p>@art.ArtistName</p>
                 }
                 
@@ -54,7 +54,7 @@
                 <!-- Average Rating -->
             </td>
             <td>
-                @item2.Song.SongPrice
+                @item2.SongInOrder.SongPrice
             </td>
 
 
@@ -86,10 +86,10 @@
     {
         <tr>
             <td>
-                @item2.Album.AlbumName
+                @item2.AlbumInOrder.AlbumName
             </td>
             <td>
-                @foreach (var art in item2.Album.AlbumArtists)
+                @foreach (var art in item2.AlbumInOrder.AlbumArtists)
                 {
                     <p>@art.ArtistName</p>
                 }
@@ -98,7 +98,7 @@
                 <!--Ratings -->
             </td>
             <td>
-                @item2.Album.AlbumPrice
+                @item2.AlbumInOrder.AlbumPrice
             </td>
             
         </tr>
@@ -121,7 +121,7 @@
     // need a viewbag.recipientID when calling this view
 }
 <p><em>Credit Card Used:</em> @FormattedCreditCardUsed</p>
-<p><em>Recipient:</em> @Recipient.FName + @Recipient.LName</p>
+<p><em>Recipient:</em> @Recipient.FName @Recipient.LName</p>
 
 <table>
     <tr>

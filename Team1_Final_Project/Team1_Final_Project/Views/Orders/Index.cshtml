@@ -36,8 +36,8 @@
         </td>
         <td>
             @{
-                CreditCard LastFourCreditCard = item.CreditCardUsed;
-                string FormattedCreditCardUsed = "**** **** ****" + LastFourCreditCard.CreditCardNumber.Substring(-4);
+                string LastFourCreditCard = item.CreditCardUsed.CreditCardNumber;
+                string FormattedCreditCardUsed = "**** **** ****" + LastFourCreditCard.Substring(LastFourCreditCard.Length-4);
                 // need a viewbag.recipientID when calling this view
             }
             @Html.DisplayFor(modelItem => LastFourCreditCard)

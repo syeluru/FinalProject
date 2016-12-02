@@ -130,16 +130,10 @@ namespace Team1_Final_Project.Controllers
             }
 
             // remove the song order bridge from bridge table
-            foreach (SongOrderBridge songorder in order.SongsInOrder)
-            {
-                order.SongsInOrder.Remove(songorder);
-            }
+            order.SongsInOrder.Clear();
+            order.AlbumsInOrder.Clear();
 
-            // remove the album order bridge from bridge table
-            foreach (AlbumOrderBridge albumorder in order.AlbumsInOrder)
-            {
-                order.AlbumsInOrder.Remove(albumorder);
-            }
+            
 
             db.Orders.Remove(order);
 
