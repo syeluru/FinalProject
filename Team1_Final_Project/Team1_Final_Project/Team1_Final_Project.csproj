@@ -195,6 +195,7 @@
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\CreditCardsController.cs" />
     <Compile Include="Controllers\DiscountsController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\FeaturedItemsController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -241,29 +242,9 @@
     <Compile Include="Migrations\201612020847293_discount-changes.Designer.cs">
       <DependentUpon>201612020847293_discount-changes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612021028254_discountchangesround4.cs" />
-    <Compile Include="Migrations\201612021028254_discountchangesround4.Designer.cs">
-      <DependentUpon>201612021028254_discountchangesround4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021136541_morethingsfromsai.cs" />
-    <Compile Include="Migrations\201612021136541_morethingsfromsai.Designer.cs">
-      <DependentUpon>201612021136541_morethingsfromsai.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021108025_notapieceofshit.cs" />
-    <Compile Include="Migrations\201612021108025_notapieceofshit.Designer.cs">
-      <DependentUpon>201612021108025_notapieceofshit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021144000_fuckthis.cs" />
-    <Compile Include="Migrations\201612021144000_fuckthis.Designer.cs">
-      <DependentUpon>201612021144000_fuckthis.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021405037_averagestuff.cs" />
-    <Compile Include="Migrations\201612021405037_averagestuff.Designer.cs">
-      <DependentUpon>201612021405037_averagestuff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612021433199_averageshopefullyworking.cs" />
-    <Compile Include="Migrations\201612021433199_averageshopefullyworking.Designer.cs">
-      <DependentUpon>201612021433199_averageshopefullyworking.cs</DependentUpon>
+    <Compile Include="Migrations\201612040559188_yooo.cs" />
+    <Compile Include="Migrations\201612040559188_yooo.Designer.cs">
+      <DependentUpon>201612040559188_yooo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201612021438552_sai122838am.cs" />
     <Compile Include="Migrations\201612021438552_sai122838am.Designer.cs">
@@ -396,6 +377,7 @@
     <Content Include="Views\Reports\SongsReport.cshtml" />
     <Content Include="Views\Reports\AlbumsReport.cshtml" />
     <Content Include="Views\Reports\GenresReport.cshtml" />
+    <Content Include="Views\Account\CustomerLibrary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -405,6 +387,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611291805076_please.resx">
@@ -431,23 +414,8 @@
     <EmbeddedResource Include="Migrations\201612020847293_discount-changes.resx">
       <DependentUpon>201612020847293_discount-changes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021028254_discountchangesround4.resx">
-      <DependentUpon>201612021028254_discountchangesround4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021136541_morethingsfromsai.resx">
-      <DependentUpon>201612021136541_morethingsfromsai.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021108025_notapieceofshit.resx">
-      <DependentUpon>201612021108025_notapieceofshit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021144000_fuckthis.resx">
-      <DependentUpon>201612021144000_fuckthis.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021405037_averagestuff.resx">
-      <DependentUpon>201612021405037_averagestuff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612021433199_averageshopefullyworking.resx">
-      <DependentUpon>201612021433199_averageshopefullyworking.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612040559188_yooo.resx">
+      <DependentUpon>201612040559188_yooo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612021438552_sai122838am.resx">
       <DependentUpon>201612021438552_sai122838am.cs</DependentUpon>

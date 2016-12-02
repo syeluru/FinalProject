@@ -4,74 +4,102 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Order Details</h2>
+<h2>Order @Model.OrderID Details</h2>
 
-<div>
+<br />
+
     <h4>Songs in Order</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            Song
-        </dt>
-        <dt>
-            Artist
-        </dt>
-        <dt>
-            Album
-        </dt>
-        <dt>
-            Price
-        </dt>
+    <table class="table">
+        <tr>
+            <th>
+                Song
+            </th>
+            <th>
+                Artist
+            </th>
+            <th>
+                Album
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
 
         @foreach (var item in Model.SongsInOrder)
         {
-            <dd>
-                @Html.DisplayFor(model => item.Song)
-            </dd>
-            <dd>
-                @Html.DisplayFor(model => item.Song.SongArtists)
-            </dd>
-            <dd>
-                @Html.DisplayFor(model => item.Song.SongAlbums)
-            </dd>
-            <dd>
-                @Html.DisplayFor(model => item.PriceAtPointOfPurchase)
-            </dd>
-        }
-    </dl>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Song.SongName)
+                </td>
 
-    <h4>Songs in Order</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            Album
-        </dt>
-        <dt>
-            Artist
-        </dt>
-        <dt>
-            Genre
-        </dt>
-        <dt>
-            Price
-        </dt>
+                @foreach (var item2 in item.Song.SongArtists)
+                { 
+                    <td>
+                        @Html.DisplayFor(model => item2.ArtistName)
+                    </td>
+                }
+                @foreach (var item3 in item.Song.SongAlbums)
+                { 
+                <td>
+
+                    @Html.DisplayFor(model => item3.AlbumName)
+                </td>
+                }
+
+                <td>
+                    @Html.DisplayFor(model => item.PriceAtPointOfPurchase)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <br />
+
+    <h4>Albums in Order</h4>
+    <table class="table">
+        <tr>
+            <th>
+                Album
+            </th>
+            <th>
+                Artist
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
 
         @foreach (var item in Model.AlbumsInOrder)
         {
-            <dd>
-                @Html.DisplayFor(model => item.Album)
-            </dd>
-            <dd>
-                @Html.DisplayFor(model => item.Album.AlbumArtists)
-            </dd>
-            <dd>
-                @Html.DisplayFor(model => item.Album.AlbumGenres)
-            </dd>
-            <dd>
-                @Html.DisplayFor(model => item.PriceAtPointOfPurchase)
-            </dd>
-        }
-    </dl>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Album.AlbumName)
+                </td>
+                @foreach (var item2 in item.Album.AlbumArtists)
+                {
+                    <td>
+                        @Html.DisplayFor(model => item2.ArtistName)
+                    </td>
+                }
 
-</div>
+                @foreach (var item3 in item.Album.AlbumGenres)
+                { 
+                    <td>
+                        @Html.DisplayFor(model => item3.GenreName)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(model => item.PriceAtPointOfPurchase)
+                </td>
+            </tr>
+        }
+
+    </table>
+
 <p>
     <!--Is edit necessary?-->
     @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) | 

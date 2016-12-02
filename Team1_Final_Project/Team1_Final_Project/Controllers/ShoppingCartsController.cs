@@ -223,13 +223,56 @@ namespace Team1_Final_Project.Controllers
                 db.Orders.Add(NewOrder);
                 db.SaveChanges();
 
-                // send a new email
+                //pick random song
+                //take genre from song
+                //query song with highest rating of that genre
+
+                List<short> SongsList = new List<short>();
+
+                if (userLoggedIn.SongsInShoppingCart != null || userLoggedIn.SongsInShoppingCart.Count() > 0)
+                {
+                    foreach (var item in userLoggedIn.SongsInShoppingCart)
+                    {
+                        foreach (var item2 in item.Song.SongGenres)
+                        {
+                            SongsList.Add(item2.GenreID);
+                        }
+                    }     
+                } else
+                {
+                    foreach (var item in userLoggedIn.AlbumsInShoppingCart)
+                    {
+                        foreach (var item2 in item.Album.AlbumGenres)
+                        {
+                            SongsList.Add(item2.GenreID);
+                        }
+                    }
+                }
+
+                String AllSongsPurchased = "";
+                foreach (var item in userLoggedIn.SongsInShoppingCart)
+                {
+                    AllSongsPurchased += item.Song.SongName + ", ";
+                }
+
+                String AllAlbumsPurchased = " ";
+                foreach (var item in userLoggedIn.AlbumsInShoppingCart)
+                {
+                    AllAlbumsPurchased += item.Album.AlbumName + ", ";
+                }
+
+                short RandomGenre = SongsList[0];
+        
+                var query = from s in db.Songs where (s.SongGenres.Any(a => a.GenreID == RandomGenre)) select s;
+                //query = from s in db.Songs where (s == s.SongRatings.First(x => x.RatingNumber.Max)) select s; 
+                List <Song> BestSongs = query.ToList();
+                String SongRecommendation = BestSongs[0].SongName;
+
+                EmailController.OrderCustomer(userLoggedIn, AllSongsPurchased, AllAlbumsPurchased, SongRecommendation, NewOrder.OrderID);
 
                 // take the customer to the confirmation pageso they can see the songs/albums they just purchased
                 return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { RecipientID = userLoggedIn.Id, PlacedOrderID = NewOrder.OrderID });
             }
-
-            
         }
 
         [Authorize(Roles = "Customer")]
@@ -342,7 +385,6 @@ namespace Team1_Final_Project.Controllers
                     // add all the albums to the recipient's albums list
                     friend.Albums.Add(albumToAdd);
 
-
                 }
 
                 // add the total price to the order
@@ -363,7 +405,20 @@ namespace Team1_Final_Project.Controllers
                 db.Orders.Add(NewOrder);
                 db.SaveChanges();
 
+                String GiftSongs = "";
+                foreach (var item in NewOrder.SongsInOrder)
+                {
+                    GiftSongs += item.SongInOrder.SongName + ", ";
+                }
+
+                String GiftAlbums = " ";
+                foreach (var item in NewOrder.AlbumsInOrder)
+                {
+                    GiftAlbums += item.AlbumInOrder.AlbumName + ", ";
+                }
+
                 // send a new email to the recipient and the user who just placed the order
+                EmailController.OrderGift(userLoggedIn, friend, GiftSongs, GiftAlbums);
 
                 // take the customer to the order confirmation page so they can see the songs/albums they just purchased
                 return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { RecipientID = friend.Id, PlacedOrderID = NewOrder.OrderID });
