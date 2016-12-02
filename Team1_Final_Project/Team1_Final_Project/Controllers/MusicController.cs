@@ -198,14 +198,14 @@ namespace Team1_Final_Project.Controllers
                 {
                     query = query.OrderByDescending(d => d.SongName);
                 }
-                    else if (SelectedSortOrder == SortOrder.AscendingArtist)
-                    {
-                        query = query.OrderBy(d => d.SongArtists.First().ArtistName);
-                    }
-                    else if (SelectedSortOrder == SortOrder.DescendingArtist)
-                    {
-                        query = query.OrderByDescending(d => d.SongArtists.First().ArtistName);
-                    }
+                else if (SelectedSortOrder == SortOrder.AscendingArtist)
+                {
+                    query = query.OrderBy(d => d.SongArtists.First().ArtistName);
+                }
+                else if (SelectedSortOrder == SortOrder.DescendingArtist)
+                {
+                    query = query.OrderByDescending(d => d.SongArtists.First().ArtistName);
+                }
                 else if (SelectedSortOrder == SortOrder.AscendingRating)
                 {
                     query = query.OrderBy(d => d.SongAverage);
@@ -248,7 +248,7 @@ namespace Team1_Final_Project.Controllers
             //code to find artists by name
             if (ArtistSearchString != null && ArtistSearchString != "")
             {
-                query = query.Where(c => c.ArtistName == ArtistSearchString);
+                query = query.Where(c => c.ArtistName.Contains(ArtistSearchString));
             }
 
             //code to find artists by rating
@@ -376,13 +376,13 @@ namespace Team1_Final_Project.Controllers
             //code to find albums by name
             if (AlbumSearchString != null && AlbumSearchString != "")
             {
-                query = query.Where(c => c.AlbumName == AlbumSearchString);
+                query = query.Where(c => c.AlbumName.Contains(AlbumSearchString));
             }
 
             //code to find albums by artist
             if (ArtistSearchString != null && ArtistSearchString != "")
             {
-                query = query.Where(c => c.AlbumArtists.Any(g => g.ArtistName == ArtistSearchString));
+                query = query.Where(c => c.AlbumArtists.Any(g => g.ArtistName.Contains(ArtistSearchString)));
             }
 
             //code to find albums by rating
