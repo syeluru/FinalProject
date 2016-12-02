@@ -73,7 +73,7 @@ namespace Team1_Final_Project.Controllers
 
 
             // return them to song index after they're done browsing
-            return RedirectToAction("BasicSearch","Music");
+            return RedirectToAction("BasicSearch","Music",new {SearchString = ""});
         }
 
         public ActionResult AddAlbum(int AlbumID)
@@ -449,7 +449,7 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
             SongInShoppingCart songToRemove = db.SongsInShoppingCart.First(a => a.Song.SongID == SongID);
-            userloggedin.SongsInShoppingCart.Remove(userloggedin.SongsInShoppingCart.Single(x => x.Song.SongID == SongID));
+            userloggedin.SongsInShoppingCart.Remove(userloggedin.SongsInShoppingCart.First(x => x.Song.SongID == SongID));
             db.SaveChanges();
 
             return View("Index");
@@ -463,7 +463,7 @@ namespace Team1_Final_Project.Controllers
         {
             AppUser userloggedin = db.Users.Find(User.Identity.GetUserId());
             AlbumInShoppingCart albumToRemove = db.AlbumsInShoppingCart.First(a => a.Album.AlbumID == AlbumID);
-            userloggedin.AlbumsInShoppingCart.Remove(userloggedin.AlbumsInShoppingCart.Single(x => x.Album.AlbumID == AlbumID));
+            userloggedin.AlbumsInShoppingCart.Remove(userloggedin.AlbumsInShoppingCart.First(x => x.Album.AlbumID == AlbumID));
             db.SaveChanges();
 
             return View("Index");
