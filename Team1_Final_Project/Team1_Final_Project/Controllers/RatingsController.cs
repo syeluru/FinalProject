@@ -50,12 +50,22 @@ namespace Team1_Final_Project.Controllers
 
                 SongRating.ReviewedSong = db.Songs.Find(SongID);
 
+                // check to see that there are no duplicates first of all
+                foreach (var item in userLoggedIn.Ratings)
+                {
+                    if (item.ReviewedSong != null && item.ReviewedSong.SongID == SongID)
+                    {
+                        ViewBag.ErrorMessage = "You can only review a song once.";
+                        return View("AddSongReview");
+                    }      
+                }
+
+                //everything checks out, add it to the database
                 userLoggedIn.Ratings.Add(SongRating);
 
                 db.Ratings.Add(SongRating);
                 db.SaveChanges();
 
-                
                 return RedirectToAction("Details", "Songs", new { id = SongRating.ReviewedSong.SongID});
 
 
@@ -94,10 +104,20 @@ namespace Team1_Final_Project.Controllers
                 AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 
                 ArtistRating.ReviewedArtist = db.Artists.Find(ArtistID);
-                db.Ratings.Add(ArtistRating);
-                db.SaveChanges();
+
+                // check to see that there are no duplicates first of all
+                foreach (var item in userLoggedIn.Ratings)
+                {
+                    if (item.ReviewedArtist != null && item.ReviewedArtist.ArtistID == ArtistID)
+                    {
+                        ViewBag.ErrorMessage = "You can only review an artist once.";
+                        return View("AddArtistReview");
+                    }
+                }
 
                 userLoggedIn.Ratings.Add(ArtistRating);
+                db.Ratings.Add(ArtistRating);
+                db.SaveChanges();
 
                 return RedirectToAction("Details", "Artists", new { id = ArtistRating.ReviewedArtist.ArtistID });
             }
@@ -135,10 +155,21 @@ namespace Team1_Final_Project.Controllers
                 AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
 
                 AlbumRating.ReviewedAlbum = db.Albums.Find(AlbumID);
-                db.Ratings.Add(AlbumRating);
-                db.SaveChanges();
+
+                // check to see that there are no duplicates first of all
+                foreach (var item in userLoggedIn.Ratings)
+                {
+                    if (item.ReviewedAlbum != null && item.ReviewedAlbum.AlbumID == AlbumID)
+                    {
+                        ViewBag.ErrorMessage = "You can only review an album once.";
+                        return View("AddAlbumReview");
+                    }
+                }
 
                 userLoggedIn.Ratings.Add(AlbumRating);
+
+                db.Ratings.Add(AlbumRating);
+                db.SaveChanges();
 
                 return RedirectToAction("Details", "Albums", new { id = AlbumRating.ReviewedAlbum.AlbumID });
             }
@@ -333,10 +364,40 @@ namespace Team1_Final_Project.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             MusicRating musicRating = db.Ratings.Find(id);
-            db.Ratings.Remove(musicRating);
+            musicRating.Review = null;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //public bool DuplicateSongsExist()
+        //{
+        //    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+        //    // get a list of all the songs in a given ratings list
+        //    List<MusicRating> RatingsList = new List<MusicRating>();
+        //    foreach (var item in userLoggedIn.Ratings)
+        //    {
+        //        RatingsList.Add(db.Ratings.Find(item.ReviewedSong.SongID));
+        //    }
+
+        //    // return true if duplicates
+        //    var duplicateSongs = RatingsList.GroupBy(a => new { a.ReviewedSong.SongName, a.ReviewedSong.SongArtists }).Where(g => g.Count() > 1);
+        //    return (duplicateSongs.Count() > 0);
+        //}
+
+        //public bool DuplicateArtistsExist()
+        //{
+        //    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+        //    // get a list of all the artists in a given ratings list
+        //    List<MusicRating> RatingsList = new List<MusicRating>();
+        //    foreach (var item in userLoggedIn.Ratings)
+        //    {
+        //        RatingsList.Add(db.Ratings.Find(item.ReviewedArtist.ArtistID));
+        //    }
+
+        //    // return true if duplicates
+        //    var duplicateSongs = RatingsList.GroupBy(a => new { a.ReviewedArtist.ArtistName, a.ReviewedArtist.SongArtists}).Where(g => g.Count() > 1);
+        //    return (duplicateSongs.Count() > 0);
+        //}
 
         protected override void Dispose(bool disposing)
         {

@@ -152,7 +152,21 @@
 <p>
     @if (userLoggedIn != null)
     {
-        if (userLoggedIn.Albums.Any(a => a.AlbumID == Model.AlbumID))
+        bool Found = true;
+        foreach (var item in Model.AlbumSongs)
+        {
+            if (userLoggedIn.Songs.Any(a => a.SongID == item.SongID))
+            {
+                //keep going through the loop
+                Found = Found;
+            }
+            else
+            {
+                Found = false;
+            }
+        }
+
+        if (userLoggedIn.Albums.Any(a => a.AlbumID == Model.AlbumID) || Found == true )
         {
             @Html.ActionLink("Add Review of Album", "AddAlbumReview", "Ratings", new { id = Model.AlbumID }, null)
         }
