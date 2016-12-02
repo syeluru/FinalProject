@@ -63,7 +63,7 @@ namespace Team1_Final_Project.Controllers
                     }
                 }
 
-                if (NewGenreName != null)
+                if (NewGenreName != null && NewGenreName != "")
                 {
                     Genre NewGenre = new Genre();
                     NewGenre.GenreName = NewGenreName;
@@ -138,25 +138,13 @@ namespace Team1_Final_Project.Controllers
                 albumToChange.AlbumGenres.Clear();
                 albumToChange.AlbumArtists.Clear();
 
-                //if there are genres to add, add them
-                if (NewGenreName != null)
+                if (SelectedGenres != null)
                 {
-                    Genre NewGenre = new Genre();
-                    NewGenre.GenreName = NewGenreName;
-                    db.Genres.Add(NewGenre);
-                    db.SaveChanges();
-
-                    album.AlbumGenres.Add(db.Genres.First(a => a.GenreName == NewGenreName));
-
-
-                }
-
-                if (NewGenreName != null)
-                {
-                    Genre NewGenre = new Genre();
-                    NewGenre.GenreName = NewGenreName;
-                    album.AlbumGenres.Add(NewGenre);
-
+                    foreach (int GenreID in SelectedGenres)
+                    {
+                        Genre genreToAdd = db.Genres.Find(GenreID);
+                        albumToChange.AlbumGenres.Add(genreToAdd);
+                    }
                 }
 
                 //if there are artists to add, add them
@@ -169,6 +157,20 @@ namespace Team1_Final_Project.Controllers
                     }
                 }
 
+                //if there are genres to add, add them
+                if (NewGenreName != null && NewGenreName != "")
+                {
+                    Genre NewGenre = new Genre();
+                    NewGenre.GenreName = NewGenreName;
+                    db.Genres.Add(NewGenre);
+                    db.SaveChanges();
+
+
+                    albumToChange.AlbumGenres.Add(db.Genres.First(a => a.GenreName == NewGenreName));
+                }
+
+
+ 
                 //update the rest of the fields
                 albumToChange.AlbumName = album.AlbumName;
                 albumToChange.AlbumPrice = album.AlbumPrice;
