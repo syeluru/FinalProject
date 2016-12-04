@@ -150,7 +150,7 @@ namespace Team1_Final_Project.Controllers
                 {
                     Song songToAdd = db.Songs.Find(song.Song.SongID);
                     SongOrderBridge songBridgeToAdd = new SongOrderBridge();
-                    decimal SongPricePostDiscounts = 0.0m;
+                    decimal SongPricePostDiscounts = song.Song.SongPrice;
 
                     // calculate total discounts
                     foreach (Discount discount in songToAdd.SongDiscounts)
@@ -181,7 +181,7 @@ namespace Team1_Final_Project.Controllers
                 {
                     Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
                     AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
-                    decimal AlbumPricePostDiscounts = 0.0m;
+                    decimal AlbumPricePostDiscounts = album.Album.AlbumPrice;
                     foreach (Discount discount in albumToAdd.AlbumDiscounts)
                     {
                         if (discount.IsActiveDiscount)
@@ -332,7 +332,7 @@ namespace Team1_Final_Project.Controllers
                     Song songToAdd = db.Songs.Find(song.Song.SongID);
                     SongOrderBridge songBridgeToAdd = new SongOrderBridge();
 
-                    decimal SongPricePostDiscounts = 0.0m;
+                    decimal SongPricePostDiscounts = song.Song.SongPrice;
 
 
                     // calculate total discounts
@@ -364,7 +364,7 @@ namespace Team1_Final_Project.Controllers
                     Album albumToAdd = db.Albums.Find(album.Album.AlbumID);
                     AlbumOrderBridge albumBridgeToAdd = new AlbumOrderBridge();
 
-                    decimal AlbumPricePostDiscounts = 0.0m;
+                    decimal AlbumPricePostDiscounts = album.Album.AlbumPrice;
 
                     foreach (Discount discount in albumToAdd.AlbumDiscounts)
                     {
@@ -445,7 +445,7 @@ namespace Team1_Final_Project.Controllers
             foreach (SongInShoppingCart scsong in userLoggedIn.SongsInShoppingCart)
             {
 
-                decimal SongPricePostDiscounts = 0.0m;
+                decimal SongPricePostDiscounts = scsong.Song.SongPrice;
                 // calculate total discounts
                 foreach (Discount discount in scsong.Song.SongDiscounts)
                 {
@@ -473,7 +473,7 @@ namespace Team1_Final_Project.Controllers
 
             foreach (AlbumInShoppingCart scalbum in userLoggedIn.AlbumsInShoppingCart)
             {
-                decimal AlbumPricePostDiscounts = 0.0m;
+                decimal AlbumPricePostDiscounts = scalbum.Album.AlbumPrice;
                 // calculate total discounts
                 foreach (Discount discount in scalbum.Album.AlbumDiscounts)
                 {

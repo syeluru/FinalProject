@@ -29,7 +29,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(model => item.Song.SongName)
+                    @Html.DisplayFor(model => item.SongInOrder.SongName)
                 </td>
 
                 @foreach (var item2 in item.Song.SongArtists)
@@ -77,16 +77,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(model => item.Album.AlbumName)
+                    @Html.DisplayFor(model => item.AlbumInOrder.AlbumName)
                 </td>
-                @foreach (var item2 in item.Album.AlbumArtists)
+                @foreach (var item2 in item.AlbumInOrder.AlbumArtists)
                 {
                     <td>
                         @Html.DisplayFor(model => item2.ArtistName)
                     </td>
                 }
 
-                @foreach (var item3 in item.Album.AlbumGenres)
+                @foreach (var item3 in item.AlbumInOrder.AlbumGenres)
                 { 
                     <td>
                         @Html.DisplayFor(model => item3.GenreName)
