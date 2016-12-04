@@ -213,15 +213,16 @@ namespace Team1_Final_Project.Controllers
                 //TODO: Once you get roles working, you may want to add users to roles upon creation
                 //await UserManager.AddToRoleAsync(user.Id, "User"); //adds user to role called "User"
                 // --OR--
-                await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Customer"
 
                 if (result.Succeeded) //user was created successfully
                 {
-                    //Send confirmation email
-                    EmailController.AccountCreation(user, "dpimentel.p@gmail.com", null, null);
-
                     //sign the user in
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    await UserManager.AddToRoleAsync(user.Id, "Customer"); //adds user to role called "Customer"
+
+                    //Send confirmation email
+                    EmailController.AccountCreation(user);
 
                     //send them to the page to add their credit cards
                     return RedirectToAction("CustomerDashboard", "Account");

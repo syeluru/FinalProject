@@ -242,6 +242,10 @@
     <Compile Include="Migrations\201612020847293_discount-changes.Designer.cs">
       <DependentUpon>201612020847293_discount-changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612040559188_yooo.cs" />
+    <Compile Include="Migrations\201612040559188_yooo.Designer.cs">
+      <DependentUpon>201612040559188_yooo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Identity\IdentityModels.cs" />
     <Compile Include="Models\Music\Album.cs" />
@@ -380,7 +384,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Email\" />
-    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611291805076_please.resx">
@@ -406,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612020847293_discount-changes.resx">
       <DependentUpon>201612020847293_discount-changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612040559188_yooo.resx">
+      <DependentUpon>201612040559188_yooo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

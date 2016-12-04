@@ -135,13 +135,24 @@ namespace Team1_Final_Project.Controllers
             order.SongsInOrder.Clear();
             order.AlbumsInOrder.Clear();
 
-            
-
             db.Orders.Remove(order);
 
 
             db.SaveChanges();
+
+            if (order.IsGift == false)
+            {
+                // send a new email to the recipient and the user who just placed the order
+                EmailController.Refund(order.Customer);
+            }
+            else
+            {
+                // send a new email to the recipient and the user who just placed the order
+                EmailController.RefundGift(order.Customer, owner);
+            }
+
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)
