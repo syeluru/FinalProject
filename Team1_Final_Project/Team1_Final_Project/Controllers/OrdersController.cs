@@ -131,6 +131,17 @@ namespace Team1_Final_Project.Controllers
                 owner.Albums.Remove(albumToRemove);
             }
 
+            if (order.IsGift == false)
+            {
+                // send a new email to the recipient and the user who just placed the order
+                EmailController.Refund(order.Customer);
+            }
+            if (order.IsGift == true)
+            {
+                // send a new email to the recipient and the user who just placed the order
+                EmailController.RefundGift(order.Customer, owner);
+            }
+
             // remove the song order bridge from bridge table
             order.SongsInOrder.Clear();
             order.AlbumsInOrder.Clear();
@@ -139,17 +150,6 @@ namespace Team1_Final_Project.Controllers
 
 
             db.SaveChanges();
-
-            if (order.IsGift == false)
-            {
-                // send a new email to the recipient and the user who just placed the order
-                EmailController.Refund(order.Customer);
-            }
-            else
-            {
-                // send a new email to the recipient and the user who just placed the order
-                EmailController.RefundGift(order.Customer, owner);
-            }
 
             return RedirectToAction("Index");
 

@@ -14,7 +14,7 @@ namespace Team1_Final_Project.Controllers
 {
     public class EmailController : Controller
     {
-        //private AppDbContext db = new AppDbContext();
+        static AppDbContext db = new AppDbContext();
 
         public static void OrderCustomer(AppUser userLoggedIn, String SongsPurchased, String AlbumsPurchased, String Recommendation, int OrderId)
         {
@@ -25,14 +25,11 @@ namespace Team1_Final_Project.Controllers
                 EnableSsl = true
             };
 
-            /*
-            string RefundUrl = Url.Action("Refund", "Orders",
-            new System.Web.Routing.RouteValueDictionary(new { Id = OrderId }), "http", Request.Url.Host);
-            */
 
             //userLoggedIn.Email
+            String link = "< a href =\\Orders\\Refund\\> Refund</a>";
 
-            String emailBody = "Hello " + userLoggedIn.FName + ", \n\n Your Order was completed succesfully. \n\n Songs Purchased: " + SongsPurchased + "\n Album Purchased: " + AlbumsPurchased + "\n\n Judging from your taste, you should check out " + Recommendation + " \n\n If you would like to make a return, click on the following link: < a href =\"google.com\">Refund</a> Thank you! \n\n Cheers, \n Longhorn Music";
+            String emailBody = "Hello " + userLoggedIn.FName + ", \n\n Your Order was completed succesfully. \n\n Songs Purchased: " + SongsPurchased + ". \n Album Purchased: " + AlbumsPurchased + ". \n\n Judging from your taste, you should check out " + Recommendation + ". \n\n If you would like to make a return, click on the following link: " + link + " Thank you! \n\n Cheers, \n Longhorn Music";
 
             // /n is a new line – this will add some white space after the main body of the message
             String finalMessage = emailBody + "\n\n MIS 333K Team1 ";
@@ -55,6 +52,8 @@ namespace Team1_Final_Project.Controllers
         public static void OrderGift(AppUser userLoggedIn, AppUser Friend, String SongsGifted, String AlbumsGifted)
         {
 
+            //userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+
             //Create an email client to send the emails
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
@@ -62,15 +61,11 @@ namespace Team1_Final_Project.Controllers
                 EnableSsl = true
             };
 
-            /*
-            string RefundUrl = Url.Action("Refund", "Orders",
-            new System.Web.Routing.RouteValueDictionary(new { Id = OrderId }),"http", Request.Url.Host);
-            */
 
             //RECIPIENT EMAIL
-            //userLoggedIn.Email
+            String link = "< a href =\\Orders\\Refund\\> Refund</a>";
 
-            String emailBody = "Hello " + userLoggedIn.FName + ", \n\n Your order went through. " + Friend.FName + " received a confirmation email notifying them that the gift has been added to their music library. If you would like to make a return, click on the following link: < a href =\"google.com\">Refund</a> Thank you! \n\n Cheers, \n Longhorn Music";
+            String emailBody = "Hello " + userLoggedIn.FName + ", \n\n Your order went through. " + Friend.FName + " received a confirmation email notifying them that the gift has been added to their music library. If you would like to make a return, click on the following link: " + link + " Thank you! \n\n Cheers, \n Longhorn Music";
 
             // /n is a new line – this will add some white space after the main body of the message
             String finalMessage = emailBody + "\n\n MIS 333K Team1 ";
@@ -147,7 +142,7 @@ namespace Team1_Final_Project.Controllers
 
         public static void RefundGift(AppUser userLoggedIn, AppUser Friend)
         {
-
+            
             //Create an email client to send the emails
             var client = new SmtpClient("smtp.gmail.com", 587)
             {

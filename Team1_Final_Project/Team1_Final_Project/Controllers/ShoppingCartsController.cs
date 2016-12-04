@@ -398,14 +398,6 @@ namespace Team1_Final_Project.Controllers
                 NewOrder.IsGift = true;
                 NewOrder.RecipientID = friend.Id;
 
-                // clear out the shopping cart
-                userLoggedIn.SongsInShoppingCart.Clear();
-                userLoggedIn.AlbumsInShoppingCart.Clear();
-
-                // add the order to the database
-                db.Orders.Add(NewOrder);
-                db.SaveChanges();
-
                 String GiftSongs = "";
                 foreach (var item in NewOrder.SongsInOrder)
                 {
@@ -419,7 +411,15 @@ namespace Team1_Final_Project.Controllers
                 }
 
                 // send a new email to the recipient and the user who just placed the order
-                EmailController.OrderGift(userLoggedIn, friend, GiftSongs, GiftAlbums);
+                EmailController.OrderGift(NewOrder.Customer, friend, GiftSongs, GiftAlbums);
+
+                // clear out the shopping cart
+                userLoggedIn.SongsInShoppingCart.Clear();
+                userLoggedIn.AlbumsInShoppingCart.Clear();
+
+                // add the order to the database
+                db.Orders.Add(NewOrder);
+                db.SaveChanges();
 
                 // take the customer to the order confirmation page so they can see the songs/albums they just purchased
                 return RedirectToAction("CheckoutConfirmationPage", "ShoppingCarts", new { RecipientID = friend.Id, PlacedOrderID = NewOrder.OrderID });
