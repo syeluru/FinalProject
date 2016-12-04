@@ -158,7 +158,7 @@ namespace Team1_Final_Project.Controllers
             String finalMessage = emailBody + "\n\n MIS 333K Team 1 ";
 
             //Create an email address object for the sender address
-            MailAddress senderEmail = new MailAddress("toEmailAddress", "Account Confirmation");
+            MailAddress senderEmail = new MailAddress(toEmailAddress, "Account Confirmation");
 
             MailMessage mm = new MailMessage();
             mm.Subject = emailSubject;
