@@ -1,0 +1,165 @@
+﻿@using Team1_Final_Project.Models.Music
+@using Team1_Final_Project.Models.Identity
+@using Microsoft.AspNet.Identity;
+@model Team1_Final_Project.Models.Identity.AppUser
+
+
+@{
+    ViewBag.Title = "CustomerLibrary";
+    AppDbContext db = new AppDbContext();
+    AppUser userLoggedIn = db.Users.Find(User.Identity.GetUserId());
+}
+
+<h2>Personal Music Library</h2>
+<br />
+
+<h4>Songs I Own</h4>
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Song
+        </th>
+        <th>
+            Artists
+        </th>
+        <th>
+            Album
+        </th>
+        <th>
+            Genre
+        </th>
+    </tr>
+
+    @{
+        List<Song> SongsList = new List<Song>();
+        foreach (var song in userLoggedIn.Songs)
+        {
+            SongsList.Add(song);
+        }
+        foreach (var albums in userLoggedIn.Albums)
+        {
+            foreach (var albumsong in albums.AlbumSongs)
+            {
+                SongsList.Add(albumsong);
+            }
+        }
+    }
+
+    @foreach (var item in SongsList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongName)
+            </td>
+
+            <td>
+                @foreach (var artist in item.SongArtists)
+                {
+                    if (item.SongArtists.Count() > 1)
+                    {
+                        @Html.DisplayFor(modelItem => artist.ArtistName);
+                        <br />
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => artist.ArtistName);
+                    }
+                }
+            </td>
+
+            <td> 
+                @foreach (var album in item.SongAlbums)
+                {
+                    if (userLoggedIn.Albums.Any(a => a.AlbumID == album.AlbumID))
+                    {
+                        @Html.DisplayFor(modelItem => album.AlbumName);
+                    }
+                }
+                
+            </td>
+
+            <td>
+                @foreach (var genre in item.SongGenres)
+                {
+                    if (item.SongGenres.Count() > 1)
+                    {
+                        @Html.DisplayFor(modelItem => genre.GenreName);
+                        <br />
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => genre.GenreName);
+                    }
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<br /><br />
+
+<h4>Albums I Own</h4>
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Album Title
+        </th>
+        <th>
+            Album Artists
+        </th>
+        <th>
+            Genres
+        </th>
+    </tr>
+    
+    @foreach (var item in Model.Albums)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlbumName)
+            </td>
+
+            <td>
+                @foreach (var artist in item.AlbumArtists)
+                {
+                    if (item.AlbumArtists.Count() > 1)
+                    {
+                        @Html.DisplayFor(modelItem => artist.ArtistName);
+                        <br />
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => artist.ArtistName);
+                    }
+                }
+            </td>
+
+            <td>
+                @foreach (var genre in item.AlbumGenres)
+                {
+                    if (item.AlbumGenres.Count() > 1)
+                    {
+                        @Html.DisplayFor(modelItem => genre.GenreName);
+                        <br />
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => genre.GenreName);
+                    }
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "CustomerDashboard")
+</div>

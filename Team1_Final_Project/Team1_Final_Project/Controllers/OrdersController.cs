@@ -78,9 +78,10 @@ namespace Team1_Final_Project.Controllers
         // POST: Orders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // CreditCard, CreditCardType,
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,TotalPrice")] Order order)
+        public ActionResult Edit([Bind(Include = "OrderID, TotalPrice")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -111,6 +112,7 @@ namespace Team1_Final_Project.Controllers
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Refund")]
         [ValidateAntiForgeryToken]
+        //system.data.entity.infrastructure.dbupdateexception savechanges
         public ActionResult DeleteConfirmed(short id)
         {
             Order order = db.Orders.Find(id);
@@ -133,13 +135,24 @@ namespace Team1_Final_Project.Controllers
             order.SongsInOrder.Clear();
             order.AlbumsInOrder.Clear();
 
-            
-
             db.Orders.Remove(order);
 
 
             db.SaveChanges();
+
+            if (order.IsGift == false)
+            {
+                // send a new email to the recipient and the user who just placed the order
+                EmailController.Refund(order.Customer);
+            }
+            else
+            {
+                // send a new email to the recipient and the user who just placed the order
+                EmailController.RefundGift(order.Customer, owner);
+            }
+
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)
