@@ -35,7 +35,7 @@ namespace Team1_Final_Project.Controllers
             String finalMessage = emailBody + "\n\n MIS 333K Team1 ";
 
             //Create an email address object for the sender address
-            MailAddress senderEmail = new MailAddress("dpimentel.p@gmail.com", "Order Confirmation");
+            MailAddress senderEmail = new MailAddress(userLoggedIn.Email, "Order Confirmation");
 
             String emailSubject = "Team 1: Longhorn Music Order Confirmation";
 
@@ -43,7 +43,7 @@ namespace Team1_Final_Project.Controllers
             mm.Subject = emailSubject;
             mm.Sender = senderEmail;
             mm.From = senderEmail;
-            mm.To.Add(new MailAddress("dpimentel.p@gmail.com"));
+            mm.To.Add(new MailAddress(userLoggedIn.Email));
             mm.Body = finalMessage;
             mm.IsBodyHtml = true;
             client.Send(mm);
@@ -71,7 +71,7 @@ namespace Team1_Final_Project.Controllers
             String finalMessage = emailBody + "\n\n MIS 333K Team1 ";
 
             //Create an email address object for the sender address
-            MailAddress senderEmail = new MailAddress("dpimentel.p@gmail.com", "Order Confirmation");
+            MailAddress senderEmail = new MailAddress(userLoggedIn.Email, "Order Confirmation");
 
             String emailSubject = "Team 1: Order Confirmation";
 
@@ -80,7 +80,7 @@ namespace Team1_Final_Project.Controllers
             mm.Subject = emailSubject;
             mm.Sender = senderEmail;
             mm.From = senderEmail;
-            mm.To.Add(new MailAddress("dpimentel.p@gmail.com"));
+            mm.To.Add(new MailAddress(userLoggedIn.Email));
             mm.Body = finalMessage;
             mm.IsBodyHtml = true;
             client.Send(mm);
@@ -94,7 +94,7 @@ namespace Team1_Final_Project.Controllers
             String finalMessage1 = emailBody1 + "\n\n MIS 333K Team1 ";
 
             //Create an email address object for the sender address
-            MailAddress senderEmail1 = new MailAddress("dpimentel.p@gmail.com", "Gift");
+            MailAddress senderEmail1 = new MailAddress(Friend.Email, "Gift");
 
             String emailSubject1 = "Team 1: You've got a gift!";
 
@@ -102,7 +102,7 @@ namespace Team1_Final_Project.Controllers
             nn.Subject = emailSubject1;
             nn.Sender = senderEmail1;
             nn.From = senderEmail1;
-            nn.To.Add(new MailAddress("dpimentel.p@gmail.com"));
+            nn.To.Add(new MailAddress(Friend.Email));
             nn.Body = finalMessage1;
             client.Send(nn);
         }
@@ -125,7 +125,7 @@ namespace Team1_Final_Project.Controllers
             String finalMessage = emailBody + "\n\n MIS 333K Team1 ";
 
             //Create an email address object for the sender address
-            MailAddress senderEmail = new MailAddress("dpimentel.p@gmail.com", "Order Refund");
+            MailAddress senderEmail = new MailAddress(userLoggedIn.Email, "Order Refund");
 
             String emailSubject = "Team 1: Order Refund";
 
@@ -134,7 +134,7 @@ namespace Team1_Final_Project.Controllers
             mm.Subject = emailSubject;
             mm.Sender = senderEmail;
             mm.From = senderEmail;
-            mm.To.Add(new MailAddress("dpimentel.p@gmail.com"));
+            mm.To.Add(new MailAddress(userLoggedIn.Email));
             mm.Body = finalMessage;
             client.Send(mm);
 
@@ -159,7 +159,7 @@ namespace Team1_Final_Project.Controllers
             String finalMessage = emailBody + "\n\n MIS 333K Team1 ";
 
             //Create an email address object for the sender address
-            MailAddress senderEmail = new MailAddress("dpimentel.p@gmail.com", "Order Refund");
+            MailAddress senderEmail = new MailAddress(userLoggedIn.Email, "Order Refund");
 
             String emailSubject = "Team 1: Order Refund";
 
@@ -168,7 +168,7 @@ namespace Team1_Final_Project.Controllers
             mm.Subject = emailSubject;
             mm.Sender = senderEmail;
             mm.From = senderEmail;
-            mm.To.Add(new MailAddress("dpimentel.p@gmail.com"));
+            mm.To.Add(new MailAddress(userLoggedIn.Email));
             mm.Body = finalMessage;
             client.Send(mm);
 
@@ -181,7 +181,7 @@ namespace Team1_Final_Project.Controllers
             String finalMessage1 = emailBody1 + "\n\n MIS 333K Team1 ";
 
             //Create an email address object for the sender address
-            MailAddress senderEmail1 = new MailAddress("dpimentel.p@gmail.com", "Gift Removal");
+            MailAddress senderEmail1 = new MailAddress(Friend.Email, "Gift Removal");
 
             String emailSubject1 = "Team 1: Gift Return";
 
@@ -189,7 +189,7 @@ namespace Team1_Final_Project.Controllers
             nn.Subject = emailSubject1;
             nn.Sender = senderEmail1;
             nn.From = senderEmail1;
-            nn.To.Add(new MailAddress("dpimentel.p@gmail.com"));
+            nn.To.Add(new MailAddress(Friend.Email));
             nn.Body = finalMessage1;
             client.Send(nn);
         }
